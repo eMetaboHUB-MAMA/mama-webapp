@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>MAMA - MetaboHUB Analyses MAnager</title>
+<!-- jquery -->
+<script src="js/jquery-2.1.4.min.js"></script>
+<!-- Bootstrap Core CSS -->
+<link href="bower_components/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- MetisMenu CSS -->
+<link href="bower_components/metisMenu/dist/metisMenu.min.css"
+	rel="stylesheet">
+<!-- Timeline CSS -->
+<link href="dist/css/timeline.css" rel="stylesheet">
+<!-- Custom CSS -->
+<link href="dist/css/sb-admin-2.css" rel="stylesheet">
+<link href="dist/css/sb-admin-2.overwrite.css" rel="stylesheet">
+<!-- Custom Fonts -->
+<link href="bower_components/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+<!-- Custom Theme JavaScript -->
+<script src="dist/js/sb-admin-2.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- Metis Menu Plugin JavaScript -->
+<script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
+<!-- hightcharts -->
+<script src="bower_components/hightcharts/highcharts.js"></script>
+<script src="bower_components/hightcharts/modules/exporting.js"></script>
+<!--date picker-->
+<link href="dist/css/bootstrap-datepicker.css" media="screen"
+	rel="stylesheet" type="text/css">
+<script src="dist/js/bootstrap-datepicker.js" type="text/javascript"></script>
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+<!-- other javascript -->
+<script src="js/jquery.localisation.min.js" type="text/javascript"></script>
+<!-- bootstrap multiselect plugin -->
+<script type="text/javascript" src="dist/js/bootstrap-multiselect.js"></script>
+<link rel="stylesheet" href="dist/css/bootstrap-multiselect.css"
+	type="text/css" />
+<!-- MAMA javascripts -->
+<script src="js/main.js" type="text/javascript"></script>
+</head>
+<body>
+	<div id="wrapper">
+		<!-- Navigation -->
+		<nav class="navbar navbar-default navbar-static-top" role="navigation"
+			style="margin-bottom: 0">
+
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.html">MAMA - MetaboHUB
+					Analyses MAnager</a>
+			</div>
+			<!-- /.navbar-header -->
+
+			<ul class="nav navbar-top-links navbar-right">
+				<li id="userName"></li>
+				<!-- /.dropdown -->
+				<li class="dropdown"><a class="dropdown-toggle "
+					data-toggle="dropdown" href="#"> <i
+						class="fa fa-language fa-fw"></i> <i class="fa fa-caret-down"></i>
+				</a>
+					<ul class="dropdown-menu dropdown-user">
+						<li><a href="#" onclick="setLang('fr');"> Fr <i
+								id="lang-fr" class="fa setLang"></i>
+						</a></li>
+						<li><a href="#" onclick="setLang('en');"> En <i
+								id="lang-en" class="fa setLang"></i>
+						</a></li>
+					</ul> <!-- /.dropdown-lang --></li>
+				</li>
+				<!-- /.dropdown -->
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#"> <i class="fa fa-user fa-fw"></i>
+						<i class="fa fa-caret-down"></i>
+				</a>
+					<ul class="dropdown-menu dropdown-user">
+						<li class="mama-menu mama-menu-user-profile"><a
+							href="index.html?page=user-profile"><i
+								class="fa fa-user fa-fw"></i> <span id="topMenu_userProfile"
+								class="lang"></span></a></li>
+						<li class="mama-menu mama-menu-login"><a
+							href="index.html?page=login"><i class="fa fa-sign-in fa-fw"></i>
+								<span id="topMenu_login" class="lang"></span></a></li>
+						<li class="mama-menu mama-menu-logout"><a
+							href="index.html?page=logout"><i class="fa fa-sign-out fa-fw"></i>
+								<span id="topMenu_logout" class="lang"></span></a></li>
+					</ul> <!-- /.dropdown-user --></li>
+				<!-- /.dropdown -->
+			</ul>
+			<!-- /.navbar-top-links -->
+			<div class="navbar-default sidebar" role="navigation">
+				<div class="sidebar-nav navbar-collapse">
+					<ul class="nav" id="side-menu">
+						<li class="mama-menu mama-menu-default"><a
+							id="navmenulink-default" href="index.html?page=default"><i
+								class="fa fa-info-circle"></i> <span id="leftMenu_about"
+								class="lang"></span></a></li>
+						<li class="mama-menu mama-menu-create-account"><a
+							id="navmenulink-new-user" href="index.html?page=create-account"><i
+								class="fa fa-user-plus fa-fw"></i> <span
+								id="leftMenu_createAccount" class="lang"></span></a></li>
+						<li class="mama-menu mama-menu-dashboard"><a
+							id="navmenulink-dashboad" href="index.html?page=dashboard"><i
+								class="fa fa-dashboard fa-fw"></i> <span id="leftMenu_dashboard"
+								class="lang"></span></a></li>
+						<li class="mama-menu mama-menu-xxx"><a
+							id="navmenulink-new-analysis" href="index.html?page=new-analysis"><i
+								class="fa fa-plus-circle fa-fw"></i> New Project Request (user)</a></li>
+						<li class="mama-menu mama-menu-xxx"><a
+							id="navmenulink-edit-analysis"
+							href="index.html?page=edit-analysis"><i
+								class="fa fa-pencil-square-o fa-fw"></i> Edit Project Request
+								(PM)</a></li>
+						<li class="mama-menu mama-menu-xxx"><a
+							id="navmenulink-projects-client"
+							href="index.html?page=projects-client"><i
+								class="fa fa-tasks fa-fw"></i> Projects (user)</a></li>
+						<li class="mama-menu mama-menu-xxx"><a
+							id="navmenulink-projects-analyst"
+							href="index.html?page=projects-analyst"><i
+								class="fa fa-tasks fa-fw"></i> Projects (PM)</a></li>
+						<li class="mama-menu mama-menu-xxx"><a
+							id="navmenulink-projects-admin"
+							href="index.html?page=projects-admin"><i
+								class="fa fa-tasks fa-fw"></i> Projects (admin)</a></li>
+						<li class="mama-menu mama-menu-xxx"><a
+							href="index.html?page=statistics"><i
+								class="fa fa-bar-chart-o fa-fw"></i> Statistics (PM/admin)</a></li>
+						<li class="mama-menu mama-menu-xxx"><a
+							id="navmenulink-clients" href="index.html?page=users"><i
+								class="fa fa-users"></i> User manager (admin)</a></li>
+					</ul>
+				</div>
+				<!-- /.sidebar-collapse -->
+			</div>
+			<!-- /.navbar-static-side -->
+		</nav>
+		<div id="page-wrapper"></div>
+		<!-- /#page-wrapper -->
+	</div>
+	<!-- /#wrapper -->
+</body>
+</html>

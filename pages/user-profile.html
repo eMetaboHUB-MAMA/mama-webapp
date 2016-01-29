@@ -1,0 +1,337 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Profile</h1>
+		</div>
+		<!-- /.col-lg-12 -->
+	</div>
+	<!-- /.row -->
+	<div class="row">
+		<div class="col-lg-6">
+			<form class="form-horizontal">
+				<fieldset>
+
+					<!-- Prepended text-->
+					<div class="form-group input-group">
+						<span class="input-group-addon"><i class="fa fa-at"></i>
+							email</span> <input id="email" type="text" class="form-control" disabled
+							value="jon.snow@got.com">
+					</div>
+
+					<div class="form-group input-group">
+						<span class="input-group-addon"><i class="fa fa-user"></i>
+							First name</span> <input id="firstname" type="text" class="form-control"
+							value="Jon" placeholder="enter your first name">
+					</div>
+
+					<div class="form-group input-group">
+						<span class="input-group-addon"><i class="fa fa-user"></i>
+							Last name</span> <input id="firstname" type="text" class="form-control"
+							value="Snow" placeholder="enter your last name">
+					</div>
+
+					<div class="form-group">
+						<label>Update password</label> <label class="radio-inline">
+							<input type="radio" name="accountUpdatePassword"
+							class="checkValidFormListener" id="accountUpdatePasswordYES"
+							value="yes">yes
+						</label> <label class="radio-inline"> <input type="radio"
+							name="accountUpdatePassword" id="accountUpdatePasswordNO" checked
+							class="checkValidFormListener" value="yes">no
+						</label>
+					</div>
+
+					<hr class="UpdatePassword" style="display: none;" />
+
+					<div class="form-group input-group UpdatePassword is-mandarotry"
+						style="display: none;">
+						<span class="input-group-addon"><i class="fa fa-key"></i>
+							current password<sup>*</sup></span> <input id="old-password"
+							type="password" class="form-control"
+							placeholder="enter your current password">
+					</div>
+
+					<div class="form-group input-group UpdatePassword is-mandarotry"
+						style="display: none;">
+						<span class="input-group-addon"><i class="fa fa-key"></i>
+							new password<sup>*</sup></span> <input id="password" type="password"
+							class="form-control password"
+							placeholder="enter your new password"
+							aria-describedby="inputSuccess2Status"> <span
+							class="fa fa-2x form-control-feedback" aria-hidden="true"></span>
+						<span id="inputSuccess2Status" class="sr-only">(success)</span>
+					</div>
+					<span id="passwordHelpBlock" class="help-block"></span>
+
+					<div class="form-group input-group UpdatePassword is-mandarotry"
+						style="display: none;">
+						<span class="input-group-addon"><i class="fa fa-key"></i>
+							re-type new password<sup>*</sup></span> <input id="repassword"
+							type="password" class="form-control password"
+							placeholder="re-enter your new password"
+							aria-describedby="inputSuccess3Status"> <span
+							class="fa fa-2x form-control-feedback" aria-hidden="true"></span>
+						<span id="inputSuccess3Status" class="sr-only">(success)</span>
+					</div>
+					<span id="rePasswordHelpBlock" class="help-block"></span>
+
+				</fieldset>
+			</form>
+		</div>
+
+		<div class="col-lg-6" style="">
+			<div class="form-group input-group">
+				<span class="input-group-addon" style="max-width: 40%;"><i
+					class="fa fa-phone"></i> Group phone</span> <select id="groupPhoneIndex"
+					style="max-width: 40%;" class="form-control groupPhoneIndex">
+					<option value="" disabled="disabled">choose in list...</option>
+				</select> <input id="groupPhone" type="text" class="form-control"
+					style="max-width: 60%;" value="0123456789"
+					placeholder="enter your phone">
+			</div>
+
+			<div class="form-group input-group">
+				<span class="input-group-addon"><i class="fa fa-building"></i>
+					Laboratory or Company</span> <input id="email" type="text"
+					class="form-control" value="Georges RR Martin - Death Corp."
+					placeholder="enter your Laboratory or Company name">
+			</div>
+
+			<div class="form-group">
+				<span class="input-group-addon"><i class="fa fa-map-marker"></i> workplace address</span>
+				<textarea class="form-control" rows="4" placeholder="enter your full adress, country included"></textarea>
+			</div>
+
+			<!-- 			<div class="form-group"> -->
+			<!-- 				<label>Type of laboratory</label> <label class="checkbox-inline"> -->
+			<!-- 					<input type="radio" name="laboType" id="laboTypePrivate" checked -->
+			<!-- 					value="user">private -->
+			<!-- 				</label> <label class="radio-inline"> <input type="radio" -->
+			<!-- 					name="laboType" id="laboTypePublic" value="group">public -->
+			<!-- 				</label> -->
+			<!-- 			</div> -->
+
+			<div class="form-group input-group">
+				<span class="input-group-addon">Type of laboratory / company</span>
+				<select class="form-control">
+					<option selected>private</option>
+					<option>public</option>
+					<option>mix private / public</option>
+				</select>
+			</div>
+		</div>
+	</div>
+	<!-- /.row -->
+	
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Account pref.</h1>
+		</div>
+		<!-- /.col-lg-12 -->
+	</div>
+	<!-- /.row -->
+	
+	<div class="row">
+		<div class="col-lg-5">
+
+			<!-- Prepended text-->
+			<div class="form-group">
+				<label>receive email</label> <label class="radio-inline">
+					<input type="radio" name="optionsRadiosInline"
+					id="optionsRadiosInline1" value="option1" checked=""> each notification
+				</label> <label class="radio-inline"> <input type="radio"
+					name="optionsRadiosInline" id="optionsRadiosInline2"
+					value="option2"> daily digest
+				</label> <label class="radio-inline"> <input type="radio"
+					name="optionsRadiosInline" id="optionsRadiosInline2"
+					value="option2"> weekly digest
+				</label> 
+			</div>
+
+			<div class="form-group">
+				<label>email alert</label>
+				<div class="checkbox">
+					<label> <input type="checkbox" value="">new user account (admin only)
+					</label>
+				</div>
+				<div class="checkbox">
+					<label> <input type="checkbox" value="" checked="checked" disabled="disabled" >new analysis request (admin+PM)
+					</label>
+				</div>
+				<div class="checkbox">
+					<label> <input type="checkbox" value="">new event followed project (all)
+					</label>
+				</div>
+				<div class="checkbox">
+					<label> <input type="checkbox" value="">new message (all)
+					</label>
+				</div>
+			</div>
+
+		</div><!-- /.col-lg-5 -->
+	</div><!-- /.row -->
+	
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">
+				<button type="button" id="btn-update-user" class="btn btn-primary">
+					<i class="fa fa-rocket"></i> Update
+				</button>
+			</h1>
+		</div>
+		<!-- /.col-lg-12 -->
+	</div>
+	<!-- /.row -->
+
+</div>
+
+<script type="text/javascript">
+	$("#accountUpdatePasswordYES").click(function() {
+		$(".UpdatePassword").show();
+		checkValidForm();
+	});
+	$("#accountUpdatePasswordNO").click(function() {
+		$(".UpdatePassword").hide();
+		checkValidForm();
+	});
+
+	$("#password").focusout(
+			function() {
+				$(this).parent().removeClass(
+						"has-error has-success has-warning has-feedback");
+				$(this).parent().find(".fa").removeClass("fa-check fa-times");
+				var passStrength = 0;
+				var password = $(this).val();
+				if (password.length > 10)
+					passStrength = 2;
+				else if (password.length > 5)
+					passStrength = 1;
+				switch (passStrength) {
+				case 0:
+					$(this).parent().addClass("has-error has-feedback");
+					$(this).parent().find(".fa").addClass("fa-times");
+					$("#passwordHelpBlock").html("error: password too weak!");
+					break;
+				case 1:
+					$(this).parent().addClass("has-warning has-feedback");
+					$(this).parent().find(".fa").addClass("fa-check");
+					$("#passwordHelpBlock").html("warning: weak password!");
+					break;
+				case 2:
+					$(this).parent().addClass("has-success has-feedback");
+					$(this).parent().find(".fa").addClass("fa-check");
+					$("#passwordHelpBlock").html("");
+					break;
+				}
+			});
+
+	$(".password").focusout(
+			function() {
+				$("#repassword").parent().removeClass(
+						"has-error has-success has-feedback");
+				$("#repassword").parent().find(".fa").removeClass(
+						"fa-check fa-times");
+				if ($("#password").val() == $("#repassword").val()
+						&& $("#repassword").val() != "") {
+					$("#repassword").parent().addClass(
+							"has-success has-feedback");
+					$("#repassword").parent().find(".fa").addClass("fa-check");
+					$("#rePasswordHelpBlock").html("");
+				} else if ($("#repassword").val() != "") {
+					$("#repassword").parent()
+							.addClass("has-error has-feedback");
+					$("#repassword").parent().find(".fa").addClass("fa-times");
+					$("#rePasswordHelpBlock").html(
+							"error: your two password must match.");
+				}
+			});
+
+	/**
+	 * check users emails
+	 */
+	function checkMail(elem) {
+		var email = $(elem).val();
+		if (!email.match(re)) {
+			$(elem).parent().removeClass("has-success has-feedback").addClass(
+					"has-error has-feedback");
+			$(elem).parent().find(".fa").removeClass("fa-check").addClass(
+					"fa-times");
+		} else {
+			$(elem).parent().addClass("has-success has-feedback").removeClass(
+					"has-error has-feedback");
+			$(elem).parent().find(".fa").removeClass("fa-times").addClass(
+					"fa-check");
+		}
+	}
+
+	$("#firstname").val($("#firstname").val()).focus();
+
+	$.getJSON("json/codes_countries.json", function(data) {
+		// load data from json
+		$.each(data, function() {
+			if (this.country == "France")
+				$(".groupPhoneIndex").append(
+						'<option value="'+this.code+'" selected="selected">'
+								+ this.country + ' (+' + this.code
+								+ ')</option>');
+			else
+				$(".groupPhoneIndex").append(
+						'<option value="'+this.code+'">' + this.country + ' (+'
+								+ this.code + ')</option>');
+		});
+	});
+
+	$(".form-control").change(
+			function() {
+				setTimeout(function() {
+					var success = true;
+					$.each($("input.form-control:visible"),
+							function() {
+								if ($(this).parent().hasClass(
+										"has-error has-feedback")) {
+									success = false;
+								}
+								if ($(this).parent().hasClass("is-mandarotry")
+										&& $(this).val() == "") {
+									success = false;
+								}
+							});
+					if ($("#accountUpdatePasswordYES").is(":checked")
+							&& $("#old-password").val() == "")
+						success = false;
+					$("#btn-update-user").removeClass("btn-disabled");
+					$("#btn-update-user").prop("disabled", false);
+					if (success) {
+
+					} else {
+						$("#btn-update-user").addClass("btn-disabled");
+						$("#btn-update-user").prop("disabled", true);
+					}
+				}, 50);
+			});
+	function checkValidForm() {
+		setTimeout(function() {
+			var success = true;
+			$.each($("input.form-control:visible"), function() {
+				if ($(this).parent().hasClass("has-error has-feedback")) {
+					success = false;
+				}
+				if ($(this).parent().hasClass("is-mandarotry")
+						&& $(this).val() == "") {
+					success = false;
+				}
+			});
+			if ($("#accountUpdatePasswordYES").is(":checked")
+					&& $("#old-password").val() == "")
+				success = false;
+			$("#btn-update-user").removeClass("btn-disabled");
+			$("#btn-update-user").prop("disabled", false);
+			if (success) {
+
+			} else {
+				$("#btn-update-user").addClass("btn-disabled");
+				$("#btn-update-user").prop("disabled", true);
+			}
+		}, 50);
+	}
+</script>

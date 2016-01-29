@@ -1,0 +1,332 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">
+				Create <small>new account</small>
+			</h1>
+		</div>
+		<!-- /.col-lg-12 -->
+	</div>
+	<!-- /.row -->
+	<div class="row">
+		<div class="col-lg-5">
+			<form class="form-horizontal">
+				<fieldset>
+
+					<!-- Form Name -->
+					<legend>basic informations</legend>
+
+					<!-- Prepended text-->
+					<div class="form-group input-group is-mandarotry">
+						<span class="input-group-addon"><i class="fa fa-at"></i> email<sup>*</sup></span>
+						<input id="email" type="text" class="form-control no-copy-past"
+							placeholder="enter a valide email" aria-describedby="inputSuccess2Status">
+						<span class="fa fa-2x form-control-feedback" aria-hidden="true"></span>
+						<span id="inputSuccess2Status" class="sr-only">(success)</span>
+					</div>
+					<span id="emailHelpBlock" class="help-block">will be use as login later</span>
+					
+					<div class="form-group input-group is-mandarotry">
+						<span class="input-group-addon"><i class="fa fa-at"></i> re-type email<sup>*</sup></span>
+						<input id="emailCheck" type="text" class="form-control no-copy-past"
+							placeholder="enter a valide email" aria-describedby="inputSuccessCheckMailStatus">
+						<span class="fa fa-2x form-control-feedback" aria-hidden="true"></span>
+						<span id="inputSuccessCheckMailStatus" class="sr-only">(success)</span>
+					</div>
+					
+					<div class="form-group input-group is-mandarotry">
+						<span class="input-group-addon"><i class="fa fa-key"></i> password<sup>*</sup></span>
+						<input id="password" type="password" class="form-control password no-copy-past"
+							placeholder="enter a (strong) password" aria-describedby="inputSuccess3Status">
+						<span class="fa fa-2x form-control-feedback" aria-hidden="true"></span>
+						<span id="inputSuccess3Status" class="sr-only">(success)</span>
+					</div>
+					<span id="passwordHelpBlock" class="help-block"></span>
+
+					<div class="form-group input-group is-mandarotry">
+						<span class="input-group-addon"><i class="fa fa-key"></i> check password<sup>*</sup></span>
+						<input id="repassword" type="password" class="form-control password no-copy-past"
+							placeholder="re-enter the same password" aria-describedby="inputSuccess4Status">
+						<span class="fa fa-2x form-control-feedback" aria-hidden="true"></span>
+						<span id="inputSuccess4Status" class="sr-only">(success)</span>
+					</div>
+					<span id="rePasswordHelpBlock" class="help-block"></span>
+					
+<!-- 					<div class="form-group"> -->
+<!-- 						<label>Type of account</label> <label class="radio-inline"> <input -->
+<!-- 							type="radio" name="accountType" id="accountTypeUser" -->
+<!-- 							value="user">user -->
+<!-- 						</label> <label class="radio-inline"> <input type="radio" -->
+<!-- 							name="accountType" id="accountTypeGroup" -->
+<!-- 							value="group">group -->
+<!-- 						</label> -->
+<!-- 					</div> -->
+
+				</fieldset>
+			</form>
+		</div>
+
+		<div class="col-lg-1"></div>
+
+		<div id="account-user-data" class="col-lg-6" style="">
+			<form class="form-horizontal">
+				<fieldset>
+
+					<!-- Form Name -->
+					<legend>user informations</legend>
+
+					<div class="form-group input-group">
+						<span class="input-group-addon"><i class="fa fa-user"></i> First name</span>
+						<input id="firstname" type="text" class="form-control"
+							placeholder="enter your first name">
+					</div>
+					
+					<div class="form-group input-group">
+						<span class="input-group-addon"><i class="fa fa-user"></i> Last name</span>
+						<input id="firstname" type="text" class="form-control"
+							placeholder="enter your last name">
+					</div>
+					
+					<div class="form-group input-group">
+						<span class="input-group-addon" style="max-width: 40%;"><i class="fa fa-phone"></i> Group phone</span>
+						<select id="groupPhoneIndex" style="max-width: 40%;" class="form-control groupPhoneIndex">
+							<option value="" disabled="disabled">choose in list...</option>
+<!-- 							<option value="+1">USA (+1)</option> -->
+<!-- 							<option value="+33">France (+33)</option> -->
+<!-- 							<option value="+44">UK (+44)</option> -->
+						</select>
+						<input id="groupPhone" type="text" class="form-control" style="max-width: 60%;"
+							placeholder="enter your phone">
+					</div>
+					
+					<div class="form-group input-group">
+						<span class="input-group-addon"><i class="fa fa-building"></i> Laboratory or Company</span>
+						<input id="laboOrCompagny" type="text" class="form-control"
+							placeholder="enter your Laboratory or Company name">
+					</div>
+					
+					<div class="form-group">
+						<span class="input-group-addon"><i class="fa fa-map-marker"></i> workplace address</span>
+						<textarea class="form-control" rows="4" placeholder="enter your full adress, country included"></textarea>
+					</div>
+<!-- 					<div class="form-group"> -->
+<!-- 						<label>Type of laboratory</label> <label class="checkbox-inline"> <input -->
+<!-- 							type="radio" name="laboType" id="laboTypePrivate" -->
+<!-- 							value="user">private -->
+<!-- 						</label> <label class="radio-inline"> <input type="radio" -->
+<!-- 							name="laboType" id="laboTypePublic" -->
+<!-- 							value="group">public -->
+<!-- 						</label> -->
+<!-- 					</div> -->
+					
+					<div class="form-group input-group">
+						<span class="input-group-addon">Type of laboratory / company</span> <select
+							class="form-control">
+							<option selected disabled>-</option>
+							<option>private</option>
+							<option>public</option>
+							<option>mix private / public</option>
+						</select>
+					</div>
+					
+					<button id="btn-create-user" type="button" disabled="disabled" class="btn btn-primary btn-disabled">Create user</button>
+
+					<!-- Select Basic -->
+<!-- 					<div class="form-group input-group"> -->
+<!-- 						<span class="input-group-addon">MTH plateform(s)</span> <select -->
+<!-- 							multiple class="form-control"> -->
+<!-- 							<option>Bordeaux Metabolome Platform</option> -->
+<!-- 							<option>Metabolism Exploration Platform</option> -->
+<!-- 							<option>MetabolomeIDF</option> -->
+<!-- 							<option>MetaToul Platform</option> -->
+<!-- 						</select> -->
+<!-- 					</div> -->
+
+				</fieldset>
+			</form>
+		</div>
+		
+		<div id="account-group-data" class="col-lg-4" style="display: none;">
+			<form class="form-horizontal">
+				<fieldset>
+
+					<!-- Form Name -->
+					<legend>group informations</legend>
+
+					<div class="form-group input-group">
+						<span class="input-group-addon"><i class="fa fa-users"></i> Group name</span>
+						<input id="groupName" type="text" class="form-control"
+							placeholder="enter your group name">
+					</div>
+					
+					<div class="form-group input-group">
+						<span class="input-group-addon"><i class="fa fa-at"></i> email of group administrator</span>
+						<input id="email2" type="text" class="form-control"
+							placeholder="enter a valide email" aria-describedby="inputSuccessGrpEmailStatus">
+						<span class="fa fa-2x form-control-feedback" aria-hidden="true"></span>
+						<span id="inputSuccessGrpEmailStatus" class="sr-only">(success)</span>
+					</div>
+					<span id="email2HelpBlock" class="help-block"></span>
+					
+					<div class="form-group input-group">
+						<span class="input-group-addon" style="max-width: 40%;"><i class="fa fa-phone"></i> Group phone</span>
+						<select id="groupPhoneIndex" style="max-width: 40%;" class="form-control groupPhoneIndex">
+							<option value="" disabled="disabled">choose in list...</option>
+<!-- 							<option value="+1">USA (+1)</option> -->
+<!-- 							<option value="+33">France (+33)</option> -->
+<!-- 							<option value="+44">UK (+44)</option> -->
+						</select>
+						<input id="groupPhone" type="text" class="form-control" style="max-width: 60%;"
+							placeholder="enter your group phone">
+					</div>
+					
+					<button type="button" class="btn btn-primary ">Create group</button>
+					
+					<!-- Select Basic -->
+<!-- 					<div class="form-group input-group"> -->
+<!-- 						<span class="input-group-addon">MTH plateform(s)</span> <select -->
+<!-- 							multiple class="form-control"> -->
+<!-- 							<option>Bordeaux Metabolome Platform</option> -->
+<!-- 							<option>Metabolism Exploration Platform</option> -->
+<!-- 							<option>MetabolomeIDF</option> -->
+<!-- 							<option>MetaToul Platform</option> -->
+<!-- 						</select> -->
+<!-- 					</div> -->
+
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z\-0-9]{2,}))$/
+$("#email").focusout(function () {
+	checkMail(this);
+}).focus();
+$("#emailCheck").focusout(function () {
+	checkMailRetype(this);
+});
+$("#email2").focusout(function () {
+	checkMail(this);
+});
+
+$(document).on("cut copy paste",".no-copy-past",function(e) {
+    e.preventDefault();
+});
+
+$("#password").focusout(function () {
+	$(this).parent().removeClass("has-error has-success has-warning has-feedback");
+	$(this).parent().find(".fa").removeClass("fa-check fa-times");
+	var passStrength = 0;
+	var password = $(this).val();
+	if (password.length > 10)
+		passStrength = 2;
+	else if (password.length > 5)
+		passStrength = 1;
+	switch(passStrength) {
+	case 0:
+		$(this).parent().addClass("has-error has-feedback");
+		$(this).parent().find(".fa").addClass("fa-times");
+		$("#passwordHelpBlock").html("error: password too weak!");
+		break;
+	case 1:
+		$(this).parent().addClass("has-warning has-feedback");
+		$(this).parent().find(".fa").addClass("fa-check");
+		$("#passwordHelpBlock").html("warning: weak password!");
+		break;
+	case 2:
+		$(this).parent().addClass("has-success has-feedback");
+		$(this).parent().find(".fa").addClass("fa-check");
+		$("#passwordHelpBlock").html("");
+		break;
+	}
+});
+
+$(".password").focusout(function () {
+	$("#repassword").parent().removeClass("has-error has-success has-feedback");
+	$("#repassword").parent().find(".fa").removeClass("fa-check fa-times");
+	if ($("#password").val()==$("#repassword").val() && $("#repassword").val()!=""){
+		$("#repassword").parent().addClass("has-success has-feedback");
+		$("#repassword").parent().find(".fa").addClass("fa-check");
+		$("#rePasswordHelpBlock").html("");
+	} else if ($("#repassword").val()!="") {
+		$("#repassword").parent().addClass("has-error has-feedback");
+		$("#repassword").parent().find(".fa").addClass("fa-times");
+		$("#rePasswordHelpBlock").html("error: your two password must match.");
+	}
+});
+
+// 
+$("#accountTypeUser").click(function () {
+	$("#account-user-data").show();
+	$("#account-group-data").hide();
+});
+$("#accountTypeGroup").click(function () {
+	$("#account-group-data").show();
+	$("#account-user-data").hide();
+});
+
+/**
+ * check users emails
+ */
+function checkMail(elem) {
+	var email = $(elem).val();
+	if(!email.match(re)){
+		$(elem).parent().removeClass("has-success has-feedback").addClass("has-error has-feedback");
+		$(elem).parent().find(".fa").removeClass("fa-check").addClass("fa-times");
+		$("#" + ($(elem).prop('id')) + "HelpBlock").html("error: Email address seems invalid!");
+	} else {
+		$(elem).parent().addClass("has-success has-feedback").removeClass("has-error has-feedback");
+		$(elem).parent().find(".fa").removeClass("fa-times").addClass("fa-check");
+		$("#" + ($(elem).prop('id')) + "HelpBlock").html("");
+	}
+}
+
+function checkMailRetype(elem) {
+	var email = $(elem).val();
+	if(email != $("#email").val()){
+		$(elem).parent().removeClass("has-success has-feedback").addClass("has-error has-feedback");
+		$(elem).parent().find(".fa").removeClass("fa-check").addClass("fa-times");
+		$("#" + ($(elem).prop('id')) + "HelpBlock").html("error: email and check email do not match!");
+	} else {
+		$(elem).parent().addClass("has-success has-feedback").removeClass("has-error has-feedback");
+		$(elem).parent().find(".fa").removeClass("fa-times").addClass("fa-check");
+		$("#" + ($(elem).prop('id')) + "HelpBlock").html("");
+	}
+}
+
+$.getJSON("json/codes_countries.json", function(data) {
+	// load data from json
+	$.each(data,function(){
+		if (this.country=="France")
+			$(".groupPhoneIndex").append('<option value="'+this.code+'" selected="selected">'+this.country+' (+'+this.code+')</option>');
+		else
+			$(".groupPhoneIndex").append('<option value="'+this.code+'">'+this.country+' (+'+this.code+')</option>');
+	});
+	
+});
+
+$(".form-control").change(function () {
+	setTimeout(function() {
+		var success = true;
+		$.each($("input.form-control:visible"), function() {
+			if ($(this).parent().hasClass("has-error has-feedback")) {
+				success = false;
+			}
+			if ($(this).parent().hasClass("is-mandarotry") && $(this).val()=="") {
+				success = false;
+			}
+		});
+		$("#btn-create-user").removeClass("btn-disabled");
+		$("#btn-create-user").prop("disabled", false);
+		if (success) {
+			
+		} else {
+			$("#btn-create-user").addClass("btn-disabled");
+			$("#btn-create-user").prop("disabled", true);
+		}
+	},50);
+});
+
+</script>

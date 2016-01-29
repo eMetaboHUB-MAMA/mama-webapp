@@ -1,0 +1,94 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">
+				<span id="login_login" class="lang"></span>
+			</h1>
+		</div>
+		<!-- /.col-lg-12 -->
+	</div>
+	<!-- /.row -->
+	<div class="row">
+		<div class="col-lg-4">
+			<form class="form-horizontal" method="post" action=""
+				onsubmit="return checkLoginForm();">
+				<fieldset>
+					<div id="divLoginError" class="alert alert-danger" role="alert"
+						style="display: none;">
+						<strong>Warning!</strong> service not available right now; please
+						try abgain later.
+					</div>
+					<div id="divLoginNotValide" class="alert alert-warning"
+						role="alert" style="display: none;">
+						<strong>Warning!</strong> invalid email/password combination.
+					</div>
+					<!-- Prepended text-->
+					<div class="form-group input-group">
+						<span class="input-group-addon"><i class="fa fa-at"></i> <span
+							id="login_email" class="lang"></span></span> <input id="email"
+							type="text" class="form-control lang "
+							lang="login_email_placeholder" placeholder="enter your email">
+					</div>
+					<div class="form-group input-group">
+						<span class="input-group-addon"><i class="fa fa-key"></i> <span
+							id="login_password" class="lang"></span></span> <input id="password"
+							type="password" class="form-control password lang"
+							lang="login_password_placeholder"
+							placeholder="enter your password">
+					</div>
+					<button type="submit" class="btn btn-primary">
+						<span id="login_loginBtn" class="lang"></span>
+					</button>
+				</fieldset>
+			</form>
+		</div>
+
+		<div class="col-lg-1"></div>
+
+		<div class="col-lg-4" style="display: none;"></div>
+
+	</div>
+</div>
+
+<script type="text/javascript">
+	$("#email").focus();
+	$("#password").keypress(function(e) {
+		if (e.which == 13) {
+			checkLoginForm();
+		}
+	});
+	checkLoginForm = function() {
+		var verbe = "post";
+		var resource = "token";
+		var params = "";
+		$.each($("form input"), function(k, v) {
+			params += "&" + $(this).prop('id') + "="
+					+ $("#" + $(this).prop('id')).val();
+		});
+		// TODO display loading
+		// run
+		$.ajax({
+			type : "post",
+			url : "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+					+ resource,
+			dataType : "json",
+			async : true,
+			data : params,
+			success : function(json) {
+				if (json.success) {
+					location.search = "?page=dashboard";
+					//location.reload();
+				} else {
+					// show wrong password info
+					$("#divLoginNotValide").show();
+				}
+			},
+			error : function(xhr) {
+				console.log(xhr);
+				// show error message info
+				$("#divLoginError").show();
+			}
+		});
+		return false;
+	}
+</script>
