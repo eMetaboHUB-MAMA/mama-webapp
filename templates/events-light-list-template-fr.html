@@ -72,9 +72,15 @@
 		{%/if%}
 	{%elif type == "_user_new_new_project_involved"%}
 		<i class="fa fa-thumbs-o-up"></i>
-		Utilisateur &quot;${eventUser.fullName}&quot; mis impliqué à un project 
+		Utilisateur &quot;${eventUser.fullName}&quot; mis impliqué à un projet 
 		{%if eventUser.id != user.id%}
 			par ${user.fullName}
+		{%/if%}
+	{%elif type == "_user_new_remove_project_in_charge"%}
+		<i class="fa fa-exclamation-circle"></i>
+		Utilisateur &quot;${eventUser.fullName}&quot; enlevé impliqué à un projet 
+		{%if eventUser.id != user.id%}
+			by ${user.fullName}
 		{%/if%}
 
 	{%elif type == "_new_keyword"%}
@@ -118,6 +124,9 @@
 	{%elif type == "_project_new_involved"%}
 		<i class="fa fa-user"></i>
 		Le projet &quot;${project.title}&quot; a de nouv. impliqué(s), modif. par ${user.fullName}
+	{%elif type == "_project_remove_in_charge"%}
+		<i class="fa fa-user-times"></i>
+		Le projet &quot;${project.title}&quot; n'a plus de géstionnaire, modif. par ${user.fullName}
 	{%elif type == "_project_set_to_assigned"%}
 		<i class="fa fa-check-circle"></i>
 		Le projet &quot;${project.title}&quot; est maintenant assigné, modif. par ${user.fullName}
@@ -139,6 +148,9 @@
 	{%elif type == "_project_set_to_rejected"%}
 		<i class="fa fa-check-circle"></i>
 		Le projet &quot;${project.title}&quot; est maintenant rejeté, modif. par ${user.fullName}
+    {%elif type == "_project_set_back_to_waiting"%}
+		<i class="fa fa-hourglass"></i>
+		Le projet &quot;${project.title}&quot; est de retour à &quot;en attente&quot;, modif. par ${user.fullName}
 	{%elif type == "_project_set_basic_informations"%}
 		<i class="fa fa-info-circle"></i>
 		Le projet &quot;${project.title}&quot; informations basiques mises-à-jour par ${user.fullName}

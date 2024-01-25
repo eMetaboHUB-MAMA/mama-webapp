@@ -448,6 +448,9 @@ function showProject (projectID) {
 						case "not_funded": 
 							$("#trRejected").html(_modal_stopProject_rejectedSelect_opt_not_funded);
 							break;
+						case "saved_twice": 
+                            $("#trRejected").html(_modal_stopProject_rejectedSelect_opt_saved_twice);
+                            break;
 						}
 					} catch (e) {}
 					$("#trStopped").html(project.analysisRequestExtraData.stoppedReason);
@@ -773,8 +776,11 @@ function setProjectStatus(projectID, newStatus) {
 				$("#projectTr"+projectID).removeClass("rejected");
 				$("#projectTr"+projectID).addClass(newStatus);
 				// TODO add 'reject' and 'accepted' buttons
-				if (newStatus == "blocked" || newStatus == "rejected" ) {
+				if (newStatus === "blocked" || newStatus === "rejected" ) {
 					blockProject(projectID, newStatus);
+				}
+				if (newStatus === "waiting") {
+				    $("#select-updateInCharge-" + projectID).val("")
 				}
 			}
 		},

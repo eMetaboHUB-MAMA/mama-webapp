@@ -76,3 +76,9 @@
     display: block;
     margin-top: -15px !important;
 }    
+
+footer p {
+    text-align: center;
+    margin-top: 15px;
+    display: none;
+}

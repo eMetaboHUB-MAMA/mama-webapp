@@ -76,6 +76,12 @@
 		{%if eventUser.id != user.id%}
 			by ${user.fullName}
 		{%/if%}
+	{%elif type == "_user_new_remove_project_in_charge"%}
+		<i class="fa fa-exclamation-circle"></i>
+		User &quot;${eventUser.fullName}&quot; removed in charge of a project 
+		{%if eventUser.id != user.id%}
+			by ${user.fullName}
+		{%/if%}
 
 	{%elif type == "_new_keyword"%}
 		<i class="fa fa-pencil-square-o"></i>
@@ -118,6 +124,9 @@
 	{%elif type == "_project_new_involved"%}
 		<i class="fa fa-user"></i>
 		The project &quot;${project.title}&quot; has a new project manager(s) involed, setted by ${user.fullName}
+	{%elif type == "_project_remove_in_charge"%}
+		<i class="fa fa-user-times"></i>
+		The project &quot;${project.title}&quot; has no longer a project manager, setted by ${user.fullName}
 	{%elif type == "_project_set_to_assigned"%}
 		<i class="fa fa-check-circle"></i>
 		The project &quot;${project.title}&quot; is now assigned, setted by ${user.fullName}
@@ -139,6 +148,9 @@
 	{%elif type == "_project_set_to_rejected"%}
 		<i class="fa fa-check-circle"></i>
 		The project &quot;${project.title}&quot; is now rejected, setted by ${user.fullName}
+    {%elif type == "_project_set_back_to_waiting"%}
+		<i class="fa fa-hourglass"></i>
+		The project &quot;${project.title}&quot; is back to waiting, setted by ${user.fullName}
 	{%elif type == "_project_set_basic_informations"%}
 		<i class="fa fa-info-circle"></i>
 		The project &quot;${project.title}&quot; basic informations has been updated by ${user.fullName}

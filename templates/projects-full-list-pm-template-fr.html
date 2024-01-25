@@ -42,8 +42,8 @@
 	{%if analystInCharge != null %}
 	<td class="nobreakline">
 			<div class="">
-				<select onchange="updateInCharge(${id})" class="btn btn-mini">
-					<option selected="" disabled="">-</option>
+				<select id="select-updateInCharge-${id}" onchange="updateInCharge(${id})" class="btn btn-mini">
+					<option value="" selected="" disabled="">-</option>
 					{%each( index, projectManager ) listOfPM %}
 						{%if analystInCharge.id == projectManager.id %}
 							<option selected value="${projectManager.id}">${projectManager.fullName}</option>
@@ -70,8 +70,8 @@
 	{%else%}
 		<td>
 			<div class="">
-				<select onchange="updateInCharge(${id})" class="btn btn-mini">
-					<option selected="" disabled="">-</option>
+				<select id="select-updateInCharge-${id}" onchange="updateInCharge(${id})" class="btn btn-mini">
+					<option value="" selected="" disabled="">-</option>
 					{%each( index, projectManager ) listOfPM %}
 						<option value="${projectManager.id}">${projectManager.fullName}</option>
 					{%/each%}

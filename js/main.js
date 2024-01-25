@@ -18,6 +18,8 @@ function initMama () {
 	loadTopMenu();
 	// load left panel
 	loadLeftPanel();
+	// load footer
+    loadFooter();
 }
 /////////////////////////////////////////////////////////////////////////////////////////
 //document load
@@ -245,3 +247,50 @@ function formatDate() {
     return dateNowFormatted;
 }
 /////////////////////////////////////////////////////////////////////////////////////////
+// load footer
+loadFooter = function() {
+	$("#mama-webapp-version").html("");
+	$("#mama-rest-version").html("");
+	setTimeout(function(){$("footer p").hide()}, 0);
+	var showWebAppVersion = false;
+	var showRestVersion = false;
+	$.ajax({
+		type : "get",
+		url : "ajax/ajax_proxypass.php?verbe=get&resource=rest-api",
+		dataType : "json",
+		async : true,
+		success : function(data) {
+			// console.log(data);
+			if (data && data.mama && data.mama[0] && data.mama[0].api && data.mama[0].api.version) {
+				$("#mama-rest-version").html(data.mama[0].api.version);
+				showRestVersion = true;
+			}
+			testShowFooter();
+		},
+		error : function(xhr) {
+			console.log(xhr);
+		}
+	});
+	$.ajax({
+		type : "get",
+		url : "config/mama-app.json",
+		dataType : "json",
+		async : true,
+		success : function(data) {
+			// console.log(data);
+			if (data && data.version) {
+				$("#mama-webapp-version").html(data.version);
+				showWebAppVersion = true;
+			}
+			testShowFooter();
+		},
+		error : function(xhr) {
+			console.log(xhr);
+		}
+	});
+	testShowFooter = function () {
+		if (showWebAppVersion && showRestVersion) {
+			$("footer p").show();
+		}
+	}
+};

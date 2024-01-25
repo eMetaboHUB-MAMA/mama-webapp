@@ -396,6 +396,10 @@
 	<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"
 		style="display: block; position: static; margin-bottom: 5px;">
 		<li><a tabindex="-1" href="#"
+			onclick="setProjectStatus(currentProjectId,'waiting');"><i
+				class="fa fa-hourglass" aria-hidden="true"></i> <span
+				id="editProjectMenu_setToWaiting" class="lang"></span></a></li>
+		<li><a tabindex="-1" href="#"
 			onclick="setProjectStatus(currentProjectId,'assigned');"><i
 				class="fa fa-tasks" aria-hidden="true"></i> <span
 				id="editProjectMenu_setToAssigned" class="lang"></span></a></li>
@@ -495,6 +499,8 @@
 							class="lang" value="_incompatible_deadline"></option>
 						<option id="_modal_stopProject_rejectedSelect_opt_not_funded"
 							class="lang" value="_not_funded"></option>
+						<option id="_modal_stopProject_rejectedSelect_opt_saved_twice"
+							class="lang" value="_saved_twice"></option>
 					</select>
 				</div>
 				<br />

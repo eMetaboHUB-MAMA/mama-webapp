@@ -375,6 +375,7 @@ _invalid_login_password_combination = "combinaison courriel/mot-de-passe non val
 _login_used = "ce courriel est déjà utilisé en identifiant."
 
 // update project menu
+editProjectMenu_setToWaiting = "changer à \"en attente\""
 editProjectMenu_setToAssigned = "changer à \"assigné\""
 editProjectMenu_setToRejected = "changer à \"rejeté\""
 editProjectMenu_setToAccepted = "changer à \"accepté\""
@@ -450,9 +451,10 @@ _modal_stopProject_pausedSelect_opt_waiting_for_provisioning = "En attente de fi
 _modal_stopProject_rejectedSelect_opt_transfered_to_privilegied = "transmis à un partenaire privilégié"
 _modal_stopProject_rejectedSelect_opt_outside_our_skill = "hors compétences"
 _modal_stopProject_rejectedSelect_opt_non_prioritary = "développement non prioritaire"
-_modal_stopProject_rejectedSelect_opt_incompatible_deadline = "Délai incompatible"
+_modal_stopProject_rejectedSelect_opt_incompatible_deadline = "délai incompatible"
 _modal_stopProject_rejectedSelect_opt_too_many_samples = "nombre d’échantillons trop important"
 _modal_stopProject_rejectedSelect_opt_not_funded = "financement refusé / financé"
+_modal_stopProject_rejectedSelect_opt_saved_twice = "enregistré en doublon"
 _modal_stopProject_rejectedSelect = "Choisir une raison dans la liste&nbsp;"
 _modal_stopProject_rejectedSelect_opt_expensive = "trop cher !"
 _modal_stopProject_rejectedSelect_opt_delays = "délais trop longs"

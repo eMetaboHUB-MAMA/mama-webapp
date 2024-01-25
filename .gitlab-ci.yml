@@ -63,3 +63,5 @@ copy to dev:
     - ssh $SSH_OPTS $SSH_USER@$SSH_HOST "cat /tmp/$IMAGE_FILE | docker load";
     - echo "[gitlab-ci] start new docker container as deamon";
     - ssh $SSH_OPTS $SSH_USER@$SSH_HOST "docker run --restart unless-stopped --name $DOCKER_CONTAINER -it -p $DOCKER_SOCKET:80 -d $DOCKER_IMAGE ";
+    - echo "[gitlab-ci] remove docker image on test server";
+    - ssh $SSH_OPTS $SSH_USER@$SSH_HOST "rm -rf /tmp/$IMAGE_FILE ";

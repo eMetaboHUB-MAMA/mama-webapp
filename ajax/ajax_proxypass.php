@@ -295,6 +295,11 @@ if (isset ( $_GET ["resource"] ) && $_GET ["resource"] != "") {
 				// get_server_load ( $mama_config_json ['mamaRestApi'] );
 			}
 			break;
+		case "rest-api" :
+			if ($verbe == "GET") {
+				get_rest_api ( $mama_config_json ['mamaRestApi'] );
+			}
+			break;
 		default :
 			returnSuccess ( false );
 	}
@@ -1216,5 +1221,14 @@ function get_project_file($mama_rest_url, $pid) {
  */
 function delete_project_file($mama_rest_url, $pid) {
 	$curl_response = getStandardizedDelete ( $mama_rest_url, "project-file/$pid" );
+	echo $curl_response;
+}
+
+/**
+ *
+ * @param unknown $mama_rest_url        	
+ */
+function get_rest_api($mama_rest_url) {
+	$curl_response = getStandardizedGet ( $mama_rest_url, "" );
 	echo $curl_response;
 }
