@@ -1,0 +1,13 @@
+# @date: 2016/07/22
+# @see: humanstxt.org/
+
+# @Team - The platform "Exploration du Métabolisme" (PFEM, Clermont-Ferrand)
+
+    Christophe Duperier
+    Franck Giacomoni
+    Nils Paulhe
+
+# @Thanks
+
+    MetaboHUB project
+    MAMA project (>*.*)>

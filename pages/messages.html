@@ -1,0 +1,92 @@
+<!-- js -->
+<script src="js/messages.min.js" type="text/javascript"></script>
+<!-- page -->
+<div id="noMessagesContent" class="row" style="display: none">
+	<br />
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<h3>
+					<span id="listMessages_noMessage_title" class="lang"></span> <small><span id="listMessages_noMessage_text" class="lang"></span></small>
+				</h3>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row listMessagesContent">
+	<div class="col-lg-12">
+		<br />
+		<div class="form-group input-group col-lg-12">
+			<input type="text" id="messagesSearchFilter" class="form-control lang" lang="listMessages_search_ph" placeholder="e.g. Lorem Ipsum">
+			<div class="input-group-btn">
+				<button type="button" class="btn btn-primary dropdown-toggle" onclick="searchMessages();"
+					data-toggle="dropdown">
+					<span id="search-analyses-filter"> <span id="listMessages_search_btn" class="lang"></span> <i
+						class="fa fa-search"></i></span>
+				</button>
+			</div>
+			<div class="pull-right pull-top">
+				<button id="btn-userFilter-users" class="btn btn-default" onclick="addRemoveUserFilter('users');">
+					<i class="fa fa-users" aria-hidden="true"></i> <span id="listMessages_filterBtn_users" class="lang"></span>
+				</button>
+				&nbsp;
+				<button id="btn-userFilter-owner" class="btn btn-default" onclick="addRemoveUserFilter('owner');">
+					<i class="fa fa-tags" aria-hidden="true"></i> <span id="listMessages_filterBtn_pj_owner" class="lang"></span>
+				</button>
+				&nbsp;
+				<button id="btn-userFilter-inCharge" class="btn btn-default" onclick="addRemoveUserFilter('inCharge');">
+					<i class="fa fa-user-md" aria-hidden="true"></i> <span id="listMessages_filterBtn_pj_inCharge" class="lang"></span>
+				</button>
+				&nbsp;
+				<button id="btn-userFilter-involved" class="btn btn-default" onclick="addRemoveUserFilter('involved');">
+					<i class="fa fa-smile-o" aria-hidden="true"></i> <span id="listMessages_filterBtn_pj_involved" class="lang"></span>
+				</button>
+			</div>
+		</div>
+	</div>
+	<!-- /.col-lg-12 -->
+</div>
+<div class="row listMessagesContent">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th></th>
+								<th><span id="listMessages_tab_message" class="lang"></span></th>
+								<th><span id="listMessages_tab_from" class="lang"></span></th>
+								<th><span id="listMessages_tab_to" class="lang"></span></th>
+								<th><span id="listMessages_tab_created" class="lang"></span></th>
+								<th><span id="listMessages_tab_actions" class="lang"></span></th>
+							</tr>
+						</thead>
+						<tbody id="messages-full-list-container">
+						</tbody>
+						<tfoot>
+							<tr>
+								<th colspan="6">
+									<div class="col-lg-6">
+										<ul id="messagesPagination" class="pagination pagination-sm">
+										</ul>
+									</div>
+								</th>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+				<!-- /.table-responsive -->
+			</div>
+			<!-- /.panel-body -->
+		</div>
+		<!-- /.panel -->
+	</div>
+</div>
+<script type="text/javascript">
+//<!--
+	if (getUrlParameter("showMessage") !== undefined) {
+		openMessage(getUrlParameter("showMessage"));
+	}
+//-->
+</script>

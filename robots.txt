@@ -1,0 +1,10 @@
+User-Agent: *
+Disallow: /images/
+Disallow: /pages/
+Disallow: /ajax/
+Disallow: /content/
+Disallow: /?page=login
+Disallow: /?page=create-account
+Allow: /?page=default
+
+# Sitemap: https://****/sitemap.xml

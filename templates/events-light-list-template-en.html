@@ -1,0 +1,188 @@
+<script type="x-jquery-tmpl" id="events-light-list-template">
+{%if typeof(project) != "undefined" %}
+	<a href="?page=projects&showProject=${project.id}" class="list-group-item list-group-item-elli">
+{%elif typeof(eventUser) != "undefined" %}
+	<a href="?page=user-profile&userID=${eventUser.id}" class="list-group-item list-group-item-elli">
+{%elif typeof(appointment) != "undefined" %}
+	<a href="?page=appointments&showAppointment=${appointment.id}" class="list-group-item list-group-item-elli">
+{%else%}
+	<a href="#" class="list-group-item list-group-item-elli">
+{%/if%}
+
+	{%if type == "_user_created"%}
+		<i class="fa fa-user-plus"></i>
+		User &quot;${eventUser.fullName}&quot; created 
+		{%if eventUser.id != user.id%}
+			by ${user.fullName}
+		{%/if%}
+	{%elif type == "_user_informations_update"%}
+		<i class="fa fa-user"></i>
+		User &quot;${eventUser.fullName}&quot; informations updated 
+		{%if eventUser.id != user.id%}
+			by ${user.fullName}
+		{%/if%}
+	{%elif type == "_user_reset_password"%}
+		<i class="fa fa-key"></i>
+		User &quot;${eventUser.fullName}&quot; reset password 
+		{%if eventUser.id != user.id%}
+			by ${user.fullName}
+		{%/if%}
+	{%elif type == "_user_password_update"%}
+		<i class="fa fa-user"></i>
+		User &quot;${eventUser.fullName}&quot; password updated 
+		{%if eventUser.id != user.id%}
+			by ${user.fullName}
+		{%/if%}
+
+	{%elif type == "_user_new_status_right__blocked"%}
+		<i class="fa fa-user-times"></i>
+		User &quot;${eventUser.fullName}&quot; set to paused 
+		{%if eventUser.id != user.id%}
+			by ${user.fullName}
+		{%/if%}
+	{%elif type == "_user_new_status_right__user"%}
+		<i class="fa fa-user"></i>
+		User &quot;${eventUser.fullName}&quot; set to service user 
+		{%if eventUser.id != user.id%}
+			by ${user.fullName}
+		{%/if%}
+	{%elif type == "_user_new_status_right__project_manager"%}
+		<i class="fa fa-user"></i>
+		User &quot;${eventUser.fullName}&quot; set to MTH staff
+		{%if eventUser.id != user.id%}
+			by ${user.fullName}
+		{%/if%}
+	{%elif type == "_user_new_status_right__admin"%}
+		<i class="fa fa-user-md"></i>
+		User &quot;${eventUser.fullName}&quot; set to administrator 
+		{%if eventUser.id != user.id%}
+			by ${user.fullName}
+		{%/if%}
+	{%elif type == "_user_new_status_right__inactive"%}
+		<i class="fa fa-user-o"></i>
+		User &quot;${eventUser.fullName}&quot; set to inactive 
+		{%if eventUser.id != user.id%}
+			by ${user.fullName}
+		{%/if%}
+	{%elif type == "_user_new_new_project_in_charge"%}
+		<i class="fa fa-thumbs-o-up"></i>
+		User &quot;${eventUser.fullName}&quot; set in charge of a project 
+		{%if eventUser.id != user.id%}
+			by ${user.fullName}
+		{%/if%}
+	{%elif type == "_user_new_new_project_involved"%}
+		<i class="fa fa-thumbs-o-up"></i>
+		User &quot;${eventUser.fullName}&quot; set involed to a project 
+		{%if eventUser.id != user.id%}
+			by ${user.fullName}
+		{%/if%}
+
+	{%elif type == "_new_keyword"%}
+		<i class="fa fa-pencil-square-o"></i>
+		${user.fullName} add new keyword: ${oldName}
+	{%elif type == "_update_keyword"%}
+		<i class="fa fa-pencil-square-o"></i>
+		${user.fullName} update keyword <i>${oldName}</i> to <i>${newName}</i>
+	{%elif type == "_restore_keyword"%}
+		<i class="fa fa-check-circle"></i>
+		${user.fullName} restore keyword <i>${oldName}</i>
+	{%elif type == "_delete_keyword"%}
+		<i class="fa fa-times-circle"></i>
+		${user.fullName} delete keyword <i>${oldName}</i>
+	{%elif type == "_new_subkeyword"%}
+		<i class="fa fa-pencil-square-o"></i>
+		${user.fullName} add new subkeyword: ${oldName}
+	{%elif type == "_update_subkeyword"%}
+		<i class="fa fa-pencil-square-o"></i>
+		${user.fullName} update subkeyword <i>${oldName}</i> to <i>${newName}</i>
+	{%elif type == "_restore_subkeyword"%}
+		<i class="fa fa-check-circle"></i>
+		${user.fullName} restore subkeyword <i>${oldName}</i>
+	{%elif type == "_delete_subkeyword"%}
+		<i class="fa fa-times-circle"></i>
+		${user.fullName} delete subkeyword <i>${oldName}</i>
+	{%elif type == "_new_mth_platform"%}
+		<i class="fa fa-pencil-square-o"></i>
+		${user.fullName} add new MTH platform: ${oldName}
+	{%elif type == "_update_mth_platform"%}
+		<i class="fa fa-pencil-square-o"></i>
+		${user.fullName} update MTH platform <i>${oldName}</i> to <i>${newName}</i>
+
+	{%elif type == "_project_created"%}
+		<i class="fa fa-clock-o"></i>
+		New Project &quot;${project.title}&quot; submitted 
+		by ${user.fullName}
+	{%elif type == "_project_new_in_charge"%}
+		<i class="fa fa-user"></i>
+		The project &quot;${project.title}&quot; has a new project manager, setted by ${user.fullName}
+	{%elif type == "_project_new_involved"%}
+		<i class="fa fa-user"></i>
+		The project &quot;${project.title}&quot; has a new project manager(s) involed, setted by ${user.fullName}
+	{%elif type == "_project_set_to_assigned"%}
+		<i class="fa fa-check-circle"></i>
+		The project &quot;${project.title}&quot; is now assigned, setted by ${user.fullName}
+	{%elif type == "_project_set_to_accepted"%}
+		<i class="fa fa-check-circle"></i>
+		The project &quot;${project.title}&quot; is now accepted, setted by ${user.fullName}
+	{%elif type == "_project_set_to_completed"%}
+		<i class="fa fa-check-circle"></i>
+		The project &quot;${project.title}&quot; is now completed, setted by ${user.fullName}
+	{%elif type == "_project_set_to_running"%}
+		<i class="fa fa-check-circle"></i>
+		The project &quot;${project.title}&quot; is now running, setted by ${user.fullName}
+	{%elif type == "_project_set_to_archived"%}
+		<i class="fa fa-check-circle"></i>
+		The project &quot;${project.title}&quot; is now archived, setted by ${user.fullName}
+	{%elif type == "_project_set_to_blocked"%}
+		<i class="fa fa-check-circle"></i>
+		The project &quot;${project.title}&quot; is now paused, setted by ${user.fullName}
+	{%elif type == "_project_set_to_rejected"%}
+		<i class="fa fa-check-circle"></i>
+		The project &quot;${project.title}&quot; is now rejected, setted by ${user.fullName}
+	{%elif type == "_project_set_basic_informations"%}
+		<i class="fa fa-info-circle"></i>
+		The project &quot;${project.title}&quot; basic informations has been updated by ${user.fullName}
+
+	{%elif type == "_new_appointment"%}
+		<i class="fa fa-calendar-plus-o"></i>
+		New appointment request on proj. &quot;${appointment.project}&quot; from 
+		 ${appointment.fromUser} to ${appointment.toUser}
+	{%elif type == "_update_appointment"%}
+		<i class="fa fa-calendar"></i>
+		appointment request on proj. &quot;${appointment.project}&quot; from 
+		 ${appointment.fromUser} to ${appointment.toUser} updated
+	{%elif type == "_lock_appointment"%}
+		<i class="fa fa-calendar-check-o"></i>
+		appointment request on proj. &quot;${appointment.project}&quot; from 
+		 ${appointment.fromUser} to ${appointment.toUser} picked
+	{%elif type == "_fail_appointment"%}
+		<i class="fa fa-calendar-times-o"></i>
+		appointment request on proj. &quot;${appointment.project}&quot; from 
+		 ${appointment.fromUser} to ${appointment.toUser} failed
+
+	{%/if%}
+	<span class="pull-right text-muted small" data-toggle="tooltip" data-placement="top" title="${toogleDate}">
+		{%if nbYearsAgo != 0 && nbMonthsAgo > 23 %}
+			<em>about ${nbYearsAgo} years ago</em>
+		{%elif nbMonthsAgo != 0 && nbWeeksAgo > 10 %}
+			<em>about ${nbMonthsAgo} months ago</em>
+		{%elif nbWeeksAgo != 0 && nbDaysAgo > 13 %}
+			<em>about ${nbWeeksAgo} weeks ago</em>
+		{%elif nbDaysAgo > 1  %}
+			<em>about ${nbDaysAgo} days ago</em>
+		{%elif nbDaysAgo == 1 && nbHoursAgo > 23 %}
+			<em>about a day ago</em>
+		{%elif nbHoursAgo > 1 %}
+			<em>about ${nbHoursAgo} hours ago</em>
+		{%elif nbHoursAgo == 1 %}
+			<em>about an hour ago</em>
+		{%elif nbMinutsAgo > 1 %}
+			<em>about ${nbMinutsAgo} minutes ago</em>
+		{%elif nbMinutsAgo == 1 %}
+			<em>about a minute ago</em>
+		{%else%}
+			<em>less than a minute ago</em>
+		{%/if%}
+	</span>
+</a>
+</script>

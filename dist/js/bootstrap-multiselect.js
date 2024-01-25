@@ -41,6 +41,8 @@
  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+var elemBefore = [];
+
 !function ($) {
     "use strict";// jshint ;_;
 
@@ -330,8 +332,14 @@
              *
              * @param {jQuery} event
              */
-            onDropdownHide: function(event) {
-
+            onDropdownHide: function(event) { 
+            	var id = $(this['$select']).attr("id").replace("involved_", "");
+            	var elems = $("#involved_"+id).val();
+            	// console.log("after",elems);
+            	if (elems == null && elemBefore == null)
+            		return;
+            	if ((elems != null && elemBefore == null) || (elems == null && elemBefore != null) || (elems.toString() != elemBefore.toString()))
+            		updateInvolved(id, elems);
             },
             /**
              * Triggered after the dropdown is shown.
@@ -339,7 +347,9 @@
              * @param {jQuery} event
              */
             onDropdownShown: function(event) {
-                
+            	var id = $(this['$select']).attr("id").replace("involved_", "");
+            	elemBefore = $("#involved_"+id).val();
+                //console.log("before",elemBefore);
             },
             /**
              * Triggered after the dropdown is hidden.

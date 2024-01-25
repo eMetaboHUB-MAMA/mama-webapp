@@ -5,10 +5,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
-<meta name="author" content="">
+<meta name="author" content="MetaboHUB">
 <title>MAMA - MetaboHUB Analyses MAnager</title>
+<!--favicon-->
+<link rel="icon" type="image/ico" href="images/ico/favicon.ico" />
 <!-- jquery -->
 <script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/jquery.tmpl.min.js"></script>
 <!-- Bootstrap Core CSS -->
 <link href="bower_components/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -16,26 +19,29 @@
 <link href="bower_components/metisMenu/dist/metisMenu.min.css"
 	rel="stylesheet">
 <!-- Timeline CSS -->
-<link href="dist/css/timeline.css" rel="stylesheet">
+<link href="dist/css/timeline.min.css" rel="stylesheet">
 <!-- Custom CSS -->
-<link href="dist/css/sb-admin-2.css" rel="stylesheet">
-<link href="dist/css/sb-admin-2.overwrite.css" rel="stylesheet">
+<link href="dist/css/sb-admin-2.min.css" rel="stylesheet">
+<link href="dist/css/sb-admin-2.overwrite.min.css" rel="stylesheet">
 <!-- Custom Fonts -->
 <link href="bower_components/font-awesome/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
 <!-- Custom Theme JavaScript -->
-<script src="dist/js/sb-admin-2.js"></script>
+<script src="dist/js/sb-admin-2.min.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Metis Menu Plugin JavaScript -->
 <script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
 <!-- hightcharts -->
-<script src="bower_components/hightcharts/highcharts.js"></script>
-<script src="bower_components/hightcharts/modules/exporting.js"></script>
+<script src="bower_components/hightcharts/highcharts.min.js"></script>
+<script src="bower_components/hightcharts/modules/exporting.min.js"></script>
 <!--date picker-->
-<link href="dist/css/bootstrap-datepicker.css" media="screen"
+<link href="dist/css/bootstrap-datepicker.min.css" media="screen"
 	rel="stylesheet" type="text/css">
-<script src="dist/js/bootstrap-datepicker.js" type="text/javascript"></script>
+<script src="dist/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+<!-- wysihtml5 core javascript  and CSS -->
+<link rel="stylesheet" type="text/css" href="dist/bootstrap3-wysihtml5.min.css"></link>
+<script src="dist/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -46,15 +52,25 @@
 <script src="js/jquery.localisation.min.js" type="text/javascript"></script>
 <!-- bootstrap multiselect plugin -->
 <script type="text/javascript" src="dist/js/bootstrap-multiselect.js"></script>
-<link rel="stylesheet" href="dist/css/bootstrap-multiselect.css"
-	type="text/css" />
+<link rel="stylesheet" href="dist/css/bootstrap-multiselect.min.css" type="text/css" />
+<!-- <script type="text/javascript" src="/path/to/jquery.js"></script> -->
+<script type="text/javascript" src="bower_components/moment/moment.min.js"></script>
+<!-- <script type="text/javascript" src="/path/to/bootstrap/js/transition.js"></script> -->
+<!-- <script type="text/javascript" src="/path/to/bootstrap/js/collapse.js"></script> -->
+<!-- <script type="text/javascript" src="/path/to/bootstrap/dist/bootstrap.min.js"></script> -->
+<script type="text/javascript" src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
 <!-- MAMA javascripts -->
-<script src="js/main.js" type="text/javascript"></script>
+<script src="js/main.min.js" type="text/javascript"></script>
+<script src="js/commons.min.js" type="text/javascript"></script>
+<script src="js/md5.min.js" type="text/javascript"></script>
+<!-- MAMA css -->
+<link href="css/mama-css.overwrite.min.css" media="screen" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div id="wrapper">
 		<!-- Navigation -->
-		<nav class="navbar navbar-default navbar-static-top" role="navigation"
+		<nav class="navbar navbar-default navbar-static-top navbar-fixed-top" role="navigation"
 			style="margin-bottom: 0">
 
 			<div class="navbar-header">
@@ -64,8 +80,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index.html">MAMA - MetaboHUB
-					Analyses MAnager</a>
+				<a class="navbar-brand" href="?">MAMA - MetaboHUB Analyses MAnager</a>
 			</div>
 			<!-- /.navbar-header -->
 
@@ -92,60 +107,74 @@
 				</a>
 					<ul class="dropdown-menu dropdown-user">
 						<li class="mama-menu mama-menu-user-profile"><a
-							href="index.html?page=user-profile"><i
+							href="?page=user-profile"><i
 								class="fa fa-user fa-fw"></i> <span id="topMenu_userProfile"
 								class="lang"></span></a></li>
 						<li class="mama-menu mama-menu-login"><a
-							href="index.html?page=login"><i class="fa fa-sign-in fa-fw"></i>
+							href="?page=login"><i class="fa fa-sign-in fa-fw"></i>
 								<span id="topMenu_login" class="lang"></span></a></li>
 						<li class="mama-menu mama-menu-logout"><a
-							href="index.html?page=logout"><i class="fa fa-sign-out fa-fw"></i>
+							href="?page=logout"><i class="fa fa-sign-out fa-fw"></i>
 								<span id="topMenu_logout" class="lang"></span></a></li>
 					</ul> <!-- /.dropdown-user --></li>
 				<!-- /.dropdown -->
 			</ul>
 			<!-- /.navbar-top-links -->
-			<div class="navbar-default sidebar" role="navigation">
-				<div class="sidebar-nav navbar-collapse">
-					<ul class="nav" id="side-menu">
+			<div id="sidebar" class="navbar-default sidebar row-offcanvas row-offcanvas-left" role="navigation">
+				<div class="sidebar-nav navbar-collapse sidebar-offcanvas">
+					<ul class="nav " id="side-menu">
+						<li class="mama-menu mama-collapse">
+							<a id="collapseLeftPanelBtn" class="pull-right" style="z-index: 300;" href="javascript:void(0)" data-toggle="offcanvas">
+								<i class="btn btn-default btn-xs fa fa-chevron-circle-left"></i> </a></li>
 						<li class="mama-menu mama-menu-default"><a
-							id="navmenulink-default" href="index.html?page=default"><i
+							id="navmenulink-default" href="?page=default"><i
 								class="fa fa-info-circle"></i> <span id="leftMenu_about"
-								class="lang"></span></a></li>
+								class="lang collapse in hidden-xs"></span></a></li>
 						<li class="mama-menu mama-menu-create-account"><a
-							id="navmenulink-new-user" href="index.html?page=create-account"><i
+							id="navmenulink-new-user" href="?page=create-account"><i
 								class="fa fa-user-plus fa-fw"></i> <span
-								id="leftMenu_createAccount" class="lang"></span></a></li>
+								id="leftMenu_createAccount" class="lang collapse in hidden-xs"></span></a></li>
 						<li class="mama-menu mama-menu-dashboard"><a
-							id="navmenulink-dashboad" href="index.html?page=dashboard"><i
+							id="navmenulink-dashboad" href="?page=dashboard"><i
 								class="fa fa-dashboard fa-fw"></i> <span id="leftMenu_dashboard"
-								class="lang"></span></a></li>
-						<li class="mama-menu mama-menu-xxx"><a
-							id="navmenulink-new-analysis" href="index.html?page=new-analysis"><i
-								class="fa fa-plus-circle fa-fw"></i> New Project Request (user)</a></li>
-						<li class="mama-menu mama-menu-xxx"><a
-							id="navmenulink-edit-analysis"
-							href="index.html?page=edit-analysis"><i
-								class="fa fa-pencil-square-o fa-fw"></i> Edit Project Request
-								(PM)</a></li>
-						<li class="mama-menu mama-menu-xxx"><a
-							id="navmenulink-projects-client"
-							href="index.html?page=projects-client"><i
-								class="fa fa-tasks fa-fw"></i> Projects (user)</a></li>
-						<li class="mama-menu mama-menu-xxx"><a
-							id="navmenulink-projects-analyst"
-							href="index.html?page=projects-analyst"><i
-								class="fa fa-tasks fa-fw"></i> Projects (PM)</a></li>
-						<li class="mama-menu mama-menu-xxx"><a
-							id="navmenulink-projects-admin"
-							href="index.html?page=projects-admin"><i
-								class="fa fa-tasks fa-fw"></i> Projects (admin)</a></li>
-						<li class="mama-menu mama-menu-xxx"><a
-							href="index.html?page=statistics"><i
-								class="fa fa-bar-chart-o fa-fw"></i> Statistics (PM/admin)</a></li>
-						<li class="mama-menu mama-menu-xxx"><a
-							id="navmenulink-clients" href="index.html?page=users"><i
-								class="fa fa-users"></i> User manager (admin)</a></li>
+								class="lang collapse in hidden-xs"></span></a></li>
+						<li class="mama-menu mama-menu-new-project"><a
+							id="navmenulink-new-project" href="?page=new-project"><i
+								class="fa fa-plus-circle fa-fw"></i> <span
+								id="leftMenu_newAnalysisRequest" class="lang collapse in hidden-xs"></span></a></li>
+						<!-- <li class="mama-menu mama-menu-xxx"><a -->
+						<!-- id="navmenulink-edit-analysis" -->
+						<!-- href="?page=edit-analysis"><i -->
+						<!-- class="fa fa-pencil-square-o fa-fw"></i> Edit Project Request -->
+						<!-- (PM)</a></li> -->
+						<li class="mama-menu mama-menu-projects"><a
+							id="navmenulink-projects-projects" href="?page=projects"><i
+								class="fa fa-tasks fa-fw"></i> <span id="leftMenu_projects"
+								class="lang collapse in hidden-xs"></span> </a></li>
+						<li class="mama-menu mama-menu-messages"><a
+							id="navmenulink-projects-messages" href="?page=messages"><i
+								class="fa fa-comments-o fa-fw"></i> <span id="leftMenu_messages"
+								class="lang collapse in hidden-xs"></span> </a></li>
+						<li class="mama-menu mama-menu-appointments"><a
+							id="navmenulink-projects-appointments" href="?page=appointments"><i
+								class="fa fa-calendar fa-fw"></i> <span id="leftMenu_appointments"
+								class="lang collapse in hidden-xs"></span> </a></li>	
+						<li class="mama-menu mama-menu-statistics"><a
+							href="?page=statistics"><i
+								class="fa fa-bar-chart-o fa-fw"></i> <span id="leftMenu_statistics"
+								class="lang collapse in hidden-xs"></span></a></li>
+						<li class="mama-menu mama-menu-users"><a
+							id="navmenulink-clients" href="?page=users"><i
+								class="fa fa-users"></i> <span id="leftMenu_usersManager"
+								class="lang collapse in hidden-xs"></span></a></li>
+						<li class="mama-menu mama-menu-settings"><a
+							id="navmenulink-settings" href="?page=settings"><i
+								class="fa fa-wrench"></i> <span id="leftMenu_settings"
+								class="lang collapse in hidden-xs"></span></a></li>
+						<li class="mama-menu mama-menu-help"><a
+							id="navmenulink-help" href="?page=help"><i
+								class="fa fa-question-circle"></i> <span id="leftMenu_help"
+								class="lang collapse in hidden-xs"></span></a></li>
 					</ul>
 				</div>
 				<!-- /.sidebar-collapse -->
@@ -154,7 +183,167 @@
 		</nav>
 		<div id="page-wrapper"></div>
 		<!-- /#page-wrapper -->
+		<script type="text/javascript">
+		initMama();
+		</script>
 	</div>
 	<!-- /#wrapper -->
+	<!-- modales:START -->
+<div id="writeMessageModal" class="modal fade" tabindex="-1" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">
+					<span id="_modal_writeMessage_title" class="lang"></span> <span id="writeMessageToSPAN"></span>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<p id="divWriteMessage"></p>
+			</div>
+			<div class="modal-footer">
+				<button id="writeMessageBtn" type="button" class="btn btn-primary" onclick=""><i class="fa fa-envelope-square" aria-hidden="true"></i> <span id="_modal_writeMessage_okBtn" class="lang"></span></button>
+				<button type="button" class="btn btn-default" data-dismiss="modal"><span id="_modal_writeMessage_cancelBtn" class="lang"></span></button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<div id="messageModal" class="modal fade" tabindex="-1" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">
+					<span id="_modal_message_title_from" class="lang"></span> <b id="messageModal_from">.</b> <span id="_modal_message_title_to" class="lang"></span> <b id="messageModal_to">.</b>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<blockquote id="messageModal_message_n0_p" style="display: none;">
+					<p id="messageModal_message_n0">.</p>
+					<footer id="messageModal_author_n0">.</footer>
+				</blockquote>
+				<blockquote>
+					<p id="messageModal_message">.</p>
+					<footer id="messageModal_author">.</footer>
+				</blockquote>
+				<p id="divReplyMessage"></p>
+				<p>
+					<button id="messageModal_replyBtn" type="button" class="btn btn-default" onclick=""><i class="fa fa-reply" aria-hidden="true"></i> <span id="_modal_message_replyBtn" class="lang"></span></button>
+					<button id="messageModal_replyAllBtn" type="button" class="btn btn-default" onclick=""><i class="fa fa-reply-all" aria-hidden="true"></i> <span id="_modal_message_replyAllBtn" class="lang"></span></button>
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal"><span id="_modal_message_closeBtn" class="lang"></span></button>
+				<a id="messageModal_linkToMessage" href="#" class="btn btn-primary"> <i
+					class="fa fa-envelope-o fa-fw"></i> <span id="_modal_message_OpenInBtn" class="lang"></span>
+				</a>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<div id="appointmentModalFix" class="modal fade" tabindex="-1" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">
+					<span id="_modal_fixAppointment_title1" class="lang"></span> <em id="appointment2user__USERNAME">.</em> <span id="_modal_fixAppointment_title2" class="lang"></span> <em id="appointment2user__PROJECTNAME">.</em>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<p>
+					<ul id="listNewAppointment" class="list-group">
+					</ul>
+					<div>
+					<div class="form-group input-group ">
+						<span class="input-group-addon"><span id="_modal_fixAppointment_newDate" class="lang"></span></span>
+						<!-- data-date-format="yyyy-mm-dd hh:MM" -->
+						<input id="new-appointment" type="text"
+							class="form-control datetimepicker" value="" placeholder="year-month-day hours:minutes">
+						<span class="input-group-btn">
+							<button id="newAppointmentBtn" class="btn btn-success" onclick="addAppointmentDate()" type="button" title="add">
+								<i class="fa fa-plus"></i>
+							</button>
+						</span>
+					</div>
+				</div>
+				</p>
+				<p id="divCreateAppointment"></p>
+			</div>
+			<div class="modal-footer">
+				<button id="createAppointmentButton" type="button" class="btn btn-primary" onclick=""><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> <span id="_modal_fixAppointment_fixAppBtn" class="lang"></span></button>
+				<button type="button" class="btn btn-default" data-dismiss="modal"><span id="_modal_fixAppointment_closeBtn" class="lang"></span></button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<div id="appointmentModalRead" class="modal fade" tabindex="-1" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">
+					<span id="_modal_readAppointment_title1" class="lang"></span> <em id="appointmentFromUser__USERNAME">.</em> <span id="_modal_readAppointment_title2" class="lang"></span> <em id="appointmentFromUser__PROJECTNAME">.</em>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<p>
+				<ul id="modalOpenAppointment_listProp" class="list-group"></ul>
+				</p>
+				<p>
+				<blockquote>
+					<p id="appointmentFromUser__MESSAGE"></p>
+					<footer id="appointmentFromUser__AUTHOR"></footer>
+				</blockquote>
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button id="saveAppointmentButton" type="button" class="btn btn-primary" onclick=""><i class="fa fa-save" aria-hidden="true"></i> <span id="_modal_readAppointment_saveBtn" class="lang"></span></button>
+				<button type="button" class="btn btn-default" data-dismiss="modal"><span id="_modal_readAppointment_closeBtn" class="lang"></span></button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+	<!-- modales:END -->
+<!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(["setDomains", ["*.pfemw3.clermont.inra.fr/mama-webapp"]]);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//pfemw3.clermont.inra.fr/piwik/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 3]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//pfemw3.clermont.inra.fr/piwik/piwik.php?idsite=3" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+<iframe id="contentToPrint" name="contentToPrint" style="display: none;"></iframe>
 </body>
 </html>

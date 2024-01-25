@@ -5,22 +5,35 @@ Metadata
 -----------
 
  * **@name**: MAMA - WebApp
- * **@version**: 0.1
- * **@authors**: Nils Paulhe
+ * **@version**: 1.0
+ * **@authors**: <nils.paulhe@inra.fr>, <franck.giacomoni@inra.fr>
  * **@date creation**: 2016/01/29
  * **@main usage**: WebApp of the **M**etaboHUB's **A**nalyses **MA**nager
- * **@see**: MAMA - REST
+ * **@see**: dev-team/mama-rest
  
 Configuration
 -----------
 
 ### Requirement:
-Any web-server (Apache / Tomcate / ...)
+PHP web-server (Apache / ...)
 
 ### Deploy:
  * get project data `git clone ssh://git@pfemw3.clermont.inra.fr:dev-team/mama-webapp.git`
- * TODO
-  
+ * edit `config/mama-webapp.json` configuration file (or create it from `config/mama-webapp.json.sample` template file ) 
+ 
+#### Apache
+
+Please enable rewrite rules with a `sudo a2enmod rewrite && sudo service apache2 restart`; then add this config to your `apache2.conf` file:
+```
+<Directory /var/www/html/mama-webapp/>
+  AllowOverride All
+</Directory>
+```
+
+#### Nginx
+
+TODO
+
 ### Warning:
 TODO
 

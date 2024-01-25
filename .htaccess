@@ -9,7 +9,10 @@ RedirectMatch 403 ^.*/\.git/*
 <Files ~ "\.sql$">
     deny from all
 </Files>
-<Files ~ "README\.md$">
+<Files ~ "README\.txt$">
+    deny from all
+</Files>
+<Files ~ "\.md$">
     deny from all
 </Files>
 

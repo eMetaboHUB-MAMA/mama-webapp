@@ -1,0 +1,263 @@
+<!-- js -->
+<script src="js/projects.min.js" type="text/javascript"></script>
+<!-- page -->
+<div id="noProjectsContent" class="row" style="display: none">
+	<br />
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<h3>
+					<span id="listProjects_noProject_title" class="lang"></span> <small><span id="listProjects_noProject_text" class="lang"></span></small>
+				</h3>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row listProjectsContent">
+	<br />
+	<div class="col-lg-12">
+		<br />
+		<div class="form-group input-group col-lg-12">
+			<input type="text" id="projectsSearchFilter" class="form-control lang" lang="listProjects_search_ph" placeholder="e.g. plasma">
+			<div class="input-group-btn">
+				<button type="button" class="btn btn-primary dropdown-toggle"
+					data-toggle="dropdown" style="">
+					<span id="search-analyses-filter-status"> <span id="listProjects_search_filter_all" class="lang"></span></span> 
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu pull-right ">
+					<li><a id="aPj_blocked" href="#" onclick="reloadPage('blocked')"> <span id="listProjects_search_filter_blocked" class="lang"></span></a></li>
+						<li><a id="aPj_rejected" href="#" onclick="reloadPage('rejected')"> <span id="listProjects_search_filter_rejected" class="lang"></span></a></li>
+						<li><a id="aPj_waiting" href="#" onclick="reloadPage('waiting')"> <span id="listProjects_search_filter_waiting" class="lang"></span></a></li>
+						<li><a id="aPj_assigned" href="#" onclick="reloadPage('assigned')"> <span id="listProjects_search_filter_assigned" class="lang"></span></a></li>
+						<li><a id="aPj_completed" href="#" onclick="reloadPage('completed')"> <span id="listProjects_search_filter_completed" class="lang"></span></a></li>
+						<li><a id="aPj_accepted" href="#" onclick="reloadPage('accepted')"> <span id="listProjects_search_filter_accepted" class="lang"></span></a></li>
+						<li><a id="aPj_running" href="#" onclick="reloadPage('running')"> <span id="listProjects_search_filter_running" class="lang"></span></a></li>
+						<li><a id="aPj_archived" href="#" onclick="reloadPage('archived')"> <span id="listProjects_search_filter_archived" class="lang"></span></a></li>
+						<li><a href="#" onclick="reloadPage('')"> <span id="listProjects_search_filter_allStatus" class="lang"></span></a></li>
+				</ul>
+			</div>
+			<div class="input-group-btn ">
+				<button type="button" class="btn btn-primary dropdown-toggle" onclick="searchProjects();"
+					data-toggle="dropdown">
+					<span id="search-analyses-filter"> 
+						<span id="listProjects_search_btn" class="lang"></span> <i class="fa fa-search"></i></span>
+				</button>
+			</div>
+				<a class="btn btn-default pull-right" href="ajax/ajax_proxypass.php?verbe=get&resource=projects-file" target="_blank">
+					<i class="fa fa-file-excel-o"></i> <span id="listProjects_download_btn" class="lang"></span>
+				</a>
+			</div>
+		</div>
+	</div>
+	<!-- /.col-lg-12 -->
+</div>
+<div class="row listProjectsContent">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th><span id="listProjects_tab_title" class="lang"></span></th>
+								<th><span id="listProjects_tab_status" class="lang"></span></th>
+								<th><span id="listProjects_tab_created" class="lang"></span></th>
+								<th><span id="listProjects_tab_updated" class="lang"></span></th>
+								<th><span id="listProjects_tab_inCharge" class="lang"></span></th>
+								<th><span id="listProjects_tab_involved" class="lang"></span></th>
+								<th><span id="listProjects_tab_actions" class="lang"></span></th>
+							</tr>
+						</thead>
+						<tbody id="projects-full-list-container">
+						</tbody>
+						<tfoot>
+							<tr>
+								<th colspan="8">
+									<div class="col-lg-6">
+										<ul id="projectsPagination" class="pagination pagination-sm">
+										</ul>
+									</div>
+								</th>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+				<!-- /.table-responsive -->
+			</div>
+			<!-- /.panel-body -->
+		</div>
+		<!-- /.panel -->
+	</div>
+</div>
+<div id="projectModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">
+					<span id="_modal_showProject_title" class="lang"></span><span id="project-idLong"></span>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<p>
+				<div class="panel-group" id="accordion">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion"
+									href="#collapseMainInfos"><i class="fa fa-info-circle" aria-hidden="true"></i> <span id="_modal_showProject_main_title" class="lang"></span></a>
+							</h4>
+						</div>
+						<div id="collapseMainInfos" class="panel-collapse collapse in">
+							<div class="panel-body">
+								<div class="table-responsive">
+									<table class="table">
+										<thead>
+											<tr>
+												<th><span id="_modal_showProject_main_tabKey" class="lang"></span></th>
+												<th><span id="_modal_showProject_main_tabVal" class="lang"></span></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><span id="_modal_showProject_pjTitle" class="lang"></span></td>
+												<td id="project-title"></td>
+											</tr>
+											<tr>
+												<td><span id="_modal_showProject_pjDemand" class="lang"></span></td>
+												<td id="project-demand">
+													<span class="demandTypeCatalogAllowance label label-default label-space">
+														<span id="_modal_showProject_pjDemand_catAllo" class="lang"></span>
+													</span> 
+													<span  class="demandTypeEqProvisioning label label-default label-space">
+														<span id="_modal_showProject_pjDemand_eqProv" class="lang"></span>
+													</span> 
+													<span class="demandTypeFeasibilityStudy label label-default label-space">
+														<span id="_modal_showProject_pjDemand_feasStud" class="lang"></span>
+													</span> 
+													<span class="demandTypeDataProcessing label label-default label-space">
+														<span id="_modal_showProject_pjDemand_dataProcessing" class="lang"></span>
+													</span>
+													<span class="demandTypeTraining label label-default label-space">
+														<span id="_modal_showProject_pjDemand_training" class="lang"></span>
+													</span>
+													<span class="demandTypeOther label label-default label-space">
+														<span id="_modal_showProject_pjDemand_other" class="lang"></span>
+													</span>
+												</td>
+											</tr>
+											<tr id="trSampleNb">
+												<td><span id="_modal_showProject_pjSampleNb" class="lang"></span></td>
+												<td><span
+													class="project-sampleNumber-50_or_fewer label label-default"><span id="_modal_showProject_pjSampleNb_less50" class="lang"></span></span> <span
+													class="project-sampleNumber-51_to_100 label label-default"><span id="_modal_showProject_pjSampleNb_51to100" class="lang"></span></span> <span
+													class="project-sampleNumber-101_to_500 label label-default"><span id="_modal_showProject_pjSampleNb_101to500" class="lang"></span></span> <span
+													class="project-sampleNumber-more_than_500 label label-default"><span id="_modal_showProject_pjSampleNb_more500" class="lang"></span></span></td>
+											</tr>
+											<tr>
+												<td><span id="_modal_showProject_pjScientificCtx" class="lang"></span></td>
+												<td id="project-scientificContext"></td>
+											</tr>
+											<tr style="display: none;">
+												<td><span id="_modal_showProject_pjScientificCtxFile" class="lang"></span></td>
+												<td id="project-scientificContextFile"></td>
+											</tr>
+											<tr>
+												<td><span id="_modal_showProject_pjThemWords" class="lang"></span></td>
+												<td id="trKeyWords"></td>
+											</tr>
+											<tr>
+												<td><span id="_modal_showProject_pjSubThemWords" class="lang"></span></td>
+												<td id="trSubKeyWords"></td>
+											</tr>
+											<tr>
+												<td><span id="_modal_showProject_pjMTHPF" class="lang"></span></td>
+												<td id="trPlatforms"></td>
+											</tr>
+
+											<tr class="trBlockedOrRejected trBlocked danger">
+												<td><span id="_modal_showProject_pjBlocked" class="lang"></span></td>
+												<td id="trBlocked"></td>
+											</tr>
+											<tr class="trBlockedOrRejected trRejected danger">
+												<td><span id="_modal_showProject_pjRejected" class="lang"></span></td>
+												<td id="trRejected"></td>
+											</tr>
+											<tr class="trBlockedOrRejected trBlocked trRejected danger">
+												<td><span id="_modal_showProject_pjStopped" class="lang"></span></td>
+												<td id="trStopped"></td>
+											</tr>
+											
+										</tbody>
+										<tfoot></tfoot>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion"
+									href="#collapseProjectEvents"><i class="fa fa-bell" aria-hidden="true"></i> <span id="_modal_showProject_events_title" class="lang"></span></a>
+							</h4>
+						</div>
+						<div id="collapseProjectEvents" class="panel-collapse collapse">
+							<div class="panel-body">
+								<div class="list-group" id="events-light-list-container"></div>
+								<!-- /.list-group -->
+								<div id="noEventToShow" style=""><span class="lang-class noEventToShow"></span></div>
+								<a id="showMoreEventsBtn" style=""
+									onclick="showMoreProjectEvents()"
+									class="btn btn-default btn-block"><span class="lang-class showMore"></span></a>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion"
+									href="#collapseProjectMessages"><i class="fa fa-envelope-o" aria-hidden="true"></i> <span id="_modal_showProject_messages_title" class="lang"></span></a>
+							</h4>
+						</div>
+						<div id="collapseProjectMessages" class="panel-collapse collapse">
+							<div class="panel-body">
+								<div class="list-group" id="messages-light-list-container"></div>
+								<!-- /.list-group -->
+								<div id="noMessageToShow" style=""><span class="lang-class noMessageToShow"></span></div>
+								<a id="showMoreMessageBtn" style=""
+									onclick="showMoreProjectMessages()"
+									class="btn btn-default btn-block"><span class="lang-class showMore"></span></a>
+							</div>
+							<div class="panel-body">
+								<p id="divWriteProjectMessage"></p>
+								<br />
+								<button id="writeProjectMessageBtn" type="button" class="btn btn-primary" onclick=""><i class="fa fa-envelope-square" aria-hidden="true"></i> <span id="_modal_showProject_btn_writeMessage" class="lang"></span></button>
+							</div>
+						</div>
+					</div>
+				</div>
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default btn-xs" onclick="printProject(false)"><i class="fa fa-print"></i> <span id="_modal_showProject_btn_print_all" class="lang"></span></button>
+				<button type="button" class="btn btn-default btn-xs" onclick="printProject(true)"><i class="fa fa-print"></i> <span id="_modal_showProject_btn_print_main" class="lang"></span></button>
+				<button type="button" class="btn btn-primary"
+					onclick="editProject(currentProjectInModalId)">
+					<i class="fa fa-pencil"></i> <span id="_modal_showProject_btn_edit" class="lang"></span>
+				</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal"><span id="_modal_showProject_btn_close" class="lang"></span></button>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+<!--
+	if (getUrlParameter("showProject") !== undefined) {
+		showProject(getUrlParameter("showProject"));
+	}
+//-->
+</script>

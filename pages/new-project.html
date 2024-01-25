@@ -1,0 +1,255 @@
+<script src="dist/js/jquery.form.min.js"></script>
+<script src="js/project.min.js"></script>
+<script src="js/uploadFile.min.js"></script>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">
+				<span id="createProject_title_create" class="lang"></span> <small><span id="createProject_title_newAnalysisRequest" class="lang"></span></small>
+			</h1>
+		</div>
+		<!-- /.col-lg-12 -->
+	</div>
+	<!-- /.row -->
+	<div class="row">
+		<div class="col-lg-5">
+			<form class="form-horizontal" action="?" method="post"
+				onchange="checkIfFormNewProjectValid()"
+				onsubmit="return checkNewProjectForm();">
+				<fieldset>
+					<div id="divError" class="alert alert-danger" role="alert"
+						style="display: none;">
+						<strong><span id="_warning1_" class="lang"></span></strong> <span
+							id="_service_not_available" class="lang"></span> <span
+							id="divErrorCause"></span>
+					</div>
+					<!-- Form Name -->
+					<legend><span id="createProject_content_basicInformations" class="lang"></span></legend>
+					<!-- Prepended text-->
+					<div class="form-group input-group">
+						<span class="input-group-addon"><span id="createProject_content_projectTitle" class="lang"></span> <sup>*</sup></span>
+						<input id="projectTitle" type="text" class="form-control lang" lang="createProject_content_projectTitle_ph"
+							placeholder="title of the project" maxlength="100">
+					</div>
+					<span id="helpBlock" class="help-block"><span id="createProject_content_projectTitle_help" class="lang"></span></span>
+					<div class="form-group">
+						<span class="input-group-addon"><i
+							class="fa fa-question-circle"></i> <span id="createProject_content_projectAim" class="lang"></span> <sup>*</sup></span>
+						<textarea id="interestInMthCollaboration" class="form-control lang"
+							rows="3" maxlength="150" lang="createProject_content_projectAim_ph"
+							placeholder="Explain your project in a few words"></textarea>
+					</div>
+					<div class="form-group">
+						<label><span id="createProject_content_projectDemandType" class="lang"></span> <sup>*</sup></label>
+						<div class="checkbox">
+							<label> <input id="demandTypeEqProvisioning"
+								name="demandType" type="checkbox" value=""> <span id="createProject_content_projectDemandType_eqProv" class="lang"></span>
+							</label>
+						</div>
+						<div class="checkbox">
+							<label> <input class="classicDemandListener"
+								id="demandTypeCatalogAllowance" name="demandType"
+								type="checkbox" value="true"> <span id="createProject_content_projectDemandType_catAllow" class="lang"></span>
+							</label>
+						</div>
+						<div class="checkbox">
+							<label> <input id="demandTypeFeasibilityStudy"
+								name="demandType" type="checkbox" value=""> <span id="createProject_content_projectDemandType_feasibility" class="lang"></span>
+							</label>
+						</div>
+						<div class="checkbox">
+							<label> 
+								<input id="demandTypeDataProcessing" name="demandType" type="checkbox" value=""> 
+								<span id="createProject_content_projectDemandType_dataProcessing" class="lang"></span>
+							</label>
+						</div>
+						<div class="checkbox">
+							<label> 
+								<input id="demandTypeTraining" name="demandType" type="checkbox" value=""> 
+								<span id="createProject_content_projectDemandType_training" class="lang"></span>
+							</label>
+						</div>
+						<div class="checkbox">
+							<label> 
+								<input id="demandTypeOther" name="demandType" type="checkbox" value=""> 
+								<span id="createProject_content_projectDemandType_other" class="lang"></span>
+							</label>
+						</div>
+<!-- 						<span id="helpBlockDemand" class="help-block"><small><i -->
+<!-- 								class="fa fa-question-circle"></i> view online <a href="#">catalogue</a></small></span> -->
+					</div>
+					<!-- Select Basic -->
+					<div class="form-group input-group classiqAnalyze"
+						style="display: none;">
+						<span class="input-group-addon"><span id="createProject_content_sampleNb" class="lang"></span></span> <select
+							id="samplesNumber" class="form-control">
+							<option selected disabled>-</option>
+							<option id="createProject_content_projectType_less50" class="lang" value="50 or fewer">50 or fewer</option>
+							<option id="createProject_content_projectType_51to100" class="lang" value="51 to 100">51 to 100</option>
+							<option id="createProject_content_projectType_101to500" class="lang" value="101 to 500">101 to 500</option>
+							<option id="createProject_content_projectType_more501" class="lang" value="more than 501">more than 501</option>
+						</select>
+					</div>
+					<div class="form-group input-group">
+						<label><span id="createProject_content_projectType_thematicCloudWords" class="lang"></span> <sup>*</sup></label> <br />
+						<div id="targetCloudWords"></div>
+						<span id="helpBlockCloudWord" class="help-block"><small><i class="fa fa-question-circle"></i> <span id="createProject_content_projectType_thematicCloudWords_help" class="lang"></span></small></span>
+					</div>
+					<div class="form-group input-group">
+						<label><span id="createProject_content_projectType_subThematicCloudWords" class="lang"></span></label> <br />
+						<div id="targetSubCloudWords"></div>
+						<span id="helpBlockCloudWord" class="help-block"><small><i class="fa fa-question-circle"></i> <span id="createProject_content_projectType_subThematicCloudWords_help" class="lang"></span></small></span>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+		<div class="col-lg-1"></div>
+		<div class="col-lg-6">
+			<form class="form-horizontal" action="?" method="post"
+				onsubmit="return checkNewProjectForm();">
+				<fieldset>
+					<!-- Form Name -->
+					<legend><span id="createProject_content_projectInformations" class="lang"></span></legend>
+					<div class="form-group classiqAnalyze" style="display: none;">
+						<label>
+							<span id="createProject_content_projectType" class="lang"></span> 
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="targeted" id="targetedTRUE" value="true"> 
+							<span id="createProject_content_projectType_targeted" class="lang"></span>
+						</label> 
+						<label class="radio-inline"> 
+							<input type="radio" name="targeted" id="targetedFALSE" value="false"> 
+							<span id="createProject_content_projectType_untargeted" class="lang"></span>
+						</label>
+					</div>
+					<!-- Select Basic -->
+					<div class="form-group input-group">
+						<span class="input-group-addon"> 
+							<span id="createProject_content_project_mthPF" class="lang"></span> <sup>*</sup>
+						</span> 
+						<select id="mthPlatforms" style="height: 105px !important;" multiple class="form-control" onchange="checkIfFormNewProjectValid()">
+						<!-- <option value="null">I do not known</option> -->
+						</select>
+					</div>
+					<div class="form-group">
+						<label><span id="createProject_content_project_copart" class="lang"></span></label>
+						<label class="radio-inline"> <input type="radio"
+							name="copartner" id="copartnerYES" value="true"><span id="createProject_content_project_copart_yes" class="lang"></span>
+						</label> <label class="radio-inline"> <input type="radio"
+							name="copartner" id="copartnerNO" checked value="false"><span id="createProject_content_project_copart_no" class="lang"></span>
+						</label> <span id="helpBlockCoPart" class="help-block"><small><i
+								class="fa fa-question-circle"></i> <span id="createProject_content_project_copart_def" class="lang"></span></small></span>
+					</div>
+					<div class="form-group">
+						<label><i class="fa fa-flask"></i> <span id="createProject_content_project_context" class="lang"></span></label>
+						<ul class="nav nav-tabs">
+							<li class="active"><a href="#science-context-txt"
+								aria-controls="settings" role="tab" data-toggle="tab"><i
+									class="fa fa-pencil"></i> <span id="createProject_content_project_desc" class="lang"></span></a></li>
+							<li><a href="#science-context-file" aria-controls="settings"
+								role="tab" data-toggle="tab"><i class="fa fa-upload"></i>
+									<span id="createProject_content_project_desc_file_upload" class="lang"></span></a></li>
+						</ul>
+						<!-- Tab panes -->
+						<br />
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane active"
+								id="science-context-txt">
+								<div class="form-group">
+									<textarea id="scientificContext" class="form-control" rows="3" maxlength="2000"></textarea>
+								</div>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="science-context-file">
+								<div class="form-group">
+									<!-- ajax ansync upload - proxy via webapp: START -->
+									<br />
+									<div class="">
+										<span id="fileUploadContainer"></span>
+										<div id="addFileFormContent" class="input-group"
+											style="max-width: 350px;">
+											<span class="input-group-btn"> <span
+												class="btn btn-primary btn-file-upload btn-file">
+													<span id="createProject_content_project_desc_file_upload_btn" class="lang"></span> <input id="file" type="file" name="file"
+													accept=".zip,.pdf,.doc,.docx,.odt">
+											</span>
+											</span> <input type="text" class="form-control" readonly>
+										</div>
+									</div>
+									<div class=""></div>
+									<div id="fileUploading" class="" style="display: none;">
+										<img src="images/ajax-loader.gif" title="uploading..." />
+									</div>
+									<br />
+									<div id="fileUploadResults" class="" style="display: none;"></div>
+									<div id="fileUploadError" class="" style="max-width: 350px;"></div>
+									<div id="fileUploadSuccess" class="" style="max-width: 350px;"></div>
+									<input type="hidden" id="attachedFile" name="attachedFile" value="">
+									<!-- ajax ansync upload - proxy via webapp: END -->
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group input-group">
+						<span class="input-group-addon"> <i class="fa fa-money"></i>
+							<span id="createProject_content_project_financialContext" class="lang"></span> <sup>*</sup>
+						</span>
+						<select id="financialContext" multiple class="form-control" onchange="checkIfFormNewProjectValid()">
+							<option id="createProject_content_project_financialContextOK" value="project_financed" class="financed lang">project financed</option>
+							<option id="createProject_content_project_financialContextProv" value="project_inProvisioning" class="lang financed">project in provisioning</option>
+							<option id="createProject_content_project_financialContextOwnSup" class="lang" value="project_onOwnSupply">project on own supply</option>
+							<option id="createProject_content_project_financialContextKO" class="lang" value="project_notFinanced">project not financed</option>
+						</select>
+					</div>
+					<div class="form-group input-group financedOK"
+						style="diplay: none;">
+						<span class="input-group-addon"> <i class="fa fa-dollar"></i>
+							<span id="createProject_content_project_financialContextBis" class="lang"></span> 
+						</span> 
+						<select id="financialContextBis" multiple class="form-control">
+							<option id="createProject_content_project_financialContextEU" class="lang" value="project_financedEU">EU</option>
+							<option id="createProject_content_project_financialContextANR" class="lang" value="project_financedANR">ANR</option>
+							<option id="createProject_content_project_financialContextNational" class="lang" value="project_financedNational">National</option>
+							<option id="createProject_content_project_financialContextRegional" class="lang" value="project_financedRegional">Regional</option>
+							<option id="createProject_content_project_financialContextTuto" class="lang" value="project_financedCompanyTutorship">company tutorship</option>
+							<option id="createProject_content_project_financialInternationalOutsideEU" class="lang" value="project_financedInternationalOutsideEU">International outside EU</option>
+							<option id="createProject_content_project_financialOwnResourcesLaboratory" class="lang" value="project_financedOwnResourcesLaboratory">Own resources laboratory</option>
+							<option id="createProject_content_project_financialContextOther" value="project_financedOther" class="lang financedOther">other</option>
+						</select>
+					</div>
+					<div class="form-group input-group financedOKOther"
+						style="diplay: none;">
+						<span class="input-group-addon"><i
+							class="fa fa-credit-card"></i> <span id="createProject_content_project_financialContextOther_fin" class="lang"></span></span> <input
+							id="financialContextOther" type="text" class="form-control lang" lang="createProject_content_project_financialContextOther_fin_ph"
+							placeholder="other financial context">
+					</div>
+					<div class="form-group " style="">
+						<span id="createProject_warningAsterix" class="lang"></span>
+					</div>
+					<button id="submitNewDAbtn" type="submit"
+						class="btn btn-primary btn-disabled" disabled>
+						<i class="fa fa-plus-circle"></i> <span id="createProject_content_btn_create" class="lang"></span>
+					</button>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</div>
+<br />
+<script type="text/javascript">
+	setTimeout(function() {
+		$("#projectTitle").focus();
+	}, 500);
+	
+	$("#projectTitle").change();
+	
+	buildKeywords();
+	buildSubKeywords();	
+	buildMTHplatforms();
+</script>
+<div style="display: none;">
+	<form id="fileUploadForm" action="ajax/ajax_proxypass_file.php"
+		method="post" enctype="multipart/form-data" class="cleanform"
+		onsubmit="return checkUploadFileForm()"></form>
+</div>

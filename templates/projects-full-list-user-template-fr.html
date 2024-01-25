@@ -1,0 +1,62 @@
+<script type="x-jquery-tmpl" id="projects-full-list-template">
+<tr id="projectTr${id}" class="${status}">
+	<td>${idLong}</td>
+	<td><div class="truncate-250" title="${title}">${title}</div></td>
+	{%if status == "waiting" %}
+		<td class="nobreakline">en attente</td>
+	{%elif status == "assigned" %}
+		<td class="nobreakline">assigné</td>
+	{%elif status == "accepted" %}
+		<td class="nobreakline">accepté</td>
+	{%elif status == "completed" %}
+		<td class="nobreakline">completé</td>
+	{%elif status == "running" %}
+		<td class="nobreakline">en cours</td>
+	{%elif status == "archived" %}
+		<td class="nobreakline">archivé</td>
+	{%elif status == "blocked" %}
+		<td class="nobreakline">en pause</td>
+	{%elif status == "rejected" %}
+		<td class="nobreakline">rejeté</td>
+	{%/if%}
+
+	<td class="nobreakline">${createdLocalDate}</td>
+	
+	{%if updated == null %}
+		<td>-</td>
+	{%else%}
+		<td class="nobreakline">${updatedLocalDate}</td>
+	{%/if%}
+	{%if analystInCharge != null %}
+	<td class="nobreakline">
+		<a href="#" onclick="writeMessageToUserAboutProject(${analystInCharge.id}, ${id}, 5);">
+			<i class="fa fa-envelope"></i>
+			${analystInCharge.fullName}
+		</a>
+		
+		<button type="button" class="btn btn-success btn-xs" onclick="createAppointment(${id}, '${titleAlt}', ${analystInCharge.id}, '${analystInCharge.fullName}');"
+			title="create appointement request">
+			<span aria-hidden="true"><i class="fa fa-calendar-plus-o"></i></span>
+			<span class="sr-only">créer une demande de rdv</span>
+		</button>
+	</td>
+	{%else%}
+		<td>-</td>
+	{%/if%}
+	<td>
+		${analystsInChargeList}
+	</td>
+	<td class="nobreakline">
+		<button type="button" class="btn btn-info btn-xs" onclick="showProject(${id});"
+			title="Voir">
+			<span aria-hidden="true"><i class="fa fa-eye"></i></span> <span
+				class="sr-only">Voir</span>
+		</button>
+		<button type="button" class="btn btn-info btn-xs" onclick="editProject(${id});"
+			title="Éditer">
+			<span aria-hidden="true"><i class="fa fa-pencil"></i></span> <span
+				class="sr-only">Éditer</span>
+		</button>
+	</td>
+</tr>
+</script>

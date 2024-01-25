@@ -1,0 +1,33 @@
+<script type="x-jquery-tmpl" id="subkeywords-light-list-template">
+{%if !deleted%}
+<li class="list-group-item">
+	<button class="btn btn-xs btn-danger pull-right"
+		onclick="deleteSubKeyword(${id})"
+		style="margin-right: 3px;"
+		title="Disable">
+		<i class="fa fa-times"></i>
+	</button>
+	<button class="btn btn-xs btn-info pull-right"
+		onclick="editSubKeyword(${id}, '${word}')"
+		style="margin-right: 3px;"
+		title="Edit">
+		<i class="fa fa-pencil"></i>
+	</button> <span id="keyword_${id}" class="label label-success label-pill"> ${word} </span>
+</li>
+{%else%}
+<li class="list-group-item">
+	<button class="btn btn-xs btn-success pull-right"
+		onclick="restoreSubKeyword(${id})"
+		style="margin-right: 3px;"
+		title="Restor">
+		<i class="fa fa-check-circle"></i>
+	</button>
+	<button class="btn btn-xs btn-info pull-right"
+		onclick="editSubKeyword(${id}, '${word}')"
+		style="margin-right: 3px;"
+		title="Edit">
+		<i class="fa fa-pencil"></i>
+	</button> <span id="keyword_${id}" class="label label-danger label-pill"> ${word} </span>
+</li>
+{%/if%}
+</script>

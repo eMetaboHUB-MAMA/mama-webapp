@@ -15,30 +15,35 @@
 				<fieldset>
 					<div id="divLoginError" class="alert alert-danger" role="alert"
 						style="display: none;">
-						<strong>Warning!</strong> service not available right now; please
-						try abgain later.
+						<strong><span id="_warning1_" class="lang"></span></strong> <span
+							id="_service_not_available" class="lang"></span>
 					</div>
 					<div id="divLoginNotValide" class="alert alert-warning"
 						role="alert" style="display: none;">
-						<strong>Warning!</strong> invalid email/password combination.
+						<strong><span id="_warning2_" class="lang"></span></strong> <span
+							id="_invalid_login_password_combination" class="lang"></span>
 					</div>
 					<!-- Prepended text-->
 					<div class="form-group input-group">
 						<span class="input-group-addon"><i class="fa fa-at"></i> <span
-							id="login_email" class="lang"></span></span> <input id="email"
-							type="text" class="form-control lang "
-							lang="login_email_placeholder" placeholder="enter your email">
+							id="login_email" class="lang"></span></span> <input id="login"
+							name="login" type="text" class="form-control lang "
+							lang="login_email_placeholder"
+							placeholder="enter your email/login">
 					</div>
 					<div class="form-group input-group">
 						<span class="input-group-addon"><i class="fa fa-key"></i> <span
 							id="login_password" class="lang"></span></span> <input id="password"
-							type="password" class="form-control password lang"
+							name="password" type="password"
+							class="form-control password lang"
 							lang="login_password_placeholder"
 							placeholder="enter your password">
 					</div>
 					<button type="submit" class="btn btn-primary">
 						<span id="login_loginBtn" class="lang"></span>
 					</button>
+					<a class="pull-right" href="?page=reset-password"><span
+						id="login_resetPassword" class="lang"></span></a>
 				</fieldset>
 			</form>
 		</div>
@@ -51,7 +56,7 @@
 </div>
 
 <script type="text/javascript">
-	$("#email").focus();
+	$("#login").focus();
 	$("#password").keypress(function(e) {
 		if (e.which == 13) {
 			checkLoginForm();
@@ -63,9 +68,8 @@
 		var params = "";
 		$.each($("form input"), function(k, v) {
 			params += "&" + $(this).prop('id') + "="
-					+ $("#" + $(this).prop('id')).val();
+					+ encodeURIComponent($("#" + $(this).prop('id')).val());
 		});
-		// TODO display loading
 		// run
 		$.ajax({
 			type : "post",
@@ -76,7 +80,13 @@
 			data : params,
 			success : function(json) {
 				if (json.success) {
-					location.search = "?page=dashboard";
+					if (localStorage.mamaFirstURL != "undefined" && localStorage.mamaFirstURL != "null") {
+						var t = localStorage.mamaFirstURL;
+						localStorage.mamaFirstURL = null;
+						document.location.href = t;
+					} else {
+						location.search = "?page=dashboard";
+					}
 					//location.reload();
 				} else {
 					// show wrong password info

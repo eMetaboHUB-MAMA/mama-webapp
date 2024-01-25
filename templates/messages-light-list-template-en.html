@@ -1,0 +1,46 @@
+<script type="x-jquery-tmpl" id="messages-light-list-template">
+<a href="javascript:void(0);" onclick="openMessage(${id});" class="list-group-item" title="${messageClean}">
+	<!-- ICON -->
+	{%if toUser !== null%} 
+		<i class="fa fa-comment fa-fw"></i> user Message 
+	{%elif toProject !== null%}
+		<i class="fa fa-envelope fa-fw"></i> project Message 
+	{%/if%}
+	<!-- FROM -->
+	{%if fromUser !== null%} 
+		from <b>${fromUser.fullName} </b>
+	{%elif fromProject !== null%}
+		
+		from ${fromProject.title} 
+	{%/if%}
+	<!-- TO -->
+	{%if toUser !== null%} 
+		to <b>me</b>
+	{%elif toProject !== null%}
+		to <b>${toProject.title}</b> 
+	{%/if%}
+	<span class="pull-right text-muted small" data-toggle="tooltip" data-placement="top" title="${toogleDate}">
+		{%if nbYearsAgo != 0 && nbMonthsAgo > 23 %}
+			<em>about ${nbYearsAgo} years ago</em>
+		{%elif nbMonthsAgo != 0 && nbWeeksAgo > 10 %}
+			<em>about ${nbMonthsAgo} months ago</em>
+		{%elif nbWeeksAgo != 0 && nbDaysAgo > 13 %}
+			<em>about ${nbWeeksAgo} weeks ago</em>
+		{%elif nbDaysAgo > 1  %}
+			<em>about ${nbDaysAgo} days ago</em>
+		{%elif nbDaysAgo == 1 && nbHoursAgo > 23 %}
+			<em>about a day ago</em>
+		{%elif nbHoursAgo > 1 %}
+			<em>about ${nbHoursAgo} hours ago</em>
+		{%elif nbHoursAgo == 1 %}
+			<em>about an hour ago</em>
+		{%elif nbMinutsAgo > 1 %}
+			<em>about ${nbMinutsAgo} minutes ago</em>
+		{%elif nbMinutsAgo == 1 %}
+			<em>about a minute ago</em>
+		{%else%}
+			<em>less than a minute ago</em>
+		{%/if%}
+	</span>
+</a>
+</script>

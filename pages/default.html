@@ -1,5 +1,5 @@
 <!-- js -->
-<script src="js/dashboard.js" type="text/javascript"></script>
+<!-- <script src="js/dashboard.js" type="text/javascript"></script> -->
 <!-- page -->
 <div class="container-fluid">
 	<div class="row">
@@ -25,23 +25,19 @@
 	<!-- /.row -->
 	<div class="row">
 		<div class="col-lg-12">
-			<div class="col-lg-6">
-				<button id="create-account" type="button"
-					class="btn btn-primary btn-lg">
-					<h3>
-						<i class="fa fa-user-plus"></i> <span
-							id="pageDefault_createAccountBtn" class="lang"></span> &nbsp;
-					</h3>
-				</button>
-			</div>
-			<div class="col-lg-6">
-				<button id="login" type="button" class="btn btn-primary btn-lg">
-					<h3>
-						<i class="fa fa-sign-out fa-fw"></i> <span
-							id="pageDefault_loginBtn" class="lang"></span> &nbsp;
-					</h3>
-				</button>
-			</div>
+			<button id="create-account" type="button"
+				class="btn btn-primary btn-lg">
+				<h3>
+					<i class="fa fa-user-plus"></i> <span
+						id="pageDefault_createAccountBtn" class="lang"></span> &nbsp;
+				</h3>
+			</button>
+			<button id="login" type="button" class="btn btn-primary btn-lg pull-right">
+				<h3>
+					<i class="fa fa-sign-out fa-fw"></i> <span
+						id="pageDefault_loginBtn" class="lang"></span> &nbsp;
+				</h3>
+			</button>
 		</div>
 		<!-- /.col-lg-12 -->
 	</div>
@@ -50,12 +46,19 @@
 <!-- /.container-fluid -->
 
 <script type="text/javascript">
+	setTimeout(function() {
+		var width = Number($("#page-wrapper").css("width").replace("px",""));
+		if (width > 1000) {
+			$("#login").css("margin-right", (width - 1000) + "px")
+		}
+	}, 10);
 	$(function() {
 		$("#create-account").click(function() {
-			window.location = "index.html?page=create-account";
+			window.location = "?page=create-account";
 		});
 		$("#login").click(function() {
-			window.location = "index.html?page=login";
+			localStorage.mamaFirstURL = document.location.href;
+			window.location = "?page=login";
 		});
 	});
 	(function() {
@@ -69,9 +72,18 @@
 		};
 	})();
 	loadWelcomeTxt = function() {
-		$.get("content/welcome-" + localStorage.lang + ".html", function(data) {
-			$("#welcome").html(data);
-		});
+		if (localStorage.lang === undefined ) {
+			var language = window.navigator.userLanguage || window.navigator.language;
+			var mamaLang = "en";
+			if (language.startsWith("fr"))
+				mamaLang = "fr";
+			setLang(mamaLang);
+			setTimeout(loadWelcomeTxt(), 150);
+		} else {
+			$.get("content/welcome-" + localStorage.lang + ".html", function(data) {
+				$("#welcome").html(data);
+			});
+		}
 	};
 	loadWelcomeTxt();
 </script>

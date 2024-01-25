@@ -1,0 +1,250 @@
+<script type="x-jquery-tmpl" id="projects-full-list-template">
+<tr id="projectTr${id}" class="${status}">
+	<td>${idLong}</td>
+	<td><div class="truncate-250" title="${title}">${title}</div></td>
+	{%if status == "waiting" %}
+		<td class="nobreakline">en attente</td>
+	{%elif status == "assigned" %}
+		<td class="nobreakline">assigné</td>
+	{%elif status == "accepted" %}
+		<td class="nobreakline">accepté</td>
+	{%elif status == "completed" %}
+		<td class="nobreakline">completé</td>
+	{%elif status == "running" %}
+		<td class="nobreakline">en cours</td>
+	{%elif status == "archived" %}
+		<td class="nobreakline">archivé</td>
+	{%elif status == "blocked" %}
+		<td class="nobreakline">en pause</td>
+	{%elif status == "rejected" %}
+		<td class="nobreakline">rejeté</td>
+	{%/if%}
+
+	<td class="nobreakline">${createdLocalDate}</td>
+	
+	{%if updated == null %}
+		<td>-</td>
+	{%else%}
+		<td class="nobreakline">${updatedLocalDate}</td>
+	{%/if%}
+	<td class="nobreakline">
+		<a href="#" onclick="writeMessageToUserAboutProject(${owner.id}, ${id}, 5);">
+			<i class="fa fa-envelope"></i>
+			${owner.fullName}
+		</a>
+		
+		<button type="button" class="btn btn-success btn-xs" onclick="createAppointment(${id}, '${titleAlt}', ${owner.id}, '${owner.fullName}');"
+			title="create appointement request">
+			<span aria-hidden="true"><i class="fa fa-calendar-plus-o"></i></span>
+			<span class="sr-only">créer une demande de rdv</span>
+		</button>
+	</td>
+	{%if analystInCharge != null %}
+	<td class="nobreakline">
+			<div class="">
+				<select onchange="updateInCharge(${id})" class="btn btn-mini">
+					<option selected="" disabled="">-</option>
+					{%each( index, projectManager ) listOfPM %}
+						{%if analystInCharge.id == projectManager.id %}
+							<option selected value="${projectManager.id}">${projectManager.fullName}</option>
+						{%else%}
+							<option value="${projectManager.id}">${projectManager.fullName}</option>
+						{%/if%}
+					{%/each%}
+				</select>
+			</div>
+	</td>
+	<td>
+			<select id="involved_${id}" class="multiselect" multiple="multiple">
+				{%each( index, projectManager ) listOfPM %}
+					<option 
+					{%each( index, projectManagerInvolved ) analystsInvolved %}
+						{%if projectManagerInvolved.id == projectManager.id %}
+							selected="selected"
+						{%/if%}
+					{%/each%}
+					value="${projectManager.id}">${projectManager.fullName}</option>
+				{%/each%}
+			</select>
+	</td>
+	{%else%}
+		<td>
+			<div class="">
+				<select onchange="updateInCharge(${id})" class="btn btn-mini">
+					<option selected="" disabled="">-</option>
+					{%each( index, projectManager ) listOfPM %}
+						<option value="${projectManager.id}">${projectManager.fullName}</option>
+					{%/each%}
+				</select>
+			</div>
+		</td>
+		<td>
+			<select id="involved_${id}" class="multiselect" multiple="multiple">
+				{%each( index, projectManager ) listOfPM %}
+					<option 
+					{%each( index, projectManagerInvolved ) analystsInvolved %}
+						{%if projectManagerInvolved.id == projectManager.id %}
+							selected="selected"
+						{%/if%}
+					{%/each%}
+					value="${projectManager.id}">${projectManager.fullName}</option>
+				{%/each%}
+			</select>
+		</td>
+	{%/if%}
+	<td class="nobreakline">
+
+		{%if status == "waiting" %}
+			<button type="button" class="btn-pj-${id} btn btn-danger btn-xs" onclick="setProjectStatus(${id},'rejected');"
+				title="changer à &quot;rejeté&quot;">
+				<span aria-hidden="true"><i class="fa fa-ban"></i></span>
+				<span class="sr-only">changer à &quot;rejeté&quot;</span>
+			</button>
+			<button type="button" class="btn btn-info btn-xs" onclick="editProject(${id});"
+				title="Éditer">
+				<span aria-hidden="true"><i class="fa fa-pencil"></i></span> <span
+					class="sr-only">Éditer</span>
+			</button>
+		{%elif status == "assigned" %}
+			<button type="button" class="btn-pj-${id} btn btn-danger btn-xs" onclick="setProjectStatus(${id},'rejected');"
+				title="changer à &quot;rejeté&quot;">
+				<span aria-hidden="true"><i class="fa fa-ban"></i></span>
+				<span class="sr-only">changer à &quot;rejeté&quot;</span>
+			</button>
+			<button type="button" class="btn btn-info btn-xs" onclick="editProject(${id});"
+				title="Éditer">
+				<span aria-hidden="true"><i class="fa fa-pencil"></i></span> <span
+					class="sr-only">Éditer</span>
+			</button>
+		{%elif status == "accepted" %}
+			<!--
+			<button type="button" class="btn-pj-${id} btn btn-default btn-xs" onclick="setProjectStatus(${id},'assigned');"
+				title="changer à &quot;assigné&quot;">
+				<span aria-hidden="true"><i class="fa fa-arrow-circle-down"></i></span>
+				<span class="sr-only">changer à &quot;assigné&quot;</span>
+			</button>
+			-->
+			<button type="button" class="btn btn-info btn-xs" onclick="editProject(${id});"
+				title="Éditer">
+				<span aria-hidden="true"><i class="fa fa-pencil"></i></span> <span
+					class="sr-only">Éditer</span>
+			</button>
+		{%elif status == "completed" %}
+			<!--
+			<button type="button" class="btn-pj-${id} btn btn-default btn-xs" onclick="setProjectStatus(${id},'accepted');"
+				title="changer à &quot;accepté&quot;">
+				<span aria-hidden="true"><i class="fa fa-arrow-circle-down"></i></span>
+				<span class="sr-only">changer à &quot;accepté&quot;</span>
+			</button>
+			-->
+			<button type="button" class="btn btn-info btn-xs" onclick="editProject(${id});"
+				title="Éditer">
+				<span aria-hidden="true"><i class="fa fa-pencil"></i></span> <span
+					class="sr-only">Éditer</span>
+			</button>
+		{%elif status == "running" %}
+			<!--
+			<button type="button" class="btn-pj-${id} btn btn-success btn-xs" onclick="setProjectStatus(${id},'completed');"
+				title="changer à &quot;complété&quot;">
+				<span aria-hidden="true"><i class="fa fa-arrow-circle-down"></i></span>
+				<span class="sr-only">changer à &quot;complété&quot;</span>
+			</button>
+			-->
+			<button type="button" class="btn btn-info btn-xs" onclick="editProject(${id});"
+				title="Éditer">
+				<span aria-hidden="true"><i class="fa fa-pencil"></i></span> <span
+					class="sr-only">Éditer</span>
+			</button>
+		{%elif status == "archived" %}
+			<!--
+			<button type="button" class="btn-pj-${id} btn btn-info btn-xs" onclick="setProjectStatus(${id},'running');"
+				title="changer à &quot;en cours&quot;">
+				<span aria-hidden="true"><i class="fa fa-arrow-circle-down"></i></span>
+				<span class="sr-only">changer à &quot;en cours&quot;</span>
+			</button>
+			-->
+		{%elif status == "blocked" %}
+			<button type="button" class="btn-pj-${id} btn btn-default btn-xs" onclick="setProjectStatus(${id},'accepted');"
+				title="changer à &quot;accepté&quot;">
+				<span aria-hidden="true"><i class="fa fa-play-circle-o"></i></span>
+				<span class="sr-only">changer à &quot;accepté&quot;</span>
+			</button>
+		{%elif status == "rejected" %}
+			<button type="button" class="btn-pj-${id} btn btn-default btn-xs" onclick="setProjectStatus(${id},'accepted');"
+				title="changer à &quot;accepté&quot;">
+				<span aria-hidden="true"><i class="fa fa-check-square-o"></i></span>
+				<span class="sr-only">changer à &quot;accepté&quot;</span>
+			</button>
+		{%/if%}
+
+		<button type="button" class="btn btn-info btn-xs" onclick="showProject(${id});"
+			title="Voir">
+			<span aria-hidden="true"><i class="fa fa-eye"></i></span> <span
+				class="sr-only">Voir</span>
+		</button>
+
+		<button id="btn-action-${id}" type="button" class="btn btn-info btn-xs context-menu-pj"
+			title="Menu">
+			<span aria-hidden="true"><i class="fa fa-rocket"></i></span> 
+			<span class="sr-only">Menu</span>
+		</button>
+
+		{%if status == "waiting" %}
+			<button type="button" class="btn-pj-${id} btn btn-default btn-xs" onclick="setProjectStatus(${id},'assigned');"
+				title="changer à &quot;assigné&quot;">
+				<span aria-hidden="true"><i class="fa fa-arrow-circle-up"></i></span>
+				<span class="sr-only">changer à &quot;assigné&quot;</span>
+			</button>
+		{%elif status == "assigned" %}
+			<button type="button" class="btn-pj-${id} btn btn-default btn-xs" onclick="setProjectStatus(${id},'completed');"
+				title="changer à &quot;complété&quot;">
+				<span aria-hidden="true"><i class="fa fa-arrow-circle-up"></i></span>
+				<span class="sr-only">changer à &quot;complété&quot;</span>
+			</button>
+		{%elif status == "completed" %}
+			<!--
+			<button type="button" class="btn-pj-${id} btn btn-danger btn-xs" onclick="setProjectStatus(${id},'blocked');"
+				title="changer à &quot;en pause&quot;">
+				<span aria-hidden="true"><i class="fa fa-pause-circle-o"></i></span>
+				<span class="sr-only">changer à &quot;en pause&quot;</span>
+			</button>
+			-->
+			<button type="button" class="btn btn-success btn-xs" onclick="setProjectStatus(${id},'accepted');"
+				title="changer à &quot;accépté&quot;">
+				<span aria-hidden="true"><i class="fa fa-arrow-circle-up"></i></span>
+				<span class="sr-only">changer à &quot;accépté&quot;</span>
+			</button>
+		{%elif status == "accepted" %}
+			<!--
+			<button type="button" class="btn-pj-${id} btn btn-danger btn-xs" onclick="setProjectStatus(${id},'blocked');"
+				title="changer à &quot;en pause&quot;">
+				<span aria-hidden="true"><i class="fa fa-pause-circle-o"></i></span>
+				<span class="sr-only">changer à &quot;en pause&quot;</span>
+			</button>
+			-->
+			<button type="button" class="btn-pj-${id} btn btn-info btn-xs" onclick="setProjectStatus(${id},'running');"
+				title="changer à &quot;en cours&quot;">
+				<span aria-hidden="true"><i class="fa fa-arrow-circle-up"></i></span>
+				<span class="sr-only">changer à &quot;en cours&quot;</span>
+			</button>
+		{%elif status == "running" %}
+			<!--
+			<button type="button" class="btn-pj-${id} btn btn-danger btn-xs" onclick="setProjectStatus(${id},'blocked');"
+				title="changer à &quot;en pause&quot;">
+				<span aria-hidden="true"><i class="fa fa-pause-circle-o"></i></span>
+				<span class="sr-only">changer à &quot;en pause&quot;</span>
+			</button>
+			-->
+			<button type="button" class="btn-pj-${id} btn btn-primary btn-xs" onclick="setProjectStatus(${id},'archived');"
+				title="changer à &quot;archivé&quot;">
+				<span aria-hidden="true"><i class="fa fa-archive"></i></span>
+				<span class="sr-only">changer à &quot;archivé&quot;</span>
+			</button>
+		{%elif status == "archived" %}
+		{%elif status == "blocked" %}
+		{%elif status == "rejected" %} 
+		{%/if%}
+
+	</td>
+</tr>
+</script>

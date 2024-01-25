@@ -1,0 +1,41 @@
+<script type="x-jquery-tmpl" id="messages-full-list-template">
+<tr id="projectTr${id}" class="">
+	<td>
+		{%if toUser !== null%} 
+			<i class="fa fa-comment fa-fw"></i> 
+		{%elif toProject !== null%}
+			<i class="fa fa-envelope fa-fw"></i>  
+		{%/if%}
+	</td>
+	<td><div class="truncate" title="${message}">${message}</div></td>
+	<td>
+		{%if fromUser !== null%} 
+			{%if fromUser.avatar !== undefined && fromUser.avatar !== null%} 
+				<img src="${fromUser.avatar}"> ${fromUser.fullName}
+			{%elif fromUser.avatar === undefined%}
+				<b>me</b>
+			{%/if%}
+		{%elif fromProject !== null%}
+			${fromProject.title} 
+		{%/if%}
+	</td>
+	<td>
+		{%if toUser !== null%} 
+			{%if toUser.avatar !== undefined && toUser.avatar !== null%} 
+				<img src="${toUser.avatar}"> ${toUser.fullName}
+			{%elif toUser.avatar === undefined%}
+				<b>me</b>
+			{%/if%}
+		{%elif toProject !== null%}
+			<a href="?page=projects&showProject=${toProject.id}">${toProject.title}</a> 
+		{%/if%}
+	</td>
+	<td>${createdLocalDate}</td>
+	<td>
+		<button type="button" class="btn btn-info btn-xs" onclick="openMessage(${id});" title="Show">
+			<span aria-hidden="true"><i class="fa fa-eye"></i></span> <span
+				class="sr-only">Show</span>
+		</button>
+	</td>
+</tr>
+</script>

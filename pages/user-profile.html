@@ -1,43 +1,64 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">Profile</h1>
+			<h1 class="page-header">
+				<span id="update_account_title" class="lang"></span>
+			</h1>
 		</div>
 		<!-- /.col-lg-12 -->
 	</div>
 	<!-- /.row -->
 	<div class="row">
 		<div class="col-lg-6">
-			<form class="form-horizontal">
+			<form class="form-horizontal" action="?" method="put"
+				onsubmit="return checkUpdateUserForm();">
 				<fieldset>
-
+					<div id="divError" class="alert alert-danger" role="alert"
+						style="display: none;">
+						<strong><span id="_warning1_" class="lang"></span></strong> <span
+							id="_service_not_available" class="lang"></span>
+					</div>
+					<div id="divWarning" class="alert alert-warning" role="alert"
+						style="display: none;">
+						<strong><span id="_warning2_" class="lang"></span></strong> 
+						<span id="update_account_error_couldNotUpdate" class="lang"></span>
+					</div>
+					<div id="divSuccess" class="alert alert-success" role="alert"
+						style="display: none;">
+						<strong><span id="update_account_successAlert" class="lang"></span></strong> 
+						<span id="update_account_successTxt" class="lang"></span>
+					</div>
 					<!-- Prepended text-->
 					<div class="form-group input-group">
-						<span class="input-group-addon"><i class="fa fa-at"></i>
-							email</span> <input id="email" type="text" class="form-control" disabled
-							value="jon.snow@got.com">
+						<span class="input-group-addon"><i class="fa fa-at"></i> 
+							<span id="update_account_field_email" class="lang"></span></span> <input id="email" name="email" type="text"
+							class="form-control" disabled value="...">
 					</div>
 
 					<div class="form-group input-group">
 						<span class="input-group-addon"><i class="fa fa-user"></i>
-							First name</span> <input id="firstname" type="text" class="form-control"
-							value="Jon" placeholder="enter your first name">
+							<span id="update_account_field_FName" class="lang"></span></span> 
+							<input id="firstName" name="firstName" type="text"
+								class="form-control lang" lang="update_account_field_FName_ph" value="..."
+								placeholder="enter your first name">
 					</div>
 
 					<div class="form-group input-group">
 						<span class="input-group-addon"><i class="fa fa-user"></i>
-							Last name</span> <input id="firstname" type="text" class="form-control"
-							value="Snow" placeholder="enter your last name">
+							<span id="update_account_field_LName" class="lang"></span></span> 
+							<input id="lastName" name="lastName" type="text"
+								class="form-control lang" lang="update_account_field_LName_ph" value="..."
+								placeholder="enter your last name">
 					</div>
 
-					<div class="form-group">
-						<label>Update password</label> <label class="radio-inline">
+					<div id="updatePasswordDiv" class="form-group">
+						<label><span id="update_account_field_updatePwd" class="lang"></span></label> <label class="radio-inline">
 							<input type="radio" name="accountUpdatePassword"
 							class="checkValidFormListener" id="accountUpdatePasswordYES"
-							value="yes">yes
+							value="yes"><span id="update_account_field_updatePwd_yes" class="lang"></span>
 						</label> <label class="radio-inline"> <input type="radio"
 							name="accountUpdatePassword" id="accountUpdatePasswordNO" checked
-							class="checkValidFormListener" value="yes">no
+							class="checkValidFormListener" value="no"><span id="update_account_field_updatePwd_nop" class="lang"></span>
 						</label>
 					</div>
 
@@ -46,32 +67,32 @@
 					<div class="form-group input-group UpdatePassword is-mandarotry"
 						style="display: none;">
 						<span class="input-group-addon"><i class="fa fa-key"></i>
-							current password<sup>*</sup></span> <input id="old-password"
-							type="password" class="form-control"
+							<span id="update_account_field_currentPwd" class="lang"></span><sup>*</sup></span> <input id="old-password"
+							type="password" class="form-control lang" lang="update_account_field_currentPwd_ph"
 							placeholder="enter your current password">
 					</div>
 
 					<div class="form-group input-group UpdatePassword is-mandarotry"
 						style="display: none;">
 						<span class="input-group-addon"><i class="fa fa-key"></i>
-							new password<sup>*</sup></span> <input id="password" type="password"
-							class="form-control password"
+							<span id="update_account_field_newPwd" class="lang"></span><sup>*</sup></span> <input id="password" name="password"
+							type="password" class="form-control password lang" lang="update_account_field_newPwd_ph"
 							placeholder="enter your new password"
 							aria-describedby="inputSuccess2Status"> <span
 							class="fa fa-2x form-control-feedback" aria-hidden="true"></span>
-						<span id="inputSuccess2Status" class="sr-only">(success)</span>
+						<span id="inputSuccess2Status" class="sr-only"><span id="update_account_field_newPwd_success" class="lang"></span></span>
 					</div>
 					<span id="passwordHelpBlock" class="help-block"></span>
 
 					<div class="form-group input-group UpdatePassword is-mandarotry"
 						style="display: none;">
 						<span class="input-group-addon"><i class="fa fa-key"></i>
-							re-type new password<sup>*</sup></span> <input id="repassword"
-							type="password" class="form-control password"
+							<span id="update_account_field_rePwd" class="lang"></span><sup>*</sup></span> <input id="repassword"
+							type="password" class="form-control password lang" lang = "update_account_field_rePwd_ph"
 							placeholder="re-enter your new password"
 							aria-describedby="inputSuccess3Status"> <span
 							class="fa fa-2x form-control-feedback" aria-hidden="true"></span>
-						<span id="inputSuccess3Status" class="sr-only">(success)</span>
+						<span id="inputSuccess3Status" class="sr-only"><span id="update_account_field_rePwd_success" class="lang"></span></span>
 					</div>
 					<span id="rePasswordHelpBlock" class="help-block"></span>
 
@@ -82,24 +103,28 @@
 		<div class="col-lg-6" style="">
 			<div class="form-group input-group">
 				<span class="input-group-addon" style="max-width: 40%;"><i
-					class="fa fa-phone"></i> Group phone</span> <select id="groupPhoneIndex"
-					style="max-width: 40%;" class="form-control groupPhoneIndex">
-					<option value="" disabled="disabled">choose in list...</option>
-				</select> <input id="groupPhone" type="text" class="form-control"
-					style="max-width: 60%;" value="0123456789"
+					class="fa fa-phone"></i> <span id="update_account_field_phoneGrp" class="lang"></span></span> <select id="phoneGroup"
+					name="phoneGroup" style="max-width: 40%;"
+					class="form-control phoneGroup">
+					<option value="" disabled="disabled"><span id="update_account_field_phoneGrpList" class="lang"></span></option>
+				</select> <input id="phoneNumber" name="phoneNumber" type="text"
+					class="form-control lang" lang="update_account_field_phoneGrp_ph" style="max-width: 60%;" value="..."
 					placeholder="enter your phone">
 			</div>
 
 			<div class="form-group input-group">
 				<span class="input-group-addon"><i class="fa fa-building"></i>
-					Laboratory or Company</span> <input id="email" type="text"
-					class="form-control" value="Georges RR Martin - Death Corp."
-					placeholder="enter your Laboratory or Company name">
+					<span id="update_account_field_laboOrComp" class="lang"></span></span> <input id="laboratoryOrCompagny"
+					name="laboratoryOrCompagny" type="text" class="form-control lang" lang="update_account_field_laboOrComp_ph"
+					value="" placeholder="enter your Laboratory or Company name">
 			</div>
 
 			<div class="form-group">
-				<span class="input-group-addon"><i class="fa fa-map-marker"></i> workplace address</span>
-				<textarea class="form-control" rows="4" placeholder="enter your full adress, country included"></textarea>
+				<span class="input-group-addon"><i class="fa fa-map-marker"></i>
+					<span id="update_account_field_workplaceAddress" class="lang"></span></span>
+				<textarea class="form-control lang" lang="update_account_field_workplaceAddress_ph" rows="4" id="workplaceAddress"
+					name="workplaceAddress"
+					placeholder="enter your full adress, country included"></textarea>
 			</div>
 
 			<!-- 			<div class="form-group"> -->
@@ -112,70 +137,90 @@
 			<!-- 			</div> -->
 
 			<div class="form-group input-group">
-				<span class="input-group-addon">Type of laboratory / company</span>
-				<select class="form-control">
-					<option selected>private</option>
-					<option>public</option>
-					<option>mix private / public</option>
+				<span class="input-group-addon"><span id="update_account_field_typeOfLab" class="lang"></span></span>
+				<select class="form-control" id="laboratoryType"
+					name="laboratoryType">
+					<option value="private" class="lang" id="update_account_field_typeOfLab_private"></option>
+					<option value="public" class="lang" id="update_account_field_typeOfLab_public"></option>
+					<option value="public_private" class="lang" id="update_account_field_typeOfLab_mixt"></option>
 				</select>
 			</div>
 		</div>
 	</div>
 	<!-- /.row -->
-	
+
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">Account pref.</h1>
+			<h1 class="page-header"><span id="update_account_title_accountPref" class="lang"></span></h1>
 		</div>
 		<!-- /.col-lg-12 -->
 	</div>
 	<!-- /.row -->
-	
+
 	<div class="row">
 		<div class="col-lg-5">
 
 			<!-- Prepended text-->
 			<div class="form-group">
-				<label>receive email</label> <label class="radio-inline">
-					<input type="radio" name="optionsRadiosInline"
-					id="optionsRadiosInline1" value="option1" checked=""> each notification
+				<label><span id="update_account_pref_receiveEmail" class="lang"></span></label> <label class="radio-inline"> <input
+					type="radio" name="emailNotification" id="emailNotificationEach"
+					value="each_notification"> <span id="update_account_pref_receiveEmail_eachNotif" class="lang"></span>
 				</label> <label class="radio-inline"> <input type="radio"
-					name="optionsRadiosInline" id="optionsRadiosInline2"
-					value="option2"> daily digest
+					name="emailNotification" id="emailNotificationDaily"
+					value="daily_digest"> <span id="update_account_pref_receiveEmail_dailyDig" class="lang"></span>
 				</label> <label class="radio-inline"> <input type="radio"
-					name="optionsRadiosInline" id="optionsRadiosInline2"
-					value="option2"> weekly digest
-				</label> 
+					name="emailNotification" id="emailNotificationWeekly"
+					value="weekly_digest"> <span id="update_account_pref_receiveEmail_weeklyDig" class="lang"></span>
+				</label>
 			</div>
-
+			
 			<div class="form-group">
-				<label>email alert</label>
-				<div class="checkbox">
-					<label> <input type="checkbox" value="">new user account (admin only)
+				<label><span id="update_account_pref_notif" class="lang"></span></label>
+				<div class="checkbox optAdmin">
+					<label> <input id="emailAlertNewUserAccount"
+						type="checkbox" value=""><span id="update_account_pref_notifNewUser" class="lang"></span>
 					</label>
 				</div>
-				<div class="checkbox">
-					<label> <input type="checkbox" value="" checked="checked" disabled="disabled" >new analysis request (admin+PM)
+				<div class="checkbox optAdmin optPM">
+					<label> <input id="emailAlertNewProject"
+						type="checkbox" value=""><span id="update_account_pref_notifNewAR" class="lang"></span>
 					</label>
 				</div>
-				<div class="checkbox">
-					<label> <input type="checkbox" value="">new event followed project (all)
+				<div class="checkbox optAll">
+					<label> <input id="emailAlertNewEventFollowedProject"
+						type="checkbox" value=""><span id="update_account_pref_notifNewEvent" class="lang"></span>
 					</label>
 				</div>
-				<div class="checkbox">
-					<label> <input type="checkbox" value="">new message (all)
+				<div class="checkbox optAll">
+					<label> <input id="emailAlertNewMessage" type="checkbox"
+						value=""><span id="update_account_pref_notifNewMessage" class="lang"></span>
 					</label>
 				</div>
 			</div>
+			
+			<div class="form-group input-group">
+				<span class="input-group-addon"><span id="update_account_pref_emailLang" class="lang"></span></span> <select
+					class="form-control" id="emailLanguage" name="emailLanguage">
+					<option id="update_account_pref_emailLang_en" value="en" class="lang"></option>
+					<option id="update_account_pref_emailLang_fr" value="fr" class="lang"></option>
+				</select>
+			</div>
 
-		</div><!-- /.col-lg-5 -->
-	</div><!-- /.row -->
-	
+		</div>
+		<!-- /.col-lg-5 -->
+		<div class="col-lg-6">
+			<img id="user-profile-img" src="" />
+			<br /><span id="update_account_pref_gravatar" class="lang"></span>
+		</div>
+	</div>
+	<!-- /.row -->
+
 	<div class="row">
 		<div class="col-lg-12">
 			<h1 class="page-header">
-				<button type="button" id="btn-update-user" class="btn btn-primary">
-					<i class="fa fa-rocket"></i> Update
+				<button type="button" id="btn-update-user" class="btn btn-primary"
+					onclick="checkUpdateUserForm();">
+					<i class="fa fa-rocket"></i> <span id="update_account_updateBtn" class="lang"></span>
 				</button>
 			</h1>
 		</div>
@@ -210,12 +255,12 @@
 				case 0:
 					$(this).parent().addClass("has-error has-feedback");
 					$(this).parent().find(".fa").addClass("fa-times");
-					$("#passwordHelpBlock").html("error: password too weak!");
+					$("#passwordHelpBlock").html(update_account_error_weak_password);
 					break;
 				case 1:
 					$(this).parent().addClass("has-warning has-feedback");
 					$(this).parent().find(".fa").addClass("fa-check");
-					$("#passwordHelpBlock").html("warning: weak password!");
+					$("#passwordHelpBlock").html(update_account_warning_weak_password);
 					break;
 				case 2:
 					$(this).parent().addClass("has-success has-feedback");
@@ -242,7 +287,7 @@
 							.addClass("has-error has-feedback");
 					$("#repassword").parent().find(".fa").addClass("fa-times");
 					$("#rePasswordHelpBlock").html(
-							"error: your two password must match.");
+							update_account_error_passwords_no_match);
 				}
 			});
 
@@ -270,12 +315,12 @@
 		// load data from json
 		$.each(data, function() {
 			if (this.country == "France")
-				$(".groupPhoneIndex").append(
+				$(".phoneGroup").append(
 						'<option value="'+this.code+'" selected="selected">'
 								+ this.country + ' (+' + this.code
 								+ ')</option>');
 			else
-				$(".groupPhoneIndex").append(
+				$(".phoneGroup").append(
 						'<option value="'+this.code+'">' + this.country + ' (+'
 								+ this.code + ')</option>');
 		});
@@ -333,5 +378,176 @@
 				$("#btn-update-user").prop("disabled", true);
 			}
 		}, 50);
+	}
+
+	/**
+	 * 
+	 */
+	function loadUserData(userID) {
+		var verbe = "get";
+		var resource = "user";
+		var extraGet= "";
+		if (userID !== undefined ){
+			extraGet += "&userID=" + userID;
+		}
+		// run
+		$.ajax({
+			type : "get",
+			url : "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+					+ resource + extraGet,
+			dataType : "json",
+			async : true,
+			success : function(user) {
+				if (user.hasOwnProperty('message')) {
+					$("#divError").show();
+					return false;
+				}
+				if (user.login.indexOf("@") >= 0) {
+					// is normal
+				} else {
+					// is LDAP
+					$("#updatePasswordDiv").hide();
+					$(".UpdatePassword").hide();
+				}
+				// 				$("#email").val(user.email);
+				$.each(user, function(k, v) {
+					$("#" + k).val(v);
+				});
+				$("#workplaceAddress").html(user.workplaceAddress);
+				// email pref. (1)
+				switch (user.emailReception) {
+				case "weekly_digest":
+					$("#emailNotificationWeekly").prop("checked", true);
+					break;
+				case "each_notification":
+					$("#emailNotificationEach").prop("checked", true);
+					break;
+				case "daily_digest":
+				default:
+					$("#emailNotificationDaily").prop("checked", true);
+					break;
+				}
+				// email pref. (2)
+				$(".optAdmin").hide();
+				$(".optPM").hide();
+				switch (user.right) {
+				case "admin":
+					$(".optAdmin").show();
+					break;
+				case "project_manager":
+					$(".optPM").show();
+					break;
+				case "user":
+				default:
+					break;
+				}
+				// email pref. (3)
+				$("#emailAlertNewProject").prop("checked",
+						user.emailAlertNewProject);
+				$("#emailAlertNewEventFollowedProject").prop("checked",
+						user.emailAlertNewEventFollowedProject);
+				$("#emailAlertNewMessage").prop("checked",
+						user.emailAlertNewMessage);
+				$("#emailAlertNewUserAccount").prop("checked",
+						user.emailAlertNewUserAccount);
+				// email pref. (4)
+				$("#emailLanguage").val(user.emailLanguage);
+				// img
+				var hash = md5(user.email.toLowerCase());
+				$("#user-profile-img").attr("src", "https://secure.gravatar.com/avatar/" + hash + "?s=200&d=identicon" )
+			},
+			error : function(xhr) {
+				console.log(xhr);
+				// show error message info
+				$("#divError").show();
+			}
+		});
+	}
+	
+	
+	if (getUrlParameter("userID")!== undefined) {
+		loadUserData(Number(getUrlParameter("userID")));
+		$("#updatePasswordDiv").hide();
+		$(".UpdatePassword").hide();
+	} else {
+		loadUserData();
+	}
+	
+	/**
+	 * 
+	 */
+	checkUpdateUserForm = function() {
+		$(".alert").hide();
+		var verbe = "put";
+		var resource = "user";
+		var params = "";
+		var extraGet= "";
+		if (getUrlParameter("userID")!== undefined) {
+			extraGet += "&userID=" + Number(getUrlParameter("userID")) ;
+		}
+		// 		$.each($("input"), function(k, v) {
+		// 			params += "&" + $(this).prop('id') + "="
+		// 					+ $("#" + $(this).prop('id')).val();
+		// 		});
+		$.each($("input[type=text]"), function(k, v) {
+			params += "&" + $(this).prop('id') + "="
+					+ encodeURIComponent($("#" + $(this).prop('id')).val());
+		});
+		if ($("input[name=accountUpdatePassword]:checked").val() === "yes")
+			$.each($("input[type=password]"), function(k, v) {
+				params += "&" + $(this).prop('id') + "="
+						+ encodeURIComponent($("#" + $(this).prop('id')).val());
+			});
+		$.each($("textarea"), function(k, v) {
+			params += "&" + $(this).prop('id') + "="
+					+ encodeURIComponent($("#" + $(this).prop('id')).val());
+		});
+		params += "&emailNotification="
+				+ $("input[name=emailNotification]:checked").val();
+		params += "&emailAlertNewUserAccount="
+				+ $("#emailAlertNewUserAccount").is(":checked");
+		params += "&emailAlertNewProject="
+				+ $("#emailAlertNewProject").is(":checked");
+		params += "&emailAlertNewEventFollowedProject="
+				+ $("#emailAlertNewEventFollowedProject").is(":checked");
+		params += "&emailAlertNewMessage="
+				+ $("#emailAlertNewMessage").is(":checked");
+		params += "&emailLanguage=" + $("#emailLanguage").val()
+		// phone group
+		params += "&phoneGroup=" + $("#phoneGroup").val();
+		// labo
+		params += "&laboratoryType=" + $("#laboratoryType").val();
+		// run
+		$.ajax({
+			type : "post",
+			url : "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+					+ resource + extraGet,
+			dataType : "json",
+			async : true,
+			data : params,
+			success : function(data) {
+				// console.log(data);
+				if (data.success) {
+					var extraURL = "";
+					if (getUrlParameter("userID") !== undefined) {
+						extraURL += "&userID="+getUrlParameter("userID"); 
+					}
+					location.search = "?page=user-profile&success=true" + extraURL;
+				} else {
+					// TODO case wrong password
+					$("#divWarning").show();
+				}
+			},
+			error : function(xhr) {
+				console.log(xhr);
+				// show error message info
+				$("#divError").show();
+			}
+		});
+		return false;
+	}
+
+	if (getUrlParameter("success") === "true") {
+		$("#divSuccess").show();
 	}
 </script>

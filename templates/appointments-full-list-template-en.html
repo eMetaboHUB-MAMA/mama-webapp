@@ -1,0 +1,42 @@
+<script type="x-jquery-tmpl" id="appointments-full-list-template">
+<tr id="projectTr${id}" class="">
+	<td>
+		<a class="pjTitle" href="?page=projects&showProject=${project.id}">${project.title}</a>
+	</td>
+	<td>
+		<img src="${fromUser.avatar}">
+		{%if fromUser.id === null%} 
+			<b>me</b>
+		{%elif fromUser.id !== null%}
+			<a href="#" onclick="writeMessageToUserAboutProject(${project.id}, ${fromUser.id}, -1, this);">
+				<i class="fa fa-envelope"></i>
+				${fromUser.fullName}
+			</a>
+			<br />
+			<a href="tel:${fromUser.phoneDial}">${fromUser.phoneDisplay}</a>
+		{%/if%}
+	</td>
+	<td>
+		<img src="${toUser.avatar}">
+		{%if toUser.id === null%} 
+			<b>me</b>
+		{%elif toUser.id !== null%}
+			<a href="#" onclick="writeMessageToUserAboutProject(${project.id}, ${toUser.id}, -1, this);">
+				<i class="fa fa-envelope"></i>
+				${toUser.fullName}
+			</a>
+			<br />
+			<a href="tel:${toUser.phoneDial}">${toUser.phoneDisplay}</a>
+		{%/if%}
+	</td>
+	<td><div class="truncate" title="${message}">${message}</div></td>
+	<td id="appointmentDate${id}">
+		${dateToChoose}
+	</td>
+	<td>
+		<button type="button" class="btn btn-info btn-xs" onclick="openAppointment(${id})" title="Open">
+			<span aria-hidden="true"><i class="fa fa-calendar"></i></span> <span class="sr-only">Open</span>
+		</button>
+	</td>
+</tr>
+</script>

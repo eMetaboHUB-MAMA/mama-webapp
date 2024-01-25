@@ -1,0 +1,6 @@
+{
+	"version":"1.0",
+	"serverLanguage":"php",
+	"mamaRestApi":"https://mama-rest.metabohub.fr/",
+	"defaultLang":"en"
+}

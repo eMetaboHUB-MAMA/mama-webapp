@@ -1,0 +1,28 @@
+<script type="x-jquery-tmpl" id="users-full-list-template">
+<tr id="tr_user_${id}" class="${userStatus}">
+	<td><img src="${avatar}" /></td>
+	<td><a href="javascript:void(0);" onclick="writeMessageToUser(${id});"><i class="fa fa-envelope"></i> ${login}</a></td>
+	<td id="loginUserA${id}">${firstName} ${lastName}</td>
+	<td><a href="mailto:${email}?subject=MAMA">${email}</a></td>
+	<td>${createdLocalDate}</td>
+	<td>${updatedLocalDate}</td>
+	<td>
+		<div class="">
+			<select onchange="updateUserStatusRight(${id}, this)" name="selectbasic" class="btn btn-mini" ${updateUserDisabled}>
+				<option ${userStatusSelectNotValidated} disabled>not validated</option>
+				<option ${userStatusSelectBlocked} value="blocked">paused</option>
+				<option ${userStatusSelectUser} value="user">user</option>
+				<option ${userStatusSelectProjectManager} value="project_manager">project manager</option>
+				<option ${userStatusSelectAdmin} value="admin">admin</option>
+				<option ${userStatusSelectInactive} disabled>inactive</option>
+			</select>
+		</div>
+	</td>
+	<td>
+		<a class="btn btn-info btn-xs" href="?page=user-profile&userID=${id}" ${updateUserDisabled} title="Edit">
+			<span aria-hidden="true"><i class="fa fa-pencil"></i></span>
+			<span class="sr-only">Edit</span>
+		</a>
+	</td>
+</tr>
+</script>

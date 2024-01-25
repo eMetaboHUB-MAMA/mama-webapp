@@ -1,0 +1,499 @@
+<!-- js -->
+<script src="js/users.min.js" type="text/javascript"></script>
+<!-- page -->
+<div class="row">
+	<br />
+</div>
+<div class="row">
+	<div class="col-lg-2 col-md-6">
+		<div class="panel panel-warning mainBtnOpt panel-users">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-3">
+						<i class="fa fa-user-plus fa-5x"></i>
+					</div>
+					<div class="col-xs-9 text-right">
+						<div class="huge">.</div>
+						<div>
+							<span id="dashboard_usersNotValidated" class="lang"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<a href="?page=users&status=not_validated">
+				<div class="panel-footer">
+					<span class="pull-left"><span class="lang-class viewDetails"></span></span> <span
+						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			</a>
+		</div>
+	</div>
+	<div class="col-lg-2 col-md-6">
+		<div class="panel panel-green mainBtnOpt panel-users">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-3">
+						<i class="fa fa-users fa-5x"></i>
+					</div>
+					<div class="col-xs-9 text-right">
+						<div class="huge">.</div>
+						<div>
+							<span id="dashboard_usersUsers" class="lang"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<a href="?page=users&status=user">
+				<div class="panel-footer">
+					<span class="pull-left"><span class="lang-class viewDetails"></span></span> <span
+						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			</a>
+		</div>
+	</div>
+	<div class="col-lg-2 col-md-6">
+		<div class="panel panel-info mainBtnOpt panel-users">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-3">
+						<i class="fa fa-users fa-5x"></i>
+					</div>
+					<div class="col-xs-9 text-right">
+						<div class="huge">.</div>
+						<div><span id="dashboard_usersProjectsManagers" class="lang"></span></div>
+					</div>
+				</div>
+			</div>
+			<a href="?page=users&status=projects_manager">
+				<div class="panel-footer">
+					<span class="pull-left"><span class="lang-class viewDetails"></span></span> <span
+						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			</a>
+		</div>
+	</div>
+	<div class="col-lg-2 col-md-6">
+		<div class="panel panel-primary mainBtnOpt panel-users">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-3">
+						<i class="fa fa-user-md fa-5x"></i>
+					</div>
+					<div class="col-xs-9 text-right">
+						<div class="huge">.</div>
+						<div><span id="dashboard_usersAdmin" class="lang"></span></div>
+					</div>
+				</div>
+			</div>
+			<a href="?page=users&status=admin">
+				<div class="panel-footer">
+					<span class="pull-left"><span class="lang-class viewDetails"></span></span> <span
+						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			</a>
+		</div>
+	</div>
+	<div class="col-lg-2 col-md-6">
+		<div class="panel panel-red mainBtnOpt panel-users">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-3">
+						<i class="fa fa-user-times fa-5x"></i>
+					</div>
+					<div class="col-xs-9 text-right">
+						<div class="huge">.</div>
+						<div><span id="dashboard_usersBlocked" class="lang"></span></div>
+					</div>
+				</div>
+			</div>
+			<a href="?page=users&status=blocked">
+				<div class="panel-footer">
+					<span class="pull-left"><span class="lang-class viewDetails"></span></span> <span
+						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			</a>
+		</div>
+	</div>
+	<div class="col-lg-2 col-md-6">
+		<div class="panel panel-lightGray mainBtnOpt panel-users">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-3">
+						<i class="fa fa-user-secret fa-5x"></i>
+					</div>
+					<div class="col-xs-9 text-right">
+						<div class="huge">.</div>
+						<div><span id="dashboard_usersInactive" class="lang"></span></div>
+					</div>
+				</div>
+			</div>
+			<a href="?page=users&status=inactive">
+				<div class="panel-footer">
+					<span class="pull-left"><span class="lang-class viewDetails"></span></span> <span
+						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			</a>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+
+	<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+		<li class="active"><a href="#users-infos" data-toggle="tab"><i
+				class="fa fa-info-circle"></i> <span id="dashboard_usersInfos" class="lang"></span></a></li>
+<!-- 		<li><a id="link-user-add" href="#user-add" data-toggle="tab"><i -->
+<!-- 				class="fa fa-user-plus"></i> <span id="dashboard_userInvite" class="lang"></span></a></li> -->
+		<li><a id="link-users-manage" href="#users-manage"
+			data-toggle="tab"><i class="fa fa-users"></i> <span id="dashboard_userManage" class="lang"></span></a></li>
+	</ul>
+	<div id="" class="tab-content">
+		<div id="users-infos" class="tab-pane fade active in ">
+			<div class="panel-group">
+				<div class="col-lg-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<i class="fa fa-users fa-fw"></i> <span id="dashboard_allUsers" class="lang"></span>
+							<button class="btn btn-xs btn-default"
+								onclick="showHideClosedUsers()">
+								<i class="fa fa-eye"></i>
+							</button>
+						</div>
+						<div class="panel-body">
+							<div id="container-pie-users"
+								style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+							<script type="text/javascript">
+								var chartUsers = null;
+								var visibleUsers = true;
+								showHideClosedUsers = function() {
+									if (visibleUsers) {
+										chartUsers.series[0].data[4].dataLabel.hide();
+										chartUsers.series[0].data[4].update({ visible : false }, true);
+										chartUsers.series[0].data[5].dataLabel.hide();
+										chartUsers.series[0].data[5].update({ visible : false }, true);
+									}
+
+									else {
+										chartUsers.series[0].data[4].dataLabel .hide();
+										chartUsers.series[0].data[4].update({ visible : true }, true);
+										chartUsers.series[0].data[5].dataLabel .hide();
+										chartUsers.series[0].data[5].update({ visible : true }, true);
+									}
+									visibleUsers = !visibleUsers;
+								}
+								buildUsersChart = function () {
+									chartUsers = new Highcharts.Chart(
+											{
+												chart : {
+													plotBackgroundColor : null,
+													plotBorderWidth : null,
+													plotShadow : false,
+													type : 'pie',
+													renderTo : 'container-pie-users'
+												},
+												title : {
+													text : _diag_usersStats
+												},
+												tooltip : {
+													pointFormat : '<b>{point.percentage:.2f}%</b> <small>({point.y})</small>'
+												},
+												plotOptions : {
+													pie : {
+														allowPointSelect : true,
+														cursor : 'pointer',
+														dataLabels : {
+															enabled : true,
+															format : '<b>{point.name}</b>: {point.percentage:.1f}% <small>({point.y})</small>',
+															style : {
+																color : (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+															}
+														}
+													}
+												},
+												series : [ {
+													name : _diag_usersStats_serieUsers,
+													colorByPoint : true,
+													data : [
+															{
+																name : _diag_usersStats_serieUsers_notActivated,
+																y : nbUsersNotActivated,
+																color : '#f0ad4e'
+															},
+															{
+																name : _diag_usersStats_serieUsers_users,
+																y : nbUsersUsers, 
+																color : '#5cb85c',
+																sliced : true,
+																selected : true,
+															},
+															{
+																name : _diag_usersStats_serieUsers_projectsManager,
+																y : nbUsersProjectManager,
+																color : '#d9edf7'
+															},
+															{
+																name : _diag_usersStats_serieUsers_admin,
+																y : nbUsersAdmin,  
+																color : '#337ab7'
+															},
+															{
+																name : _diag_usersStats_serieUsers_blocked,
+																y : nbUsersBlocked,
+																color : '#d9534f'
+															},{
+																name : _diag_usersStats_serieUsers_inactive,
+																y : nbUsersInactive,  
+																color : 'lightgray'
+															}]
+												} ]
+											});
+											if (!visibleUsers) {
+												chartUsers.series[0].data[4].dataLabel.hide();
+												chartUsers.series[0].data[4].update({ visible : false }, true);
+												chartUsers.series[0].data[5].dataLabel.hide();
+												chartUsers.series[0].data[5].update({ visible : false }, true);
+											}
+								};
+							</script>
+							<a href="#" onclick="$('#link-users-manage').click()" class="btn btn-default btn-block"><span class="lang-class viewDetails"></span></a>
+						</div>
+						<!-- /.panel-body -->
+					</div>
+					<!-- /.panel -->
+				</div>
+				<!-- /.col-lg-6 -->
+				<div class="col-lg-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<i class="fa fa-bell fa-fw"></i> <span id="dashboard_notificationsPanel" class="lang"></span>
+						</div>
+						<!-- /.panel-heading -->
+						<div class="panel-body">
+							<div class="list-group" id="events-light-list-container">
+							</div>
+							<!-- /.list-group -->
+							<div id="noEventToShow" style=""><span class="lang-class noEventToShow"></span></div>
+							<a id="showMoreEventsBtn" style="" onclick="showMoreUsersEvents()" class="btn btn-default btn-block"><span class="lang-class showMore"></span></a>
+						</div>
+						<!-- /.panel-body -->
+					</div>
+				</div>
+				<!-- /.col-lg-6 -->
+			</div>
+		</div>
+		<div id="user-add" class="tab-pane fade ">
+			<div class="panel-group">
+				<div class="col-lg-6">
+					<form class="form-horizontal">
+						<fieldset>
+
+							<!-- Form Name -->
+							<legend>invite new user</legend>
+
+							<!-- Prepended text-->
+							<div class="form-group input-group">
+								<span class="input-group-addon"><i class="fa fa-at"></i>
+									email</span> <input id="email" type="text" class="form-control"
+									placeholder="enter a valide email"
+									aria-describedby="inputSuccess2Status"> <span
+									class="fa fa-2x form-control-feedback" aria-hidden="true"></span>
+								<span id="inputSuccess2Status" class="sr-only">(success)</span>
+							</div>
+							<span id="emailHelpBlock" class="help-block"></span>
+
+							<div class="form-group">
+								<label>Type of account</label> <label class="radio-inline">
+									<input type="radio" name="accountType" id="accountTypeClient"
+									value="user"> User
+								</label> <label class="radio-inline"> <input type="radio"
+									name="accountType" id="accountTypeAnalyst" value="analyst"
+									class="accountTypeManager">analyst
+								</label> <label class="radio-inline"> <input type="radio"
+									name="accountType" id="accountTypeAdmin" value="group"
+									class="accountTypeManager">admin
+								</label>
+							</div>
+
+							<!-- 
+							<div class="form-group input-group" style="display: none;">
+								<span class="input-group-addon">MTH plateform(s)</span> <select
+									id="mthPF" class="form-control">
+									<option>Bordeaux Metabolome Platform</option>
+									<option>Metabolism Exploration Platform</option>
+									<option>MetabolomeIDF</option>
+									<option>MetaToul Platform</option>
+								</select>
+							</div>
+							 -->
+							
+							<button type="button" class="btn btn-primary">
+								<i class="fa fa-user-plus"></i> Create User
+							</button>
+
+						</fieldset>
+					</form>
+				</div>
+				<!-- .col-6 -->
+			</div>
+		</div>
+		<div id="users-manage" class="tab-pane fade">
+			<div class="col-lg-12">
+				<br>
+				<div class="form-group input-group col-lg-6">
+					<input type="text" id="usersSearchFilter" class="form-control lang" lang="_user_mgmt_search_ph"
+						placeholder="e.g. mace.windu@haruun-kal.sw">
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-primary dropdown-toggle"
+							data-toggle="dropdown">
+							<span id="search-users-filter-status"> <span id="_user_mgmt_filter_all" class="lang"></span></span> 
+							<span class="caret"></span>
+						</button>
+						
+						<ul class="dropdown-menu pull-right">
+							<li>
+								<a id="aUser_not_validated" onclick="reloadUsersPage('not_validated');">
+									<span id="_user_mgmt_filter_notVal" class="lang"></span>
+								</a>
+							</li>
+							<li>
+								<a id="aUser_user" onclick="reloadUsersPage('user');">
+									<span id="_user_mgmt_filter_users" class="lang"></span>
+								</a>
+							</li>
+							<li>
+								<a id="aUser_projects_manager" onclick="reloadUsersPage('projects_manager');">
+									<span id="_user_mgmt_filter_pm" class="lang"></span>
+								</a>
+							</li>
+							<li>
+								<a id="aUser_admin" onclick="reloadUsersPage('admin');">
+									<span id="_user_mgmt_filter_admin" class="lang"></span>
+								</a>
+							</li>
+							<li>
+								<a id="aUser_blocked" onclick="reloadUsersPage('blocked');">
+									<span id="_user_mgmt_filter_blocked" class="lang"></span>
+								</a>
+							</li>
+							<li>
+								<a id="aUser_inactive" onclick="reloadUsersPage('inactive');">
+									<span id="_user_mgmt_filter_inact" class="lang"></span>
+								</a>
+							</li>
+							<li>
+								<a id="aUser_all" onclick="reloadUsersPage('');">
+									<span id="_user_mgmt_filter_allUsers" class="lang"></span>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-primary" onclick="searchUsers();">
+							<span id="_user_mgmt_filter_searchBtn" class="lang"></span> <i class="fa fa-search"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+			<!-- /.col-lg-12 -->
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<!-- <div class="panel-heading">Context Classes</div> -->
+					<!-- /.panel-heading -->
+					<div class="panel-body">
+						<div class="table-responsive">
+							<table id="tableListUsers" class="table">
+								<thead>
+									<tr>
+										<th></th>
+										<th><span id="_user_mgmt_tab_login" class="lang"></span></th>
+										<th><span id="_user_mgmt_tab_name" class="lang"></span></th>
+										<th><span id="_user_mgmt_tab_email" class="lang"></span></th>
+										<th><span id="_user_mgmt_tab_created" class="lang"></span></th>
+										<th><span id="_user_mgmt_tab_updated" class="lang"></span></th>
+										<th style="min-width: 100px;"></th>
+										<th><span id="_user_mgmt_tab_actions" class="lang"></span></th>
+									</tr>
+								</thead>
+								<tbody id="users-full-list-container"></tbody>
+								<tfoot>
+									<tr>
+										<th colspan="8">
+											<div class="col-lg-6">
+												<ul id="usersPagination"
+													class="pagination pagination-sm">
+												</ul>
+											</div>
+										</th>
+									</tr>
+								</tfoot>
+							</table>
+
+						</div>
+						<div id="noUsersDiv"><h3> 
+						<span id="_user_mgmt_noUser_title" class="lang"></span> <small><span id="_user_mgmt_noUser_txt" class="lang"></span></small></h3></div>
+						<!-- /.table-responsive -->
+					</div>
+					<!-- /.panel-body -->
+				</div>
+				<!-- /.panel -->
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z\-0-9]{2,}))$/
+	$("#email").focusout(function() {
+		checkMail(this);
+	});
+	/**
+	 * check users emails
+	 */
+	function checkMail(elem) {
+		var email = $(elem).val();
+		if (!email.match(re)) {
+			$(elem).parent().removeClass("has-success has-feedback").addClass(
+					"has-error has-feedback");
+			$(elem).parent().find(".fa").removeClass("fa-check").addClass(
+					"fa-times");
+			$("#" + ($(elem).prop('id')) + "HelpBlock").html(
+					"error: Email address seems invalid!");
+		} else {
+			$(elem).parent().addClass("has-success has-feedback").removeClass(
+					"has-error has-feedback");
+			$(elem).parent().find(".fa").removeClass("fa-times").addClass(
+					"fa-check");
+			$("#" + ($(elem).prop('id')) + "HelpBlock").html("");
+		}
+	}
+	$("#link-user-add").click(function() {
+		setTimeout(function() {
+			$("#email").focus();
+		}, 500);
+	});
+
+	$("#link-users-manage").click(function() {
+		setTimeout(function() {
+			$("#usersSearchFilter").focus();
+		}, 500);
+	});
+
+// 	$("input[name=accountType]").click(function() {
+// 		var showID = false;
+// 		$.each($(".accountTypeManager"), function() {
+// 			if ($(this).is(':checked'))
+// 				showID = true;
+// 		});
+// 		if (showID)
+// 			$("#mthPF").parent().show();
+// 		else
+// 			$("#mthPF").parent().hide();
+
+// 	});
+// 	$("#mthPF").parent().hide();
+</script>

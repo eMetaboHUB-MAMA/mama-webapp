@@ -1,0 +1,19 @@
+<script type="x-jquery-tmpl" id="projects-light-list-template">
+<tr id="projectTr${id}" class="${status}">
+	<td>${title}</td>
+	{%if analystInCharge != null %}
+	<td>
+		<a id="projectA${id}" href="#" onclick="writeMessageToUserAboutProject(${analystInCharge.id}, ${id});"><i class="fa fa-envelope"></i> ${analystInCharge.fullName}</a>
+	</td>
+	{%else%}
+	<td>-</td>
+	{%/if%}
+	<td>
+		<button type="button" class="btn btn-info btn-xs" onclick="showProject(${id});"
+			title="Voir">
+			<span aria-hidden="true"><i class="fa fa-eye"></i></span> <span
+				class="sr-only">Voir</span>
+		</button>
+	</td>
+</tr>
+</script>

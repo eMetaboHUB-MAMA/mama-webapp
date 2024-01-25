@@ -1,0 +1,175 @@
+<!-- tablesorter plugin -->
+<script src="js/jquery.tablesorter.min.js"></script>
+<!-- tablesorter widget file - loaded after the plugin -->
+<!-- <script src="js/jquery.tablesorter.widgets.js"></script> -->
+<!-- js -->
+<script src="js/statistics.min.js" type="text/javascript"></script>
+<!-- page -->
+<div class="row">
+	<br />
+	<form class="form-inline" onsubmit="return false;">
+		<div class="form-group input-group ">
+			<span class="input-group-addon">from</span> 
+			<input id="range-date-start"
+				data-date-format="yyyy-mm-dd" type="text"
+				class="form-control datepicker"
+				value="" placeholder="2016-01-01">
+		</div>
+		<div class="form-group input-group ">
+			<span class="input-group-addon">to</span> 
+			<input id="range-date-end"
+				data-date-format="yyyy-mm-dd" type="text"
+				class="form-control datepicker "
+				value="" placeholder="2016-12-31">
+		</div>
+		<button id="range-date-update" type="submit" class="btn btn-primary"><i class="fa fa-refresh"></i> Update!</button>
+		<a id="link-donwload-xls-file" class="btn btn-default" href="ajax/ajax_proxypass.php?verbe=get&resource=statistics-file" target="_blank"><i class="fa fa-file-excel-o"></i> Download</a>
+	</form>
+	<br />
+</div>
+<div class="row">
+	<!-- 
+	range: from, to,
+	filters: isStatus/isNotStatus (OR), isPlatForm/isNotPlatForm (AND), isKeyword/isNotKeyword (AND), isType/isNotType (OR),  isFinanced/isNotFinanced (OR), isOwner/isNotOwner (AND)
+	// note about filters: filter=(1,2,3)
+	groups: status, mthPF, keywords, type, targeted, copartner, financial
+	
+	// e.g
+	http://localhost/pfem/mama-rest/public/projects-statistics?token=e3c2328975fe1e1c544153a252e9f8b5&format=json&from=2016-01-01&to=2016-12-32&group=copartner&isStatus=rejected,waiting
+	http://localhost/pfem/mama-rest/public/projects-statistics?token=e3c2328975fe1e1c544153a252e9f8b5&format=json&from=2016-01-01&to=2016-12-32&group=type&isStatus=waiting,accepted,assigned,archived
+	 -->
+	 <div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<i class="fa fa-users fa-fw"></i> Projects Stats.
+			</div>
+			<div class="panel-body">
+				<div class="col-lg-12">
+					<table id="statsPjPFxStatusTable" class="table table-striped tablesorter">
+						<thead>
+							<tr>
+								<th><i class="fa fa-sort" aria-hidden="true"></i> Platform</th>
+								<th><i class="fa fa-sort" aria-hidden="true"></i> rejected</th>
+								<th><i class="fa fa-sort" aria-hidden="true"></i> waiting</th>
+								<th><i class="fa fa-sort" aria-hidden="true"></i> assigned</th>
+								<th><i class="fa fa-sort" aria-hidden="true"></i> completed</th>
+								<th><i class="fa fa-sort" aria-hidden="true"></i> accepted</th>
+								<th><i class="fa fa-sort" aria-hidden="true"></i> running</th>
+								<th><i class="fa fa-sort" aria-hidden="true"></i> blocked</th>
+								<th><i class="fa fa-sort" aria-hidden="true"></i> archived</th>
+								<th><i class="fa fa-sort" aria-hidden="true"></i> total</th>
+							</tr>
+						</thead>
+						<tbody id="statsPjPFxStatus"></tbody>
+						<tfoot id="statsPjPFxStatusFooter"></tfoot>
+					</table>
+				</div>
+			</div>
+			<div class="panel-footer">
+				Note: a project can be assigned to more than one platform!
+			</div>
+		</div>
+	</div><!-- ./col-lg-12 -->
+	<div class="col-lg-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<i class="fa fa-info-circle fa-fw"></i> Projects's users laboratorie types and Projects's authorizations
+			</div>
+			<div class="panel-body">
+				<div class="col-lg-6">
+					<div id="container-pie-laboratory" 
+						style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+				</div>
+				<div class="col-lg-6">
+					<div id="container-pie-copartner"
+						style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+				</div>
+			</div><!-- /.panel-body -->
+			<div class="panel-footer">
+				Note: only count projects "waiting", "accepted", "assigned", "completed", "running" or "archived"
+			</div>
+		</div><!-- /.panel -->
+	</div><!-- ./col-lg-6 --> 
+	<div class="col-lg-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<i class="fa fa-pie-chart fa-fw"></i> Projects types &amp; <i class="fa fa-money fa-fw"></i> funding
+			</div>
+			<div class="panel-body">
+				<div class="col-lg-6">
+					<div id="container-pie-demand" 
+						style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+				</div>
+				<div class="col-lg-6">
+					<div id="container-pie-funding" 
+						style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+				</div>
+			</div><!-- /.panel-body -->
+			<div class="panel-footer">
+				Note: only count projects "waiting", "accepted", "assigned", "completed", "running" or "archived"
+			</div>
+		</div><!-- /.panel -->
+	</div><!-- ./col-lg-6 --> 
+	<div class="col-lg-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<i class="fa fa-flask fa-fw"></i>  "Catalog allowance - lab routine" projects
+			</div>
+			<div class="panel-body">
+				<div class="col-lg-6">
+					<div id="container-pie-sampleNb" 
+						style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+				</div>
+				<div class="col-lg-6">
+					<div id="container-pie-targeted" 
+						style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+				</div>
+			</div><!-- /.panel-body -->
+			<div class="panel-footer">
+				Note: only count projects "waiting", "accepted", "assigned", "completed", "running" or "archived";
+				<br />only count "Catalog allowance - lab routine" projects
+			</div>
+		</div><!-- /.panel -->
+	</div><!-- ./col-lg-6 --> 
+	<div class="col-lg-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<i class="fa fa-users fa-fw"></i>  Actives users &amp; projects laboratories types
+			</div>
+			<div class="panel-body">
+				<div class="col-lg-6">
+					<div id="container-pie-usersLabo" 
+						style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+				</div>
+				<div class="col-lg-6">
+					<div id="container-pie-extraLabo" 
+						style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+				</div>
+			</div><!-- /.panel-body -->
+			<div class="panel-footer">
+				Note: active users: created a project during the selected dates range.
+			</div>
+		</div><!-- /.panel -->
+	</div><!-- ./col-lg-6 --> 
+	<div class="col-lg-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<i class="fa fa-hashtag" aria-hidden="true"></i>  Project thematic / sub-thematic repartitions
+			</div>
+			<div class="panel-body">
+				<div class="col-lg-6">
+					<div id="container-pie-thematic" 
+						style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+				</div>
+				<div class="col-lg-6">
+					<div id="container-pie-subthematic" 
+						style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+				</div>
+			</div><!-- /.panel-body -->
+			<div class="panel-footer">
+				Note: projects are associated with more than one thematic or sub-thematic. 
+				<br />Only count projects "waiting", "accepted", "assigned", "completed", "running" or "archived";
+			</div>
+		</div><!-- /.panel -->
+	</div><!-- ./col-lg-6 --> 
+</div>

@@ -1,136 +1,137 @@
 <!-- js -->
-<script src="js/dashboard.js" type="text/javascript"></script>
+<script src="js/dashboard.min.js" type="text/javascript"></script>
 <!-- page -->
 <div class="row">
 	<br />
 </div>
 <div class="row">
-	<!-- 	<div class="col-lg-3 col-md-6"> -->
-	<!-- 		<div class="panel panel-primary mainBtnOpt"> -->
-	<!-- 			<div class="panel-heading"> -->
-	<!-- 				<div class="row"> -->
-	<!-- 					<div class="col-xs-3"> -->
-	<!-- 						<i class="fa fa-plus-square fa-5x"></i> -->
-	<!-- 					</div> -->
-	<!-- 					<div class="col-xs-9 text-right"> -->
-	<!-- 						<div class="huge">Add</div> -->
-	<!-- 						<div>Create new project request!</div> -->
-	<!-- 					</div> -->
-	<!-- 				</div> -->
-	<!-- 			</div> -->
-	<!-- 			<a href="#"> -->
-	<!-- 				<div class="panel-footer"> -->
-	<!-- 					<span class="pull-left">View Details</span> <span -->
-	<!-- 						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span> -->
-	<!-- 					<div class="clearfix"></div> -->
-	<!-- 				</div> -->
-	<!-- 			</a> -->
-	<!-- 		</div> -->
-	<!-- 	</div> -->
-	<!-- 	<div class="col-lg-3 col-md-6"> -->
-	<!-- 		<div class="panel panel-red mainBtnOpt"> -->
-	<!-- 			<div class="panel-heading"> -->
-	<!-- 				<div class="row"> -->
-	<!-- 					<div class="col-xs-3"> -->
-	<!-- 						<i class="fa fa-support fa-5x"></i> -->
-	<!-- 					</div> -->
-	<!-- 					<div class="col-xs-9 text-right"> -->
-	<!-- 						<div class="huge">2</div> -->
-	<!-- 						<div>Stopped analyses!</div> -->
-	<!-- 					</div> -->
-	<!-- 				</div> -->
-	<!-- 			</div> -->
-	<!-- 			<a href="#"> -->
-	<!-- 				<div class="panel-footer"> -->
-	<!-- 					<span class="pull-left">View Details</span> <span -->
-	<!-- 						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span> -->
-	<!-- 					<div class="clearfix"></div> -->
-	<!-- 				</div> -->
-	<!-- 			</a> -->
-	<!-- 		</div> -->
-	<!-- 	</div> -->
-	<div class="col-lg-3 col-md-6">
-		<div class="panel panel-primary mainBtnOpt">
+	<div class="col-lg-2 col-md-6">
+		<div class="panel panel-primary mainBtnOpt panel-projects">
 			<div class="panel-heading">
 				<div class="row">
 					<div class="col-xs-3">
 						<i class="fa fa-exclamation-triangle fa-5x"></i>
 					</div>
 					<div class="col-xs-9 text-right">
-						<div class="huge">10</div>
-						<div>Projects in charge ! (1 belong to me)</div>
+						<div class="huge">.</div>
+						<div><span id="dashboard_projectsInCharge" class="lang"></span></div>
 					</div>
 				</div>
 			</div>
-			<a href="#">
+			<a href="?page=projects&userFilter=inCharge">
 				<div class="panel-footer">
-					<span class="pull-left">View Details</span> <span
+					<span class="pull-left"><span class="lang-class viewDetails"></span></span> <span
 						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 					<div class="clearfix"></div>
 				</div>
 			</a>
 		</div>
 	</div>
-	<div class="col-lg-3 col-md-6">
-		<div class="panel panel-yellow mainBtnOpt">
+	<div class="col-lg-2 col-md-6">
+		<div class="panel panel-waiting mainBtnOpt panel-projects">
 			<div class="panel-heading">
 				<div class="row">
 					<div class="col-xs-3">
 						<i class="fa fa-clock-o fa-5x"></i>
 					</div>
 					<div class="col-xs-9 text-right">
-						<div class="huge">5</div>
-						<div>Waiting projects! (1 belong to me)</div>
+						<div class="huge">.</div>
+						<div><span id="dashboard_waitingProjects" class="lang"></span> (<span class="lang-class belongToMe1"></span><span id="spanMyWaitingProjects"></span><span class="lang-class belongToMe2"></span>)</div>
 					</div>
 				</div>
 			</div>
-			<a href="#">
+			<a href="?page=projects&status=waiting">
 				<div class="panel-footer">
-					<span class="pull-left">View Details</span> <span
+					<span class="pull-left"><span class="lang-class viewDetails"></span></span> <span
 						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 					<div class="clearfix"></div>
 				</div>
 			</a>
 		</div>
 	</div>
-	<div class="col-lg-3 col-md-6">
-		<div class="panel panel-lightGreen mainBtnOpt">
+	<div class="col-lg-2 col-md-6">
+		<div class="panel panel-assigned mainBtnOpt panel-projects">
 			<div class="panel-heading">
 				<div class="row">
 					<div class="col-xs-3">
 						<i class="fa fa-tasks fa-5x"></i>
 					</div>
 					<div class="col-xs-9 text-right">
-						<div class="huge">30</div>
-						<div>Projects Completed! (3 belong to me)</div>
+						<div class="huge">.</div>
+						<div><span id="dashboard_assignedProjects" class="lang"></span> (<span class="lang-class belongToMe1"></span><span id="spanMyAssignedProjects"></span><span class="lang-class belongToMe2"></span>)</div>
 					</div>
 				</div>
 			</div>
-			<a href="#">
+			<a href="?page=projects&status=assigned">
 				<div class="panel-footer">
-					<span class="pull-left">View Details</span> <span
+					<span class="pull-left"><span class="lang-class viewDetails"></span></span> <span
 						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 					<div class="clearfix"></div>
 				</div>
 			</a>
 		</div>
 	</div>
-	<div class="col-lg-3 col-md-6">
-		<div class="panel panel-green mainBtnOpt">
+
+	<div class="col-lg-2 col-md-6">
+		<div class="panel panel-completed mainBtnOpt panel-projects">
 			<div class="panel-heading">
 				<div class="row">
 					<div class="col-xs-3">
 						<i class="fa fa-check fa-5x"></i>
 					</div>
 					<div class="col-xs-9 text-right">
-						<div class="huge">55</div>
-						<div>Projects assigned! (7 belong to me)</div>
+						<div class="huge">.</div>
+						<div><span id="dashboard_completedProjects" class="lang"></span> (<span class="lang-class belongToMe1"></span><span id="spanMyCompletedProjects"></span><span class="lang-class belongToMe2"></span>)</div>
 					</div>
 				</div>
 			</div>
-			<a href="#">
+			<a href="?page=projects&status=completed">
 				<div class="panel-footer">
-					<span class="pull-left">View Details</span> <span
+					<span class="pull-left"><span class="lang-class viewDetails"></span></span> <span
+						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			</a>
+		</div>
+	</div>
+	<div class="col-lg-2 col-md-6">
+		<div class="panel panel-accepted mainBtnOpt panel-projects">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-3">
+						<i class="fa fa-clock-o fa-5x"></i>
+					</div>
+					<div class="col-xs-9 text-right">
+						<div class="huge">.</div>
+						<div><span id="dashboard_acceptedProjects" class="lang"></span> (<span class="lang-class belongToMe1"></span><span id="spanMyAcceptedProjects"></span><span class="lang-class belongToMe2"></span>)</div>
+					</div>
+				</div>
+			</div>
+			<a href="?page=projects&status=accepted">
+				<div class="panel-footer">
+					<span class="pull-left"><span class="lang-class viewDetails"></span></span> <span
+						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			</a>
+		</div>
+	</div>
+	<div class="col-lg-2 col-md-6">
+		<div class="panel panel-info mainBtnOpt panel-projects">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-3">
+						<i class="fa fa-check fa-5x"></i>
+					</div>
+					<div class="col-xs-9 text-right">
+						<div class="huge">.</div>
+						<div><span id="dashboard_runningProjects" class="lang"></span> (<span class="lang-class belongToMe1"></span><span id="spanMyRunningProjects"></span><span class="lang-class belongToMe2"></span>)</div>
+					</div>
+				</div>
+			</div>
+			<a href="?page=projects&status=running">
+				<div class="panel-footer">
+					<span class="pull-left"><span class="lang-class viewDetails"></span></span> <span
 						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 					<div class="clearfix"></div>
 				</div>
@@ -143,7 +144,7 @@
 	<div class="col-lg-6">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<i class="fa fa-bar-chart-o fa-fw"></i> My Projects
+				<i class="fa fa-bar-chart-o fa-fw"></i> <span id="dashboard_allProjects" class="lang"></span>
 				<button class="btn btn-xs btn-default" onclick="showHideClosed()">
 					<i class="fa fa-eye"></i>
 				</button>
@@ -156,22 +157,24 @@
 					var visible = true;
 					showHideClosed = function() {
 						if (visible) {
-							chart.series[0].data[0].dataLabel.hide();
-							chart.series[0].data[0].update({
-								visible : false
-							}, true);
-						}
-
-						else {
-							chart.series[0].data[0].dataLabel.hide();
-							chart.series[0].data[0].update({
-								visible : true
-							}, true);
+							chart.series[0].data[6].dataLabel.hide();
+							chart.series[0].data[6].update({ visible : false }, true);
+							chart.series[0].data[7].dataLabel.hide();
+							chart.series[0].data[7].update({ visible : false }, true);
+							chart.series[0].data[8].dataLabel.hide();
+							chart.series[0].data[8].update({ visible : false }, true);
+						} else {
+							chart.series[0].data[6].dataLabel.hide();
+							chart.series[0].data[6].update({ visible : true }, true);
+							chart.series[0].data[7].dataLabel.hide();
+							chart.series[0].data[7].update({ visible : true }, true);
+							chart.series[0].data[8].dataLabel.hide();
+							chart.series[0].data[8].update({ visible : true }, true);
 						}
 						visible = !visible;
 					}
 
-					$(function() {
+					function buildProjectsStats() {
 						chart = new Highcharts.Chart(
 								{
 									chart : {
@@ -182,10 +185,11 @@
 										renderTo : 'container-pie'
 									},
 									title : {
-										text : 'Project stats.'
+										text : _diag_projectStats
 									},
 									tooltip : {
-										pointFormat : '{series.name}: <b>{point.percentage:.1f}%</b>'
+										pointFormat : '<b>{point.percentage:.2f}%</b> <small>({point.y})</small>',
+										useHTML: true
 									},
 									plotOptions : {
 										pie : {
@@ -193,45 +197,71 @@
 											cursor : 'pointer',
 											dataLabels : {
 												enabled : true,
-												format : '<b>{point.name}</b>: {point.percentage:.1f} %',
+												format : '<b>{point.name}</b>: {point.percentage:.1f}% <small>({point.y})</small>',
 												style : {
-													color : (Highcharts.theme && Highcharts.theme.contrastTextColor)
-															|| 'black'
-												}
+													color : (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+												},
+												useHTML: true
 											}
 										}
 									},
 									series : [ {
-										name : "Projects",
+										name : _diag_projectStats_serieProjects,
 										colorByPoint : true,
 										data : [ {
-											name : "Closed",
-											y : 30,
+											name : _diag_projectStats_serieProjects_inCharge,
+											y : nbProjectsInChargeTotal,
+											color : '#337ab7'
+										}, {
+											name : _diag_projectStats_serieProjects_waiting,
+											y : nbProjectsWaiting,
+											color : '#000'
+										}, {
+											name : _diag_projectStats_serieProjects_assigned,
+											y : (nbProjectsAssigned - nbProjectsInChargeAssigned),
+											color : '#f0ad4e'
+										}, {
+											name : _diag_projectStats_serieProjects_completed,
+											y : (nbProjectsCompleted - nbProjectsInChargeCompleted),
+											color : '#dff0d8'
+										}, {
+											name : _diag_projectStats_serieProjects_accepted,
+											y : (nbProjectsAccepted - nbProjectsInChargeAccepted),
+											color : '#5cb85c'
+										}, {
+											name : _diag_projectStats_serieProjects_running,
+											y : (nbProjectsRunning - nbProjectsInChargeRunning),
+											color : '#bce8f1'
+										}, {
+											name : _diag_projectStats_serieProjects_blocked,
+											y : (nbProjectsBlocked - nbProjectsInChargeBlocked),
+											color : '#d9534f',
+											borderColor: '#fff'
+										}, {
+											name : _diag_projectStats_serieProjects_rejected,
+											y : (nbProjectsRejected),
+											color : '#d9534f',
+											borderColor: '#000'
+										}, {
+											name : _diag_projectStats_serieProjects_archived,
+											y : nbProjectsArchived,
 											sliced : true,
 											selected : true,
 											color : 'lightgray'
-										}, {
-											name : "In Charge",
-											y : 10,
-											color : '#337ab7'
-										}, {
-											name : "Waiting",
-											y : 5,
-											color : '#f0ad4e'
-										}, {
-											name : "Completed",
-											y : 30,
-											color : '#dff0d8'
-										}, {
-											name : "Assigned",
-											y : 55,
-											color : '#5cb85c'
 										} ]
 									} ]
 								});
-					});
+								if (!visible) {
+									chart.series[0].data[6].dataLabel.hide();
+									chart.series[0].data[6].update({ visible : false }, true);
+									chart.series[0].data[7].dataLabel.hide();
+									chart.series[0].data[7].update({ visible : false }, true);
+									chart.series[0].data[8].dataLabel.hide();
+									chart.series[0].data[8].update({ visible : false }, true);
+								}
+					};
 				</script>
-				<a href="#" class="btn btn-default btn-block">View Details</a>
+				<a href="#" class="btn btn-default btn-block"><span class="lang-class viewDetails"></span></a>
 			</div>
 			<!-- /.panel-body -->
 		</div>
@@ -241,42 +271,34 @@
 	<div class="col-lg-6">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<i class="fa fa-bell fa-fw"></i> Notifications Panel
+				<i class="fa fa-bell fa-fw"></i> <span id="dashboard_notificationsPanel" class="lang"></span>
 			</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">
-				<div class="list-group">
-					<a href="#" class="list-group-item"> <i
-						class="fa fa-comment fa-fw"></i> New Message on project <span
-						class="pull-right text-muted small"><em>4 minutes ago</em>
-					</span>
-					</a> <a href="#" class="list-group-item"> <i
-						class="fa fa-envelope fa-fw"></i> Message Sent about project <span
-						class="pull-right text-muted small"><em>27 minutes ago</em>
-					</span>
-					</a> <a href="#" class="list-group-item"> <i
-						class="fa fa-times-circle"></i> Project Update: closed<span
-						class="pull-right text-muted small"><em>30 minutes ago</em>
-					</span>
-					</a> <a href="#" class="list-group-item"> <i
-						class="fa fa-check-circle"></i> Project Update: assigned<span
-						class="pull-right text-muted small"><em>33 minutes ago</em>
-					</span>
-					</a>  <a href="#" class="list-group-item"> <i
-						class="fa fa-exclamation-triangle"></i> Project Update: assigned <b>to me</b><span
-						class="pull-right text-muted small"><em>34 minutes ago</em>
-					</span>
-					</a> <a href="#" class="list-group-item"> <i
-						class="fa fa-tasks fa-fw"></i> Project Update: completed<span
-						class="pull-right text-muted small"><em>37 minutes ago</em>
-					</span>
-					</a> <a href="#" class="list-group-item"> <i class="fa fa-clock-o"></i>
-						New project submitted <span class="pull-right text-muted small"><em>43
-								minutes ago</em> </span>
-					</a>
+				<div class="list-group" id="events-light-list-container">
 				</div>
 				<!-- /.list-group -->
-				<a href="#" class="btn btn-default btn-block">View All Alerts</a>
+				<div id="noEventToShow" style=""><span class="lang-class noEventToShow"></span></div>
+				<a id="showMoreEventsBtn" style="" onclick="showMoreEvents()" class="btn btn-default btn-block"><span class="lang-class showMore"></span></a>
+			</div>
+			<!-- /.panel-body -->
+		</div>
+	</div>
+	<!-- /.col-lg-6 -->
+	<div class="col-lg-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<i class="fa fa-comments-o fa-fw"></i> <span id="dashboard_messagesPanel" class="lang"></span>
+			</div>
+			<!-- /.panel-heading -->
+			<div class="panel-body">
+				<div class="list-group" id="messages-light-list-container">
+				</div>
+				<div id="noMessageToShow" style=""><span class="lang-class noMessageToShow"></span></div>
+				<!-- /.list-group -->
+				<a id="goToMessagesBtn" href="?page=messages" class="btn btn-default btn-block">
+					<span class="lang-class showAllMessages"></span>
+				</a>
 			</div>
 			<!-- /.panel-body -->
 		</div>
