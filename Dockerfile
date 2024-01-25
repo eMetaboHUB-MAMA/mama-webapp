@@ -1,7 +1,7 @@
 FROM metabohub/mama-core
 
 # set author
-MAINTAINER Nils Paulhe <nils.paulhe@inrae.fr>
+LABEL maintainer="nils.paulhe@inrae.fr"
 
 # [php] copy MAMA-REST directoy
 COPY . /var/www/html/

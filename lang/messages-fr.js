@@ -230,7 +230,7 @@ createProject_content_project_copart_no = "non"
 createProject_content_project_copart_def = "Partenaire privilégié : MTH ne peut pas subvenir à tous les besoins, votre demande peut éventuellement être basculée vers nos <a href=\"http://www.metabohub.fr/donnees/partenaires/\" target=\"_blank\">partenaires</a>&nbsp;; ce sont des laboratoires français compétents et fiables spécialisés en métabolomique et/ou fluxomique qui ne font pas partie de MTH."
 createProject_content_project_context = "contexte scientifique"
 createProject_content_project_desc = "Description rapide"
-createProject_content_project_context_size = "caractères restants"   
+createProject_content_project_context_size = "caractères restants"
 createProject_content_project_desc_file_upload = "Téléverser un fichier"
 createProject_content_project_desc_file_upload_btn = "Parcourir&#133;"
 createProject_content_project_financialContext = "Contexte financier"
@@ -249,7 +249,7 @@ createProject_content_project_financialOwnResourcesLaboratory = "Fonds propres u
 createProject_content_project_financialContextOther = "autre"
 createProject_content_project_financialContextOther_fin = "Financement autre"
 createProject_content_project_financialContextOther_fin_ph = "autre contexte financier"
-createProject_warningAsterix = "Attention : les champs avec un astérisque<sup style='color:red'>*</sup> sont obligatoires !"	
+createProject_warningAsterix = "Attention : les champs avec un astérisque<sup style='color:red'>*</sup> sont obligatoires !"
 createProject_content_btn_create = "Créer une nouvelle sollicitation"
 // edit project
 editProject_title_edit = "Éditer"
@@ -299,7 +299,7 @@ editProject_extraBox_dialogbox_opt_searching_pf_able_to_process = "recherche d'u
 editProject_extraBox_dialogbox_ph = "données complémentaires"
 editProject_updateScientificContextFile = "mettre à jour le fichier :"
 editProject_btn_update = "Mettre à jour"
-		
+
 // list projects
 listProjects_noProject_title = "Désolé,"
 listProjects_noProject_text = "aucune sollicitation / aucun projet à afficher pour le moment !"
@@ -328,9 +328,11 @@ listProjects_tab_updated = "Mis-à-jour"
 listProjects_tab_owner = "Propr."
 listProjects_tab_inCharge = "Gestionnaire"
 listProjects_tab_involved = "Analyste(s)"
+listProjects_tab_response_delay = "DDR" // new mama#35
+listProjects_tab_response_delay_title = "Délai de réponse (jours)" // new mama#35
 listProjects_tab_actions = "Actions"
 listProjects_action_setManager_confirmDialog = "Attention: changer le gestionnaire mettra à jour le status du projet en \"assigné\". \nContinuer ?";
-	
+
 // list messages
 listMessages_noMessage_title = "Désolé,"
 listMessages_noMessage_text = "aucun message à afficher pour le moment !"
@@ -345,7 +347,7 @@ listMessages_tab_from = "De"
 listMessages_tab_to = "Pour"
 listMessages_tab_created = "Crée"
 listMessages_tab_actions = "Actions."
-	
+
 // list appointments
 listAppointments_noAppointment_title = "Désolé,"
 listAppointments_noAppointment_text = "pas de rendez-vous à afficher pour le moment !"
@@ -363,7 +365,7 @@ listAppointments_tab_to = "Pour"
 listAppointments_tab_message = "Message"
 listAppointments_tab_dates = "Date(s)"
 listAppointments_tab_actions = "Actions"
-	
+
 // TODO settings
 
 // alerts
@@ -399,7 +401,7 @@ _modal_message_closeBtn = "Fermer"
 _modal_message_OpenInBtn = " Ouvrir dans messages"
 _modal_fixAppointment_title1 = "Créer un rendez-vous avec"
 _modal_fixAppointment_title2 = "à propos de la sollicitation / du projet"
-_modal_fixAppointment_newDate = "nouvelle date"	
+_modal_fixAppointment_newDate = "nouvelle date"
 _modal_fixAppointment_fixAppBtn = "Fixer rendez-vous"
 _modal_fixAppointment_closeBtn = "Fermer"
 _modal_readAppointment_title1 = "Rendez-vous de"
@@ -484,3 +486,30 @@ _user_mgmt_tab_updated = "Mis-à-jour"
 _user_mgmt_tab_actions = "Actions"
 _user_mgmt_noUser_title = "Désolé"
 _user_mgmt_noUser_txt = "pas d'utilisateur à afficher."
+
+// new 1.0.5
+// analysts multiselect text localization
+_multiselect_mth_analyst_filterPlaceholder = "analystes"
+_multiselect_mth_analyst_nonSelectedText = 'Aucun selectionné'
+_multiselect_mth_analyst_nSelectedText = 'selectionné'
+_multiselect_mth_analyst_allSelectedText = 'Tous selectionnés'
+
+// plateformes multiselect text localization (mama#42)
+_listProjects_filter_plateform = "Plateforme(s)"
+_multiselect_mth_platforms_filterPlaceholder = "plateformes"
+_multiselect_mth_platforms_nonSelectedText = "Aucune selectionnée"
+_multiselect_mth_platforms_nSelectedText = "selectionnée"
+_multiselect_mth_platforms_allSelectedText = "Toutes selectionnées"
+
+// new filters (mama#36)
+_listProjects_filter_title = "Titre"
+_title_filter_pj_title = "Filtrer sur un motif du titre du projet"
+_listProjects_filter_owner = "Prop."
+_title_filter_pj_owner = "Filtrer sur un motif de l'email du prop. du projet"
+_listProjects_filter_manager = "Gest."
+_title_filter_pj_manager = "Filtrer sur un motif de l'email du gestionnaire du projet"
+_listProjects_filter_analysts = "Analyste"
+_title_filter_pj_analysts = "Filtrer sur un motif de l'email d'un analyste du projet"
+
+// confirm project reject (mama#32)
+_confirm_popup_reject_project = "⚠️ Êtes-vous sur de vouloir 'rejeter' le projet ?"

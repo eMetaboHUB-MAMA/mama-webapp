@@ -1,10 +1,10 @@
-[![pipeline status](https://services.pfem.clermont.inra.fr/gitlab/mama/mama-webapp/badges/dev/pipeline.svg)](https://services.pfem.clermont.inra.fr/gitlab/mama/mama-webapp/commits/dev)
+[![pipeline status](https://services.pfem.clermont.inrae.fr/gitlab/mama/mama-webapp/badges/dev/pipeline.svg)](https://services.pfem.clermont.inrae.fr/gitlab/mama/mama-webapp/commits/dev)
 
 # MAMA - WebApp
 
 ## Metadata
 
-* **@authors**: <nils.paulhe@inra.fr>, <franck.giacomoni@inra.fr>
+* **@authors**: <nils.paulhe@inrae.fr>, <franck.giacomoni@inrae.fr>
 * **@date creation**: `2016-01-29`
 * **@main usage**: WebApp of the **M**etaboHUB's **A**nalyses **MA**nager
 * **@see**: [MAMA - REST](../mama-rest)
@@ -15,7 +15,7 @@
 PHP web-server (Apache / ...)
 
 ### Deploy:
-* get project data `git clone ssh://git@services.pfem.clermont.inra.fr:mama/mama-webapp.git`
+* get project data `git clone git@services.pfem.clermont.inrae.fr:mama/mama-webapp.git`
 * edit `config/mama-webapp.json` configuration file (or create it from `config/mama-webapp.json.sample` template file ) 
  
 #### Apache

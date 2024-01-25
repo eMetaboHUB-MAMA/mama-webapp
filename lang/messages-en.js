@@ -230,7 +230,7 @@ createProject_content_project_copart_no = "no"
 createProject_content_project_copart_def = "copartner:  MTH is not able to cover all uses-cases, your request may be forwarded to our <a href=\"http://www.metabohub.fr/partners.html\" target=\"_blank\">copartners</a>;  they are French laboratory, reliable and efficient in Metabolomics/Fluxomics fields but does not belong to MTH."
 createProject_content_project_context = "scientific context"
 createProject_content_project_desc = "Short Description"
-createProject_content_project_context_size = "remaining characters"    
+createProject_content_project_context_size = "remaining characters"
 createProject_content_project_desc_file_upload = "Upload file"
 createProject_content_project_desc_file_upload_btn = "Browse&#133;"
 createProject_content_project_financialContext = "Financing"
@@ -328,6 +328,8 @@ listProjects_tab_updated = "Updated"
 listProjects_tab_owner = "Owner"
 listProjects_tab_inCharge = "Project Manager"
 listProjects_tab_involved = "MTH Analyst(s)"
+listProjects_tab_response_delay = "RD" // new mama#35
+listProjects_tab_response_delay_title = "Response delay (days)" // new mama#35
 listProjects_tab_actions = "Actions"
 listProjects_action_setManager_confirmDialog = "Danger: set the project manager wil update the project status to \"assigned\". \nContinue anyway?";
 
@@ -484,3 +486,30 @@ _user_mgmt_tab_updated = "Updated"
 _user_mgmt_tab_actions = "Actions"
 _user_mgmt_noUser_title = "Sorry"
 _user_mgmt_noUser_txt = "no user to display."
+
+// new 1.0.5
+// analysts multiselect text localization
+_multiselect_mth_analyst_filterPlaceholder = "analysts"
+_multiselect_mth_analyst_nonSelectedText = "None selected"
+_multiselect_mth_analyst_nSelectedText = "selected"
+_multiselect_mth_analyst_allSelectedText = "All selected"
+
+// plateformes multiselect text localization (mama#42)
+_listProjects_filter_plateform = "Plateform(s)"
+_multiselect_mth_platforms_filterPlaceholder = "plateformes"
+_multiselect_mth_platforms_nonSelectedText = "None selected"
+_multiselect_mth_platforms_nSelectedText = "selected"
+_multiselect_mth_platforms_allSelectedText = "All selected"
+
+// new filters (mama#36)
+_listProjects_filter_title = "Title"
+_title_filter_pj_title = "Filter on project title pattern"
+_listProjects_filter_owner = "Owner"
+_title_filter_pj_owner = "Filter on project owner email pattern"
+_listProjects_filter_manager = "Manager"
+_title_filter_pj_manager = "Filter on project manager email pattern"
+_listProjects_filter_analysts = "Analyst"
+_title_filter_pj_analysts = "Filter on project analysts email pattern"
+
+// confirm project reject (mama#32)
+_confirm_popup_reject_project = "⚠️ Are you sure that you want to 'reject' project?"

@@ -1,17 +1,17 @@
 // ///////////////////////////////////////////////////////////////////////////////////////
 // dashboard - onload stuff
-$(document).ready(function() {
+$(document).ready(function () {
 	// page localization
 	loadLang();
 	// /////////////////////////////////////////
 	// LOAD PROJECTS
 	var userRights = "user"
-//	if (userData.right == "admin") {
-		// build datepicker
-		buildRangeDate();
-		// build datepicker
-		buildGraph();
-//	} 
+	//	if (userData.right == "admin") {
+	// build datepicker
+	buildRangeDate();
+	// build datepicker
+	buildGraph();
+	//	} 
 	// splash current URL param into download link
 	$("#link-donwload-xls-file").attr("href", $("#link-donwload-xls-file").attr("href") + document.location.search.replace("?page=statistics", ""))
 	if (getUrlParameter("from") === undefined) {
@@ -26,7 +26,7 @@ $(document).ready(function() {
 /**
  * 
  */
-function buildRangeDate () {
+function buildRangeDate() {
 	if (getUrlParameter("from") !== undefined) {
 		$("#range-date-start").val(getUrlParameter("from"));
 	} else {
@@ -37,11 +37,11 @@ function buildRangeDate () {
 	} else {
 		$("#range-date-end").val(today);
 	}
-	$(document).ready(function(){
+	$(document).ready(function () {
 		$('.datepicker').datepicker();
 	});
 }
-$('#range-date-update').bind("click", function(e) { 
+$('#range-date-update').bind("click", function (e) {
 	reloadPage();
 });
 
@@ -52,10 +52,10 @@ function reloadPage() {
 	var newLocation = "?page=statistics";
 	// date filter
 	if ($("#range-date-start").val() != "") {
-		newLocation += '&from=' + $("#range-date-start").val() ;
+		newLocation += '&from=' + $("#range-date-start").val();
 	}
 	if ($("#range-date-end").val() != "") {
-		newLocation += '&to=' + $("#range-date-end").val() ;
+		newLocation += '&to=' + $("#range-date-end").val();
 	}
 	document.location = newLocation;
 }
@@ -66,18 +66,20 @@ function reloadPage() {
 function buildGraph() {
 	var from = $("#range-date-start").val();
 	var to = $("#range-date-end").val();
-	setTimeout(function() {buildTabPFxStatus(from, to)}, 10);
-	setTimeout(function() {buildLaboTypeChart(from, to)}, 20);
-	setTimeout(function() {buildCopartnerChart(from, to)}, 30);
-	setTimeout(function() {buildDemandsChart(from, to)}, 40);
-	setTimeout(function() {buildTargetedChart(from, to)}, 60);
-	setTimeout(function() {buildSampleNbChart(from, to)}, 70);
-	setTimeout(function() {buildFinancialChart(from, to)}, 80);
-	setTimeout(function() {buildUserLaboTypeChart(from, to)}, 90);
-	setTimeout(function() {buildExtraLaboTypeChart(from, to)}, 100);
+	setTimeout(function () { buildTabPFxStatus(from, to) }, 10);
+	setTimeout(function () { buildLaboTypeChart(from, to) }, 20);
+	setTimeout(function () { buildCopartnerChart(from, to) }, 30);
+	setTimeout(function () { buildDemandsChart(from, to) }, 40);
+	setTimeout(function () { buildTargetedChart(from, to) }, 60);
+	setTimeout(function () { buildSampleNbChart(from, to) }, 70);
+	setTimeout(function () { buildFinancialChart(from, to) }, 80);
+	setTimeout(function () { buildUserLaboTypeChart(from, to) }, 90);
+	setTimeout(function () { buildExtraLaboTypeChart(from, to) }, 100);
 	// Rolin one request: new charts awaken 
-	setTimeout(function() {buildThematicChart(from, to)}, 110);
-	setTimeout(function() {buildSubThematicChart(from, to)}, 120);
+	setTimeout(function () { buildThematicChart(from, to) }, 110);
+	setTimeout(function () { buildSubThematicChart(from, to) }, 120);
+	// mama#46 - funding source graph
+	setTimeout(function () { buildFundingSourcesChart(from, to) }, 130);
 }
 
 /**
@@ -87,19 +89,16 @@ function buildTabPFxStatus(from, to) {
 	// init - get list of PF
 	var listOfMthPF = [];
 	$.ajax({
-		type : "get",
-		url : "ajax/ajax_proxypass.php?verbe=get&resource=mth-platforms&order=asc",
-		dataType : "json",
-		async : false,
-		success : function(mthPlatforms) {
-//			if (!(mthPlatforms.hasOwnProperty('success') && mthPlatforms.success == false)) {
-//			} else {
+		type: "get",
+		url: "ajax/ajax_proxypass.php?verbe=get&resource=mth-platforms&order=asc",
+		dataType: "json",
+		async: false,
+		success: function (mthPlatforms) {
 			listOfMthPF = (mthPlatforms);
-//			}
 		},
-		error : function(xhr) { console.log(xhr); }
+		error: function (xhr) { console.log(xhr); }
 	});
-	
+
 	console.log(listOfMthPF);
 	// for each PF" count project group by status
 	$("#statsPjPFxStatus").empty();
@@ -112,42 +111,42 @@ function buildTabPFxStatus(from, to) {
 	var superSumRunning = 0;
 	var superSumBlocked = 0;
 	var superSumArchived = 0;
-	$.each(listOfMthPF, function(k, v) {
+	$.each(listOfMthPF, function (k, v) {
 		var pfName = v.name;
 		var pfId = v.id;
-		var dataTmp = (getNbOf(from, to, "isPlatForm="+pfId+"&group=status"))[0];
+		var dataTmp = (getNbOf(from, to, "isPlatForm=" + pfId + "&group=status"))[0];
 		// {"projects_count":3,"projects_status":0},{"projects_count":1,"projects_status":10},{"projects_count":1,"projects_status":30},{"projects_count":1,"projects_status":40}
-//		console.log("dataTmp:", dataTmp)
+		//		console.log("dataTmp:", dataTmp)
 		// {projects_count: 1, rejected: 0, waiting: 0, assigned: 0, completed: 0…}
 		var tabSortedDat = dataTmp;
-		var sum = tabSortedDat ['rejected'] + tabSortedDat ['assigned'] + tabSortedDat ['accepted'] + tabSortedDat ['completed'] + tabSortedDat ['running'] ;
-		sum += tabSortedDat ['blocked'] + tabSortedDat ['archived'] + tabSortedDat ['waiting'];
+		var sum = tabSortedDat['rejected'] + tabSortedDat['assigned'] + tabSortedDat['accepted'] + tabSortedDat['completed'] + tabSortedDat['running'];
+		sum += tabSortedDat['blocked'] + tabSortedDat['archived'] + tabSortedDat['waiting'];
 		superSum += sum;
 		tabSortedDat['total'] = sum;
 		var newTabLine = '<tr>';
 		newTabLine += '<td>' + pfName + '</td>';
-		newTabLine += '<td>'+tabSortedDat['rejected']+'</td>';
-		newTabLine += '<td>'+tabSortedDat['waiting']+'</td>';
-		newTabLine += '<td>'+tabSortedDat['assigned']+'</td>';
-		newTabLine += '<td>'+tabSortedDat['completed']+'</td>';
-		newTabLine += '<td>'+tabSortedDat['accepted']+'</td>';
-		newTabLine += '<td>'+tabSortedDat['running']+'</td>';
-		newTabLine += '<td>'+tabSortedDat['blocked']+'</td>';
-		newTabLine += '<td>'+tabSortedDat['archived']+'</td>';
-		newTabLine += '<td>'+tabSortedDat['total']+'</td>';
+		newTabLine += '<td>' + tabSortedDat['rejected'] + '</td>';
+		newTabLine += '<td>' + tabSortedDat['waiting'] + '</td>';
+		newTabLine += '<td>' + tabSortedDat['assigned'] + '</td>';
+		newTabLine += '<td>' + tabSortedDat['completed'] + '</td>';
+		newTabLine += '<td>' + tabSortedDat['accepted'] + '</td>';
+		newTabLine += '<td>' + tabSortedDat['running'] + '</td>';
+		newTabLine += '<td>' + tabSortedDat['blocked'] + '</td>';
+		newTabLine += '<td>' + tabSortedDat['archived'] + '</td>';
+		newTabLine += '<td>' + tabSortedDat['total'] + '</td>';
 		newTabLine += '</tr>';
 		$("#statsPjPFxStatus").append(newTabLine);
 	});
 
-//	$("#statsPjPFxStatus").append("TODO: NONE line");
+	//	$("#statsPjPFxStatus").append("TODO: NONE line");
 	// NONE
 	var dataTmp = (getNbOf(from, to, "&isStatus=&isNotStatus=&group=status"))[0];
 	var sum = 0;
 	var tabSortedDat = dataTmp;
-	var sum = tabSortedDat ['rejected'] + tabSortedDat ['assigned'] + tabSortedDat ['accepted'] + tabSortedDat ['completed'] + tabSortedDat ['running'] ;
-	sum += tabSortedDat ['blocked'] + tabSortedDat ['archived'] + tabSortedDat ['waiting'];
+	var sum = tabSortedDat['rejected'] + tabSortedDat['assigned'] + tabSortedDat['accepted'] + tabSortedDat['completed'] + tabSortedDat['running'];
+	sum += tabSortedDat['blocked'] + tabSortedDat['archived'] + tabSortedDat['waiting'];
 	tabSortedDat['total'] = sum;
-	
+
 	/// NONE PF (grumpf)
 	var rawRejected = (getNbOf(from, to, "isStatus=rejected&isNotStatus=&group=mthPF"));
 	var rawWaiting = (getNbOf(from, to, "isStatus=waiting&isNotStatus=&group=mthPF"));
@@ -165,42 +164,44 @@ function buildTabPFxStatus(from, to) {
 	var noPfRunning = extractFromRaw(rawRunning);
 	var noPfBlocked = extractFromRaw(rawBlocked);
 	var noPfArchived = extractFromRaw(rawArchived);
-	var sumNoPf = (noPfRejected +noPfWaiting+noPfAssigned+noPfAccepted+noPfCompleted+noPfRunning+noPfBlocked+noPfArchived);
+	var sumNoPf = (noPfRejected + noPfWaiting + noPfAssigned + noPfAccepted + noPfCompleted + noPfRunning + noPfBlocked + noPfArchived);
 	var newTabLine = '<tr>';
 	newTabLine += '<td><span style="display: none">ź</span>NONE</td>';
-	newTabLine += '<td>'+(noPfRejected)+'</td>';
-	newTabLine += '<td>'+(noPfWaiting)+'</td>';
-	newTabLine += '<td>'+(noPfAssigned)+'</td>';
-	newTabLine += '<td>'+(noPfCompleted)+'</td>';
-	newTabLine += '<td>'+(noPfAccepted)+'</td>';
-	newTabLine += '<td>'+(noPfRunning)+'</td>';
-	newTabLine += '<td>'+(noPfBlocked)+'</td>';
-	newTabLine += '<td>'+(noPfArchived)+'</td>';
-	newTabLine += '<td>'+(sumNoPf)+'</td>';
+	newTabLine += '<td>' + (noPfRejected) + '</td>';
+	newTabLine += '<td>' + (noPfWaiting) + '</td>';
+	newTabLine += '<td>' + (noPfAssigned) + '</td>';
+	newTabLine += '<td>' + (noPfCompleted) + '</td>';
+	newTabLine += '<td>' + (noPfAccepted) + '</td>';
+	newTabLine += '<td>' + (noPfRunning) + '</td>';
+	newTabLine += '<td>' + (noPfBlocked) + '</td>';
+	newTabLine += '<td>' + (noPfArchived) + '</td>';
+	newTabLine += '<td>' + (sumNoPf) + '</td>';
 	newTabLine += '</tr>';
 	$("#statsPjPFxStatus").append(newTabLine);
 	// TOTAL
 	var totalTabLine = '<tr>';
 	totalTabLine += '<td>Total</td>';
-	totalTabLine += '<td>'+(tabSortedDat['rejected'])+'</td>';
-	totalTabLine += '<td>'+(tabSortedDat['waiting'])+'</td>';
-	totalTabLine += '<td>'+(tabSortedDat['assigned'])+'</td>';
-	totalTabLine += '<td>'+(tabSortedDat['completed'])+'</td>';
-	totalTabLine += '<td>'+(tabSortedDat['accepted'])+'</td>';
-	totalTabLine += '<td>'+(tabSortedDat['running'])+'</td>';
-	totalTabLine += '<td>'+(tabSortedDat['blocked'])+'</td>';
-	totalTabLine += '<td>'+(tabSortedDat['archived'])+'</td>';
-	totalTabLine += '<td>'+(tabSortedDat['total'])+'</td>';
+	totalTabLine += '<td>' + (tabSortedDat['rejected']) + '</td>';
+	totalTabLine += '<td>' + (tabSortedDat['waiting']) + '</td>';
+	totalTabLine += '<td>' + (tabSortedDat['assigned']) + '</td>';
+	totalTabLine += '<td>' + (tabSortedDat['completed']) + '</td>';
+	totalTabLine += '<td>' + (tabSortedDat['accepted']) + '</td>';
+	totalTabLine += '<td>' + (tabSortedDat['running']) + '</td>';
+	totalTabLine += '<td>' + (tabSortedDat['blocked']) + '</td>';
+	totalTabLine += '<td>' + (tabSortedDat['archived']) + '</td>';
+	totalTabLine += '<td>' + (tabSortedDat['total']) + '</td>';
 	totalTabLine += '</tr>';
 	$("#statsPjPFxStatusFooter").empty();
 	$("#statsPjPFxStatusFooter").append(totalTabLine);
 	$("#statsPjPFxStatusTable").tablesorter();
+	// mama#33 - add new indicator
+	$("#span-count-nb-rejected-projects").html(tabSortedDat['rejected']);
 }
 
-function extractFromRaw (json) {
-	if ( (json[0]) !== undefined && (json[0]).pf_ids === null) {
+function extractFromRaw(json) {
+	if ((json[0]) !== undefined && (json[0]).pf_ids === null) {
 		return (json[0]).projects_count;
-	} else if ( (json).pf_ids === null ) {
+	} else if ((json).pf_ids === null) {
 		return (json).projects_count;
 	}
 	return 0;
@@ -209,46 +210,46 @@ function extractFromRaw (json) {
 /**
  * 
  */
-function buildUserLaboTypeChart (from, to) {
+function buildUserLaboTypeChart(from, to) {
 	var data = (getNbOf(from, to, "&group=laboratory", "users-statistics"))[0];
-//	{users_count: 4, u_labo_public: 2, u_labo_private: 0, u_labo_public_private: 2}
+	//	{users_count: 4, u_labo_public: 2, u_labo_private: 0, u_labo_public_private: 2}
 	var series = [{
-        name: "Laboratory",
-        colorByPoint: true,
-        data: [{
-            name: "Private",
-            y: data.u_labo_private
-        },{
-            name: "Public",
-            y: data.u_labo_public
-        },{
-            name: "Public / Private",
-            y: data.u_labo_public_private
-        }]
-    }];
+		name: "Laboratory",
+		colorByPoint: true,
+		data: [{
+			name: "Private",
+			y: data.u_labo_private
+		}, {
+			name: "Public",
+			y: data.u_labo_public
+		}, {
+			name: "Public / Private",
+			y: data.u_labo_public_private
+		}]
+	}];
 	buildGenericPie('#container-pie-usersLabo', ' active users laboratories profiles ', series);
 }
 
 /**
  * 
  */
-function buildExtraLaboTypeChart (from, to) {
+function buildExtraLaboTypeChart(from, to) {
 	var data = (getNbOf(from, to, "&group=laboratory", "extra-data-statistics"))[0];
-//	{users_count: 4, u_labo_public: 2, u_labo_private: 0, u_labo_public_private: 2}
+	//	{users_count: 4, u_labo_public: 2, u_labo_private: 0, u_labo_public_private: 2}
 	var series = [{
-        name: "Laboratory",
-        colorByPoint: true,
-        data: [{
-            name: "Private",
-            y: data.e_labo_private
-        },{
-            name: "Public",
-            y: data.e_labo_public
-        },{
-            name: "Public / Private",
-            y: data.e_labo_public_private
-        }]
-    }];
+		name: "Laboratory",
+		colorByPoint: true,
+		data: [{
+			name: "Private",
+			y: data.e_labo_private
+		}, {
+			name: "Public",
+			y: data.e_labo_public
+		}, {
+			name: "Public / Private",
+			y: data.e_labo_public_private
+		}]
+	}];
 	buildGenericPie('#container-pie-extraLabo', ' projects laboratories profiles ', series);
 }
 
@@ -256,24 +257,24 @@ function buildExtraLaboTypeChart (from, to) {
  * 
  */
 function buildLaboTypeChart(from, to) {
-//	isStatus=waiting,accepted,assigned,archived&isOwner=public_private
+	//	isStatus=waiting,accepted,assigned,archived&isOwner=public_private
 	var nbPublic = (getNbOf(from, to, "isStatus=waiting,accepted,assigned,completed,running,archived&isOwner=public"))[0].projects_count;
 	var nbPrivate = (getNbOf(from, to, "isStatus=waiting,accepted,assigned,completed,running,archived&isOwner=private"))[0].projects_count;
 	var nbPublicPrivate = (getNbOf(from, to, "isStatus=waiting,accepted,assigned,completed,running,archived&isOwner=public_private"))[0].projects_count;
 	var series = [{
-        name: "Laboratory",
-        colorByPoint: true,
-        data: [{
-            name: "Private",
-            y: nbPrivate
-        },{
-            name: "Public",
-            y: nbPublic
-        },{
-            name: "Public / Private",
-            y: nbPublicPrivate
-        }]
-    }];
+		name: "Laboratory",
+		colorByPoint: true,
+		data: [{
+			name: "Private",
+			y: nbPrivate
+		}, {
+			name: "Public",
+			y: nbPublic
+		}, {
+			name: "Public / Private",
+			y: nbPublicPrivate
+		}]
+	}];
 	buildGenericPie('#container-pie-laboratory', ' project\'s laboratories profiles ', series);
 }
 
@@ -286,19 +287,19 @@ function buildCopartnerChart(from, to) {
 	var coPartNOPE = rawData.can_not_be_fwd;
 	var coPartUNDEF = rawData.undef;
 	var series = [{
-        name: "Forward",
-        colorByPoint: true,
-        data: [{
-            name: "Can be Fwd",
-            y: coPartYES
-        },{
-            name: "Can't be Fwd",
-            y: coPartNOPE
-        },{
-            name: "Undefinded",
-            y: coPartUNDEF
-        }]
-    }];
+		name: "Forward",
+		colorByPoint: true,
+		data: [{
+			name: "Can be Fwd",
+			y: coPartYES
+		}, {
+			name: "Can't be Fwd",
+			y: coPartNOPE
+		}, {
+			name: "Undefinded",
+			y: coPartUNDEF
+		}]
+	}];
 	buildGenericPie('#container-pie-copartner', ' can be forwarded to Copartner ', series);
 }
 
@@ -315,28 +316,28 @@ function buildDemandsChart(from, to) {
 	var data_proc = rawData.dt__data_proc;
 	var other = rawData.dt__other;
 	var series = [{
-        name: "Demands",
-        colorByPoint: true,
-        data: [{
-            name: "Equipment provisioning",
-            y: eqprov
-        },{
-            name: "Catalog allowance - lab routine",
-            y: catallo
-        },{
-            name: "feasibility study - R & D",
-            y: feastu
-        },{
-            name: "Training",
-            y: train
-        },{
-            name: "Data processing",
-            y: data_proc
-        },{
-            name: "Other",
-            y: other
-        }]
-    }];
+		name: "Demands",
+		colorByPoint: true,
+		data: [{
+			name: "Equipment provisioning",
+			y: eqprov
+		}, {
+			name: "Catalog allowance - lab routine",
+			y: catallo
+		}, {
+			name: "feasibility study - R & D",
+			y: feastu
+		}, {
+			name: "Training",
+			y: train
+		}, {
+			name: "Data processing",
+			y: data_proc
+		}, {
+			name: "Other",
+			y: other
+		}]
+	}];
 	buildGenericPie('#container-pie-demand', ' Demand type ', series);
 }
 
@@ -350,19 +351,19 @@ function buildTargetedChart(from, to) {
 	var targetedNOPE = rawData.is_NOT_targeted;
 	var targetedUNDEF = rawData.undef;
 	var series = [{
-        name: "Targeted",
-        colorByPoint: true,
-        data: [{
-            name: "targeted",
-            y: targetedYES
-        },{
-            name: "untargeted",
-            y: targetedNOPE
-        },{
-            name: "undefined",
-            y: targetedUNDEF
-        }]
-    }];
+		name: "Targeted",
+		colorByPoint: true,
+		data: [{
+			name: "targeted",
+			y: targetedYES
+		}, {
+			name: "untargeted",
+			y: targetedNOPE
+		}, {
+			name: "undefined",
+			y: targetedUNDEF
+		}]
+	}];
 	buildGenericPie('#container-pie-targeted', ' Targeted ', series);
 }
 
@@ -378,25 +379,25 @@ function buildSampleNbChart(from, to) {
 	var sampleNb_more_501 = rawData['more_501'];
 	var sampleNb_undef = rawData['undef'];
 	var series = [{
-        name: "sampleNb",
-        colorByPoint: true,
-        data: [{
-            name: "50 or less",
-            y: sampleNb_less50
-        },{
-            name: "51  to 100",
-            y: sampleNb_51_to_100
-        },{
-            name: "101 to 500",
-            y: sampleNb_101_to_500
-        },{
-            name: "more than 501",
-            y: sampleNb_more_501
-        },{
-            name: "undefined",
-            y: sampleNb_undef
-        }]
-    }];
+		name: "sampleNb",
+		colorByPoint: true,
+		data: [{
+			name: "50 or less",
+			y: sampleNb_less50
+		}, {
+			name: "51  to 100",
+			y: sampleNb_51_to_100
+		}, {
+			name: "101 to 500",
+			y: sampleNb_101_to_500
+		}, {
+			name: "more than 501",
+			y: sampleNb_more_501
+		}, {
+			name: "undefined",
+			y: sampleNb_undef
+		}]
+	}];
 	buildGenericPie('#container-pie-sampleNb', ' Sample Number ', series);
 }
 
@@ -411,58 +412,58 @@ function buildFinancialChart(from, to) {
 	var funding_ownsupply = rawData.f__ownsupply;
 	var funding_notfinanced = rawData.f__notfinanced;
 	var series = [{
-        name: "funding",
-        colorByPoint: true,
-        data: [{
-            name: "financed",
-            y: funding_financed
-        },{
-            name: "provisioning",
-            y: funding_provisioning
-        },{
-            name: "on own supply",
-            y: funding_ownsupply
-        },{
-            name: "Not financed",
-            y: funding_notfinanced
-        }]
-    }];
+		name: "funding",
+		colorByPoint: true,
+		data: [{
+			name: "financed",
+			y: funding_financed
+		}, {
+			name: "provisioning",
+			y: funding_provisioning
+		}, {
+			name: "on own supply",
+			y: funding_ownsupply
+		}, {
+			name: "Not financed",
+			y: funding_notfinanced
+		}]
+	}];
 	buildGenericPie('#container-pie-funding', ' Funding ', series);
 }
 
 /**
  * 
  */
-function buildThematicChart (from, to) {
+function buildThematicChart(from, to) {
 	var data = (getNbOf(from, to, "&group=keywords&isStatus=waiting,accepted,assigned,completed,running,archived", "projects-statistics"));
 	var dataSeries = [];
-	$.each(data, function(k, v) {
+	$.each(data, function (k, v) {
 		if (v.tw_words !== null)
-			dataSeries.push({"name": v.tw_words, "y": v.projects_count });
-	});	
+			dataSeries.push({ "name": v.tw_words, "y": v.projects_count });
+	});
 	var series = [{
-        name: "Thematic keyword",
-        colorByPoint: true,
-        data: dataSeries
-    }];
+		name: "Thematic keyword",
+		colorByPoint: true,
+		data: dataSeries
+	}];
 	buildGenericPie('#container-pie-thematic', ' Project thematic repartition ', series);
 }
 
 /**
  * 
  */
-function buildSubThematicChart (from, to) {
+function buildSubThematicChart(from, to) {
 	var data = (getNbOf(from, to, "&group=subkeywords&isStatus=waiting,accepted,assigned,completed,running,archived", "projects-statistics"));
 	var dataSeries = [];
-	$.each(data, function(k, v) {
+	$.each(data, function (k, v) {
 		if (v.tw_words !== null)
-			dataSeries.push({"name": v.tw_words, "y": v.projects_count });
-	});	
+			dataSeries.push({ "name": v.tw_words, "y": v.projects_count });
+	});
 	var series = [{
-        name: "Sub-thematic keyword",
-        colorByPoint: true,
-        data: dataSeries
-    }];
+		name: "Sub-thematic keyword",
+		colorByPoint: true,
+		data: dataSeries
+	}];
 	buildGenericPie('#container-pie-subthematic', ' Project sub-thematic repartition ', series);
 }
 
@@ -476,16 +477,16 @@ function getNbOf(from, to, filtersAndGroup, resource) {
 		resource2 = 'projects-statistics';
 	}
 	$.ajax({
-		type : "get",
-		url : "ajax/ajax_proxypass.php?verbe=get&resource="+resource2+"&from=" + from + "&to=" + to + "&" + filtersAndGroup,
-		dataType : "json",
-		async : false,
-		success : function(stat) {
+		type: "get",
+		url: "ajax/ajax_proxypass.php?verbe=get&resource=" + resource2 + "&from=" + from + "&to=" + to + "&" + filtersAndGroup,
+		dataType: "json",
+		async: false,
+		success: function (stat) {
 			if (!(stat.hasOwnProperty('success') && stat.success == false)) {
 				retData = stat;
 			}
 		},
-		error : function(xhr) {
+		error: function (xhr) {
 			console.log(xhr);
 		}
 	});
@@ -497,33 +498,201 @@ function getNbOf(from, to, filtersAndGroup, resource) {
  */
 function buildGenericPie(_pie_target, _pie_title, _pie_series) {
 	$(_pie_target).highcharts({
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
-        title: {
-            text: _pie_title
-        },
-        tooltip: {
-            pointFormat: '<b>{point.percentage:.2f}%</b> ({point.y})',
-            useHTML: true
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: true,
-                    format: '<b>{point.name}</b>: {point.percentage:.1f}% ({point.y})',
-                    style: {
-                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                    },
-                    useHTML: true
-                }
-            }
-        },
-        series: _pie_series
-    });
+		chart: {
+			plotBackgroundColor: null,
+			plotBorderWidth: null,
+			plotShadow: false,
+			type: 'pie'
+		},
+		title: {
+			text: _pie_title
+		},
+		tooltip: {
+			pointFormat: '<b>{point.percentage:.2f}%</b> ({point.y})',
+			useHTML: true
+		},
+		plotOptions: {
+			pie: {
+				allowPointSelect: true,
+				cursor: 'pointer',
+				dataLabels: {
+					enabled: true,
+					format: '<b>{point.name}</b>: {point.percentage:.1f}% ({point.y})',
+					style: {
+						color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+					},
+					useHTML: true
+				}
+			}
+		},
+		series: _pie_series
+	});
+}
+///////////////////////////////////////////////////////////////////////////////
+var _start_pj_display = 0;
+var _max_pj_display = 20;
+function openStatsRejectedProjects() {
+	// init
+	var dateStart = $("#range-date-start").val();
+	var dateEnd = $("#range-date-end").val();
+	_start_pj_display = 0;
+	$("#tab-stats-pj-rejected tbody").empty();
+	// render - dates
+	$("#_stats_pj_rejected_date_start").html(dateStart);
+	$("#_stats_pj_rejected_date_end").html(dateEnd);
+	// render - dnl button
+	$("#btn-stats-rejected-projects-xls-dnl").attr("href", //
+		$("#btn-stats-rejected-projects-xls-dnl").attr("href") +//
+		document.location.search.replace("?page=statistics", "") +//
+		"&status=rejected" +//
+		"&from=" + dateStart +//
+		"&to=" + dateEnd //
+	)
+	// load modal content
+	showStatsRejectedProjects();
+}
+function showStatsRejectedProjects() {
+	// init
+	var dateStart = $("#range-date-start").val();
+	var dateEnd = $("#range-date-end").val();
+	// load projects
+	var verbe = "get";
+	var resource = "projects";
+	// http://localhost/mama-webapp/ajax/ajax_proxypass.php?verbe=get&resource=projects&start=0&limit=20&status=rejected&pj_owner=&pj_manager=&pj_analysts=&from=2021-08-29&to=2021-10-09&order=desc
+	// run
+	$.ajax({
+		type: "get",
+		url: "ajax/ajax_proxypass.php?verbe=" + verbe
+			+ "&resource=" + resource,
+		dataType: "json",
+		data: "start=" + _start_pj_display +//
+			"&limit=" + _max_pj_display +//
+			"&status=rejected" + //
+			"&from=" + dateStart +//
+			"&to=" + dateEnd +//
+			"&order=asc",
+		async: true,
+		success: function (projects) {
+			if ((projects).hasOwnProperty("success") && projects.success == false) {
+				return false;
+			}
+			// rended - content
+			$.each(projects, function (k, project) {
+				// console.log("project", project);
+				// mthPlatforms / name
+				var plateforms = "";
+				$.each(project.mthPlatforms, function (k2, plateform) {
+					plateforms += '<span class="demandTypeEqProvisioning label label-default label-space" style="display: inline;">' +//
+						plateform.name + //
+						'</span>';
+				});
+				// analysisRequestExtraData / rejectedReason + stoppedReason
+				var rejectedReason = "<code>";
+				if (project.analysisRequestExtraData) {
+					switch (project.analysisRequestExtraData.rejectedReason) {
+						case "too_expensive":
+							rejectedReason += (_modal_stopProject_rejectedSelect_opt_expensive);
+							break;
+						case "too_long_delays":
+							rejectedReason += (_modal_stopProject_rejectedSelect_opt_delays);
+							break;
+						case "outside_our_skill_sphere":
+							rejectedReason += (_modal_stopProject_rejectedSelect_opt_outside_our_skill);
+							break;
+						case "non_prioritary_rad":
+							rejectedReason += (_modal_stopProject_rejectedSelect_opt_non_prioritary);
+							break;
+						case "incompatible_deadline":
+							rejectedReason += (_modal_stopProject_rejectedSelect_opt_incompatible_deadline);
+							break;
+						case "too_many_samples":
+							rejectedReason += (_modal_stopProject_rejectedSelect_opt_too_many_samples);
+							break;
+						case "transfered_to_privilegied_mth_partner":
+							rejectedReason += (_modal_stopProject_rejectedSelect_opt_transfered_to_privilegied);
+							break;
+						case "not_funded":
+							rejectedReason += (_modal_stopProject_rejectedSelect_opt_not_funded);
+							break;
+						case "saved_twice":
+							rejectedReason += (_modal_stopProject_rejectedSelect_opt_saved_twice);
+							break;
+					}
+				}
+				rejectedReason += "</code>";
+				var line = '<tr><td><a href="?page=edit-project&editProject=' + project.id + '">' + project.idLong + '</a></td>' +//
+					'<td>' + project.title + '</td>' +//
+					'<td>' + plateforms + '</td>' +//
+					'<td>' + rejectedReason + '</td></tr>';
+				$("#tab-stats-pj-rejected tbody").append(line);
+			});
+			// compute next range
+			_start_pj_display += _max_pj_display;
+			// render - buttons
+			if (projects.length === _max_pj_display) {
+				// show 'show more' button
+				$("#btn-show-more-rejected-project").show();
+			} else {
+				// hide 'show more' button
+				$("#btn-show-more-rejected-project").hide();
+			}
+			// show
+			$('#statsProjectsModal').modal('show');
+		},
+		error: function (xhr) {
+			console.log(xhr);
+			// TODO show error message info
+		}
+	});
+}
+///////////////////////////////////////////////////////////////////////////////
+
+// new mama#47
+/**
+ * 
+ */
+function buildFundingSourcesChart(from, to) {
+	var rawData = getNbOf(from, to, "isStatus=waiting,accepted,assigned,completed,running,archived&group=financial_type")[0];
+	// [{"projects_count":9,"less_50":1,"51_to_100":3,"101_to_500":1,"more_501":1}]
+	var funding_source_eu = rawData.fs__eu;
+	var funding_source_anr = rawData.fs__anr;
+	var funding_source_national = rawData.fs__national;
+	var funding_source_regional = rawData.fs__regional;
+
+	var funding_source_compagny_tutorship = rawData.fs__compagny_tutorship;
+	var funding_source_international_outside_eu = rawData.fs__international_outside_eu;
+	var funding_source_own_resources_laboratory = rawData.fs__own_resources_laboratory;
+	var funding_source_other = rawData.fs__other;
+
+
+	var series = [{
+		name: "funding sources",
+		colorByPoint: true,
+		data: [{
+			name: "EU",
+			y: funding_source_eu
+		}, {
+			name: "ANR",
+			y: funding_source_anr
+		}, {
+			name: "National",
+			y: funding_source_national
+		}, {
+			name: "Regional",
+			y: funding_source_regional
+		}, {
+			name: "Compagny Tutorship",
+			y: funding_source_compagny_tutorship
+		}, {
+			name: "International Outside EU",
+			y: funding_source_international_outside_eu
+		}, {
+			name: "Own Resources Laboratory",
+			y: funding_source_own_resources_laboratory
+		}, {
+			name: "Other",
+			y: funding_source_other
+		}]
+	}];
+	buildGenericPie('#container-pie-financial_type', ' Fundings sources ', series);
 }

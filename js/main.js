@@ -160,6 +160,10 @@ function loadLang() {
 	$.each($(".lang[placeholder]"), function() {
 		$(this).attr("placeholder", window[$(this).prop('lang')]);
 	});
+	// placeholder
+	$.each($(".lang[title]"), function() {
+		$(this).attr("title", window[$(this).prop('lang')]);
+	});
 	$.each($(".lang-class"), function() {
 		$($(this)).html(window[$($(this)).attr("class").replace("lang-class","").replace(".","").replace(" ","")]);
 	});

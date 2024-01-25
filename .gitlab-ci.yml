@@ -9,7 +9,7 @@ variables:
   # SSH / SCP
   SSH_OPTS: " -q -t "
   SSH_USER: "gitlab-bot"
-  SSH_HOST: "147.99.132.187"
+  SSH_HOST: "pfem-lindev.ara.inrae.fr"
   # cache
   IMAGE_FILE: "mama-webapp.image"
   CACHE_BASH: "/tmp/gitlab-ci-cache"
@@ -24,6 +24,10 @@ build docker image:
   stage: docker_env
   tags:
     - bash
+  except:
+    refs:
+      - master
+      - tags
   before_script:
     - echo "==================================";
     - echo "[info] set config. files ";
@@ -46,6 +50,10 @@ copy to dev:
   tags:
     - docker
   image: $DOCKER_IMAGE
+  except:
+    refs:
+      - master
+      - tags
   before_script:
     - mkdir -p ~/.ssh
     - eval $(ssh-agent -s)

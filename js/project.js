@@ -265,6 +265,9 @@ function loadProject (projectID) {
 				// project metadata
 				$("#projectMetadata_userFullName").html(project.owner.fullName);
 				$("#projectMetadata_userEmail").html(project.owner.email);
+				// mama#47 - more info about owner
+				$("#projectMetadata_userPhone").html(project.owner.phone);
+				$("#projectMetadata_userAddress").html(project.owner.workplace_address);
 				$("#projectMetadata_createdOn").html(convertJsonDateToHumanReadable(project.created.date) + ".");
 				if (project.updated == null) {
 					$("#projectMetadata_updatedOn").hide();

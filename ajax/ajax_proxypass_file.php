@@ -57,9 +57,10 @@ if ($uploadOk) {
 	echo curl_exec ( $request );
 	// RM TMP FILE
 	unlink ( $target_file );
-	exit ();
 	// close the session
 	curl_close ( $request );
+	// exit
+	exit ();
 } else {
 	// RETURN ERROR
 	echo json_encode ( array (

@@ -55,7 +55,7 @@
 			</div>
 	</td>
 	<td>
-			<select id="involved_${id}" class="multiselect" multiple="multiple">
+			<select id="involved_${id}" class="multiselect multiselect-involved" multiple="multiple">
 				{%each( index, projectManager ) listOfPM %}
 					<option 
 					{%each( index, projectManagerInvolved ) analystsInvolved %}
@@ -79,7 +79,7 @@
 			</div>
 		</td>
 		<td>
-			<select id="involved_${id}" class="multiselect" multiple="multiple">
+			<select id="involved_${id}" class="multiselect multiselect-involved" multiple="multiple">
 				{%each( index, projectManager ) listOfPM %}
 					<option 
 					{%each( index, projectManagerInvolved ) analystsInvolved %}
@@ -92,6 +92,12 @@
 			</select>
 		</td>
 	{%/if%}
+
+	<!-- new mama#35 - display response delay -->
+	<td>
+		<code>${response_delay != null ? response_delay : '-'}</code>
+	</td>
+
 	<td class="nobreakline">
 
 		{%if status == "waiting" %}
