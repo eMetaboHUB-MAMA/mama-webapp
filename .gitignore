@@ -5,3 +5,7 @@
 # .settings/*
 # .settings/org.eclipse.wst.common.project.facet.core.xml
 config/mama-webapp.json
+
+# mama#60 - ignore RNSR generated / updated files;
+# note: update with files with script "tools/update_rnsr_list.php"
+json/list_labs_rnsr*.json

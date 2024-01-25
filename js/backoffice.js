@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // memory usage graph
-$(function() {
+$(function () {
 	var serieCpuLoad1;
 	var serieMemUsed;
 	var lastCPU1 = 0;
@@ -9,47 +9,47 @@ $(function() {
 	var lastRAM = 0;
 
 	$(document).ready(
-		function() {
+		function () {
 			// opt
 			Highcharts.setOptions({
-				global : {
-					useUTC : false
+				global: {
+					useUTC: false
 				}
 			});
 
 			// chart
 			$('#container-update').highcharts({
-				chart : {
-					type : 'spline',
-					animation : Highcharts.svg,
-					events : {
-						load : function() {
+				chart: {
+					type: 'spline',
+					animation: Highcharts.svg,
+					events: {
+						load: function () {
 							serieCpuLoad1 = this.series[0];
 							serieCpuLoad5 = this.series[1];
 							serieCpuLoad15 = this.series[2];
 							serieMemUsed = this.series[3];
-							setInterval(function() {
+							setInterval(function () {
 								// current time
 								var x = (new Date()).getTime();
 								// update
 								var verbe = "get";
 								var resource = "server-load";
 								$.ajax({
-									type : "get",
-									url : "ajax/ajax_proxypass.php?verbe="
-											+ verbe
-											+ "&resource="
-											+ resource,
-									dataType : "json",
-									async : true,
-									data : "",
-									success : function(data) {
-										serieMemUsed.addPoint([x, data['ram'] ], true, true);
-										serieCpuLoad1.addPoint([x, data['cpu-1-min'] ], true, true);
-										serieCpuLoad5.addPoint([x, data['cpu-5-min'] ], true, true);
-										serieCpuLoad15.addPoint([x, data['cpu-15-min'] ], true, true);
+									type: "get",
+									url: "ajax/ajax_proxypass.php?verbe="
+										+ verbe
+										+ "&resource="
+										+ resource,
+									dataType: "json",
+									async: true,
+									data: "",
+									success: function (data) {
+										serieMemUsed.addPoint([x, data['ram']], true, true);
+										serieCpuLoad1.addPoint([x, data['cpu-1-min']], true, true);
+										serieCpuLoad5.addPoint([x, data['cpu-5-min']], true, true);
+										serieCpuLoad15.addPoint([x, data['cpu-15-min']], true, true);
 									},
-									error : function(xhr) {
+									error: function (xhr) {
 										console.log(xhr);
 									}
 								}); // ajax
@@ -57,115 +57,117 @@ $(function() {
 						}//load
 					}
 				},
-				title : {
-					text : 'Server status'
+				title: {
+					text: 'Server status'
 				},
-				xAxis : [ {
-					type : 'datetime',
-					tickPixelInterval : 120
-				} ],
-				yAxis : [ {
-					min : 0,
-					title : {
-						text : 'CPU Usage (%)'
+				xAxis: [{
+					type: 'datetime',
+					tickPixelInterval: 120
+				}],
+				yAxis: [{
+					min: 0,
+					title: {
+						text: 'CPU Usage (%)'
 					},
-					gridLineWidth : 0,
-					opposite : true,
-					plotLines : [ {
-						value : 0,
-						width : 1,
-						color : '#808080'
-					} ]
+					gridLineWidth: 0,
+					opposite: true,
+					plotLines: [{
+						value: 0,
+						width: 1,
+						color: '#808080'
+					}]
 				}, {
-					min : 0,
-					max : 100,
-					title : {
-						text : 'RAM Usage (%)'
+					min: 0,
+					max: 100,
+					title: {
+						text: 'RAM Usage (%)'
 					},
-					gridLineWidth : 0,
-					plotLines : [ {
-						value : 0,
-						width : 1,
-						color : '#808080'
-					} ]
-				} ],
-				tooltip : {
-					formatter : function() {
+					gridLineWidth: 0,
+					plotLines: [{
+						value: 0,
+						width: 1,
+						color: '#808080'
+					}]
+				}],
+				tooltip: {
+					formatter: function () {
 						return '<b>' + this.series.name + '</b><br/>'
-								+ Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x)
-								+ '<br/>'
-								+ Highcharts.numberFormat(this.y, 2)+ "%";
+							+ Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x)
+							+ '<br/>'
+							+ Highcharts.numberFormat(this.y, 2) + "%";
 					}
 				},
-				legend : {
-					enabled : true
+				legend: {
+					enabled: true
 				},
-				exporting : {
-					enabled : false
+				exporting: {
+					enabled: false
 				},
 				// init series
-				series : [{
-					name : 'CPU load <small>(last minute)</small>',
-					yAxis : 0,
-					data : (function() {
+				series: [{
+					name: 'CPU load <small>(last minute)</small>',
+					yAxis: 0,
+					data: (function () {
 						// generate an array of 'flat' data
 						var data = [], time = (new Date()).getTime(), i;
 						for (i = -500; i <= 0; i += 1) {
-							data.push({ x : time + i * 1000, y : 0 });
+							data.push({ x: time + i * 1000, y: 0 });
 						}
 						return data;
 					}())
-				},{
-					name : 'CPU load <small>(last 5 minutes)</small>',
-					yAxis : 0,
-					data : (function() {
+				}, {
+					name: 'CPU load <small>(last 5 minutes)</small>',
+					yAxis: 0,
+					data: (function () {
 						// generate an array of 'flat' data
 						var data = [], time = (new Date()).getTime(), i;
 						for (i = -500; i <= 0; i += 1) {
-							data.push({ x : time + i * 1000, y : 0 });
+							data.push({ x: time + i * 1000, y: 0 });
 						}
 						return data;
 					}())
-				},{
-					name : 'CPU load <small>(last 15 minutes)</small>',
-					yAxis : 0,
-					data : (function() {
+				}, {
+					name: 'CPU load <small>(last 15 minutes)</small>',
+					yAxis: 0,
+					data: (function () {
 						// generate an array of 'flat' data
 						var data = [], time = (new Date()).getTime(), i;
 						for (i = -500; i <= 0; i += 1) {
-							data.push({ x : time + i * 1000, y : 0 });
+							data.push({ x: time + i * 1000, y: 0 });
 						}
 						return data;
 					}())
-				},{
-					name : 'Memory usage',
-					yAxis : 1,
-					data : (function() {
+				}, {
+					name: 'Memory usage',
+					yAxis: 1,
+					data: (function () {
 						// generate an array of 'flat' data
 						var data = [], time = (new Date()).getTime(), i;
 						for (i = -500; i <= 0; i += 1) {
-							data.push({ x : time + i * 1000, y : 0 });
+							data.push({ x: time + i * 1000, y: 0 });
 						}
 						return data;
 					}())
 				}]
+			});
 		});
-	});
 });
 ///////////////////////////////////////////////////////////////////////////////
 //memory usage graph
 
 var keywordTemplateLoaded = false;
 var subKeywordTemplateLoaded = false;
+var managerKeywordTemplateLoaded = false; //mama#66
 var mthPlatformTemplateLoaded = false;
+var mthSubPlatformTemplateLoaded = false; // mama#65
 
 /**
  * load keywords
  */
-loadKeywords = function() {
+loadKeywords = function () {
 	if (!keywordTemplateLoaded) {
-		$.get('templates/keywords-light-list-template.html', function(
-				template) {
+		$.get('templates/keywords-light-list-template.html', function (
+			template) {
 			$('body').append(template);
 			keywordTemplateLoaded = true;
 			loadKeywords();
@@ -178,14 +180,14 @@ loadKeywords = function() {
 		var extraFilter = "&order=asc"
 		// run
 		$.ajax({
-			type : "get",
-			url : "ajax/ajax_proxypass.php?verbe=" + verbe
-					+ "&resource=" + resource + extraFilter,
-			dataType : "json",
-			async : true,
-			success : function(keywords) {
+			type: "get",
+			url: "ajax/ajax_proxypass.php?verbe=" + verbe
+				+ "&resource=" + resource + extraFilter,
+			dataType: "json",
+			async: true,
+			success: function (keywords) {
 				if (keywords.hasOwnProperty('success')
-						&& keywords.success == false) {
+					&& keywords.success == false) {
 					// TODO show error message info
 				} else {
 					if (keywords.length === 0) {
@@ -194,12 +196,12 @@ loadKeywords = function() {
 						keywords.sort(compareKeyworks);
 						$("#noKeywordsToShow").hide();
 						$("#keywords-light-list-template").tmpl(
-								keywords).appendTo(
+							keywords).appendTo(
 								"#keywords-light-list-container");
 					}
 				}
 			},
-			error : function(xhr) {
+			error: function (xhr) {
 				console.log(xhr);
 				// TODO show error message info
 			}
@@ -211,10 +213,10 @@ loadKeywords();
 /**
  * load subkeywords
  */
-loadSubKeywords = function() {
-	if (!keywordTemplateLoaded) {
-		$.get('templates/subkeywords-light-list-template.html', function(
-				template) {
+loadSubKeywords = function () {
+	if (!subKeywordTemplateLoaded) {
+		$.get('templates/subkeywords-light-list-template.html', function (
+			template) {
 			$('body').append(template);
 			subKeywordTemplateLoaded = true;
 			loadSubKeywords();
@@ -227,14 +229,14 @@ loadSubKeywords = function() {
 		var extraFilter = "&order=asc"
 		// run
 		$.ajax({
-			type : "get",
-			url : "ajax/ajax_proxypass.php?verbe=" + verbe
-					+ "&resource=" + resource + extraFilter,
-			dataType : "json",
-			async : true,
-			success : function(keywords) {
+			type: "get",
+			url: "ajax/ajax_proxypass.php?verbe=" + verbe
+				+ "&resource=" + resource + extraFilter,
+			dataType: "json",
+			async: true,
+			success: function (keywords) {
 				if (keywords.hasOwnProperty('success')
-						&& keywords.success == false) {
+					&& keywords.success == false) {
 					// TODO show error message info
 				} else {
 					if (keywords.length === 0) {
@@ -243,12 +245,12 @@ loadSubKeywords = function() {
 						keywords.sort(compareKeyworks);
 						$("#noSubKeywordsToShow").hide();
 						$("#subkeywords-light-list-template").tmpl(
-								keywords).appendTo(
+							keywords).appendTo(
 								"#subkeywords-light-list-container");
 					}
 				}
 			},
-			error : function(xhr) {
+			error: function (xhr) {
 				console.log(xhr);
 				// TODO show error message info
 			}
@@ -260,10 +262,10 @@ loadSubKeywords();
 /**
  * load mthPlatforms
  */
-loadMTHPlatforms = function() {
+loadMTHPlatforms = function () {
 	if (!mthPlatformTemplateLoaded) {
-		$.get('templates/mthPlatforms-light-list-template.html', function(
-				template) {
+		$.get('templates/mthPlatforms-light-list-template.html', function (
+			template) {
 			$('body').append(template);
 			mthPlatformTemplateLoaded = true;
 			loadMTHPlatforms();
@@ -276,14 +278,14 @@ loadMTHPlatforms = function() {
 		var extraFilter = "&order=asc"
 		// run
 		$.ajax({
-			type : "get",
-			url : "ajax/ajax_proxypass.php?verbe=" + verbe
-					+ "&resource=" + resource + extraFilter,
-			dataType : "json",
-			async : true,
-			success : function(mthPlatforms) {
+			type: "get",
+			url: "ajax/ajax_proxypass.php?verbe=" + verbe
+				+ "&resource=" + resource + extraFilter,
+			dataType: "json",
+			async: true,
+			success: function (mthPlatforms) {
 				if (mthPlatforms.hasOwnProperty('success')
-						&& mthPlatforms.success == false) {
+					&& mthPlatforms.success == false) {
 					// TODO show error message info
 				} else {
 					if (mthPlatforms.length === 0) {
@@ -291,12 +293,12 @@ loadMTHPlatforms = function() {
 					} else {
 						$("#noMTHPlatformsToShow").hide();
 						$("#mthPlatforms-light-list-template").tmpl(
-								mthPlatforms).appendTo(
+							mthPlatforms).appendTo(
 								"#mthPlatforms-light-list-container");
 					}
 				}
 			},
-			error : function(xhr) {
+			error: function (xhr) {
 				console.log(xhr);
 				// TODO show error message info
 			}
@@ -308,21 +310,21 @@ loadMTHPlatforms();
 /**
  * add a keyword
  */
-addNewKeyword = function() {
-	if ($("#newKeyword").val() == "") { 
+addNewKeyword = function () {
+	if ($("#newKeyword").val() == "") {
 		return false;
 	}
 	var params = "keyword=" + $("#newKeyword").val();
 	var verbe = "post";
 	var resource = "keyword";
 	$.ajax({
-		type : "post",
-		url : "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
-				+ resource,
-		dataType : "json",
-		async : true,
-		data : params,
-		success : function(data) {
+		type: "post",
+		url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+			+ resource,
+		dataType: "json",
+		async: true,
+		data: params,
+		success: function (data) {
 			// console.log(data);
 			if (data.success) {
 				loadKeywords();
@@ -332,7 +334,7 @@ addNewKeyword = function() {
 				alert("[error] sorry, could not add keyword.")
 			}
 		},
-		error : function(xhr) {
+		error: function (xhr) {
 			console.log(xhr);
 			//
 			alert("[error] sorry, could not add keyword.")
@@ -342,9 +344,8 @@ addNewKeyword = function() {
 }
 
 //bind enter key on create keyword
-$('#newKeyword').bind('keypress', function(e) {
-	var code = e.keyCode || e.which;
-	if (code == 13) {
+$('#newKeyword').on('keypress', function (e) {
+	if (e.key === 'Enter') {
 		addNewKeyword();
 	}
 });
@@ -352,21 +353,21 @@ $('#newKeyword').bind('keypress', function(e) {
 /**
  * add a subkeyword
  */
-addNewSubKeyword = function() {
-	if ($("#newSubKeyword").val() == "") { 
+addNewSubKeyword = function () {
+	if ($("#newSubKeyword").val() == "") {
 		return false;
 	}
 	var params = "keyword=" + $("#newSubKeyword").val();
 	var verbe = "post";
 	var resource = "subkeyword";
 	$.ajax({
-		type : "post",
-		url : "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
-				+ resource,
-		dataType : "json",
-		async : true,
-		data : params,
-		success : function(data) {
+		type: "post",
+		url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+			+ resource,
+		dataType: "json",
+		async: true,
+		data: params,
+		success: function (data) {
 			// console.log(data);
 			if (data.success) {
 				loadSubKeywords();
@@ -376,7 +377,7 @@ addNewSubKeyword = function() {
 				alert("[error] sorry, could not add subkeyword.")
 			}
 		},
-		error : function(xhr) {
+		error: function (xhr) {
 			console.log(xhr);
 			alert("[error] sorry, could not add subkeyword.")
 		}
@@ -385,9 +386,8 @@ addNewSubKeyword = function() {
 }
 
 //bind enter key on create keyword
-$('#newSubKeyword').bind('keypress', function(e) {
-	var code = e.keyCode || e.which;
-	if (code == 13) {
+$('#newSubKeyword').on('keypress', function (e) {
+	if (e.key === 'Enter') {
 		addNewSubKeyword();
 	}
 });
@@ -395,18 +395,18 @@ $('#newSubKeyword').bind('keypress', function(e) {
 /**
  * add a mthPlatform
  */
-addNewMTHPlatform = function() {
+addNewMTHPlatform = function () {
 	var params = "mthPlatform=" + $("#newMTHPlatform").val();
 	var verbe = "post";
 	var resource = "mth-platform";
 	$.ajax({
-		type : "post",
-		url : "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
-				+ resource,
-		dataType : "json",
-		async : true,
-		data : params,
-		success : function(data) {
+		type: "post",
+		url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+			+ resource,
+		dataType: "json",
+		async: true,
+		data: params,
+		success: function (data) {
 			// console.log(data);
 			if (data.success) {
 				loadMTHPlatforms();
@@ -416,7 +416,7 @@ addNewMTHPlatform = function() {
 				alert("[error] sorry, could not add MTH platform.")
 			}
 		},
-		error : function(xhr) {
+		error: function (xhr) {
 			console.log(xhr);
 			//
 			alert("[error] sorry, could not add MTH platform.")
@@ -426,19 +426,17 @@ addNewMTHPlatform = function() {
 }
 
 //bind enter key on create mthPlatform
-$('#newMTHPlatform').bind('keypress', function(e) {
-	var code = e.keyCode || e.which;
-	if (code == 13) {
+$('#newMTHPlatform').on('keypress', function (e) {
+	if (e.key === 'Enter') {
 		addNewMTHPlatform();
 	}
 });
 
-var saveAdminObject = function () {}
+var saveAdminObject = function () { }
 
 //bind enter key on create keyword
-$('#newName').bind('keypress', function(e) {
-	var code = e.keyCode || e.which;
-	if (code == 13) {
+$('#newName').on('keypress', function (e) {
+	if (e.key === 'Enter') {
 		saveAdminObject();
 	}
 });
@@ -446,12 +444,12 @@ $('#newName').bind('keypress', function(e) {
 /**
  * edit a keyword
  */
-editKeyword = function(id, oldKeyword) {
+editKeyword = function (id, oldKeyword) {
 	$("#adminEntity").html(oldKeyword);
 	$("#newName").val("");
 	$("#newName").attr("placeholder", "" + oldKeyword);
 	$("#adminEditEntityModal").modal("show");
-	setTimeout(function() {$("#newName").focus();}, 250);
+	setTimeout(function () { $("#newName").trigger('focus'); }, 250);
 	// rewrite function
 	saveAdminObject = function () {
 		keyword = $("#newName").val();
@@ -462,13 +460,13 @@ editKeyword = function(id, oldKeyword) {
 		var resource = "keyword";
 		var extraGet = "keywordID=" + id;
 		$.ajax({
-			type : "post",
-			url : "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
-					+ resource + "&" + extraGet,
-			dataType : "json",
-			async : true,
-			data : params,
-			success : function(data) {
+			type: "post",
+			url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+				+ resource + "&" + extraGet,
+			dataType: "json",
+			async: true,
+			data: params,
+			success: function (data) {
 				// console.log(data);
 				if (data.success) {
 					loadKeywords();
@@ -478,14 +476,14 @@ editKeyword = function(id, oldKeyword) {
 					alert("[error] sorry, could not edit keyword.")
 				}
 			},
-			error : function(xhr) {
+			error: function (xhr) {
 				console.log(xhr);
 				//
 				alert("[error] sorry, could not edit keyword.")
 			}
 		});
 		$("#adminEditEntityModal").modal("hide");
-		saveAdminObject = function () {}
+		saveAdminObject = function () { }
 		return false;
 	}
 }
@@ -493,12 +491,12 @@ editKeyword = function(id, oldKeyword) {
 /**
  * edit a subkeyword
  */
-editSubKeyword = function(id, oldKeyword) {
+editSubKeyword = function (id, oldKeyword) {
 	$("#adminEntity").html(oldKeyword);
 	$("#newName").val("");
 	$("#newName").attr("placeholder", "" + oldKeyword);
 	$("#adminEditEntityModal").modal("show");
-	setTimeout(function() {$("#newName").focus();}, 250);
+	setTimeout(function () { $("#newName").trigger('focus'); }, 250);
 	// rewrite function
 	saveAdminObject = function () {
 		keyword = $("#newName").val();
@@ -509,13 +507,13 @@ editSubKeyword = function(id, oldKeyword) {
 		var resource = "subkeyword";
 		var extraGet = "keywordID=" + id;
 		$.ajax({
-			type : "post",
-			url : "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
-					+ resource + "&" + extraGet,
-			dataType : "json",
-			async : true,
-			data : params,
-			success : function(data) {
+			type: "post",
+			url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+				+ resource + "&" + extraGet,
+			dataType: "json",
+			async: true,
+			data: params,
+			success: function (data) {
 				// console.log(data);
 				if (data.success) {
 					loadSubKeywords();
@@ -525,13 +523,13 @@ editSubKeyword = function(id, oldKeyword) {
 					alert("[error] sorry, could not edit subkeyword.")
 				}
 			},
-			error : function(xhr) {
+			error: function (xhr) {
 				console.log(xhr);
 				alert("[error] sorry, could not edit subkeyword.")
 			}
 		});
 		$("#adminEditEntityModal").modal("hide");
-		saveAdminObject = function () {}
+		saveAdminObject = function () { }
 		return false;
 	}
 }
@@ -539,12 +537,12 @@ editSubKeyword = function(id, oldKeyword) {
 /**
  * edit a mthPlatform
  */
-editMTHPlatform = function(id, oldMTHPlatform) {
+editMTHPlatform = function (id, oldMTHPlatform) {
 	$("#adminEntity").html(oldMTHPlatform);
 	$("#newName").val("");
 	$("#newName").attr("placeholder", "" + oldMTHPlatform);
 	$("#adminEditEntityModal").modal("show");
-	setTimeout(function() {$("#newName").focus();}, 250);
+	setTimeout(function () { $("#newName").trigger('focus'); }, 250);
 	// rewrite function
 	saveAdminObject = function () {
 		mthPlatform = $("#newName").val();
@@ -555,13 +553,13 @@ editMTHPlatform = function(id, oldMTHPlatform) {
 		var resource = "mth-platform";
 		var extraGet = "mthPlatformID=" + id;
 		$.ajax({
-			type : "post",
-			url : "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
-					+ resource + "&" + extraGet,
-			dataType : "json",
-			async : true,
-			data : params,
-			success : function(data) {
+			type: "post",
+			url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+				+ resource + "&" + extraGet,
+			dataType: "json",
+			async: true,
+			data: params,
+			success: function (data) {
 				// console.log(data);
 				if (data.success) {
 					loadMTHPlatforms();
@@ -571,14 +569,14 @@ editMTHPlatform = function(id, oldMTHPlatform) {
 					alert("[error] sorry, could not edit MTH Platform.")
 				}
 			},
-			error : function(xhr) {
+			error: function (xhr) {
 				console.log(xhr);
 				//
 				alert("[error] sorry, could not edit MTH Platform.")
 			}
 		});
 		$("#adminEditEntityModal").modal("hide");
-		saveAdminObject = function () {}
+		saveAdminObject = function () { }
 		return false;
 	}
 }
@@ -586,19 +584,19 @@ editMTHPlatform = function(id, oldMTHPlatform) {
 /**
  * restore a keyword
  */
-restoreKeyword = function(id) {
+restoreKeyword = function (id) {
 	var params = "deleted=false";
 	var verbe = "put";
 	var resource = "keyword";
 	var extraGet = "keywordID=" + id;
 	$.ajax({
-		type : "post",
-		url : "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
-				+ resource + "&" + extraGet,
-		dataType : "json",
-		async : true,
-		data : params,
-		success : function(data) {
+		type: "post",
+		url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+			+ resource + "&" + extraGet,
+		dataType: "json",
+		async: true,
+		data: params,
+		success: function (data) {
 			// console.log(data);
 			if (data.success) {
 				loadKeywords();
@@ -608,7 +606,7 @@ restoreKeyword = function(id) {
 				alert("[error] sorry, could not edit keyword.")
 			}
 		},
-		error : function(xhr) {
+		error: function (xhr) {
 			console.log(xhr);
 			//
 			alert("[error] sorry, could not edit keyword.")
@@ -620,19 +618,19 @@ restoreKeyword = function(id) {
 /**
  * delete a keyword
  */
-deleteKeyword = function(id) {
+deleteKeyword = function (id) {
 	var params = "deleted=true";
 	var verbe = "put";
 	var resource = "keyword";
 	var extraGet = "keywordID=" + id;
 	$.ajax({
-		type : "post",
-		url : "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
-				+ resource + "&" + extraGet,
-		dataType : "json",
-		async : true,
-		data : params,
-		success : function(data) {
+		type: "post",
+		url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+			+ resource + "&" + extraGet,
+		dataType: "json",
+		async: true,
+		data: params,
+		success: function (data) {
 			// console.log(data);
 			if (data.success) {
 				loadKeywords();
@@ -642,7 +640,7 @@ deleteKeyword = function(id) {
 				alert("[error] sorry, could not edit keyword.")
 			}
 		},
-		error : function(xhr) {
+		error: function (xhr) {
 			console.log(xhr);
 			//
 			alert("[error] sorry, could not edit keyword.")
@@ -654,19 +652,19 @@ deleteKeyword = function(id) {
 /**
  * restore a subkeyword
  */
-restoreSubKeyword = function(id) {
+restoreSubKeyword = function (id) {
 	var params = "deleted=false";
 	var verbe = "put";
 	var resource = "subkeyword";
 	var extraGet = "keywordID=" + id;
 	$.ajax({
-		type : "post",
-		url : "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
-				+ resource + "&" + extraGet,
-		dataType : "json",
-		async : true,
-		data : params,
-		success : function(data) {
+		type: "post",
+		url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+			+ resource + "&" + extraGet,
+		dataType: "json",
+		async: true,
+		data: params,
+		success: function (data) {
 			// console.log(data);
 			if (data.success) {
 				loadSubKeywords();
@@ -676,7 +674,7 @@ restoreSubKeyword = function(id) {
 				alert("[error] sorry, could not edit subkeyword.")
 			}
 		},
-		error : function(xhr) {
+		error: function (xhr) {
 			console.log(xhr);
 			alert("[error] sorry, could not edit subkeyword.")
 		}
@@ -687,19 +685,19 @@ restoreSubKeyword = function(id) {
 /**
  * delete a subkeyword
  */
-deleteSubKeyword = function(id) {
+deleteSubKeyword = function (id) {
 	var params = "deleted=true";
 	var verbe = "put";
 	var resource = "subkeyword";
 	var extraGet = "keywordID=" + id;
 	$.ajax({
-		type : "post",
-		url : "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
-				+ resource + "&" + extraGet,
-		dataType : "json",
-		async : true,
-		data : params,
-		success : function(data) {
+		type: "post",
+		url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+			+ resource + "&" + extraGet,
+		dataType: "json",
+		async: true,
+		data: params,
+		success: function (data) {
 			// console.log(data);
 			if (data.success) {
 				loadSubKeywords();
@@ -708,7 +706,7 @@ deleteSubKeyword = function(id) {
 				alert("[error] sorry, could not edit subkeyword.")
 			}
 		},
-		error : function(xhr) {
+		error: function (xhr) {
 			console.log(xhr);
 			alert("[error] sorry, could not edit subkeyword.")
 		}
@@ -725,23 +723,23 @@ var logStep = 20;
  * @param file
  * @returns
  */
-function showLogs (from, to, file) {
+function showLogs(from, to, file) {
 	from = Number(from);
 	to = Number(to);
 	var resource = "admin/show-logs/" + file;
-	var params = "from="+from+"&to="+to;
+	var params = "from=" + from + "&to=" + to;
 	var verbe = "get";
-	if (from === 1 )
+	if (from === 1)
 		$("#logContent").html("");
 	// init
 	$(".btn-showlog").attr("disabled", false);
 	$.ajax({
-		type : "get",
-		url : "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource=" + resource,
-		dataType : "text",
-		async : true,
-		data : params,
-		success : function(data) {
+		type: "get",
+		url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource=" + resource,
+		dataType: "text",
+		async: true,
+		data: params,
+		success: function (data) {
 			// load
 			$("#logContent").html($("#logContent").html() + data.replace(new RegExp("\n", 'g'), "\n<br />"));
 			// show modal
@@ -751,7 +749,7 @@ function showLogs (from, to, file) {
 				$("#btnMoreLogs").attr("disabled", true);
 			} else {
 				$("#btnMoreLogs").attr("disabled", false);
-				$("#btnMoreLogs").attr("onclick", "showLogs ("+(from+logStep)+", "+(to+logStep)+", '"+file+"')");
+				$("#btnMoreLogs").attr("onclick", "showLogs (" + (from + logStep) + ", " + (to + logStep) + ", '" + file + "')");
 			}
 			// other
 			if (file == "daily-mailler")
@@ -761,7 +759,7 @@ function showLogs (from, to, file) {
 			if (file == "monthly-users_inactiver")
 				$("#showLogMontlhyUsersInactiverBtn").attr("disabled", true);
 		},
-		error : function(xhr) {
+		error: function (xhr) {
 			console.log(xhr);
 			alert("[error] sorry, could show logs")
 		}
@@ -780,12 +778,12 @@ function cleanTokens() {
 	var verbe = "delete";
 	var resource = "admin/clean-tokens";
 	$.ajax({
-		type : "post",
-		url : "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource=" + resource,
-		dataType : "json",
-		async : true,
-		data : params,
-		success : function(data) {
+		type: "post",
+		url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource=" + resource,
+		dataType: "json",
+		async: true,
+		data: params,
+		success: function (data) {
 			// console.log(data);
 			if (data.success) {
 				$("#btnCleanTokens").removeClass("btn-warning").addClass("btn-success");
@@ -797,7 +795,7 @@ function cleanTokens() {
 				return false;
 			}
 		},
-		error : function(xhr) {
+		error: function (xhr) {
 			console.log(xhr);
 			$("#btnCleanTokens").removeClass("btn-warning").addClass("btn-danger");
 			$("#btnCleanTokens").html('<i class="fa fa-times-circle"></i>');
@@ -818,12 +816,12 @@ function archiveProjects() {
 	var verbe = "put";
 	var resource = "admin/archive-projects";
 	$.ajax({
-		type : "post",
-		url : "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource=" + resource,
-		dataType : "json",
-		async : true,
-		data : params,
-		success : function(data) {
+		type: "post",
+		url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource=" + resource,
+		dataType: "json",
+		async: true,
+		data: params,
+		success: function (data) {
 			// console.log(data);
 			if (data.success) {
 				$("#btnArchiveProjects").removeClass("btn-warning").addClass("btn-success");
@@ -835,7 +833,7 @@ function archiveProjects() {
 				return false;
 			}
 		},
-		error : function(xhr) {
+		error: function (xhr) {
 			console.log(xhr);
 			$("#btnArchiveProjects").removeClass("btn-warning").addClass("btn-danger");
 			$("#btnArchiveProjects").html('<i class="fa fa-times-circle"></i>');
@@ -856,12 +854,12 @@ function inactiveUsers() {
 	var verbe = "put";
 	var resource = "admin/inactive-users";
 	$.ajax({
-		type : "post",
-		url : "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource=" + resource,
-		dataType : "json",
-		async : true,
-		data : params,
-		success : function(data) {
+		type: "post",
+		url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource=" + resource,
+		dataType: "json",
+		async: true,
+		data: params,
+		success: function (data) {
 			// console.log(data);
 			if (data.success) {
 				$("#btnInactiveUsers").removeClass("btn-warning").addClass("btn-success");
@@ -873,7 +871,7 @@ function inactiveUsers() {
 				return false;
 			}
 		},
-		error : function(xhr) {
+		error: function (xhr) {
 			console.log(xhr);
 			$("#btnInactiveUsers").removeClass("btn-warning").addClass("btn-danger");
 			$("#btnInactiveUsers").html('<i class="fa fa-times-circle"></i>');
@@ -895,14 +893,14 @@ function cleanUploaded() {
 	var verbe = "put";
 	var resource = "admin/clean-uploaded-files";
 	$.ajax({
-		type : "post",
-		url : "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource=" + resource,
-		dataType : "json",
-		async : true,
-		success : function(data) {
+		type: "post",
+		url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource=" + resource,
+		dataType: "json",
+		async: true,
+		success: function (data) {
 			// console.log(data);
 			if (data.success) {
-				$("#cleanUploadedMessage").html('<small>clean ' + data['nb-deleted'] +' file(s)!</small>');
+				$("#cleanUploadedMessage").html('<small>clean ' + data['nb-deleted'] + ' file(s)!</small>');
 				$("#cleanUploadFiles i").removeClass('fa-spin').removeClass('fa-spinner').addClass('fa-check-circle');
 				$("#cleanUploadFiles").removeClass("btn-warning").addClass("btn-success");
 				return true;
@@ -912,7 +910,7 @@ function cleanUploaded() {
 				return false;
 			}
 		},
-		error : function(xhr) {
+		error: function (xhr) {
 			console.log(xhr);
 			$("#cleanUploadFiles i").removeClass('fa-spin').removeClass('fa-spinner').addClass('fa-times-circle');
 			$("#cleanUploadFiles").removeClass("btn-warning").addClass("btn-danger");
@@ -922,3 +920,333 @@ function cleanUploaded() {
 	return false;
 }
 
+// mama#66
+
+/**
+ * load managerkeywords
+ */
+loadManagerKeywords = function () {
+	if (!managerKeywordTemplateLoaded) {
+		$.get('templates/managerkeywords-light-list-template.html',
+			function (template) {
+				$('body').append(template);
+				managerKeywordTemplateLoaded = true;
+				loadManagerKeywords();
+			});
+	} else {
+		$("#managerkeywords-light-list-container").empty();
+		// 
+		var verbe = "get";
+		var resource = "managerkeywords";
+		var extraFilter = "&order=asc"
+		// run
+		$.ajax({
+			type: "get",
+			url: "ajax/ajax_proxypass.php?verbe=" + verbe
+				+ "&resource=" + resource + extraFilter,
+			dataType: "json",
+			async: true,
+			success: function (keywords) {
+				if (keywords.hasOwnProperty('success')
+					&& keywords.success == false) {
+					// TODO show error message info
+				} else {
+					if (keywords.length === 0) {
+						$("#noManagerKeywordsToShow").show();
+					} else {
+						keywords.sort(compareKeyworks);
+						$("#noManagerKeywordsToShow").hide();
+						$("#managerkeywords-light-list-template")
+							.tmpl(keywords)
+							.appendTo("#managerkeywords-light-list-container");
+					}
+				}
+			},
+			error: function (xhr) {
+				console.log(xhr);
+				// TODO show error message info
+			}
+		});
+	}
+}
+loadManagerKeywords();
+
+/**
+ * add a managerkeyword
+ */
+addNewManagerKeyword = function () {
+	if ($("#newManagerKeyword").val() == "") {
+		return false;
+	}
+	var params = "keyword=" + $("#newManagerKeyword").val();
+	var verbe = "post";
+	var resource = "managerkeyword";
+	$.ajax({
+		type: "post",
+		url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+			+ resource,
+		dataType: "json",
+		async: true,
+		data: params,
+		success: function (data) {
+			// console.log(data);
+			if (data.success) {
+				loadManagerKeywords();
+				$("#newManagerKeyword").val("");
+			} else {
+				//
+				alert("[error] sorry, could not add manager keyword.")
+			}
+		},
+		error: function (xhr) {
+			console.log(xhr);
+			alert("[error] sorry, could not add manager keyword.")
+		}
+	});
+	return false;
+}
+
+//bind enter key on create keyword
+$('#newManagerKeyword').on('keypress', function (e) {
+	if (e.key === 'Enter') {
+		addNewManagerKeyword();
+	}
+});
+
+/**
+ * edit a managerkeyword
+ */
+editManagerKeyword = function (id, oldKeyword) {
+	$("#adminEntity").html(oldKeyword);
+	$("#newName").val("");
+	$("#newName").attr("placeholder", "" + oldKeyword);
+	$("#adminEditEntityModal").modal("show");
+	setTimeout(function () { $("#newName").trigger('focus'); }, 250);
+	// rewrite function
+	saveAdminObject = function () {
+		keyword = $("#newName").val();
+		if (keyword === null)
+			return false;
+		var params = "keyword=" + keyword;
+		var verbe = "put";
+		var resource = "managerkeyword";
+		var extraGet = "keywordID=" + id;
+		$.ajax({
+			type: "post",
+			url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+				+ resource + "&" + extraGet,
+			dataType: "json",
+			async: true,
+			data: params,
+			success: function (data) {
+				// console.log(data);
+				if (data.success) {
+					loadManagerKeywords();
+					return true;
+				} else {
+					//
+					alert("[error] sorry, could not edit manager keyword.")
+				}
+			},
+			error: function (xhr) {
+				console.log(xhr);
+				alert("[error] sorry, could not edit manager keyword.")
+			}
+		});
+		$("#adminEditEntityModal").modal("hide");
+		saveAdminObject = function () { }
+		return false;
+	}
+}
+
+/**
+ * restore a managerkeyword
+ */
+restoreManagerKeyword = function (id) {
+	var params = "deleted=false";
+	var verbe = "put";
+	var resource = "managerkeyword";
+	var extraGet = "keywordID=" + id;
+	$.ajax({
+		type: "post",
+		url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+			+ resource + "&" + extraGet,
+		dataType: "json",
+		async: true,
+		data: params,
+		success: function (data) {
+			// console.log(data);
+			if (data.success) {
+				loadManagerKeywords();
+				return true;
+			} else {
+				//
+				alert("[error] sorry, could not edit managerkeyword.")
+			}
+		},
+		error: function (xhr) {
+			console.log(xhr);
+			alert("[error] sorry, could not edit managerkeyword.")
+		}
+	});
+	return false;
+}
+
+/**
+ * delete a managerkeyword
+ */
+deleteManagerKeyword = function (id) {
+	var params = "deleted=true";
+	var verbe = "put";
+	var resource = "managerkeyword";
+	var extraGet = "keywordID=" + id;
+	$.ajax({
+		type: "post",
+		url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+			+ resource + "&" + extraGet,
+		dataType: "json",
+		async: true,
+		data: params,
+		success: function (data) {
+			// console.log(data);
+			if (data.success) {
+				loadManagerKeywords();
+				return true;
+			} else {
+				alert("[error] sorry, could not edit manager keyword.")
+			}
+		},
+		error: function (xhr) {
+			console.log(xhr);
+			alert("[error] sorry, could not edit manager keyword.")
+		}
+	});
+	return false;
+}
+
+// mama#65
+loadMTHSubPlatforms = function () {
+	if (!mthSubPlatformTemplateLoaded) {
+		$.get('templates/mthSubPlatforms-light-list-template.html',
+			function (template) {
+				$('body').append(template);
+				mthSubPlatformTemplateLoaded = true;
+				loadMTHSubPlatforms();
+			});
+	} else {
+		$("#mthSubPlatforms-light-list-container").empty();
+		// 
+		var verbe = "get";
+		var resource = "mth-sub-platforms";
+		var extraFilter = "&order=asc"
+		// run
+		$.ajax({
+			type: "get",
+			url: "ajax/ajax_proxypass.php?verbe=" + verbe
+				+ "&resource=" + resource + extraFilter,
+			dataType: "json",
+			async: true,
+			success: function (mthPlatforms) {
+				if (mthPlatforms.hasOwnProperty('success')
+					&& mthPlatforms.success == false) {
+					// TODO show error message info
+				} else {
+					if (mthPlatforms.length === 0) {
+						$("#noMTHSubPlatformsToShow").show();
+					} else {
+						$("#noMTHSubPlatformsToShow").hide();
+						$("#mthSubPlatforms-light-list-template")
+							.tmpl(mthPlatforms)
+							.appendTo("#mthSubPlatforms-light-list-container");
+					}
+				}
+			},
+			error: function (xhr) {
+				console.log(xhr);
+				// TODO show error message info
+			}
+		});
+	}
+}
+loadMTHSubPlatforms();
+
+addNewMTHSubPlatform = function () {
+	var params = "mthSubPlatform=" + $("#newMTHSubPlatform").val();
+	var verbe = "post";
+	var resource = "mth-sub-platform";
+	$.ajax({
+		type: "post",
+		url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+			+ resource,
+		dataType: "json",
+		async: true,
+		data: params,
+		success: function (data) {
+			// console.log(data);
+			if (data.success) {
+				loadMTHSubPlatforms();
+				$("#newMTHSubPlatform").val("");
+			} else {
+				//
+				alert("[error] sorry, could not add MTH sub platform.")
+			}
+		},
+		error: function (xhr) {
+			console.log(xhr);
+			//
+			alert("[error] sorry, could not add MTH sub platform.")
+		}
+	});
+	return false;
+}
+
+//bind enter key on create mthSubPlatform
+$('#newMTHSubPlatform').on('keypress', function (e) {
+	if (e.key === 'Enter') {
+		addNewMTHSubPlatform();
+	}
+});
+
+editMTHSubPlatform = function (id, oldMTHSubPlatform) {
+	$("#adminEntity").html(oldMTHSubPlatform);
+	$("#newName").val("");
+	$("#newName").attr("placeholder", "" + oldMTHSubPlatform);
+	$("#adminEditEntityModal").modal("show");
+	setTimeout(function () { $("#newName").trigger('focus'); }, 250);
+	// rewrite function
+	saveAdminObject = function () {
+		mthSubPlatform = $("#newName").val();
+		if (mthSubPlatform === null)
+			return false;
+		var params = "mthSubPlatform=" + mthSubPlatform;
+		var verbe = "put";
+		var resource = "mth-sub-platform";
+		var extraGet = "mthSubPlatformID=" + id;
+		$.ajax({
+			type: "post",
+			url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+				+ resource + "&" + extraGet,
+			dataType: "json",
+			async: true,
+			data: params,
+			success: function (data) {
+				// console.log(data);
+				if (data.success) {
+					loadMTHSubPlatforms();
+					return true;
+				} else {
+					//
+					alert("[error] sorry, could not edit MTH sub-Platform.")
+				}
+			},
+			error: function (xhr) {
+				console.log(xhr);
+				//
+				alert("[error] sorry, could not edit MTH sub-Platform.")
+			}
+		});
+		$("#adminEditEntityModal").modal("hide");
+		saveAdminObject = function () { }
+		return false;
+	}
+}

@@ -1,17 +1,18 @@
 // ///////////////////////////////////////////////////////////////////////////////////////
 // dashboard - onload stuff
-$(document).ready(function () {
+$(window).on("load", function () {
 	// page localization
 	loadLang();
-	// /////////////////////////////////////////
-	// LOAD PROJECTS
-	var userRights = "user"
-	//	if (userData.right == "admin") {
+	// mama#62 - build MTH platforms picker
+	if (getUrlParameter("mth_pf") !== undefined) {
+		filterMthPF = true;
+		filterMthPFval = getUrlParameter("mth_pf");
+	}
+	buildMTHplatforms();
 	// build datepicker
 	buildRangeDate();
 	// build datepicker
 	buildGraph();
-	//	} 
 	// splash current URL param into download link
 	$("#link-donwload-xls-file").attr("href", $("#link-donwload-xls-file").attr("href") + document.location.search.replace("?page=statistics", ""))
 	if (getUrlParameter("from") === undefined) {
@@ -20,6 +21,17 @@ $(document).ready(function () {
 	if (getUrlParameter("to") === undefined) {
 		$("#link-donwload-xls-file").attr("href", $("#link-donwload-xls-file").attr("href") + "&to=" + today);
 	}
+	// mama#62 - filter on platform for XLS export
+	if (filterMthPF) {
+		// process filter mthPlatformsFilter
+		const mthPlatformsFilterId = filterMthPFval.replace(/mth_pf_/g, "").split(",");
+		const pfFilter = (mthPlatformsFilterId.length > 0) ? "&isPlatForm=" + mthPlatformsFilterId.join(",") : "";//
+		$("#link-donwload-xls-file").attr("href", $("#link-donwload-xls-file").attr("href") + "&isPlatForm=" + pfFilter);
+	}
+	// reload page if click on 'reload' button
+	$('#range-date-update').on("click", function (e) {
+		reloadPage();
+	});
 });
 // ///////////////////////////////////////////////////////////////////////////////////////
 // functions
@@ -37,13 +49,22 @@ function buildRangeDate() {
 	} else {
 		$("#range-date-end").val(today);
 	}
-	$(document).ready(function () {
-		$('.datepicker').datepicker();
-	});
+	// init datepicker
+	$('.datepicker').datepicker();
 }
-$('#range-date-update').bind("click", function (e) {
-	reloadPage();
-});
+
+
+
+var filterMthPF = false;
+var filterMthPFval = '';
+
+function addRemoveUserFilter(filter, val) {
+	// MTH platform
+	if (filter == 'mth_pf') {
+		filterMthPF = true;
+		filterMthPFval = val;
+	}
+}
 
 /**
  * 
@@ -57,6 +78,10 @@ function reloadPage() {
 	if ($("#range-date-end").val() != "") {
 		newLocation += '&to=' + $("#range-date-end").val();
 	}
+	// mama#62 - mth platform
+	if ($("#mthPlatforms").val() != "") {
+		newLocation += '&mth_pf=' + $("#mthPlatforms").val();
+	}
 	document.location = newLocation;
 }
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -66,28 +91,37 @@ function reloadPage() {
 function buildGraph() {
 	var from = $("#range-date-start").val();
 	var to = $("#range-date-end").val();
-	setTimeout(function () { buildTabPFxStatus(from, to) }, 10);
-	setTimeout(function () { buildLaboTypeChart(from, to) }, 20);
-	setTimeout(function () { buildCopartnerChart(from, to) }, 30);
-	setTimeout(function () { buildDemandsChart(from, to) }, 40);
-	setTimeout(function () { buildTargetedChart(from, to) }, 60);
-	setTimeout(function () { buildSampleNbChart(from, to) }, 70);
-	setTimeout(function () { buildFinancialChart(from, to) }, 80);
-	setTimeout(function () { buildUserLaboTypeChart(from, to) }, 90);
-	setTimeout(function () { buildExtraLaboTypeChart(from, to) }, 100);
+	// mama#62 - filter mth pf
+	const filterPF = (filterMthPFval != "null" && filterMthPFval != "");
+	const mthPlatformsFilter = filterPF ? filterMthPFval.split(",") : [];
+	const mthPlatformsFilterId = filterPF ? filterMthPFval.replace(/mth_pf_/g, "").split(",") : [];
+	// build each graph
+	setTimeout(function () { buildTabPFxStatus(from, to, mthPlatformsFilter) }, 10);
+	setTimeout(function () { buildLaboTypeChart(from, to, mthPlatformsFilterId) }, 20);
+	setTimeout(function () { buildCopartnerChart(from, to, mthPlatformsFilterId) }, 30);
+	setTimeout(function () { buildDemandsChart(from, to, mthPlatformsFilterId) }, 40);
+	setTimeout(function () { buildTargetedChart(from, to, mthPlatformsFilterId) }, 60);
+	setTimeout(function () { buildSampleNbChart(from, to, mthPlatformsFilterId) }, 70);
+	setTimeout(function () { buildFinancialChart(from, to, mthPlatformsFilterId) }, 80);
+	setTimeout(function () { buildUserLaboTypeChart(from, to, mthPlatformsFilterId) }, 90);
+	setTimeout(function () { buildExtraLaboTypeChart(from, to, mthPlatformsFilterId) }, 100);
 	// Rolin one request: new charts awaken 
-	setTimeout(function () { buildThematicChart(from, to) }, 110);
-	setTimeout(function () { buildSubThematicChart(from, to) }, 120);
+	setTimeout(function () { buildThematicChart(from, to, mthPlatformsFilterId) }, 110);
+	setTimeout(function () { buildSubThematicChart(from, to, mthPlatformsFilterId) }, 120);
 	// mama#46 - funding source graph
-	setTimeout(function () { buildFundingSourcesChart(from, to) }, 130);
+	setTimeout(function () { buildFundingSourcesChart(from, to, mthPlatformsFilterId) }, 130);
+	// mama#66 - manager keywords
+	setTimeout(function () { buildManagerThematicChart(from, to, mthPlatformsFilterId) }, 140);
+	// mama#65 - MTH sub-platform
+	setTimeout(function () { buildSubPlatforms(from, to, mthPlatformsFilterId) }, 140);
 }
 
 /**
  * 
  */
-function buildTabPFxStatus(from, to) {
+function buildTabPFxStatus(from, to, mthPlatformsFilter) {
 	// init - get list of PF
-	var listOfMthPF = [];
+	let listOfMthPF = [];
 	$.ajax({
 		type: "get",
 		url: "ajax/ajax_proxypass.php?verbe=get&resource=mth-platforms&order=asc",
@@ -98,8 +132,6 @@ function buildTabPFxStatus(from, to) {
 		},
 		error: function (xhr) { console.log(xhr); }
 	});
-
-	console.log(listOfMthPF);
 	// for each PF" count project group by status
 	$("#statsPjPFxStatus").empty();
 	var superSum = 0;
@@ -112,6 +144,11 @@ function buildTabPFxStatus(from, to) {
 	var superSumBlocked = 0;
 	var superSumArchived = 0;
 	$.each(listOfMthPF, function (k, v) {
+		// new mama#62 - filter MTH PF
+		if (mthPlatformsFilter.length > 0 && !mthPlatformsFilter.includes("mth_pf_" + v.id)) {
+			return;
+		}
+		// load
 		var pfName = v.name;
 		var pfId = v.id;
 		var dataTmp = (getNbOf(from, to, "isPlatForm=" + pfId + "&group=status"))[0];
@@ -180,7 +217,7 @@ function buildTabPFxStatus(from, to) {
 	$("#statsPjPFxStatus").append(newTabLine);
 	// TOTAL
 	var totalTabLine = '<tr>';
-	totalTabLine += '<td>Total</td>';
+	totalTabLine += '<td>Total (no filter)</td>';
 	totalTabLine += '<td>' + (tabSortedDat['rejected']) + '</td>';
 	totalTabLine += '<td>' + (tabSortedDat['waiting']) + '</td>';
 	totalTabLine += '<td>' + (tabSortedDat['assigned']) + '</td>';
@@ -210,8 +247,11 @@ function extractFromRaw(json) {
 /**
  * 
  */
-function buildUserLaboTypeChart(from, to) {
-	var data = (getNbOf(from, to, "&group=laboratory", "users-statistics"))[0];
+function buildUserLaboTypeChart(from, to, mthPlatformsFilterId) {
+	// process filter mthPlatformsFilter
+	const pfFilter = (mthPlatformsFilterId.length > 0) ? "&isPlatForm=" + mthPlatformsFilterId.join(",") : "";//
+	// process query
+	const data = (getNbOf(from, to, pfFilter + "&group=laboratory", "users-statistics"))[0];
 	//	{users_count: 4, u_labo_public: 2, u_labo_private: 0, u_labo_public_private: 2}
 	var series = [{
 		name: "Laboratory",
@@ -233,8 +273,11 @@ function buildUserLaboTypeChart(from, to) {
 /**
  * 
  */
-function buildExtraLaboTypeChart(from, to) {
-	var data = (getNbOf(from, to, "&group=laboratory", "extra-data-statistics"))[0];
+function buildExtraLaboTypeChart(from, to, mthPlatformsFilterId) {
+	// process filter mthPlatformsFilter
+	const pfFilter = (mthPlatformsFilterId.length > 0) ? "&isPlatForm=" + mthPlatformsFilterId.join(",") : "";//
+	// process query
+	const data = (getNbOf(from, to, pfFilter + "&group=laboratory", "extra-data-statistics"))[0];
 	//	{users_count: 4, u_labo_public: 2, u_labo_private: 0, u_labo_public_private: 2}
 	var series = [{
 		name: "Laboratory",
@@ -256,12 +299,15 @@ function buildExtraLaboTypeChart(from, to) {
 /**
  * 
  */
-function buildLaboTypeChart(from, to) {
-	//	isStatus=waiting,accepted,assigned,archived&isOwner=public_private
-	var nbPublic = (getNbOf(from, to, "isStatus=waiting,accepted,assigned,completed,running,archived&isOwner=public"))[0].projects_count;
-	var nbPrivate = (getNbOf(from, to, "isStatus=waiting,accepted,assigned,completed,running,archived&isOwner=private"))[0].projects_count;
-	var nbPublicPrivate = (getNbOf(from, to, "isStatus=waiting,accepted,assigned,completed,running,archived&isOwner=public_private"))[0].projects_count;
-	var series = [{
+function buildLaboTypeChart(from, to, mthPlatformsFilterId) {
+	// process filter mthPlatformsFilter
+	const pfFilter = (mthPlatformsFilterId.length > 0) ? "&isPlatForm=" + mthPlatformsFilterId.join(",") : "";
+	// isStatus=waiting,accepted,assigned,archived&isOwner=public_private
+	const prefix = pfFilter + "&isStatus=waiting,accepted,assigned,completed,running,archived&isOwner=";
+	const nbPublic = (getNbOf(from, to, prefix + "public"))[0].projects_count;
+	const nbPrivate = (getNbOf(from, to, prefix + "private"))[0].projects_count;
+	const nbPublicPrivate = (getNbOf(from, to, prefix + "public_private"))[0].projects_count;
+	const series = [{
 		name: "Laboratory",
 		colorByPoint: true,
 		data: [{
@@ -281,8 +327,11 @@ function buildLaboTypeChart(from, to) {
 /**
  * 
  */
-function buildCopartnerChart(from, to) {
-	var rawData = getNbOf(from, to, "isStatus=waiting,accepted,assigned,completed,running,archived&group=copartner")[0];
+function buildCopartnerChart(from, to, mthPlatformsFilterId) {
+	// process filter mthPlatformsFilter
+	const pfFilter = (mthPlatformsFilterId.length > 0) ? "&isPlatForm=" + mthPlatformsFilterId.join(",") : "";//
+	// process query
+	var rawData = getNbOf(from, to, pfFilter + "&isStatus=waiting,accepted,assigned,completed,running,archived&group=copartner")[0];
 	var coPartYES = rawData.can_be_fwd;
 	var coPartNOPE = rawData.can_not_be_fwd;
 	var coPartUNDEF = rawData.undef;
@@ -306,8 +355,11 @@ function buildCopartnerChart(from, to) {
 /**
  * 
  */
-function buildDemandsChart(from, to) {
-	var rawData = getNbOf(from, to, "isStatus=waiting,accepted,assigned,completed,running,archived&group=type")[0];
+function buildDemandsChart(from, to, mthPlatformsFilterId) {
+	// process filter mthPlatformsFilter
+	const pfFilter = (mthPlatformsFilterId.length > 0) ? "&isPlatForm=" + mthPlatformsFilterId.join(",") : "";//
+	// process query
+	var rawData = getNbOf(from, to, pfFilter + "&isStatus=waiting,accepted,assigned,completed,running,archived&group=type")[0];
 	// {"projects_count":38,"dt__eqprov":24,"dt__NOT_eqprov":14,"dt__catallo":8,"dt__NOT_catallo":30,"dt__feastu":8,"dt__NOT_feastu":30,"dt__train":4,"dt__NOT_train":34}
 	var eqprov = rawData.dt__eqprov;
 	var catallo = rawData.dt__catallo;
@@ -344,8 +396,11 @@ function buildDemandsChart(from, to) {
 /**
  * 
  */
-function buildTargetedChart(from, to) {
-	var rawData = getNbOf(from, to, "isStatus=waiting,accepted,assigned,completed,running,archived&group=targeted")[0];
+function buildTargetedChart(from, to, mthPlatformsFilterId) {
+	// process filter mthPlatformsFilter
+	const pfFilter = (mthPlatformsFilterId.length > 0) ? "&isPlatForm=" + mthPlatformsFilterId.join(",") : "";//
+	// process query
+	var rawData = getNbOf(from, to, pfFilter + "&isStatus=waiting,accepted,assigned,completed,running,archived&group=targeted")[0];
 	// {"projects_count":8,"is_targeted":3,"is_NOT_targeted":2}
 	var targetedYES = rawData.is_targeted;
 	var targetedNOPE = rawData.is_NOT_targeted;
@@ -370,8 +425,11 @@ function buildTargetedChart(from, to) {
 /**
  * 
  */
-function buildSampleNbChart(from, to) {
-	var rawData = getNbOf(from, to, "isStatus=waiting,accepted,assigned,completed,running,archived&group=sample_number")[0];
+function buildSampleNbChart(from, to, mthPlatformsFilterId) {
+	// process filter mthPlatformsFilter
+	const pfFilter = (mthPlatformsFilterId.length > 0) ? "&isPlatForm=" + mthPlatformsFilterId.join(",") : "";//
+	// process query
+	var rawData = getNbOf(from, to, pfFilter + "&isStatus=waiting,accepted,assigned,completed,running,archived&group=sample_number")[0];
 	// [{"projects_count":9,"less_50":1,"51_to_100":3,"101_to_500":1,"more_501":1}]
 	var sampleNb_less50 = rawData.less_50;
 	var sampleNb_51_to_100 = rawData['51_to_100'];
@@ -404,8 +462,11 @@ function buildSampleNbChart(from, to) {
 /**
  * 
  */
-function buildFinancialChart(from, to) {
-	var rawData = getNbOf(from, to, "isStatus=waiting,accepted,assigned,completed,running,archived&group=financial")[0];
+function buildFinancialChart(from, to, mthPlatformsFilterId) {
+	// process filter mthPlatformsFilter
+	const pfFilter = (mthPlatformsFilterId.length > 0) ? "&isPlatForm=" + mthPlatformsFilterId.join(",") : "";//
+	// process query
+	const rawData = getNbOf(from, to, pfFilter + "&isStatus=waiting,accepted,assigned,completed,running,archived&group=financial")[0];
 	// [{"projects_count":9,"less_50":1,"51_to_100":3,"101_to_500":1,"more_501":1}]
 	var funding_financed = rawData.f__financed;
 	var funding_provisioning = rawData.f__provisioning;
@@ -434,8 +495,11 @@ function buildFinancialChart(from, to) {
 /**
  * 
  */
-function buildThematicChart(from, to) {
-	var data = (getNbOf(from, to, "&group=keywords&isStatus=waiting,accepted,assigned,completed,running,archived", "projects-statistics"));
+function buildThematicChart(from, to, mthPlatformsFilterId) {
+	// process filter mthPlatformsFilter
+	const pfFilter = (mthPlatformsFilterId.length > 0) ? "&isPlatForm=" + mthPlatformsFilterId.join(",") : "";//
+	// process query
+	const data = (getNbOf(from, to, pfFilter + "&group=keywords&isStatus=waiting,accepted,assigned,completed,running,archived", "projects-statistics"));
 	var dataSeries = [];
 	$.each(data, function (k, v) {
 		if (v.tw_words !== null)
@@ -446,14 +510,17 @@ function buildThematicChart(from, to) {
 		colorByPoint: true,
 		data: dataSeries
 	}];
-	buildGenericPie('#container-pie-thematic', ' Project thematic repartition ', series);
+	buildGenericPie('#container-pie-thematic', ' Projects thematic repartition ', series);
 }
 
 /**
  * 
  */
-function buildSubThematicChart(from, to) {
-	var data = (getNbOf(from, to, "&group=subkeywords&isStatus=waiting,accepted,assigned,completed,running,archived", "projects-statistics"));
+function buildSubThematicChart(from, to, mthPlatformsFilterId) {
+	// process filter mthPlatformsFilter
+	const pfFilter = (mthPlatformsFilterId.length > 0) ? "&isPlatForm=" + mthPlatformsFilterId.join(",") : "";//
+	// process query
+	const data = (getNbOf(from, to, pfFilter + "&group=subkeywords&isStatus=waiting,accepted,assigned,completed,running,archived", "projects-statistics"));
 	var dataSeries = [];
 	$.each(data, function (k, v) {
 		if (v.tw_words !== null)
@@ -464,7 +531,7 @@ function buildSubThematicChart(from, to) {
 		colorByPoint: true,
 		data: dataSeries
 	}];
-	buildGenericPie('#container-pie-subthematic', ' Project sub-thematic repartition ', series);
+	buildGenericPie('#container-pie-subthematic', ' Projects sub-thematic repartition ', series);
 }
 
 /**
@@ -654,8 +721,11 @@ function showStatsRejectedProjects() {
 /**
  * 
  */
-function buildFundingSourcesChart(from, to) {
-	var rawData = getNbOf(from, to, "isStatus=waiting,accepted,assigned,completed,running,archived&group=financial_type")[0];
+function buildFundingSourcesChart(from, to, mthPlatformsFilterId) {
+	// process filter mthPlatformsFilter
+	const pfFilter = (mthPlatformsFilterId.length > 0) ? "&isPlatForm=" + mthPlatformsFilterId.join(",") : "";//
+	// process query
+	const rawData = getNbOf(from, to, pfFilter + "&isStatus=waiting,accepted,assigned,completed,running,archived&group=financial_type")[0];
 	// [{"projects_count":9,"less_50":1,"51_to_100":3,"101_to_500":1,"more_501":1}]
 	var funding_source_eu = rawData.fs__eu;
 	var funding_source_anr = rawData.fs__anr;
@@ -698,4 +768,45 @@ function buildFundingSourcesChart(from, to) {
 		}]
 	}];
 	buildGenericPie('#container-pie-financial_type', ' Fundings sources ', series);
+}
+
+// mama#66
+function buildManagerThematicChart(from, to, mthPlatformsFilterId) {
+	// process filter mthPlatformsFilter
+	const pfFilter = (mthPlatformsFilterId.length > 0) ? "&isPlatForm=" + mthPlatformsFilterId.join(",") : "";//
+	// process query
+	const data = (getNbOf(from, to, pfFilter + "&group=manager-keywords&isStatus=waiting,accepted,assigned,completed,running,archived", "projects-statistics"));
+	var dataSeries = [];
+	$.each(data, function (k, v) {
+		if (v.tw_words !== null)
+			dataSeries.push({ "name": v.tw_words, "y": v.projects_count });
+	});
+	var series = [{
+		name: "Manager-thematic keyword",
+		colorByPoint: true,
+		data: dataSeries
+	}];
+	buildGenericPie('#container-pie-manager-thematic', ' Projects manager-thematic repartition ', series);
+}
+
+// mama#65
+function buildSubPlatforms(from, to, mthPlatformsFilterId) {
+	// process filter mthPlatformsFilter
+	const pfFilter = (mthPlatformsFilterId.length > 0) ? "&isPlatForm=" + mthPlatformsFilterId.join(",") : "";//
+	// process query
+	const data = (getNbOf(from, to, pfFilter + "&group=mth-sub-platforms&isStatus=waiting,accepted,assigned,completed,running,archived", "projects-statistics"));
+	var dataSeries = [];
+	$.each(data, function (k, v) {
+		if (v.sub_pf_names !== null) {
+			dataSeries.push({ "name": v.sub_pf_names, "y": v.projects_count });
+		} else if (v.sub_pf_names === null) {
+			dataSeries.push({ "name": "none", "y": v.projects_count });
+		}
+	});
+	var series = [{
+		name: "MTH Sub-Platform",
+		colorByPoint: true,
+		data: dataSeries
+	}];
+	buildGenericPie('#container-pie-sub-platforms', ' Projects Sub-Platform', series);
 }

@@ -1,19 +1,19 @@
 /////////////////////////////////////////////////////////////////////////////////////////
 // project - add / edit
-$( document ).ready(function() {
+$(document).ready(function () {
 	// 
 	if (getUrlParameter("editProject") !== undefined)
-		setTimeout(function(){loadProject(Number(getUrlParameter("editProject")))}, 250);
-	if (getUrlParameter("update") =="success") 
+		setTimeout(function () { loadProject(Number(getUrlParameter("editProject"))) }, 250);
+	if (getUrlParameter("update") == "success")
 		$("#divSuccess").show();
 	///////////////////////////
 	//
 	$(".classiqAnalyze").hide();
 	$(".financedOK").hide();
 
-	$("input[name=demandType]").change(function() {
+	$("input[name=demandType]").change(function () {
 		var showID = false;
-		$.each($(".classicDemandListener"), function() {
+		$.each($(".classicDemandListener"), function () {
 			if ($(this).is(':checked'))
 				showID = true;
 		});
@@ -23,9 +23,9 @@ $( document ).ready(function() {
 			$(".classiqAnalyze").hide();
 	});;
 
-	$("#financialContext").change(function() {
+	$("#financialContext").change(function () {
 		var showID = false;
-		$.each($(".financed"), function() {
+		$.each($(".financed"), function () {
 			if ($(this).is(':selected'))
 				showID = true;
 		});
@@ -34,11 +34,11 @@ $( document ).ready(function() {
 		else
 			$(".financedOK").hide();
 
-	}).change();
+	}).trigger("change");;
 
-	$("#financialContextBis").change(function() {
+	$("#financialContextBis").change(function () {
 		var showID = false;
-		$.each($(".financedOther"), function() {
+		$.each($(".financedOther"), function () {
 			if ($(this).is(':selected'))
 				showID = true;
 		});
@@ -47,44 +47,45 @@ $( document ).ready(function() {
 		else
 			$(".financedOKOther").hide();
 
-	}).change();
-	
-	$("#financialContext").change();
+	}).trigger("change");;
+
+	$("#financialContext").trigger("change");;
 	var showID = false;
-	$.each($(".classicDemandListener"), function() {
+	$.each($(".classicDemandListener"), function () {
 		if ($(this).is(':checked'))
 			showID = true;
 	});
-	if (showID)
+	if (showID) {
 		$(".classiqAnalyze").show();
-	else
+	} else {
 		$(".classiqAnalyze").hide();
-	
+	}
+
 	// 2.0.1 - mama#9 - dialog box
 	var dialogBoxEdit = 0;
-	$("#extra_dialogBoxVal").on("change", function() {
-	    if (dialogBoxEdit >= 1 ){
-            var dialogTxt = $("#extra_dialogBoxTxt").val();
-            if (dialogTxt !== "") { dialogTxt += "\n"; }
-            dialogTxt += "- " + formatDate() + " " + window.userData.email + " ⇒ \"" + $("#extra_dialogBoxVal option:selected").html() + "\": ..." ;
-            $("#extra_dialogBoxTxt").val(dialogTxt);
-	    }
-	    dialogBoxEdit++;
+	$("#extra_dialogBoxVal").on("change", function () {
+		if (dialogBoxEdit >= 1) {
+			var dialogTxt = $("#extra_dialogBoxTxt").val();
+			if (dialogTxt !== "") { dialogTxt += "\n"; }
+			dialogTxt += "- " + formatDate() + " " + window.userData.email + " ⇒ \"" + $("#extra_dialogBoxVal option:selected").html() + "\": ...";
+			$("#extra_dialogBoxTxt").val(dialogTxt);
+		}
+		dialogBoxEdit++;
 	});
-	
+
 	// 2.0.1 - mama#18 - scientific context size
 	var scientificContextMaxLength = 3000;
-	$("#scientificContext").keyup( function() {
-	    var txtSize = (escape($("#scientificContext").val())).length;
-	    var remainingSize = scientificContextMaxLength - txtSize;
-        $("#scientificContext-size").html(remainingSize);
-        $("#scientificContext-size").parent().css("color", "");
-        if (remainingSize < 0) {
-            $("#scientificContext-size").parent().css("color", "red");
-        }
-    });
+	$("#scientificContext").keyup(function () {
+		var txtSize = (escape($("#scientificContext").val())).length;
+		var remainingSize = scientificContextMaxLength - txtSize;
+		$("#scientificContext-size").html(remainingSize);
+		$("#scientificContext-size").parent().css("color", "");
+		if (remainingSize < 0) {
+			$("#scientificContext-size").parent().css("color", "red");
+		}
+	});
 	$("#scientificContext").keyup();
-	
+
 });
 
 /**
@@ -103,24 +104,24 @@ function buildKeywords() {
 	var extraFilter = "&order=asc&deleted=false"
 	// run
 	$.ajax({
-		type : "get",
-		url : "ajax/ajax_proxypass.php?verbe=" + verbe
-				+ "&resource=" + resource + extraFilter,
-		dataType : "json",
-		async : true,
-		success : function(keywords) {
+		type: "get",
+		url: "ajax/ajax_proxypass.php?verbe=" + verbe
+			+ "&resource=" + resource + extraFilter,
+		dataType: "json",
+		async: true,
+		success: function (keywords) {
 			if (keywords.hasOwnProperty('success')
-					&& keywords.success == false) {
+				&& keywords.success == false) {
 				// TODO show error message info
 			} else {
 				if (keywords.length === 0) {
-//						$("#noKeywordsToShow").show();
+					//						$("#noKeywordsToShow").show();
 				} else {
 					var keywordsHTML = "";
 					var cptk = 0;
 					keywords.sort(compareKeyworks);
-					$.each(keywords, function(k, v) {
-						keywordsHTML += '<span id="cw_'+v.id+'" class="cloud-word label label-default" onclick="cloudWord(this)">'+v.word+'</span>';
+					$.each(keywords, function (k, v) {
+						keywordsHTML += '<span id="cw_' + v.id + '" class="cloud-word label label-default" onclick="cloudWord(this)">' + v.word + '</span>';
 						cptk++;
 						if (cptk == 4) {
 							cptk = 0;
@@ -133,7 +134,7 @@ function buildKeywords() {
 				}
 			}
 		},
-		error : function(xhr) {
+		error: function (xhr) {
 			console.log(xhr);
 			// TODO show error message info
 		}
@@ -143,7 +144,7 @@ function buildKeywords() {
 /**
  * 
  */
-function cloudWord (span) {
+function cloudWord(span) {
 	if ($(span).hasClass("label-default")) {
 		$(span).removeClass("label-default");
 		$(span).addClass("label-success");
@@ -154,19 +155,18 @@ function cloudWord (span) {
 		return;
 	}
 	var count = $(".cloud-word.label-success").size();
-	var increase = true;
 	if (count < 3) {
-		$.each($(".cloud-word.label-danger"), function() {
+		$.each($(".cloud-word.label-danger"), function () {
 			$(this).removeClass("label-danger");
 			$(this).addClass("label-default");
 		});
 	} else {
-		$.each($(".cloud-word.label-default"), function() {
+		$.each($(".cloud-word.label-default"), function () {
 			$(this).removeClass("label-default");
 			$(this).addClass("label-danger");
 		});
 	}
-	try { checkIfFormNewProjectValid(); } catch (e) {}
+	try { checkIfFormNewProjectValid(); } catch (e) { }
 }
 
 /**
@@ -178,24 +178,24 @@ function buildSubKeywords() {
 	var extraFilter = "&order=asc&deleted=false"
 	// run
 	$.ajax({
-		type : "get",
-		url : "ajax/ajax_proxypass.php?verbe=" + verbe
-				+ "&resource=" + resource + extraFilter,
-		dataType : "json",
-		async : true,
-		success : function(keywords) {
+		type: "get",
+		url: "ajax/ajax_proxypass.php?verbe=" + verbe
+			+ "&resource=" + resource + extraFilter,
+		dataType: "json",
+		async: true,
+		success: function (keywords) {
 			if (keywords.hasOwnProperty('success')
-					&& keywords.success == false) {
+				&& keywords.success == false) {
 				// TODO show error message info
 			} else {
 				if (keywords.length === 0) {
-//						$("#noKeywordsToShow").show();
+					//						$("#noKeywordsToShow").show();
 				} else {
 					var keywordsHTML = "";
 					var cptk = 0;
 					keywords.sort(compareKeyworks);
-					$.each(keywords, function(k, v) {
-						keywordsHTML += '<span id="scw_'+v.id+'" class="sub-cloud-word label label-default" onclick="subCloudWord(this)">'+v.word+'</span>';
+					$.each(keywords, function (k, v) {
+						keywordsHTML += '<span id="scw_' + v.id + '" class="sub-cloud-word label label-default" onclick="subCloudWord(this)">' + v.word + '</span>';
 						cptk++;
 						if (cptk == 4) {
 							cptk = 0;
@@ -208,7 +208,7 @@ function buildSubKeywords() {
 				}
 			}
 		},
-		error : function(xhr) {
+		error: function (xhr) {
 			console.log(xhr);
 			// TODO show error message info
 		}
@@ -218,7 +218,7 @@ function buildSubKeywords() {
 /**
  * 
  */
-function subCloudWord (span) {
+function subCloudWord(span) {
 	if ($(span).hasClass("label-default")) {
 		$(span).removeClass("label-default");
 		$(span).addClass("label-success");
@@ -231,12 +231,12 @@ function subCloudWord (span) {
 	var count = $(".sub-cloud-word.label-success").size();
 	var increase = true;
 	if (count < 5) {
-		$.each($(".sub-cloud-word.label-danger"), function() {
+		$.each($(".sub-cloud-word.label-danger"), function () {
 			$(this).removeClass("label-danger");
 			$(this).addClass("label-default");
 		});
 	} else {
-		$.each($(".sub-cloud-word.label-default"), function() {
+		$.each($(".sub-cloud-word.label-default"), function () {
 			$(this).removeClass("label-default");
 			$(this).addClass("label-danger");
 		});
@@ -246,22 +246,22 @@ function subCloudWord (span) {
 /**
  * 
  */
-function loadProject (projectID) {
+function loadProject(projectID) {
 	var verbe = "get";
 	var resource = "project&projectID=" + projectID;
 	$.ajax({
-		type : "get",
-		url : "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
-				+ resource,
-		dataType : "json",
-		async : true,
-		success : function(project) {
+		type: "get",
+		url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+			+ resource,
+		dataType: "json",
+		async: true,
+		success: function (project) {
 			if (project != null && project.hasOwnProperty('success')
-					&& project.success == false) {
+				&& project.success == false) {
 				// TODO show error message info
 			} else {
 				// console.log(project);
-				
+
 				// project metadata
 				$("#projectMetadata_userFullName").html(project.owner.fullName);
 				$("#projectMetadata_userEmail").html(project.owner.email);
@@ -273,35 +273,35 @@ function loadProject (projectID) {
 					$("#projectMetadata_updatedOn").hide();
 					$("#editProject_metadata_updatedOn").hide();
 				} else {
-					$("#projectMetadata_updatedOn").html(convertJsonDateToHumanReadable(project.updated.date) + ".");	
+					$("#projectMetadata_updatedOn").html(convertJsonDateToHumanReadable(project.updated.date) + ".");
 				}
-				
+
 				// all other data
-				$.each(project, function(k, v) {
+				$.each(project, function (k, v) {
 					var elemID = "project" + capitalizeFirstLetter(k);
 					var elem = null;
-					if ($('#'+elemID).length) {
-						elem = $('#'+elemID);
-					} else if ($('#'+k).length) {
-						elem = $('#'+k);
-					} else if ($('input[name='+k+']').length) {
-						elem = $('input[name='+k+']');
+					if ($('#' + elemID).length) {
+						elem = $('#' + elemID);
+					} else if ($('#' + k).length) {
+						elem = $('#' + k);
+					} else if ($('input[name=' + k + ']').length) {
+						elem = $('input[name=' + k + ']');
 					}
 					if (elem !== null) {
 						// console.log(elem);
 						if ($(elem).is("a") || $(elem).is("textarea")) {
 							$(elem).html(v);
 						} else if ($(elem).is("input")) {
-							if ($(elem).is("input[type=text]")|| $(elem).is("input[type=hidden]")) {
+							if ($(elem).is("input[type=text]") || $(elem).is("input[type=hidden]")) {
 								$(elem).val(v);
 							} else if ($(elem).is("input[type=checkbox]")) {
 								$(elem).prop("checked", v);
 							} else if ($(elem).is("input[type=radio]")) {
 								if (v !== null)
 									if (v) {
-										$('#'+k+"TRUE").prop("checked", true);
+										$('#' + k + "TRUE").prop("checked", true);
 									} else {
-										$('#'+k+"FALSE").prop("checked", true);
+										$('#' + k + "FALSE").prop("checked", true);
 									}
 							}
 						} else if ($(elem).is("select")) {
@@ -309,8 +309,8 @@ function loadProject (projectID) {
 							if (typeof attr !== typeof undefined && attr !== false) {
 								// multiple
 								if (k == "mthPlatforms") {
-									$.each(v, function(key, val) {
-										$("option[value=mth_pf_"+val.id+"]").attr("selected", true);
+									$.each(v, function (key, val) {
+										$("option[value=mth_pf_" + val.id + "]").attr("selected", true);
 									});
 								}
 							} else {
@@ -321,16 +321,16 @@ function loadProject (projectID) {
 							// tml debug
 							// console.log(elem);
 						}
-					} 
-					
+					}
+
 				});
 				// cloudwords
-				$.each(project.thematicWords, function(index, value){ 
-					cloudWord ($("#cw_"+value.id));
+				$.each(project.thematicWords, function (index, value) {
+					cloudWord($("#cw_" + value.id));
 				});
 				// subcloudwords
-				$.each(project.subThematicWords, function(index, value){ 
-					subCloudWord ($("#scw_"+value.id));
+				$.each(project.subThematicWords, function (index, value) {
+					subCloudWord($("#scw_" + value.id));
 				});
 				// other select
 				if (project.financialContextIsProjectANR) {
@@ -375,54 +375,77 @@ function loadProject (projectID) {
 				if (project.scientificContextFile !== null && project.scientificContextFile !== "") {
 					$("#link-to-upload-file").click();
 					$("#project-scientificContextFile").parent().show();
-					var linkFile = 'download current file: <a href="'+project.scientificContextFileURL+'" target="_blank">'+project.scientificContextFile+'</a>'
+					var linkFile = 'download current file: <a href="' + project.scientificContextFileURL + '" target="_blank">' + project.scientificContextFile + '</a>'
 					$("#project-scientificContextFile").html(linkFile);
 					$("#project-scientificContextFileDeleteBtn").show();
-				} 
+				}
 				// extra data
 				if (project.hasOwnProperty("analysisRequestExtraData") && project.analysisRequestExtraData != null) {
 					var extraData = project.analysisRequestExtraData;
 					$("#extra_adminContext").val(extraData.administrativeContext);
+					// mama#61
+					$("#extra_managerContext").val(extraData.managerContext);
 					$("#extra_budget").val(extraData.budgetConstraint);
 					$("#extra_deadline").val(extraData.deadline);
 					$("#extra_geoContext").val(extraData.geographicContext);
 					$("#extra_projectMaturity").val(extraData.projectMaturity);
 					$("#extra_userNeeds").val(extraData.syntheticUserNeeds);
 					if (extraData.knowMTHviaCoworkerOrFriend)
-						$("#extra_hdykm_friend").attr("checked",  true);
+						$("#extra_hdykm_friend").attr("checked", true);
 					if (extraData.knowMTHviaPublication)
-						$("#extra_hdykm_publication").attr("checked",  true);
+						$("#extra_hdykm_publication").attr("checked", true);
 					if (extraData.knowMTHviaSearchEngine)
-						$("#extra_hdykm_searchEngine").attr("checked",  true);
+						$("#extra_hdykm_searchEngine").attr("checked", true);
+					// mama#64 - add new 'formal user' field
+					if (extraData.knowMTHviaFormalUser)
+						$("#extra_hdykm_formalUser").attr("checked", true);
 					if (extraData.knowMTHviaWebsite)
-						$("#extra_hdykm_website").attr("checked",  true);
+						$("#extra_hdykm_website").attr("checked", true);
 					switch (extraData.laboType) {
-					case "public":
-						$("#extra_laboType_public").attr("checked",  true);
-						break;
-					case "private":
-						$("#extra_laboType_private").attr("checked",  true);
-						break;
-					case "private/public":
-						$("#extra_laboType_privatepublic").attr("checked",  true);
-						break;
+						case "public":
+							$("#extra_laboType_public").attr("checked", true);
+							break;
+						case "private":
+							$("#extra_laboType_private").attr("checked", true);
+							break;
+						case "private/public":
+							$("#extra_laboType_privatepublic").attr("checked", true);
+							break;
 					}
 					// new 1.0.3 - mama#9 dialogbox
 					$("#extra_dialogBoxVal").val(extraData.dialogBoxVal);
 					$("#extra_dialogBoxTxt").val(extraData.dialogBoxTxt);
+					// mama#66 - manager keywords
+					$.each(extraData.managerThematicWords, function (index, value) {
+						managerCloudWord($("#mcw_" + value.id));
+					});
+					// mama#68 - ext. manager ID
+					$("#extra_extManagerId").val(extraData.externalManagerIdentifier);
+					// mama#65 - mth sub-PF 
+					$.each(extraData.mthSubPlatforms, function (key, val) {
+						$("option[value=mth_sub_pf_" + val.id + "]").attr("selected", true);
+					});
 				}
-				
-				// mop
-				$("input[type=checkbox]").change();
-				$("input[type=radio]").change();
-				$("select").change();
+				// mama#60 - lab. RNSR
+				$("#createProject_content_project_clientsLabRNSR_input").val(project.labRNSR);
+				$("#createProject_content_project_clientsLabRNSR_hidden").val(project.labRNSR);
+				$("#createProject_content_project_clientsLabRNSR_input").trigger("change");
+				$(".typeahead").eq(0).val(project.labRNSR).trigger("input")
+				setTimeout(function () { $("#createProject_content_project_clientsLabRNSR_input").parent().find("strong").trigger("click") }, 250);
+				// focus back first editable field
+				setTimeout(function () { $("#interestInMthCollaboration").trigger("focus") }, 300);
+
+				// update all kind of fields
+				$("input[type=checkbox]").trigger("change");
+				$("input[type=radio]").trigger("change");;
+				$("select").trigger("change");;
 				// focus
-				$("#interestInMthCollaboration").focus();
+				$("#interestInMthCollaboration").trigger("focus");;
 				// mama#18
-				$("#scientificContext").keyup();
+				$("#scientificContext").trigger("keyup");
 			}
 		},
-		error : function(xhr) {
+		error: function (xhr) {
 			console.log(xhr);
 			// TODO show error message info
 		}
@@ -437,22 +460,22 @@ function checkUpdateProjectForm() {
 	var verbe = "put";
 	var resource = "project&projectID=" + projectID;
 	var params = "";
-	$.each($("input[type=text]"), function(k, v) {
+	$.each($("input[type=text]"), function (k, v) {
 		params += "&" + $(this).prop('id') + "="
-				+ encodeURIComponent($("#" + $(this).prop('id')).val());
+			+ encodeURIComponent($("#" + $(this).prop('id')).val());
 	});
-	$.each($("input[type=checkbox]"), function(k, v) {
+	$.each($("input[type=checkbox]"), function (k, v) {
 		params += "&" + $(this).prop('id') + "="
-				+ $("#" + $(this).prop('id')).is(":checked");
+			+ $("#" + $(this).prop('id')).is(":checked");
 	});
-	$.each($("select"), function(k, v) {
+	$.each($("select"), function (k, v) {
 		if ($(this).prop('id') != "mthPlatforms")
 			params += "&" + $(this).prop('id') + "="
-					+ $("#" + $(this).prop('id')).val();
+				+ $("#" + $(this).prop('id')).val();
 	});
-	$.each($("textarea"), function(k, v) {
+	$.each($("textarea"), function (k, v) {
 		params += "&" + $(this).prop('id') + "="
-				+ encodeURIComponent($("#" + $(this).prop('id')).val());
+			+ encodeURIComponent($("#" + $(this).prop('id')).val());
 	});
 	params += "&targeted=" + $("input[name=targeted]:checked").val();
 	params += "&copartner=" + $("input[name=canBeForwardedToCoPartner]:checked").val();
@@ -460,32 +483,46 @@ function checkUpdateProjectForm() {
 		params += "&extra_laboType=" + $("input[name=laboType]:checked").val();
 	}
 	var cloudWords = [];
-	$.each($(".cloud-word.label-success"), function() {
+	$.each($(".cloud-word.label-success"), function () {
 		cloudWords.push($(this).attr('id').replace("cw_", ""));
 	});
 	params += "&cloudWords=" + cloudWords;
 	var subCloudWords = [];
-	$.each($(".sub-cloud-word.label-success"), function() {
+	$.each($(".sub-cloud-word.label-success"), function () {
 		subCloudWords.push($(this).attr('id').replace("scw_", ""));
 	});
 	params += "&subCloudWords=" + subCloudWords;
 	var mthPF = [];
-	$.each($("#mthPlatforms option:selected"), function() {
+	$.each($("#mthPlatforms option:selected"), function () {
 		mthPF.push($(this).attr('value').replace("mth_pf_", ""));
 	});
 	params += "&mthPlatforms=" + mthPF;
 	params += "&scientificContextFile=" + $("#attachedFile").val();
+	// mama#60 - lab RNSR (input type=hidden)
+	params += "&labRNSR=" + encodeURIComponent($("#createProject_content_project_clientsLabRNSR_hidden").val());
+	// mama#66 - manager keywords
+	const managerCloudWords = [];
+	$.each($(".manager-cloud-word.label-success"), function () {
+		managerCloudWords.push($(this).attr('id').replace("mcw_", ""));
+	});
+	params += "&extra_managerThematicWords=" + managerCloudWords;
+	// mama#65 - mth sub-PF
+	const mthSubPF = [];
+	$.each($("#mthSubPlatforms option:selected"), function () {
+		mthSubPF.push($(this).attr('value').replace("mth_sub_pf_", ""));
+	});
+	params += "&extra_mthSubPlatforms=" + mthSubPF;
 	// run
 	$.ajax({
-		type : "post",
-		url : "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
-				+ resource,
-		dataType : "json",
-		async : true,
-		data : params,
-		success : function(json) {
+		type: "post",
+		url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+			+ resource,
+		dataType: "json",
+		async: true,
+		data: params,
+		success: function (json) {
 			if (json.success) {
-				location.search = "?page=edit-project&editProject="+projectID+"&update=success";
+				location.search = "?page=edit-project&editProject=" + projectID + "&update=success";
 			} else {
 				// show wrong password info
 				$("#divError").show();
@@ -494,7 +531,7 @@ function checkUpdateProjectForm() {
 				}
 			}
 		},
-		error : function(xhr) {
+		error: function (xhr) {
 			console.log(xhr);
 			// show error message info
 			$("#divError").show();
@@ -510,50 +547,52 @@ function checkNewProjectForm() {
 	var verbe = "post";
 	var resource = "project";
 	var params = "";
-	$.each($("form input[type=text]"), function(k, v) {
+	$.each($("form input[type=text]"), function (k, v) {
 		params += "&" + $(this).prop('id') + "="
-				+ encodeURIComponent($("#" + $(this).prop('id')).val());
+			+ encodeURIComponent($("#" + $(this).prop('id')).val());
 	});
-	$.each($("form input[type=checkbox]"), function(k, v) {
+	$.each($("form input[type=checkbox]"), function (k, v) {
 		params += "&" + $(this).prop('id') + "="
-				+ $("#" + $(this).prop('id')).is(":checked");
+			+ $("#" + $(this).prop('id')).is(":checked");
 	});
-	$.each($("form select"), function(k, v) {
+	$.each($("form select"), function (k, v) {
 		if ($(this).prop('id') != "mthPlatforms")
 			params += "&" + $(this).prop('id') + "="
-					+ $("#" + $(this).prop('id')).val();
+				+ $("#" + $(this).prop('id')).val();
 	});
-	$.each($("form textarea"), function(k, v) {
+	$.each($("form textarea"), function (k, v) {
 		params += "&" + $(this).prop('id') + "="
-				+ encodeURIComponent($("#" + $(this).prop('id')).val());
+			+ encodeURIComponent($("#" + $(this).prop('id')).val());
 	});
 	params += "&targeted=" + $("input[name=targeted]:checked").val();
 	params += "&copartner=" + $("input[name=copartner]:checked").val();
 	var cloudWords = [];
-	$.each($(".cloud-word.label-success"), function() {
+	$.each($(".cloud-word.label-success"), function () {
 		cloudWords.push($(this).attr('id').replace("cw_", ""));
 	});
 	params += "&cloudWords=" + cloudWords;
 	var subCloudWords = [];
-	$.each($(".sub-cloud-word.label-success"), function() {
+	$.each($(".sub-cloud-word.label-success"), function () {
 		subCloudWords.push($(this).attr('id').replace("scw_", ""));
 	});
 	params += "&subCloudWords=" + subCloudWords;
 	var mthPF = [];
-	$.each($("#mthPlatforms option:selected"), function() {
+	$.each($("#mthPlatforms option:selected"), function () {
 		mthPF.push($(this).attr('value').replace("mth_pf_", ""));
 	});
 	params += "&mthPlatforms=" + mthPF;
 	params += "&scientificContextFile=" + $("#attachedFile").val();
+	// mama#60 - lab RNSR (input type=hidden)
+	params += "&labRNSR=" + encodeURIComponent($("#createProject_content_project_clientsLabRNSR_hidden").val());
 	// run
 	$.ajax({
-		type : "post",
-		url : "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
-				+ resource,
-		dataType : "json",
-		async : true,
-		data : params,
-		success : function(json) {
+		type: "post",
+		url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+			+ resource,
+		dataType: "json",
+		async: true,
+		data: params,
+		success: function (json) {
 			if (json.success) {
 				location.search = "?page=dashboard";
 			} else {
@@ -564,7 +603,7 @@ function checkNewProjectForm() {
 				}
 			}
 		},
-		error : function(xhr) {
+		error: function (xhr) {
 			console.log(xhr);
 			// show error message info
 			$("#divError").show();
@@ -586,12 +625,12 @@ function checkIfFormNewProjectValid() {
 		isFormValid = false;
 		$("#projectTitle").parent().find("sup").css("color", "red");
 	}
-	
+
 	if ($("#interestInMthCollaboration").val() == "") {
 		isFormValid = false;
 		$("#interestInMthCollaboration").parent().find("sup").css("color", "red");
 	}
-	
+
 	if ($("input[name=demandType]:checked").size() == 0) {
 		isFormValid = false;
 		$("#createProject_content_projectDemandType").parent().find("sup").css("color", "red");
@@ -601,23 +640,23 @@ function checkIfFormNewProjectValid() {
 		isFormValid = false;
 		$("#createProject_content_projectType_thematicCloudWords").parent().find("sup").css("color", "red");
 	}
-	
+
 	if ($("#mthPlatforms :checked").size() == 0) {
 		isFormValid = false;
-		$("#createProject_content_project_mthPF").parent().find("sup").css("color", "red"); console.log(0);
+		$("#createProject_content_project_mthPF").parent().find("sup").css("color", "red");
 	}
-	
+
 	if ($("#financialContext :checked").size() == 0) {
 		isFormValid = false;
 		$("#createProject_content_project_financialContext").parent().find("sup").css("color", "red");
 	}
-	
+
 	if (isFormValid) {
 		$("#submitNewDAbtn").attr("disabled", false);
 	} else {
 		$("#submitNewDAbtn").addClass("btn-disabled");
 		$("#submitNewDAbtn").attr("disabled", true);
-	} 
+	}
 	return isFormValid;
 }
 
@@ -631,13 +670,13 @@ function removeAttachedFile() {
 	var params = "";
 	// run
 	$.ajax({
-		type : "post",
-		url : "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
-				+ resource,
-		dataType : "json",
-		async : true,
-		data : params,
-		success : function(json) {
+		type: "post",
+		url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+			+ resource,
+		dataType: "json",
+		async: true,
+		data: params,
+		success: function (json) {
 			if (json.success) {
 				$("#project-scientificContextFile").hide();
 				$("#project-scientificContextFileDeleteBtn").hide();
@@ -649,11 +688,113 @@ function removeAttachedFile() {
 				}
 			}
 		},
-		error : function(xhr) {
+		error: function (xhr) {
 			console.log(xhr);
 			// show error message info
 			$("#divError").show();
 		}
 	});
 	return false;
+}
+
+// mama#60 - support clients' lab RNSR
+/**
+ * Init the client labs RNSR labels
+ */
+function initClientsLabRNSR() {
+	const id = "createProject_content_project_clientsLabRNSR_input";
+	// autocomplete with $.get json ajax search
+	$('#createProject_content_project_clientsLabRNSR_input')//
+		.attr('disabled', false)//
+		.typeahead('destroy')//
+		.typeahead({
+			source: function (query, process) {
+				return $.get("json/list_labs_rnsr.json", //
+					// { query: query, source: id },//
+					function (data) {
+						return process(data);
+					});
+			},
+			minLength: 2,
+			autoSelect: true
+		})//
+		.on('change', function () {
+			const active = $('#createProject_content_project_clientsLabRNSR_input').typeahead("getActive");
+			if (active === null) return;
+			const text = active.id + " (" + (active.a ? "Active" : "Inactive") + ")";
+			$('#createProject_content_project_clientsLabRNSR_display').val(text).show();
+			$('#createProject_content_project_clientsLabRNSR_hidden').val(active.name);
+		})//
+		.trigger("change");
+}
+
+// mama#66
+
+function buildManagerKeywords() {
+	var verbe = "get";
+	var resource = "managerkeywords";
+	var extraFilter = "&order=asc&deleted=false"
+	// run
+	$.ajax({
+		type: "get",
+		url: "ajax/ajax_proxypass.php?verbe=" + verbe
+			+ "&resource=" + resource + extraFilter,
+		dataType: "json",
+		async: true,
+		success: function (keywords) {
+			if (keywords.hasOwnProperty('success')
+				&& keywords.success == false) {
+				// TODO show error message info
+			} else {
+				if (keywords.length === 0) {
+					// $("#noKeywordsToShow").show();
+				} else {
+					var keywordsHTML = "";
+					var cptk = 0;
+					keywords.sort(compareKeyworks);
+					$.each(keywords, function (k, v) {
+						keywordsHTML += '<span id="mcw_' + v.id + '" class="manager-cloud-word label label-default" onclick="managerCloudWord(this)">' + v.word + '</span>';
+						cptk++;
+						if (cptk == 4) {
+							cptk = 0;
+							keywordsHTML += ' ';
+						} else {
+							keywordsHTML += ' ';
+						}
+					});
+					$("#targetManagerCloudWords").html(keywordsHTML);
+				}
+			}
+		},
+		error: function (xhr) {
+			console.log(xhr);
+			// TODO show error message info
+		}
+	});
+}
+
+
+function managerCloudWord(span) {
+	if ($(span).hasClass("label-default")) {
+		$(span).removeClass("label-default");
+		$(span).addClass("label-success");
+	} else if ($(span).hasClass("label-success")) {
+		$(span).removeClass("label-success");
+		$(span).addClass("label-default");
+	} else if ($(span).hasClass("label-danger")) {
+		return;
+	}
+	var count = $(".manager-cloud-word.label-success").size();
+	var increase = true;
+	if (count < 5) {
+		$.each($(".manager-cloud-word.label-danger"), function () {
+			$(this).removeClass("label-danger");
+			$(this).addClass("label-default");
+		});
+	} else {
+		$.each($(".manager-cloud-word.label-default"), function () {
+			$(this).removeClass("label-default");
+			$(this).addClass("label-danger");
+		});
+	}
 }

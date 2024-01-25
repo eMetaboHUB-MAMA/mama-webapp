@@ -172,6 +172,20 @@
 		demande RDV sur proj. &quot;${appointment.project}&quot; soumis 
 		par ${appointment.fromUser} pour ${appointment.toUser} échoué
 
+	<!-- mama#60 -->
+	{%elif type == "_new_managerkeyword"%}
+		<i class="fa fa-pencil-square-o"></i>
+		${user.fullName} a ajouté nouv. le mot-clef gestionnaire : ${oldName}
+	{%elif type == "_update_managerkeyword"%}
+		<i class="fa fa-pencil-square-o"></i>
+		${user.fullName} a renommé le mot-clef gestionnaire <i>${oldName}</i> en <i>${newName}</i>
+	{%elif type == "_restore_managerkeyword"%}
+		<i class="fa fa-check-circle"></i>
+		${user.fullName} a re-mis le mot-clef gestionnaire <i>${oldName}</i>
+	{%elif type == "_delete_managerkeyword"%}
+		<i class="fa fa-times-circle"></i>
+		${user.fullName} a supp. le mot-clef gestionnaire <i>${oldName}</i>
+
 	{%/if%}
 	<span class="pull-right text-muted small" data-toggle="tooltip" data-placement="top" title="${toogleDate}">
 		{%if nbYearsAgo != 0 && nbMonthsAgo > 23 %}

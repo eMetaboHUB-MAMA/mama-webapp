@@ -6,14 +6,12 @@
 <div class="row">
 	<div class="col-lg-12">
 		<ul class="nav nav-tabs" style="margin-bottom: 15px;">
-			<li class="active"><a href="#server-status" data-toggle="tab"><i
-					class="fa fa-tachometer"></i> Server load</a></li>
-			<li><a href="#mama-settings" data-toggle="tab"> <i
-					class="fa fa-cogs"></i> MAMA Settings
-			</a></li>
-			<li><a href="#cleaner-tools" data-toggle="tab"> <i
-					class="fa fa-wrench"></i> Cleaner Tools
-			</a></li>
+			<li class="active"><a href="#server-status" data-toggle="tab"><i class="fa fa-tachometer"></i> Server
+					load</a></li>
+			<li><a href="#mama-settings" data-toggle="tab"> <i class="fa fa-cogs"></i> MAMA Settings
+				</a></li>
+			<li><a href="#cleaner-tools" data-toggle="tab"> <i class="fa fa-wrench"></i> Cleaner Tools
+				</a></li>
 		</ul>
 
 		<div id="backoffice-mgmt" class="tab-content">
@@ -26,8 +24,8 @@
 								<i class="fa fa-area-chart fa-fw"></i> Server status
 							</div>
 							<div class="panel-body">
-								<div id="container-update"
-									style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+								<div id="container-update" style="min-width: 310px; height: 400px; margin: 0 auto">
+								</div>
 								<!-- <a href="#" class="btn btn-default btn-block"><span class="lang-class viewDetails"></span></a> -->
 							</div>
 							<!-- /.panel-body -->
@@ -42,27 +40,24 @@
 							<div class="panel-body">
 								<ul class="list-group" style="max-width: 600px;">
 									<li class="list-group-item">
-										<button id="cleanUploadFiles"
-											class="btn btn-primary" onclick="cleanUploaded();"
-											type="button" style="">
+										<button id="cleanUploadFiles" class="btn btn-primary" onclick="cleanUploaded();"
+											type="button">
 											<i class="fa fa-eraser"></i> Clean uploaded files
 										</button>
 										<span id="cleanUploadedMessage" class="pull-right"><i class="fa"></i></span>
 										<br /><small>clean only upload file not link to a project!</small>
 									</li>
 									<li class="list-group-item">
-										<button id="showLogFiles"
-											class="btn btn-primary" onclick="showLogs(0, 20, 'daily-mailler');"
-											type="button" style="">
+										<button id="showLogFiles" class="btn btn-primary"
+											onclick="showLogs(0, 20, 'daily-mailler');" type="button">
 											<i class="fa fa-eye"></i> Show MAMA log
 										</button>
 									</li>
 									<li class="list-group-item">
-										<a id="openPhpMyAdmin"
-											class="btn btn-primary" target="_blank"
+										<a id="openPhpMyAdmin" class="btn btn-primary" target="_blank"
 											href="https://managers.pfem.clermont.inra.fr/phpmyadmin/?server=3"
-											type="button" style="">
-												<i class="fa fa-database"></i> Open phpMyAdmin
+											type="button">
+											<i class="fa fa-database"></i> Open phpMyAdmin
 										</a>
 									</li>
 								</ul>
@@ -83,9 +78,11 @@
 								<li class="list-group-item">
 									<div class="form-group">
 										Clean tokens older than
-										<input id="cleanTokenNbHours" class="form-control" type="number" value="24" min="1" max="36">  
+										<input id="cleanTokenNbHours" class="form-control" type="number" value="24"
+											min="1" max="36">
 										hour(s)
-										<button id="btnCleanTokens" class="btn btn-primary btn-xs" onclick="cleanTokens();" type="button" style="">
+										<button id="btnCleanTokens" class="btn btn-primary btn-xs"
+											onclick="cleanTokens();" type="button">
 											<i class="fa fa-eraser"></i> Clean!
 										</button>
 									</div>
@@ -93,9 +90,11 @@
 								<li class="list-group-item">
 									<div class="form-group">
 										Archive project older than
-										<input id="archiveProjectNbYears" class="form-control" type="number" value="5" min="3" max="10">  
+										<input id="archiveProjectNbYears" class="form-control" type="number" value="5"
+											min="3" max="10">
 										years
-										<button id="btnArchiveProjects" class="btn btn-primary btn-xs" onclick="archiveProjects();" type="button" style="">
+										<button id="btnArchiveProjects" class="btn btn-primary btn-xs"
+											onclick="archiveProjects();" type="button">
 											<i class="fa fa-eraser"></i> Clean!
 										</button>
 									</div>
@@ -103,9 +102,11 @@
 								<li class="list-group-item">
 									<div class="form-group">
 										Inactive user(s) not logged for
-										<input id="inactiveUsersNbWeeks" class="form-control" type="number" value="5" min="3" max="10">  
+										<input id="inactiveUsersNbWeeks" class="form-control" type="number" value="5"
+											min="3" max="10">
 										weeks
-										<button id="btnInactiveUsers" class="btn btn-primary btn-xs" onclick="inactiveUsers();" type="button" style="">
+										<button id="btnInactiveUsers" class="btn btn-primary btn-xs"
+											onclick="inactiveUsers();" type="button">
 											<i class="fa fa-eraser"></i> Clean!
 										</button>
 									</div>
@@ -115,7 +116,7 @@
 					</div><!-- ./col-log.6 -->
 					<div class="col-lg-6">
 						<div class="table-responsive">
-						<!-- 
+							<!-- 
 						<table class="table table-hover tablesorter table-search">
 							<thead>
 								<tr>
@@ -224,11 +225,35 @@
 								<div class="form-group input-group" style="max-width: 500px;">
 									<span class="input-group-addon">New MetaboHub Platform</span> <input
 										id="newMTHPlatform" type="text" class="form-control"
-										placeholder="enter a new MTH platform"> <span
-										class="input-group-btn">
+										placeholder="enter a new MTH platform"> <span class="input-group-btn">
 										<button id="newMTHpfBtn" class="btn btn-success" type="button"
-											onclick="addNewMTHPlatform()"
-											title="add">
+											onclick="addNewMTHPlatform()" title="add">
+											<i class="fa fa-plus"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- mama#65 -->
+					<div class="col-lg-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<i class="fa fa-map-signs fa-fw"></i> MTH Sub-plateform / sites
+							</div>
+							<div class="panel-body">
+								<div id="noMTHSubPlatformsToShow">
+									<h3>
+										Sorry <small>no MetaboHUB sub-platform / site to display yet</small>
+									</h3>
+								</div>
+								<ul class="list-group" id="mthSubPlatforms-light-list-container"></ul>
+								<div class="form-group input-group" style="max-width: 500px;">
+									<span class="input-group-addon">New MetaboHub Sub-Platform</span>
+									<input id="newMTHSubPlatform" type="text" class="form-control"
+										placeholder="enter a new MTH sub-platform"> <span class="input-group-btn">
+										<button id="newMTHsubpfBtn" class="btn btn-success" type="button"
+											onclick="addNewMTHSubPlatform()" title="add">
 											<i class="fa fa-plus"></i>
 										</button>
 									</span>
@@ -249,12 +274,11 @@
 								</div>
 								<ul id="keywords-light-list-container" class="list-group"></ul>
 								<div class="form-group input-group" style="max-width: 400px;">
-									<span class="input-group-addon">New keyword</span> <input
-										id="newKeyword" type="text" class="form-control"
-										placeholder="enter a keyword"> <span
+									<span class="input-group-addon">New keyword</span> <input id="newKeyword"
+										type="text" class="form-control" placeholder="enter a keyword"> <span
 										class="input-group-btn">
-										<button id="newKeywordBtn" class="btn btn-success"
-											onclick="addNewKeyword()" type="button" title="add">
+										<button id="newKeywordBtn" class="btn btn-success" onclick="addNewKeyword()"
+											type="button" title="add">
 											<i class="fa fa-plus"></i>
 										</button>
 									</span>
@@ -275,12 +299,39 @@
 								</div>
 								<ul id="subkeywords-light-list-container" class="list-group"></ul>
 								<div class="form-group input-group" style="max-width: 400px;">
-									<span class="input-group-addon">New Subkeyword</span> <input
-										id="newSubKeyword" type="text" class="form-control"
-										placeholder="enter a subkeyword"> <span
-										class="input-group-btn">
-										<button id="newKeywordBtn" class="btn btn-success"
+									<span class="input-group-addon">New Subkeyword</span>
+									<input id="newSubKeyword" type="text" class="form-control"
+										placeholder="enter a subkeyword">
+									<span class="input-group-btn">
+										<button id="newSubKeywordBtn" class="btn btn-success"
 											onclick="addNewSubKeyword()" type="button" title="add">
+											<i class="fa fa-plus"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- mama#66 -->
+					<div class="col-lg-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<i class="fa fa-cloud fa-fw"></i> Projects Manager Keywords
+							</div>
+							<div class="panel-body">
+								<div id="noManagerKeywordsToShow">
+									<h3>
+										Sorry <small>no manager keyword to display yet</small>
+									</h3>
+								</div>
+								<ul id="managerkeywords-light-list-container" class="list-group"></ul>
+								<div class="form-group input-group" style="max-width: 400px;">
+									<span class="input-group-addon">New Manager Keyword</span>
+									<input id="newManagerKeyword" type="text" class="form-control"
+										placeholder="enter a manager keyword">
+									<span class="input-group-btn">
+										<button id="newManagerKeywordBtn" class="btn btn-success"
+											onclick="addNewManagerKeyword()" type="button" title="add">
 											<i class="fa fa-plus"></i>
 										</button>
 									</span>
@@ -306,15 +357,16 @@
 			</div>
 			<div class="modal-body">
 				<p>
-					<div class="form-group input-group" style="max-width: 400px;">
-						<span class="input-group-addon">New name</span> <input id="newName" type="text" class="form-control" placeholder="enter a new label">
-					</div>
+				<div class="form-group input-group" style="max-width: 400px;">
+					<span class="input-group-addon">New name</span> <input id="newName" type="text" class="form-control"
+						placeholder="enter a new label">
+				</div>
 				</p>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
-				<button type="button" class="btn btn-success"
-					onclick="saveAdminObject()">
+				<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>
+					Cancel</button>
+				<button type="button" class="btn btn-success" onclick="saveAdminObject()">
 					<i class="fa fa-check"></i> Save
 				</button>
 			</div>
@@ -330,19 +382,24 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title">
-					<button id="showLogDailyMaillerBtn" class="btn btn-primary btn-showlog" onclick="showLogs(1, 20, 'daily-mailler');" type="button" style="">
+					<button id="showLogDailyMaillerBtn" class="btn btn-primary btn-showlog"
+						onclick="showLogs(1, 20, 'daily-mailler');" type="button">
 						Daily mailler
 					</button>
-					<button id="showLogweeklyMaillerBtn" class="btn btn-primary btn-showlog" onclick="showLogs(1, 20, 'weekly-mailler');" type="button" style="">
+					<button id="showLogweeklyMaillerBtn" class="btn btn-primary btn-showlog"
+						onclick="showLogs(1, 20, 'weekly-mailler');" type="button">
 						Weekly mailler
 					</button>
-					<button id="showLogMontlhyUsersInactiverBtn" class="btn btn-primary btn-showlog" onclick="showLogs(1, 20, 'monthly-users_inactiver');" type="button" style="">
+					<button id="showLogMontlhyUsersInactiverBtn" class="btn btn-primary btn-showlog"
+						onclick="showLogs(1, 20, 'monthly-users_inactiver');" type="button">
 						Montlhy users inactiver
 					</button>
 				</h4>
 			</div>
 			<div class="modal-body">
-				<p id="logContent" style="overflow: auto; max-height: 500px; max-width: 1000px; font-family: Monospace; white-space: nowrap; color: white; background-color: black;"></p>
+				<p id="logContent"
+					style="overflow: auto; max-height: 500px; max-width: 1000px; font-family: Monospace; white-space: nowrap; color: white; background-color: black;">
+				</p>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Close</button>
@@ -356,5 +413,5 @@
 </div>
 
 <script type="text/javascript">
-	
+
 </script>

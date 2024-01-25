@@ -342,6 +342,9 @@ function loadProjectsList(start, limit, status) {
 		dataType: "json",
 		async: true,
 		success: function (projects) {
+			// mama#61 register project data in window
+			window['project'] = [];
+			// process response
 			if (projects != null && projects.hasOwnProperty('success')
 				&& projects.success == false) {
 				// TODO show error message info
@@ -367,6 +370,17 @@ function loadProjectsList(start, limit, status) {
 							analystsInChargeList += "" + v.fullName;
 						});
 						this['analystsInChargeList'] = analystsInChargeList;
+						// mama#61 - register mandarory field values
+						window['project'][this.id] = [];
+						if (this.analysisRequestExtraData !== null) {
+							window['project'][this.id]['administrativeContext'] = this.analysisRequestExtraData.administrativeContext;
+							window['project'][this.id]['managerContext'] = this.analysisRequestExtraData.managerContext;
+							window['project'][this.id]['geographicContext'] = this.analysisRequestExtraData.geographicContext;
+						} else {
+							window['project'][this.id]['administrativeContext'] = null;
+							window['project'][this.id]['managerContext'] = null;
+							window['project'][this.id]['geographicContext'] = null;
+						}
 					});
 					$("#projects-full-list-template").tmpl(projects).appendTo("#projects-full-list-container");
 					$(".multiselect-involved").multiselect({
@@ -791,6 +805,18 @@ function reloadPage(newStatus) {
  * 
  */
 function searchProjects() {
+	// mama#67 - if search a project ID, redirect to this project sheet without a search
+	let keyword = ($("#projectsSearchFilter").val().trim());
+	if (Number(keyword) == keyword) {
+		// if full id, shorter it (remove fist 4 digists)
+		if (keyword.length >= 9) {
+			keyword = keyword.substr(4);
+		}
+		// redirect
+		document.location = "?page=edit-project&editProject=" + Number(keyword);
+		return;
+	}
+	// default search
 	reloadPage(currentStatus);
 }
 
@@ -867,6 +893,19 @@ function setProjectStatus(projectID, newStatus) {
 	// mama#32 - ask reject confirmation before update
 	if (newStatus === "rejected") {
 		if (!confirm(_confirm_popup_reject_project)) {
+			return false;
+		}
+	}
+	// mama#61 - check if fields 'administative/manager/geographical context' are fulfilled (are now mandatory)
+	if (newStatus === "running") {
+		const administrativeContext = window['project'][projectID]['administrativeContext'];
+		const managerContext = window['project'][projectID]['managerContext'];
+		const geographicContext = window['project'][projectID]['geographicContext'];
+		if (administrativeContext === null || administrativeContext === '' ||
+			managerContext === null || managerContext === '' ||
+			geographicContext === null || geographicContext === ''
+		) {
+			alert(_warning_popup_cannot_switch_to_running_missing_mandatory_data)
 			return false;
 		}
 	}

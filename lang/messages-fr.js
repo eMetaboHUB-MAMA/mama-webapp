@@ -265,7 +265,7 @@ editProject_extraBox_laboType = "Type de Laboratoire"
 editProject_extraBox_laboType_private = "privé"
 editProject_extraBox_laboType_public = "public"
 editProject_extraBox_laboType_privatepublic = "privé/public"
-editProject_extraBox_adminContext = "Contexte administratif"
+editProject_extraBox_adminContext = "Tutelle administrative"
 editProject_extraBox_adminContext_ph = "exp. : MNHN - UMR 12345"
 editProject_extraBox_adminContext_help = "Veuillez indiquer la tutelle principale (INRA, CNRS, CEA, INSERM, Université, INSA, etc.) et l’unité de recherche ou le nom de la société."
 editProject_extraBox_geoContext = "contexte Géographique"
@@ -303,7 +303,7 @@ editProject_btn_update = "Mettre à jour"
 // list projects
 listProjects_noProject_title = "Désolé,"
 listProjects_noProject_text = "aucune sollicitation / aucun projet à afficher pour le moment !"
-listProjects_search_ph = "exp. : titre de la sollicitations / du projet"
+listProjects_search_ph = "exp. : titre ou ID de la sollicitations / du projet"
 listProjects_search_filter_all = "Tous"
 listProjects_search_filter_blocked = "Pj en pause"
 listProjects_search_filter_rejected = "Sol. rejetées"
@@ -502,7 +502,7 @@ _multiselect_mth_platforms_nSelectedText = "selectionnée"
 _multiselect_mth_platforms_allSelectedText = "Toutes selectionnées"
 
 // new filters (mama#36)
-_listProjects_filter_title = "Titre"
+_listProjects_filter_title = "Titre ou ID"
 _title_filter_pj_title = "Filtrer sur un motif du titre du projet"
 _listProjects_filter_owner = "Prop."
 _title_filter_pj_owner = "Filtrer sur un motif de l'email du prop. du projet"
@@ -527,3 +527,28 @@ _contact_btn_writeMessage = "Envoyer le message"
 
 // new rejected reason (mama#53)
 _modal_stopProject_rejectedSelect_opt_canceled_by_client = "Annulé par le client"
+
+// new Lab RNSR (mama#60)
+createProject_content_project_clientsLabRNSR = "RNSR du labo.";
+createProject_content_project_clientsLabRNSR_ph = "Entrez le label RNSR de votre laboratoire";
+createProject_content_project_clientsLabRNSR_def = "Identifiant RNSR de laboratoires: seulement pour les laboratoires public Français&nbsp;; entrez le <a href=\"https://www.data.gouv.fr/fr/datasets/repertoire-national-des-structures-de-recherche-rnsr/\" target=\"_blank\">RNSR</a> de votre structure."
+
+// new manager context (mama#61)
+editProject_extraBox_managerContext = "Tutelle du gestionnaire"
+editProject_extraBox_managerContext_ph = "exp. : UNH - UMR 4266"
+editProject_extraBox_managerContext_help = "Veuillez indiquer la tutelle du gestionnaire et l’unité de recherche ou le nom de la société."
+_warning_popup_cannot_switch_to_running_missing_mandatory_data = "⚠️ Vous ne pouvez pas changer le status à 'en cours':\n informations manquantes dans la section 'stats. MTH'\n (soit 'Tutelle administrative', 'Tutelle du gestionnaire' ou 'Contexte géographique')."
+
+// new response for 'how did you known MHT' ⇒ 'formal user' (mama#64)
+editProject_extraBox_hdykm_formalUser = "ancien utilisateur"
+
+// new mananger keywords in 'MTH stats box' (mama#66)
+createProject_content_projectType_managerThematicCloudWords = "Mots-clefs pour gestionnaires"
+createProject_content_projectType_managerThematicCloudWords_help = "choisir 5 max."
+
+// new field to follow project outside of MAMA; in 'MTH stats box' (mama#68)
+editProject_extraBox_extManagerId = "ID/URL de gestionnaire ext." //
+editProject_extraBox_extManagerId_ph = "exp : nom du LIMS, ID de LIMS, URL, ..."
+
+// new field "MTH sub platform"; in 'MTH stats box' (mama#65)
+createProject_content_project_mthSubPF = "sous-plateforme(s) MTH<br/>(sous-site(s))"

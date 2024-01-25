@@ -147,7 +147,7 @@
 							class="lang"></span>
 						<hr />
 					</div>
-					<div class="form-group " style="">
+					<div class="form-group ">
 						<label> <span id="editProject_extraBox_laboType" class="lang"></span> <sup>*</sup>
 						</label> <label class="radio-inline"> <input type="radio" name="laboType"
 								id="extra_laboType_private" value="private">
@@ -161,16 +161,34 @@
 						</label>
 					</div>
 					<div class="form-group input-group">
-						<span class="input-group-addon"> <i class="fa fa-puzzle-piece"></i> <span
-								id="editProject_extraBox_adminContext" class="lang"></span> <sup>*</sup>
-						</span> <input id="extra_adminContext" type="text" class="form-control lang"
+						<span class="input-group-addon">
+							<i class="fa fa-puzzle-piece"></i>
+							<span id="editProject_extraBox_adminContext" class="lang"></span>
+							<sup>*</sup>
+						</span>
+						<input id="extra_adminContext" type="text" class="form-control lang"
 							lang="editProject_extraBox_adminContext_ph" placeholder="administrative context">
 					</div>
 					<p id="editProject_extraBox_adminContext_help" class="help-block lang"></p>
+					<!-- mama#61 - new mandatory field: 'manager context' -->
 					<div class="form-group input-group">
-						<span class="input-group-addon"> <i class="fa fa-globe"></i>
+						<span class="input-group-addon">
+							<i class="fa fa-user-md"></i>
+							<span id="editProject_extraBox_managerContext" class="lang"></span>
+							<sup>*</sup>
+						</span>
+						<input id="extra_managerContext" type="text" class="form-control lang"
+							lang="editProject_extraBox_managerContext_ph" placeholder="manager context">
+					</div>
+					<p id="editProject_extraBox_managerContext_help" class="help-block lang"></p>
+					<!-- mama#61 - geo context is now mandatory -->
+					<div class="form-group input-group">
+						<span class="input-group-addon">
+							<i class="fa fa-globe"></i>
 							<span id="editProject_extraBox_geoContext" class="lang"></span>
-						</span> <input id="extra_geoContext" type="text" class="form-control lang"
+							<sup>*</sup>
+						</span>
+						<input id="extra_geoContext" type="text" class="form-control lang"
 							lang="editProject_extraBox_geoContext_ph" placeholder="geographic context">
 					</div>
 					<p id="editProject_extraBox_geoContext_help" class="help-block lang"></p>
@@ -195,6 +213,12 @@
 						<div class="checkbox">
 							<label> <input id="extra_hdykm_searchEngine" name="howDidYouKnownMTH" type="checkbox"
 									value=""> <span id="editProject_extraBox_hdykm_serchEngine" class="lang"></span>
+							</label>
+						</div>
+						<!-- mama#64 - new 'formal user' field -->
+						<div class="checkbox">
+							<label> <input id="extra_hdykm_formalUser" name="howDidYouKnownMTH" type="checkbox"
+									value=""> <span id="editProject_extraBox_hdykm_formalUser" class="lang"></span>
 							</label>
 						</div>
 					</div>
@@ -225,14 +249,14 @@
 							lang="editProject_extraBox_deadline_ph" placeholder="trimester / year">
 					</div>
 					<p id="editProject_extraBox_deadline_help" class="help-block lang"></p>
-					<div class="form-group input-group " style="">
+					<div class="form-group input-group ">
 						<span class="input-group-addon"><i class="fa fa-calculator"></i>
 							<span id="editProject_extraBox_budget" class="lang"></span></span> <input id="extra_budget"
 							type="text" class="form-control lang" lang="editProject_extraBox_budget_ph"
 							placeholder="Enter client budget constraint" value="">
 					</div>
 					<p id="editProject_extraBox_budget_help" class="help-block lang"></p>
-					<!-- new 1.0.3 - dialog box (mama#9) -->
+					<!-- mama#9 - dialog box (new 1.0.3) -->
 					<div class="form-group input-group">
 						<span class="input-group-addon">
 							<i class="fa fa-stack-exchange"></i>
@@ -264,6 +288,39 @@
 						</div>
 					</div>
 					<!-- end new 1.0.3 -->
+					<!-- mama#66 - manager keywords -->
+					<div class="form-group input-group">
+						<label>
+							<span id="createProject_content_projectType_managerThematicCloudWords" class="lang"></span>
+						</label>
+						<br />
+						<div id="targetManagerCloudWords"></div>
+						<span id="helpBlockManagerCloudWord" class="help-block">
+							<small>
+								<i class="fa fa-question-circle"></i>
+								<span id="createProject_content_projectType_managerThematicCloudWords_help"
+									class="lang"></span>
+							</small>
+						</span>
+					</div>
+					<!-- mama#68 - ext. manager ID -->
+					<div class="form-group input-group">
+						<span class="input-group-addon">
+							<i class="fa fa-shopping-cart"></i>
+							<span id="editProject_extraBox_extManagerId" class="lang"></span>
+						</span>
+						<input id="extra_extManagerId" type="text" class="form-control lang"
+							lang="editProject_extraBox_extManagerId_ph" placeholder="ext. mgmr ID/URL">
+					</div>
+					<!-- mama#65 - mth sub-PF -->
+					<div class="form-group input-group">
+						<span class="input-group-addon">
+							<span id="createProject_content_project_mthSubPF" class="lang"></span>
+						</span>
+						<select id="mthSubPlatforms" class="form-control" multiple
+							style="height: 105px !important;"></select>
+					</div>
+					<!-- end form -->
 					<div class="clearfix"></div>
 				</div>
 			</div>
@@ -383,7 +440,7 @@
 								financed</option>
 						</select>
 					</div>
-					<div class="form-group input-group financedOK" style="diplay: none;">
+					<div class="form-group input-group financedOK" style="display: none;">
 						<span class="input-group-addon"> <i class="fa fa-dollar"></i>
 							<span id="createProject_content_project_financialContextBis" class="lang"></span>
 						</span> <select id="financialContextBis" multiple class="form-control">
@@ -408,14 +465,42 @@
 								value="project_financedOther" class="lang financedOther">other</option>
 						</select>
 					</div>
-					<div class="form-group input-group financedOKOther" style="">
+					<div class="form-group input-group financedOKOther">
 						<span class="input-group-addon"><i class="fa fa-credit-card"></i> <span
 								id="createProject_content_project_financialContextOther_fin" class="lang"></span></span>
 						<input id="financialContextIsProjectOtherValue" type="text" class="form-control lang"
 							lang="createProject_content_project_financialContextOther_fin_ph"
 							placeholder="other financial context" value="">
 					</div>
-					<div class="form-group " style="">
+
+					<!-- mama#60 support client lab RNSR-->
+					<div class="form-group input-group">
+						<span class="input-group-addon">
+							<!-- prefix content-->
+							<i class="fa fa-flask"></i>
+							<span id="createProject_content_project_clientsLabRNSR" class="lang"></span>
+						</span>
+						<!-- picker-->
+						<input id="createProject_content_project_clientsLabRNSR_input" type="text"
+							style="max-width: 300px;" class="form-control typeahead lang"
+							lang="createProject_content_project_clientsLabRNSR_ph" aria-label="Lab. RNSR"
+							autocomplete="off" placeholder="test overwrite PH before remove">
+						<!-- readonly data-->
+						<input id="createProject_content_project_clientsLabRNSR_display" type="text" readonly="readonly"
+							style="max-width: 200px; display:none;" class="form-control ">
+						<!-- hidden data-->
+						<input id="createProject_content_project_clientsLabRNSR_hidden" type="hidden"
+							readonly="readonly">
+						<!-- help text-->
+					</div>
+					<span id="helpBlockLabRNSR" class="help-block">
+						<small>
+							<i class="fa fa-question-circle"></i>
+							<span id="createProject_content_project_clientsLabRNSR_def" class="lang"></span>
+						</small>
+					</span>
+
+					<div class="form-group ">
 						<span id="createProject_warningAsterix" class="lang"></span>
 					</div>
 					<!-- <div class="form-group input-group " style=""> -->
@@ -434,6 +519,12 @@
 	buildKeywords();
 	buildSubKeywords();
 	buildMTHplatforms();
+	// mama#60 - load labs RNSR
+	initClientsLabRNSR();
+	// mama#66 - load manager keywords
+	buildManagerKeywords();
+	// mama#65 - load sub-PF / sub-sites	
+	buildMTHsubPlatforms();
 </script>
 <div style="display: none;">
 	<form id="fileUploadForm" action="ajax/ajax_proxypass_file.php" method="post" enctype="multipart/form-data"

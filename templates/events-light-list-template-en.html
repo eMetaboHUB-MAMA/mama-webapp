@@ -172,6 +172,20 @@
 		appointment request on proj. &quot;${appointment.project}&quot; from 
 		 ${appointment.fromUser} to ${appointment.toUser} failed
 
+	<!-- mama#60 -->
+	{%elif type == "_new_managerkeyword"%}
+		 <i class="fa fa-pencil-square-o"></i>
+		 ${user.fullName} add new manager keyword: ${oldName}
+	{%elif type == "_update_managerkeyword"%}
+		 <i class="fa fa-pencil-square-o"></i>
+		 ${user.fullName} update manager keyword <i>${oldName}</i> to <i>${newName}</i>
+	{%elif type == "_restore_managerkeyword"%}
+		 <i class="fa fa-check-circle"></i>
+		 ${user.fullName} restore manager keyword <i>${oldName}</i>
+	{%elif type == "_delete_managerkeyword"%}
+		 <i class="fa fa-times-circle"></i>
+		 ${user.fullName} delete manager keyword <i>${oldName}</i>
+
 	{%/if%}
 	<span class="pull-right text-muted small" data-toggle="tooltip" data-placement="top" title="${toogleDate}">
 		{%if nbYearsAgo != 0 && nbMonthsAgo > 23 %}

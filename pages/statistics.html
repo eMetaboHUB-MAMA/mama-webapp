@@ -8,16 +8,29 @@
 <div class="row">
 	<br />
 	<form class="form-inline" onsubmit="return false;">
+		<!-- datepicker: date from -->
 		<div class="form-group input-group ">
 			<span class="input-group-addon">from</span>
 			<input id="range-date-start" data-date-format="yyyy-mm-dd" type="text" class="form-control datepicker"
 				value="" placeholder="2016-01-01" autocomplete="off">
 		</div>
+		<!-- datepicker: date to -->
 		<div class="form-group input-group ">
 			<span class="input-group-addon">to</span>
 			<input id="range-date-end" data-date-format="yyyy-mm-dd" type="text" class="form-control datepicker "
 				value="" placeholder="2016-12-31" autocomplete="off">
 		</div>
+		<!-- mama#62  - filter plateform -->
+		<div class="form-group input-group">
+			<span class="input-group-addon">
+				<span id="_listProjects_filter_plateform" class="lang"></span>
+			</span>
+			<select id="mthPlatforms" class="btn btn-mini multiselect multiselect-mthPlatforms" multiple="multiple"
+				style="width: 150px;">
+			</select>
+			&nbsp;
+		</div>
+		<!-- refresh button -->
 		<button id="range-date-update" type="submit" class="btn btn-primary"><i class="fa fa-refresh"></i>
 			Update!</button>
 		<a id="link-donwload-xls-file" class="btn btn-default"
@@ -59,7 +72,11 @@
 								<th><i class="fa fa-sort" aria-hidden="true"></i> total</th>
 							</tr>
 						</thead>
-						<tbody id="statsPjPFxStatus"></tbody>
+						<tbody id="statsPjPFxStatus">
+							<tr>
+								<td colspan="10"><img src="images/ajax-loader.gif" /></td>
+							</tr>
+						</tbody>
 						<tfoot id="statsPjPFxStatusFooter"></tfoot>
 					</table>
 				</div>
@@ -80,21 +97,31 @@
 		<div class="col-lg-6">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<i class="fa fa-info-circle fa-fw"></i> Projects's users laboratorie types and Projects's
+					<i class="fa fa-info-circle fa-fw"></i> Projects' users laboratorie types and Projects'
 					authorizations
 				</div>
 				<div class="panel-body">
 					<div class="col-lg-6">
 						<div id="container-pie-laboratory"
-							style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+							style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto">
+							<img src="images/ajax-loader.gif" />
+						</div>
 					</div>
 					<div class="col-lg-6">
 						<div id="container-pie-copartner"
-							style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+							style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto">
+							<img src="images/ajax-loader.gif" />
+						</div>
 					</div>
 				</div><!-- /.panel-body -->
 				<div class="panel-footer">
-					Note: only count projects "waiting", "accepted", "assigned", "completed", "running" or "archived"
+					Notes:
+					<ul>
+						<li>only count projects "waiting", "accepted", "assigned", "completed", "running" or "archived".
+						</li>
+						<li>if more than one "plateform" filter is set, the project <em>count</em> is perform with an
+							"AND" logical connector.</li>
+					</ul>
 				</div>
 			</div><!-- /.panel -->
 		</div><!-- ./col-lg-6 -->
@@ -107,7 +134,9 @@
 				<div class="panel-body">
 					<div class="col-lg-12">
 						<div id="container-pie-demand"
-							style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+							style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto">
+							<img src="images/ajax-loader.gif" />
+						</div>
 					</div>
 					<!-- <div class="col-lg-6">
 					<div id="container-pie-funding"
@@ -119,7 +148,8 @@
 					<ul>
 						<li>only count projects "waiting", "accepted", "assigned", "completed", "running" or "archived".
 						</li>
-						<li>a single project can be associated with more than one funding status / funding sources</li>
+						<li>if more than one "plateform" filter is set, the project <em>count</em> is perform with an
+							"AND" logical connector.</li>
 					</ul>
 				</div>
 			</div><!-- /.panel -->
@@ -138,11 +168,15 @@
 				<div class="panel-body">
 					<div class="col-lg-6">
 						<div id="container-pie-funding"
-							style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+							style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto">
+							<img src="images/ajax-loader.gif" />
+						</div>
 					</div>
 					<div class="col-lg-6">
 						<div id="container-pie-financial_type"
-							style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+							style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto">
+							<img src="images/ajax-loader.gif" />
+						</div>
 					</div>
 					<!-- <div class="col-lg-6">
 				<div id="container-pie-copartner"
@@ -154,7 +188,9 @@
 					<ul>
 						<li>only count projects "waiting", "accepted", "assigned", "completed", "running" or "archived".
 						</li>
-						<li>a single project can be associated with more than one funding status / funding sources</li>
+						<li>a single project can be associated with more than one funding status / funding sources.</li>
+						<li>if more than one "plateform" filter is set, the project <em>count</em> is perform with an
+							"AND" logical connector.</li>
 					</ul>
 				</div>
 			</div><!-- /.panel -->
@@ -170,16 +206,26 @@
 				<div class="panel-body">
 					<div class="col-lg-6">
 						<div id="container-pie-sampleNb"
-							style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+							style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto">
+							<img src="images/ajax-loader.gif" />
+						</div>
 					</div>
 					<div class="col-lg-6">
 						<div id="container-pie-targeted"
-							style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+							style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto">
+							<img src="images/ajax-loader.gif" />
+						</div>
 					</div>
 				</div><!-- /.panel-body -->
 				<div class="panel-footer">
-					Note: only count projects "waiting", "accepted", "assigned", "completed", "running" or "archived";
-					<br />only count "Catalog allowance - lab routine" projects
+					Notes:
+					<ul>
+						<li>only count projects "waiting", "accepted", "assigned", "completed", "running" or "archived".
+						</li>
+						<li>if more than one "plateform" filter is set, the project <em>count</em> is perform with an
+							"AND" logical connector.</li>
+						<li>only count "Catalog allowance - lab routine" projects.</li>
+					</ul>
 				</div>
 			</div><!-- /.panel -->
 		</div><!-- ./col-lg-6 -->
@@ -196,39 +242,97 @@
 				<div class="panel-body">
 					<div class="col-lg-6">
 						<div id="container-pie-usersLabo"
-							style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+							style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto">
+							<img src="images/ajax-loader.gif" />
+						</div>
 					</div>
 					<div class="col-lg-6">
 						<div id="container-pie-extraLabo"
-							style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+							style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto">
+							<img src="images/ajax-loader.gif" />
+						</div>
 					</div>
 				</div><!-- /.panel-body -->
 				<div class="panel-footer">
-					Note: active users: created a project during the selected dates range.
+					Notes:
+					<ul>
+						<li>active users: created a project during the selected dates range.
+						</li>
+						<li>active users: if the "plateform" filter is set, the created project must be in the filtered
+							platforms list.</li>
+						<li>if more than one "plateform" filter is set, the <em>count</em> is perform with an
+							"AND" logical connector.</li>
+					</ul>
 				</div>
 			</div><!-- /.panel -->
 		</div><!-- ./col-lg-6 -->
 		<div class="col-lg-6">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<i class="fa fa-hashtag" aria-hidden="true"></i> Project thematic / sub-thematic repartitions
+					<i class="fa fa-hashtag" aria-hidden="true"></i> Projects thematic / sub-thematic repartitions
 				</div>
 				<div class="panel-body">
+					<!-- mama#66 -->
 					<div class="col-lg-6">
 						<div id="container-pie-thematic"
-							style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+							style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto">
+							<img src="images/ajax-loader.gif" />
+						</div>
 					</div>
+					<!-- mama#65 -->
 					<div class="col-lg-6">
 						<div id="container-pie-subthematic"
-							style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+							style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto">
+							<img src="images/ajax-loader.gif" />
+						</div>
 					</div>
 				</div><!-- /.panel-body -->
 				<div class="panel-footer">
-					Note: projects are associated with more than one thematic or sub-thematic.
-					<br />Only count projects "waiting", "accepted", "assigned", "completed", "running" or "archived";
+					Notes:
+					<ul>
+						<li>only count projects "waiting", "accepted", "assigned", "completed", "running" or "archived".
+						</li>
+						<li>projects are associated with more than one thematic or sub-thematic keyword.</li>
+						<li>if more than one "plateform" filter is set, the project <em>count</em> is perform with an
+							"AND" logical connector.</li>
+					</ul>
 				</div>
 			</div><!-- /.panel -->
 		</div><!-- ./col-lg-6 -->
+		<!-- mama#66 -->
+		<div class="col-lg-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<i class="fa fa-hashtag" aria-hidden="true"></i> Projects manager-thematic repartitions / Projects sub-platforms
+				</div>
+				<div class="panel-body">
+					<div class="col-lg-6">
+						<div id="container-pie-manager-thematic"
+							style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto">
+							<img src="images/ajax-loader.gif" />
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div id="container-pie-sub-platforms"
+							style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto">
+							<img src="images/ajax-loader.gif" />
+						</div>
+					</div>
+				</div><!-- /.panel-body -->
+				<div class="panel-footer">
+					Notes:
+					<ul>
+						<li>only count projects "waiting", "accepted", "assigned", "completed", "running" or "archived".
+						</li>
+						<li>projects are associated with more than one manager keyword.</li>
+						<li>projects are associated with more than one sub-platform.</li>
+						<li>if more than one "plateform" filter is set, the project <em>count</em> is perform with an
+							"AND" logical connector.</li>
+					</ul>
+				</div>
+			</div><!-- /.panel -->
+		</div><!-- ./col-lg-6 -->
+
 	</div>
 	<!--col-lg-12-->
 

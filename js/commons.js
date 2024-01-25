@@ -464,7 +464,7 @@ function buildMTHplatforms() {
 					// special case - select old search
 					if (typeof filterMthPF !== 'undefined' && filterMthPF) {
 						$.each(filterMthPFval.split(","), function (k, v) {
-							$("#mthPlatforms option[value="+v+"]").attr("selected", "selected");
+							$("#mthPlatforms option[value=" + v + "]").attr("selected", "selected");
 						});
 					}
 				}
@@ -732,3 +732,34 @@ function compareKeyworks(a, b) {
 	return 0;
 }
 /////////////////////////////////////////////////////////////////////////////////////////
+// mama#65 - mth sub-PF
+function buildMTHsubPlatforms() {
+	var verbe = "get";
+	var resource = "mth-sub-platforms";
+	var extraFilter = "&order=asc&"// deleted=false
+	// run
+	$.ajax({
+		type: "get",
+		url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+			+ resource + extraFilter,
+		dataType: "json",
+		async: true,
+		success: function (platform) {
+			if (platform.hasOwnProperty('success')
+				&& platform.success == false) {
+				// TODO show error message info
+			} else {
+				if (platform.length === 0) {
+					// $("#noKeywordsToShow").show();
+				} else {
+					$.each(platform, function (k, v) {
+						$("#mthSubPlatforms").append('<option value="mth_sub_pf_' + v.id + '">' + v.name + '</option>');
+					});
+				}
+			}
+		},
+		error: function (xhr) {
+			console.log(xhr);
+		}
+	});
+}

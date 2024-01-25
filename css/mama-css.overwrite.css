@@ -82,3 +82,8 @@ footer p {
     margin-top: 15px;
     display: none;
 }
+
+/* mama#60 */
+#helpBlockLabRNSR {
+	margin-top: -15px;
+}

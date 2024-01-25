@@ -303,7 +303,7 @@ editProject_btn_update = "Update"
 // list projects
 listProjects_noProject_title = "Sorry,"
 listProjects_noProject_text = "no request / project to display yet!"
-listProjects_search_ph = "e.g.: title of request / project"
+listProjects_search_ph = "e.g.: title or ID of request / project"
 listProjects_search_filter_all = "All"
 listProjects_search_filter_blocked = "Only paused"
 listProjects_search_filter_rejected = "Only rejected"
@@ -502,7 +502,7 @@ _multiselect_mth_platforms_nSelectedText = "selected"
 _multiselect_mth_platforms_allSelectedText = "All selected"
 
 // new filters (mama#36)
-_listProjects_filter_title = "Title"
+_listProjects_filter_title = "Title / ID"
 _title_filter_pj_title = "Filter on project title pattern"
 _listProjects_filter_owner = "Owner"
 _title_filter_pj_owner = "Filter on project owner email pattern"
@@ -527,3 +527,28 @@ _contact_btn_writeMessage = "Send message"
 
 // new rejected reason (mama#53)
 _modal_stopProject_rejectedSelect_opt_canceled_by_client = "Canceled by client"
+
+// new Lab RNSR (mama#60)
+createProject_content_project_clientsLabRNSR = "Lab. RNSR";
+createProject_content_project_clientsLabRNSR_ph = "Enter your Laboratory's RNSR label";
+createProject_content_project_clientsLabRNSR_def = "Laboratory's RNSR: only for French public laboratories, enter your structure's <a href=\"https://www.data.gouv.fr/fr/datasets/repertoire-national-des-structures-de-recherche-rnsr/\" target=\"_blank\">RNSR</a>."
+
+// new manager context (mama#61)
+editProject_extraBox_managerContext = "Manager context"
+editProject_extraBox_managerContext_ph = "exp. : UNH - UMR 4266"
+editProject_extraBox_managerContext_help = "Please indicate the manager's public organism and Research Unit or the full name of the company."
+_warning_popup_cannot_switch_to_running_missing_mandatory_data = "⚠️ You can't switch to 'running' status:\n missing mandatory data in ' MTH stats informations' section\n (either 'administrative context', 'manager context' or 'geographic context')."
+
+// new response for 'how did you known MHT' ⇒ 'formal user' (mama#64)
+editProject_extraBox_hdykm_formalUser = "formal user"
+
+// new mananger keywords in 'MTH stats box' (mama#66)
+createProject_content_projectType_managerThematicCloudWords = "Manager-thematic key words"
+createProject_content_projectType_managerThematicCloudWords_help = "choose 5 max."
+
+// new field to follow project outside of MAMA; in 'MTH stats box' (mama#68)
+editProject_extraBox_extManagerId = "Ext. manager ID/URL"
+editProject_extraBox_extManagerId_ph = "e.g.: LIMS name and ID, URL, ..."
+
+// new field "MTH sub platform"; in 'MTH stats box' (mama#65)
+createProject_content_project_mthSubPF = "MTH sub-plateform(s)<br/>(sub-site(s))"

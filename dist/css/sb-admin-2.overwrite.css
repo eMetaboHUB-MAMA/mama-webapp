@@ -256,3 +256,12 @@ tr.blocked>td select {
 	position: absolute;
 	display: none;
 }
+
+/* mama#66 */
+.manager-cloud-word {
+	cursor: pointer;
+}
+
+.manager-cloud-word.label-danger {
+	cursor: not-allowed;
+}

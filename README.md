@@ -19,6 +19,7 @@ PHP web-server (Apache / ...)
 
 * get project data `git clone git@services.pfem.clermont.inrae.fr:mama/mama-webapp.git`
 * edit `config/mama-webapp.json` configuration file (or create it from `config/mama-webapp.json.sample` template file )
+* update Lab RNSR list `sudo -u www-data php -f ./tools/update_rnsr_list.php`
 
 ### Apache configuration
 
