@@ -1,6 +1,6 @@
-[![pipeline status](https://services.pfem.clermont.inrae.fr/gitlab/mama/mama-webapp/badges/dev/pipeline.svg)](https://services.pfem.clermont.inrae.fr/gitlab/mama/mama-webapp/commits/dev)
-
 # MAMA - WebApp
+
+[![pipeline status](https://services.pfem.clermont.inrae.fr/gitlab/mama/mama-webapp/badges/dev/pipeline.svg)](https://services.pfem.clermont.inrae.fr/gitlab/mama/mama-webapp/commits/dev)
 
 ## Metadata
 
@@ -8,48 +8,47 @@
 * **@date creation**: `2016-01-29`
 * **@main usage**: WebApp of the **M**etaboHUB's **A**nalyses **MA**nager
 * **@see**: [MAMA - REST](../mama-rest)
- 
+
 ## Configuration
 
-### Requirement:
+### Requirement
+
 PHP web-server (Apache / ...)
 
-### Deploy:
+### Deploy
+
 * get project data `git clone git@services.pfem.clermont.inrae.fr:mama/mama-webapp.git`
-* edit `config/mama-webapp.json` configuration file (or create it from `config/mama-webapp.json.sample` template file ) 
- 
-#### Apache
+* edit `config/mama-webapp.json` configuration file (or create it from `config/mama-webapp.json.sample` template file )
+
+### Apache configuration
 
 Please enable rewrite rules with a `sudo a2enmod rewrite && sudo service apache2 restart`; then add this config to your `apache2.conf` file:
-```
+
+```html
 <Directory /var/www/html/mama-webapp/>
   AllowOverride All
 </Directory>
 ```
 
-#### Nginx
+### Warning
 
-TODO
-
-### Warning:
-TODO
+NA
 
 ## Services provided
 
-TODO
+Simple GUI for the `MAMA-REST` API.
 
 ## Technical description
 
-TODO
-
+NA
 
 ## Notes
 
-TODO
+NA
 
 ## License
 
-TODO
+MAMA "in-house" code is provided under [MIT license](LICENSE.md).
 
 ## Tird part code
 
@@ -60,6 +59,7 @@ TODO
 #### Getting Started
 
 To use this template, choose one of the following options to get started:
+
 * Download the latest release on Start Bootstrap
 * Fork this repository on GitHub
 * Install via bower using `bower install startbootstrap-sb-admin-2`
@@ -72,8 +72,8 @@ Have a bug or an issue with this template? [Open a new issue](https://github.com
 
 Start Bootstrap was created by and is maintained by **David Miller**, Managing Parter at [Iron Summit Media Strategies](http://www.ironsummitmedia.com/).
 
-* https://twitter.com/davidmillerskt
-* https://github.com/davidtmiller
+* [@davidmillerskt](https://twitter.com/davidmillerskt)
+* [github | davidtmiller](https://github.com/davidtmiller)
 
 Start Bootstrap is based on the [Bootstrap](http://getbootstrap.com/) framework created by [Mark Otto](https://twitter.com/mdo) and [Jacob Thorton](https://twitter.com/fat).
 

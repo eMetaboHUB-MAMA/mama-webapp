@@ -3,13 +3,13 @@
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
   # docker env.
-  DOCKER_IMAGE: "metabohub/mama-webapp"
+  DOCKER_IMAGE: "metabohub/mama-webapp:1.2.0"
   DOCKER_CONTAINER: "mama-webapp"
   DOCKER_SOCKET: "6381"
   # SSH / SCP
   SSH_OPTS: " -q -t "
   SSH_USER: "gitlab-bot"
-  SSH_HOST: "pfem-lindev.ara.inrae.fr"
+  SSH_HOST: "unh-pfemlindev.ara.inrae.fr"
   # cache
   IMAGE_FILE: "mama-webapp.image"
   CACHE_BASH: "/tmp/gitlab-ci-cache"
@@ -23,7 +23,7 @@ stages:
 build docker image:
   stage: docker_env
   tags:
-    - bash
+    - shell-sauron
   except:
     refs:
       - master
@@ -48,7 +48,7 @@ build docker image:
 copy to dev:
   stage: copy_to_dev
   tags:
-    - docker
+    - docker-sauron
   image: $DOCKER_IMAGE
   except:
     refs:
@@ -73,3 +73,6 @@ copy to dev:
     - ssh $SSH_OPTS $SSH_USER@$SSH_HOST "docker run --restart unless-stopped --name $DOCKER_CONTAINER -it -p $DOCKER_SOCKET:80 -d $DOCKER_IMAGE ";
     - echo "[gitlab-ci] remove docker image on test server";
     - ssh $SSH_OPTS $SSH_USER@$SSH_HOST "rm -rf /tmp/$IMAGE_FILE ";
+  after_script:
+    - echo "[gitlab-ci] remove docker image on gitlab server";
+    - test -f $CACHE_DOCKER/$IMAGE_FILE && rm -rf $CACHE_DOCKER/$IMAGE_FILE

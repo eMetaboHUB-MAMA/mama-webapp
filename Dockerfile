@@ -1,4 +1,4 @@
-FROM metabohub/mama-core
+FROM metabohub/mama-core:1.2.0
 
 # set author
 LABEL maintainer="nils.paulhe@inrae.fr"
