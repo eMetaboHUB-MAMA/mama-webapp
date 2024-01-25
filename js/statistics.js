@@ -1,6 +1,11 @@
-// ///////////////////////////////////////////////////////////////////////////////////////
-// dashboard - onload stuff
-$(window).on("load", function () {
+// ============================================================================
+// statistics - variables
+var filterMthPF = false;
+var filterMthPFval = '';
+
+// ============================================================================
+// statistics - onload stuff
+$(document).ready(function() {
 	// page localization
 	loadLang();
 	// mama#62 - build MTH platforms picker
@@ -33,11 +38,8 @@ $(window).on("load", function () {
 		reloadPage();
 	});
 });
-// ///////////////////////////////////////////////////////////////////////////////////////
+// ============================================================================
 // functions
-/**
- * 
- */
 function buildRangeDate() {
 	if (getUrlParameter("from") !== undefined) {
 		$("#range-date-start").val(getUrlParameter("from"));
@@ -52,11 +54,6 @@ function buildRangeDate() {
 	// init datepicker
 	$('.datepicker').datepicker();
 }
-
-
-
-var filterMthPF = false;
-var filterMthPFval = '';
 
 function addRemoveUserFilter(filter, val) {
 	// MTH platform

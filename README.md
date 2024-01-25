@@ -1,6 +1,6 @@
 # MAMA - WebApp
 
-[![pipeline status](https://services.pfem.clermont.inrae.fr/gitlab/mama/mama-webapp/badges/dev/pipeline.svg)](https://services.pfem.clermont.inrae.fr/gitlab/mama/mama-webapp/commits/dev)
+[![pipeline status](https://unh-pfem-gitlab.ara.inrae.fr/mama/mama-webapp/badges/dev/pipeline.svg)](https://unh-pfem-gitlab.ara.inrae.fr/mama/mama-webapp/commits/dev)
 
 ## Metadata
 
