@@ -94,7 +94,7 @@
 			</form>
 		</div>
 
-		<div class="col-lg-6" style="">
+		<div class="col-lg-6">
 			<div class="form-group input-group">
 				<span class="input-group-addon" style="max-width: 40%;"><i class="fa fa-phone"></i> <span
 						id="update_account_field_phoneGrp" class="lang"></span></span> <select id="phoneGroup"
@@ -223,6 +223,53 @@
 			<h1 class="page-header">
 				<button type="button" id="btn-update-user" class="btn btn-primary" onclick="checkUpdateUserForm();">
 					<i class="fa fa-rocket"></i> <span id="update_account_updateBtn" class="lang"></span>
+				</button>
+			</h1>
+		</div>
+		<!-- /.col-lg-12 -->
+	</div>
+	<!-- /.row -->
+
+	<!-- mama#84 -->
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header"><span id="update_account_grdpr_title" class="lang"></span></h1>
+		</div>
+		<!-- /.col-lg-12 -->
+		<div class="col-lg-12">
+			<pre>
+<span id="update_account_grdpr_shortNotification1" class="lang"></span>
+<span id="update_account_grdpr_shortNotification2" class="lang"></span>
+<span id="update_account_grdpr_shortNotification3" class="lang"></span>
+<span id="update_account_grdpr_shortNotification4" class="lang"></span>
+<span id="update_account_grdpr_shortNotificationWarning" class="lang"></span>
+<span id="update_account_grdpr_shortNotificationCleanData" class="lang"></span></pre>
+		</div>
+		<!-- /.col-lg-12 -->
+		<div class="col-lg-12">
+			<h3>
+				<span id="update_account_grdpr_shortNotificationCheckOK" class="lang"></span>
+				<span id="update_account_grdpr_shortNotificationCheckKO" class="lang"></span>
+			</h3>
+			<table id="update_account_grdpr_table" class="table table-striped tablesorter tablesorter-default">
+				<thead>
+					<tr>
+						<th><span id="update_account_grdpr_tab_yourRole" class="lang"></span></th>
+						<th><span id="update_account_grdpr_tab_nbWaiting" class="lang"></span></th>
+						<th><span id="update_account_grdpr_tab_nbAssigned" class="lang"></span></th>
+						<th><span id="update_account_grdpr_tab_nbCompleted" class="lang"></span></th>
+						<th><span id="update_account_grdpr_tab_nbAccepted" class="lang"></span></th>
+						<th><span id="update_account_grdpr_tab_nbRunning" class="lang"></span></th>
+						<th><span id="update_account_grdpr_tab_nbBlocked" class="lang"></span></th>
+						<th><span id="update_account_grdpr_tab_total" class="lang"></span></th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+			<h1 class="page-header">
+				<button type="button" id="btn-anonymize-user-personal-data" class="btn btn-danger"
+					onclick="anonymizeUserPersonalData();">
+					<i class="fa fa-user-secret"></i> <span id="update_account_anonymizeBtn" class="lang"></span>
 				</button>
 			</h1>
 		</div>
@@ -389,14 +436,12 @@
 			dataType: "json",
 			async: true,
 			success: function (platforms) {
-				console.log("platforms ⇒ ", platforms);
 				$.each(platforms, function (k, v) {
 					$("#mthPlatform").append(
 						'<option value="' + v.id + '">' + v.name + '</option>');
 				});
 			},
 			error: function (xhr) {
-				console.log(xhr);
 				// show error message info
 				$("#divError").show();
 			}
@@ -482,11 +527,10 @@
 				$("#user-profile-img").attr("src", "https://secure.gravatar.com/avatar/" + hash + "?s=200&d=identicon")
 				// mama#41 - link user to MTH platform
 				if (user.mthPlatform !== null) {
-					setTimeout(()=>($("#mthPlatform").val(user.mthPlatform.id)), 200);
+					setTimeout(() => ($("#mthPlatform").val(user.mthPlatform.id)), 200);
 				}
 			},
 			error: function (xhr) {
-				console.log(xhr);
 				// show error message info
 				$("#divError").show();
 			}
@@ -557,7 +601,6 @@
 			async: true,
 			data: params,
 			success: function (data) {
-				// console.log(data);
 				if (data.success) {
 					var extraURL = "";
 					if (getUrlParameter("userID") !== undefined) {
@@ -570,12 +613,219 @@
 				}
 			},
 			error: function (xhr) {
-				console.log(xhr);
 				// show error message info
 				$("#divError").show();
 			}
 		});
 		return false;
+	}
+
+	// mama#84
+	checkCanProfileBeAnonymized = function () {
+		// init html
+		const uData = userData;
+		if (!(userData.right === 'admin' || userData.right === 'project_manager')) {
+			$('#update_account_grdpr_shortNotification3').hide();
+		}
+		$(".alert").hide();
+		// init query
+		var verbe = "get";
+		var resource = "test-can-user-be-anonymized";
+		var params = "";
+		var extraGet = "";
+		// process query
+		if (getUrlParameter("userID") !== undefined) {
+			extraGet += "&userID=" + Number(getUrlParameter("userID"));
+		}
+		// load
+		$.ajax({
+			type: "post",
+			url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource=" + resource + extraGet,
+			dataType: "json",
+			async: true,
+			data: params,
+			success: function (data) {
+				if (data && data.can_be_anonymized) {
+					$("#update_account_grdpr_shortNotificationCheckKO").hide();
+					$("#update_account_grdpr_table").hide();
+				} else {
+					// $("#update_account_grdpr_shortNotificationCheckKO").show();
+					$("#update_account_grdpr_shortNotificationCheckOK").hide();
+					$("#btn-anonymize-user-personal-data").attr('disabled', 'disabled');
+					loadActiveProjectsStats();
+				}
+			},
+			error: function (xhr) {
+				// show error message info
+				$("#divError").show();
+				$("#btn-anonymize-user-personal-data").attr('disabled', 'disabled');
+			}
+		});
+	}
+	checkCanProfileBeAnonymized();
+
+	loadActiveProjectsStats = function () {
+		var verbe = "get";
+		var resource = "projects-stats";
+		var extraGet = "";
+		if (getUrlParameter("userID") !== undefined) {
+			extraGet += "&userID=" + Number(getUrlParameter("userID"));
+		}
+		// run
+		$.ajax({
+			type: "get",
+			url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource=" + resource + extraGet,
+			dataType: "json",
+			async: true,
+			success: function (projectsStats) {
+				if (projectsStats.hasOwnProperty('success')
+					&& projectsStats.success == false) {
+					// TODO show error message info
+				} else {
+					// user as owner
+					nbProjectsWaiting = projectsStats['userProjectsWaiting'];
+					nbProjectsCompleted = projectsStats['userProjectsCompleted'];
+					nbProjectsAccepted = projectsStats['userProjectsAccepted'];
+					nbProjectsAssigned = projectsStats['userProjectsAssigned'];
+					nbProjectsRunning = projectsStats['userProjectsRunning'];
+					nbProjectsBlocked = projectsStats['userProjectsBlocked'];
+					totOwner = nbProjectsWaiting + nbProjectsCompleted + nbProjectsAccepted + nbProjectsAssigned + nbProjectsRunning + nbProjectsBlocked;
+					$("#update_account_grdpr_table tbody").append(
+						'<tr>' +
+						`<td>${update_account_grdpr_tab_owner}</td>` +
+						`<td><a href="?page=projects&status=waiting&userFilter=owner">${nbProjectsWaiting}</a></td>` +
+						`<td><a href="?page=projects&status=assigned&userFilter=owner">${nbProjectsAssigned}</a></td>` +
+						`<td><a href="?page=projects&status=completed&userFilter=owner">${nbProjectsCompleted}</a></td>` +
+						`<td><a href="?page=projects&status=accepted&userFilter=owner">${nbProjectsAccepted}</a></td>` +
+						`<td><a href="?page=projects&status=running&userFilter=owner">${nbProjectsRunning}</a></td>` +
+						`<td><a href="?page=projects&status=blocked&userFilter=owner">${nbProjectsBlocked}</a></td>` +
+						`<td><a href="?page=projects&userFilter=owner">${totOwner}</a></td>` +
+						'</tr>'
+					);
+					// user as manager
+					if (projectsStats.userRight == "project_manager" || projectsStats.userRight == "admin") {
+						// in charge
+						nbProjectsInChargeWaiting = 0; //projectsStats['inChargeProjectsWaiting'];
+						nbProjectsInChargeCompleted = projectsStats['inChargeProjectsCompleted'];
+						nbProjectsInChargeAccepted = projectsStats['inChargeProjectsAccepted'];
+						nbProjectsInChargeAssigned = projectsStats['inChargeProjectsAssigned'];
+						nbProjectsInChargeRunning = projectsStats['inChargeProjectsRunning'];
+						nbProjectsInChargeBlocked = projectsStats['inChargeProjectsBlocked'];
+						totInCharge = nbProjectsInChargeWaiting + nbProjectsInChargeCompleted + nbProjectsInChargeAccepted + nbProjectsInChargeAssigned + nbProjectsInChargeRunning + nbProjectsInChargeBlocked;
+						$("#update_account_grdpr_table tbody").append(
+							'<tr>' +
+							`<td>${update_account_grdpr_tab_inCharge}</td>` +
+							`<td><a href="?page=projects&status=waiting&userFilter=inCharge">${nbProjectsInChargeWaiting}</a></td>` +
+							`<td><a href="?page=projects&status=assigned&userFilter=inCharge">${nbProjectsInChargeAssigned}</a></td>` +
+							`<td><a href="?page=projects&status=completed&userFilter=inCharge">${nbProjectsInChargeCompleted}</a></td>` +
+							`<td><a href="?page=projects&status=accepted&userFilter=inCharge">${nbProjectsInChargeAccepted}</a></td>` +
+							`<td><a href="?page=projects&status=running&userFilter=inCharge">${nbProjectsInChargeRunning}</a></td>` +
+							`<td><a href="?page=projects&status=blocked&userFilter=inCharge">${nbProjectsInChargeBlocked}</a></td>` +
+							`<td><a href="?page=projects&userFilter=inCharge">${totInCharge}</a></td>` +
+							'</tr>'
+						);
+						// involved
+						nbProjectsInvolvedWaiting = 0;//projectsStats['involvedProjectsWaiting'];
+						nbProjectsInvolvedCompleted = projectsStats['involvedProjectsCompleted'];
+						nbProjectsInvolvedAccepted = projectsStats['involvedProjectsAccepted'];
+						nbProjectsInvolvedAssigned = projectsStats['involvedProjectsAssigned'];
+						nbProjectsInvolvedRunning = projectsStats['involvedProjectsRunning'];
+						nbProjectsInvolvedBlocked = projectsStats['involvedProjectsBlocked'];
+						totInvolved = nbProjectsInvolvedWaiting + nbProjectsInvolvedCompleted + nbProjectsInvolvedAccepted + nbProjectsInvolvedAssigned + nbProjectsInvolvedRunning + nbProjectsInvolvedBlocked;
+						$("#update_account_grdpr_table tbody").append(
+							'<tr>' +
+							`<td>${update_account_grdpr_tab_involved}</td>` +
+							`<td><a href="?page=projects&status=waiting&userFilter=involved">${nbProjectsInvolvedWaiting}</a></td>` +
+							`<td><a href="?page=projects&status=assigned&userFilter=involved">${nbProjectsInvolvedAssigned}</a></td>` +
+							`<td><a href="?page=projects&status=completed&userFilter=involved">${nbProjectsInvolvedCompleted}</a></td>` +
+							`<td><a href="?page=projects&status=accepted&userFilter=involved">${nbProjectsInvolvedAccepted}</a></td>` +
+							`<td><a href="?page=projects&status=running&userFilter=involved">${nbProjectsInvolvedRunning}</a></td>` +
+							`<td><a href="?page=projects&status=blocked&userFilter=involved">${nbProjectsInvolvedBlocked}</a></td>` +
+							`<td><a href="?page=projects&userFilter=involved">${totInvolved}</a></td>` +
+							'</tr>'
+						);
+						// total
+						totWaiting = nbProjectsWaiting + nbProjectsInChargeWaiting + nbProjectsInvolvedWaiting;
+						totAssigned = nbProjectsAssigned + nbProjectsInChargeAssigned + nbProjectsInvolvedAssigned;
+						totCompleted = nbProjectsCompleted + nbProjectsInChargeCompleted + nbProjectsInvolvedCompleted;
+						totAccepted = nbProjectsAccepted + nbProjectsInChargeAccepted + nbProjectsInvolvedAccepted;
+						totRunning = nbProjectsRunning + nbProjectsInChargeRunning + nbProjectsInvolvedRunning;
+						totBlocked = nbProjectsBlocked + nbProjectsInChargeBlocked + nbProjectsInvolvedBlocked;
+						superTot = totOwner + totInCharge + totInvolved;
+						$("#update_account_grdpr_table tbody").append(
+							'<tr>' +
+							`<td>${update_account_grdpr_tab_total}</td>` +
+							`<td><a href="?page=projects&status=assigned">${totWaiting}</a></td>` +
+							`<td><a href="?page=projects&status=assigned">${totAssigned}</a></td>` +
+							`<td><a href="?page=projects&status=completed&userFilter=involved">${totCompleted}</a></td>` +
+							`<td><a href="?page=projects&status=accepted&userFilter=involved">${totAccepted}</a></td>` +
+							`<td><a href="?page=projects&status=running&userFilter=involved">${totRunning}</a></td>` +
+							`<td><a href="?page=projects&status=blocked&userFilter=involved">${totBlocked}</a></td>` +
+							`<td><a href="?page=projects">${superTot}</a></td>` +
+							'</tr>'
+						);
+					}
+				}
+			},
+			error: function (xhr) {
+				console.log(xhr);
+				// TODO show error message info
+			}
+		});
+	}
+
+	anonymizeUserPersonalData = function () {
+		var a = getRandomInt(1, 10);
+		var b = getRandomInt(1, 10);
+		var c = a + b;
+		var dialog = update_account_grdpr_confirm_delete.replace('xxxxx', '"' + a + ' + ' + b + ' = ?"');
+		var response = prompt(dialog, ""); console.log("response", response)
+		if (response == '' || response === null) { return; }
+		if (response == c) {
+			// if user is self, logout
+			var self = true;
+			var verbe = "delete";
+			var resource = "anonymize-user";
+			var params = "";
+			var extraGet = "";
+			if (getUrlParameter("userID") !== undefined) {
+				extraGet += "&userID=" + Number(getUrlParameter("userID"));
+				self = false;
+			}
+			// load
+			$.ajax({
+				type: "post",
+				url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource=" + resource + extraGet,
+				dataType: "json",
+				async: true,
+				data: params,
+				success: function (data) {
+					if (data && data.success) {
+						//  show success
+						alert(update_account_grdpr_confirm_delete_success);
+						if (self) {
+							location.search = "?page=logout";
+						}
+					} else {
+						// show error
+						alert(update_account_grdpr_confirm_delete_fail2);
+					}
+				},
+				error: function (xhr) {
+					// show error message info
+					alert(update_account_grdpr_confirm_delete_fail2);
+				}
+			});
+		} else {
+			alert(update_account_grdpr_confirm_delete_fail1);
+			anonymizeUserPersonalData();
+		}
+	}
+
+	function getRandomInt(min, max) {
+		min = Math.ceil(min);
+		max = Math.floor(max);
+		return Math.floor(Math.random() * (max - min) + min);
 	}
 
 	if (getUrlParameter("success") === "true") {

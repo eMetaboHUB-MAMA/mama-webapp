@@ -552,3 +552,30 @@ editProject_extraBox_extManagerId_ph = "exp : nom du LIMS, ID de LIMS, URL, ..."
 
 // new field "MTH sub platform"; in 'MTH stats box' (mama#65)
 createProject_content_project_mthSubPF = "sous-plateforme(s) MTH<br/>(sous-site(s))"
+
+// mama#84 - GDPR stuff
+update_account_grdpr_title = "Anonymiser mes données personnelles"
+update_account_grdpr_shortNotification1 = "Vous pouvez anonymiser vos données personnelles / privées de la base-de-données MAMA si&nbsp;:"
+update_account_grdpr_shortNotification2 = "- vous n'êtes pas &quot;propriétaire&quot; d'&quot;requêtes d'analyses&quot; avec un status autre que &quot;archivé&quot; ou &quot;rejeté&quot;."
+update_account_grdpr_shortNotification3 = "- vous n'êtes pas soit &quot;en charge de&quot; ou &quot;impliqué dans&quot; des &quot;requêtes d'analyses&quot; avec un status autre que &quot;archived&quot; or &quot;rejected&quot;."
+update_account_grdpr_shortNotification4 = "- vous ne voulez pas utiliser nos services avec ce compte dans le futur."
+update_account_grdpr_shortNotificationWarning = "<b>DANGER&nbsp;:</b> cette action est <b>non révercible</b>&nbsp;; votre compte sera <b>non utilisable</b> dans le futur&nbsp;;"
+update_account_grdpr_shortNotificationCleanData = "Les données suivantes seront anonymisées: courriel, identifiant, nom, prénom, numéro de téléphone, adresse de travail."
+update_account_grdpr_shortNotificationCheckOK = "Vous pouvez demander une anonymisation de votre compte."
+update_account_grdpr_shortNotificationCheckKO = "Vous <b>NE POUVEZ PAS</b> demander une anonymisation de votre compte (détails si dessous)"
+update_account_grdpr_tab_owner = "propriétaire";
+update_account_grdpr_tab_inCharge = "en charge";
+update_account_grdpr_tab_involved = "impliqué";
+update_account_grdpr_tab_yourRole = "votre rôle"
+update_account_grdpr_tab_total = "total"
+update_account_grdpr_tab_nbWaiting = "nb. en attente"
+update_account_grdpr_tab_nbAssigned = "nb. assigné"
+update_account_grdpr_tab_nbCompleted = "nb. completé"
+update_account_grdpr_tab_nbAccepted = "nb. accepté"
+update_account_grdpr_tab_nbRunning = "nb. en cours"
+update_account_grdpr_tab_nbBlocked = "nb. en pause"
+update_account_anonymizeBtn = "Anonymiser mes données personnelles"
+update_account_grdpr_confirm_delete = "ATTENTION : êtes vous sur de vouloir supprimer votre compte ?\nSi NON, cliquez juste \"ANNULER\";\nSinon, resoudre xxxxx, entrz le résultat dans le champs, puis cliquez \"OK\""
+update_account_grdpr_confirm_delete_fail1 = "Mauvais captcha, merci de re-essayer."
+update_account_grdpr_confirm_delete_success = "Succès ! Vos données personnelles sont anonymisées."
+update_account_grdpr_confirm_delete_fail2 = "Erreur ! Impossible de supprimer les données personnelles."

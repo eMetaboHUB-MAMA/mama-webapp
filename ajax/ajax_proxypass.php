@@ -218,7 +218,7 @@ if (isset($_GET["resource"]) && $_GET["resource"] != "") {
 				get_subkeywords($mama_config_json['mamaRestApi']);
 			}
 			break;
-			// mama#66
+		// mama#66
 		case "managerkeywords":
 			if ($verbe == "GET") {
 				get_managerkeywords($mama_config_json['mamaRestApi']);
@@ -229,7 +229,7 @@ if (isset($_GET["resource"]) && $_GET["resource"] != "") {
 				get_mthPlatforms($mama_config_json['mamaRestApi']);
 			}
 			break;
-			// mama#65
+		// mama#65
 		case "mth-sub-platforms":
 			if ($verbe == "GET") {
 				get_mthSubPlatforms($mama_config_json['mamaRestApi']);
@@ -296,7 +296,7 @@ if (isset($_GET["resource"]) && $_GET["resource"] != "") {
 				// get_server_load ( $mama_config_json ['mamaRestApi'] );
 			}
 			break;
-			// mama#66
+		// mama#66
 		case "managerkeyword":
 			if ($verbe == "POST") {
 				post_managerkeyword($mama_config_json['mamaRestApi']);
@@ -319,7 +319,7 @@ if (isset($_GET["resource"]) && $_GET["resource"] != "") {
 				// nope!
 			}
 			break;
-			// mama#65
+		// mama#65
 		case "mth-sub-platform":
 			if ($verbe == "POST") {
 				post_mthSubPlatform($mama_config_json['mamaRestApi']);
@@ -336,11 +336,23 @@ if (isset($_GET["resource"]) && $_GET["resource"] != "") {
 				get_rest_api($mama_config_json['mamaRestApi']);
 			}
 			break;
-			// new mama#39
+		// new mama#39
 		case "contact-message":
 			if ($verbe == "POST") {
 				// create new message
 				post_contact_message($mama_config_json['mamaRestApi']);
+			}
+			break;
+		// new mama#84
+		case "test-can-user-be-anonymized":
+			if ($verbe == "GET") {
+				// create new message
+				get_test_can_user_be_anonymized($mama_config_json['mamaRestApi']);
+			}
+			break;
+		case "anonymize-user":
+			if ($verbe == "DELETE") {
+				delete_anonymize_user($mama_config_json['mamaRestApi']);
 			}
 			break;
 		default:
@@ -356,10 +368,12 @@ if (isset($_GET["resource"]) && $_GET["resource"] != "") {
  */
 function returnSuccess($success, $message = null)
 {
-	echo json_encode(array(
-		'success' => $success,
-		'message' => $message
-	));
+	echo json_encode(
+		array(
+			'success' => $success,
+			'message' => $message
+		)
+	);
 	exit();
 }
 // ////////////////////////////////////////////////////////////////////////////
@@ -390,9 +404,13 @@ function getStandardizedPost($base_api, $resource)
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($curl, CURLOPT_POST, true);
 	curl_setopt($curl, CURLOPT_POSTFIELDS, $post);
-	curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-		"Accept: application/json"
-	));
+	curl_setopt(
+		$curl,
+		CURLOPT_HTTPHEADER,
+		array(
+			"Accept: application/json"
+		)
+	);
 	$curl_response = curl_exec($curl);
 	curl_close($curl);
 	// return
@@ -422,10 +440,14 @@ function getStandardizedPut($base_api, $resource)
 	curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
 	// curl_setopt ( $curl, CURLOPT_HEADER, true );
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-		'Accept: application/json',
-		'Content-type: application/x-www-form-urlencoded'
-	));
+	curl_setopt(
+		$curl,
+		CURLOPT_HTTPHEADER,
+		array(
+			'Accept: application/json',
+			'Content-type: application/x-www-form-urlencoded'
+		)
+	);
 	curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
 	$curl_response = curl_exec($curl);
 	curl_close($curl);
@@ -454,9 +476,13 @@ function getStandardizedGet($base_api, $resource)
 	$curl = curl_init($base_api . $resource . "?" . $tokenURL . $get);
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
-	curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-		"Accept: application/json"
-	));
+	curl_setopt(
+		$curl,
+		CURLOPT_HTTPHEADER,
+		array(
+			"Accept: application/json"
+		)
+	);
 	$curl_response = curl_exec($curl);
 	curl_close($curl);
 	// return
@@ -486,10 +512,14 @@ function getStandardizedDelete($base_api, $resource)
 	curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "DELETE");
 	// curl_setopt ( $curl, CURLOPT_HEADER, true );
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-		'Accept: application/json',
-		'Content-type: application/x-www-form-urlencoded'
-	));
+	curl_setopt(
+		$curl,
+		CURLOPT_HTTPHEADER,
+		array(
+			'Accept: application/json',
+			'Content-type: application/x-www-form-urlencoded'
+		)
+	);
 	curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
 	$curl_response = curl_exec($curl);
 	curl_close($curl);
@@ -1446,4 +1476,30 @@ function put_mthSubPlatform($mama_rest_url)
 	} else {
 		returnSuccess(false);
 	}
+}
+
+// mama#84 - GDPR
+
+function get_test_can_user_be_anonymized($mama_rest_url)
+{
+	$userID = "";
+	if (isset($_GET['userID']) && $_GET['userID'] != "") {
+		$userID = $_GET['userID'];
+	} else if (isset($_SESSION['user_id']) && $_SESSION['user_id'] != "") {
+		$userID = $_SESSION['user_id'];
+	}
+	$curl_response = getStandardizedGet($mama_rest_url, "test-can-user-be-anonymized/" . $userID);
+	echo $curl_response;
+}
+
+function delete_anonymize_user($mama_rest_url)
+{
+	$userID = "";
+	if (isset($_GET['userID']) && $_GET['userID'] != "") {
+		$userID = $_GET['userID'];
+	} else if (isset($_SESSION['user_id']) && $_SESSION['user_id'] != "") {
+		$userID = $_SESSION['user_id'];
+	}
+	$curl_response = getStandardizedDelete($mama_rest_url, "anonymize-user/$userID");
+	echo $curl_response;
 }

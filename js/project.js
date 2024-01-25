@@ -1,3 +1,4 @@
+let rnsrIsVoid = false;
 /////////////////////////////////////////////////////////////////////////////////////////
 // project - add / edit
 $(document).ready(function () {
@@ -434,6 +435,14 @@ function loadProject(projectID) {
 				setTimeout(function () { $("#createProject_content_project_clientsLabRNSR_input").parent().find("strong").trigger("click") }, 250);
 				// focus back first editable field
 				setTimeout(function () { $("#interestInMthCollaboration").trigger("focus") }, 300);
+				// mama#89 - clean if void
+				$("#createProject_content_project_clientsLabRNSR_input").on("keyup", function () {
+					if ($("#createProject_content_project_clientsLabRNSR_input").val() === '') {
+						rnsrIsVoid = true;
+						$("#createProject_content_project_clientsLabRNSR_display").val("");
+						$("#createProject_content_project_clientsLabRNSR_hidden").val("");
+					}
+				});
 
 				// update all kind of fields
 				$("input[type=checkbox]").trigger("change");
@@ -721,9 +730,11 @@ function initClientsLabRNSR() {
 		.on('change', function () {
 			const active = $('#createProject_content_project_clientsLabRNSR_input').typeahead("getActive");
 			if (active === null) return;
-			const text = active.id + " (" + (active.a ? "Active" : "Inactive") + ")";
-			$('#createProject_content_project_clientsLabRNSR_display').val(text).show();
-			$('#createProject_content_project_clientsLabRNSR_hidden').val(active.name);
+			if (!rnsrIsVoid) {
+				const text = active.id + " (" + (active.a ? "Active" : "Inactive") + ")";
+				$('#createProject_content_project_clientsLabRNSR_display').val(text).show();
+				$('#createProject_content_project_clientsLabRNSR_hidden').val(active.name);
+			}
 		})//
 		.trigger("change");
 }

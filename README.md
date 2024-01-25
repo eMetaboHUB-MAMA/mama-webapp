@@ -39,6 +39,12 @@ NA
 
 Simple GUI for the `MAMA-REST` API.
 
+## Dev and Tests
+
+* Build test docker image: `docker build -t metabohub/mama-webapp .`
+* Run test docker image: `docker run --rm -it -v $(pwd):/var/www/html_dev/ -p 8080:80 --name mama-webapp-tests metabohub/mama-webapp`
+* Update code in docker image: `docker exec -it mama-webapp-tests bash -c "cp -r /var/www/html_dev/* /var/www/html/"`
+
 ## Technical description
 
 NA

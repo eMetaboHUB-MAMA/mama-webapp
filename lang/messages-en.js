@@ -552,3 +552,30 @@ editProject_extraBox_extManagerId_ph = "e.g.: LIMS name and ID, URL, ..."
 
 // new field "MTH sub platform"; in 'MTH stats box' (mama#65)
 createProject_content_project_mthSubPF = "MTH sub-plateform(s)<br/>(sub-site(s))"
+
+// mama#84 - GDPR stuff
+update_account_grdpr_title = "Anonymize my personal data"
+update_account_grdpr_shortNotification1 = "You can anonymize all your personal / private data from MAMA database if:"
+update_account_grdpr_shortNotification2 = "- you are not &quot;owner&quot; of any &quot;analyzis requests&quot; with status other than &quot;archived&quot; or &quot;rejected&quot;."
+update_account_grdpr_shortNotification3 = "- you are not either &quot;in charge of&quot; or &quot;involved in&quot; any &quot;analyzis requests&quot; with status other than &quot;archived&quot; or &quot;rejected&quot;."
+update_account_grdpr_shortNotification4 = "- you don't want to use our service with this account any more."
+update_account_grdpr_shortNotificationWarning = "<b>WARNING</b>: this action is <b>not revercible</b>; your account will be <b>lost forever</b> and <b>not usable again</b>;"
+update_account_grdpr_shortNotificationCleanData = "The following data will be anonymized: email, login, firstname, lastname, phone number, workplace address."
+update_account_grdpr_shortNotificationCheckOK = "You can ask for an account anonymization."
+update_account_grdpr_shortNotificationCheckKO = "You <b>CAN NOT</b> ask for an account anonymization (see details below)"
+update_account_grdpr_tab_owner = "owner";
+update_account_grdpr_tab_inCharge = "in charge";
+update_account_grdpr_tab_involved = "involved";
+update_account_grdpr_tab_yourRole = "your role"
+update_account_grdpr_tab_total = "total"
+update_account_grdpr_tab_nbWaiting = "nb. waiting"
+update_account_grdpr_tab_nbAssigned = "nb. assigned"
+update_account_grdpr_tab_nbCompleted = "nb. completed"
+update_account_grdpr_tab_nbAccepted = "nb. accepted"
+update_account_grdpr_tab_nbRunning = "nb. running"
+update_account_grdpr_tab_nbBlocked = "nb. paused"
+update_account_anonymizeBtn = "Anonymize my personal data"
+update_account_grdpr_confirm_delete = "WARNING: are you sur that you want to delete your account?\nIf NO, just click \"CANCEL\";\nOtherwise, solve xxxxx, enter result in box, then click \"OK\""
+update_account_grdpr_confirm_delete_fail1 = "Wrong captcha, please try again."
+update_account_grdpr_confirm_delete_success = "Success! Your personnal data have been anonymized."
+update_account_grdpr_confirm_delete_fail2 = "Error! Can't delete personnal data."
