@@ -122,45 +122,86 @@
 						<li class="mama-menu mama-collapse">
 							<a id="collapseLeftPanelBtn" class="pull-right" style="z-index: 300;"
 								href="javascript:void(0)" data-toggle="offcanvas">
-								<i class="btn btn-default btn-xs fa fa-chevron-circle-left"></i> </a></li>
-						<li class="mama-menu mama-menu-default"><a id="navmenulink-default" href="?page=default"><i
-									class="fa fa-info-circle"></i> <span id="leftMenu_about"
-									class="lang collapse in hidden-xs"></span></a></li>
-						<li class="mama-menu mama-menu-create-account"><a id="navmenulink-new-user"
-								href="?page=create-account"><i class="fa fa-user-plus fa-fw"></i> <span
-									id="leftMenu_createAccount" class="lang collapse in hidden-xs"></span></a></li>
-						<li class="mama-menu mama-menu-dashboard"><a id="navmenulink-dashboad" href="?page=dashboard"><i
-									class="fa fa-dashboard fa-fw"></i> <span id="leftMenu_dashboard"
-									class="lang collapse in hidden-xs"></span></a></li>
-						<li class="mama-menu mama-menu-new-project"><a id="navmenulink-new-project"
-								href="?page=new-project"><i class="fa fa-plus-circle fa-fw"></i> <span
-									id="leftMenu_newAnalysisRequest" class="lang collapse in hidden-xs"></span></a></li>
+								<i aria-hidden="true" class="btn btn-default btn-xs fa fa-chevron-circle-left"></i>
+							</a>
+						</li>
+						<li class="mama-menu mama-menu-default">
+							<a id="navmenulink-default" href="?page=default">
+								<i aria-hidden="true" class="fa fa-info-circle"></i>
+								<span id="leftMenu_about" class="lang collapse in hidden-xs"></span>
+							</a>
+						</li>
+						<li class="mama-menu mama-menu-create-account">
+							<a id="navmenulink-new-user" href="?page=create-account">
+								<i aria-hidden="true" class="fa fa-user-plus fa-fw"></i>
+								<span id="leftMenu_createAccount" class="lang collapse in hidden-xs"></span>
+							</a>
+						</li>
+						<li class="mama-menu mama-menu-dashboard">
+							<a id="navmenulink-dashboad" href="?page=dashboard">
+								<i aria-hidden="true" class="fa fa-dashboard fa-fw"></i>
+								<span id="leftMenu_dashboard" class="lang collapse in hidden-xs"></span>
+							</a>
+						</li>
+						<li class="mama-menu mama-menu-new-project">
+							<a id="navmenulink-new-project" href="?page=new-project">
+								<i aria-hidden="true" class="fa fa-plus-circle fa-fw"></i>
+								<span id="leftMenu_newAnalysisRequest" class="lang collapse in hidden-xs"></span>
+							</a>
+						</li>
 						<!-- <li class="mama-menu mama-menu-xxx"><a -->
 						<!-- id="navmenulink-edit-analysis" -->
 						<!-- href="?page=edit-analysis"><i -->
 						<!-- class="fa fa-pencil-square-o fa-fw"></i> Edit Project Request -->
 						<!-- (PM)</a></li> -->
-						<li class="mama-menu mama-menu-projects"><a id="navmenulink-projects-projects"
-								href="?page=projects"><i class="fa fa-tasks fa-fw"></i> <span id="leftMenu_projects"
-									class="lang collapse in hidden-xs"></span> </a></li>
-						<li class="mama-menu mama-menu-messages"><a id="navmenulink-projects-messages"
-								href="?page=messages"><i class="fa fa-comments-o fa-fw"></i> <span
-									id="leftMenu_messages" class="lang collapse in hidden-xs"></span> </a></li>
-						<li class="mama-menu mama-menu-appointments"><a id="navmenulink-projects-appointments"
-								href="?page=appointments"><i class="fa fa-calendar fa-fw"></i> <span
-									id="leftMenu_appointments" class="lang collapse in hidden-xs"></span> </a></li>
-						<li class="mama-menu mama-menu-statistics"><a href="?page=statistics"><i
-									class="fa fa-bar-chart-o fa-fw"></i> <span id="leftMenu_statistics"
-									class="lang collapse in hidden-xs"></span></a></li>
-						<li class="mama-menu mama-menu-users"><a id="navmenulink-clients" href="?page=users"><i
-									class="fa fa-users"></i> <span id="leftMenu_usersManager"
-									class="lang collapse in hidden-xs"></span></a></li>
-						<li class="mama-menu mama-menu-settings"><a id="navmenulink-settings" href="?page=settings"><i
-									class="fa fa-wrench"></i> <span id="leftMenu_settings"
-									class="lang collapse in hidden-xs"></span></a></li>
-						<li class="mama-menu mama-menu-help"><a id="navmenulink-help" href="?page=help"><i
-									class="fa fa-question-circle"></i> <span id="leftMenu_help"
-									class="lang collapse in hidden-xs"></span></a></li>
+						<li class="mama-menu mama-menu-projects">
+							<a id="navmenulink-projects-projects" href="?page=projects">
+								<i aria-hidden="true" class="fa fa-tasks fa-fw"></i>
+								<span id="leftMenu_projects" class="lang collapse in hidden-xs"></span>
+							</a>
+						</li>
+						<li class="mama-menu mama-menu-messages">
+							<a id="navmenulink-projects-messages" href="?page=messages">
+								<i aria-hidden="true" class="fa fa-comments-o fa-fw"></i>
+								<span id="leftMenu_messages" class="lang collapse in hidden-xs"></span>
+							</a>
+						</li>
+						<li class="mama-menu mama-menu-appointments">
+							<a id="navmenulink-projects-appointments" href="?page=appointments">
+								<i aria-hidden="true" class="fa fa-calendar fa-fw"></i>
+								<span id="leftMenu_appointments" class="lang collapse in hidden-xs"></span>
+							</a>
+						</li>
+						<li class="mama-menu mama-menu-statistics">
+							<a href="?page=statistics">
+								<i aria-hidden="true" class="fa fa-bar-chart-o fa-fw"></i>
+								<span id="leftMenu_statistics" class="lang collapse in hidden-xs"></span>
+							</a>
+						</li>
+						<li class="mama-menu mama-menu-users">
+							<a id="navmenulink-clients" href="?page=users">
+								<i aria-hidden="true" class="fa fa-users"></i>
+								<span id="leftMenu_usersManager" class="lang collapse in hidden-xs"></span>
+							</a>
+						</li>
+						<li class="mama-menu mama-menu-settings">
+							<a id="navmenulink-settings" href="?page=settings">
+								<i aria-hidden="true" class="fa fa-wrench"></i>
+								<span id="leftMenu_settings" class="lang collapse in hidden-xs"></span>
+							</a>
+						</li>
+						<li class="mama-menu mama-menu-help">
+							<a id="navmenulink-help" href="?page=help">
+								<i aria-hidden="true" class="fa fa-question-circle"></i>
+								<span id="leftMenu_help" class="lang collapse in hidden-xs"></span>
+							</a>
+						</li>
+						<li class="mama-menu mama-menu-contact">
+							<a id="navmenulink-help" href="?page=contact">
+								<i aria-hidden="true" class="fa fa-envelope"></i>
+								<span id="_leftMenu_contact" class="lang collapse in hidden-xs"></span>
+							</a>
+						</li>
 					</ul>
 				</div>
 				<!-- /.sidebar-collapse -->

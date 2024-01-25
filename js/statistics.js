@@ -617,6 +617,9 @@ function showStatsRejectedProjects() {
 						case "saved_twice":
 							rejectedReason += (_modal_stopProject_rejectedSelect_opt_saved_twice);
 							break;
+						case "canceled_by_client":
+							rejectedReason += (_modal_stopProject_rejectedSelect_opt_canceled_by_client);
+							break;
 					}
 				}
 				rejectedReason += "</code>";

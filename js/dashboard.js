@@ -31,13 +31,13 @@ var nbProjectsInChargeTotal = 0;
 
 // ///////////////////////////////////////////////////////////////////////////////////////
 // dashboard - onload stuff
-$(document).ready(function() {
+$(document).ready(function () {
 	// page localization
 	loadLang();
 	// /////////////////////////////////////////
 	// link listener on buttons
 	var isClicking = false;
-	$(".panel.mainBtnOpt").css("cursor", "pointer").click(function() {
+	$(".panel.mainBtnOpt").css("cursor", "pointer").click(function () {
 		var e = $(this);
 		var doClick = false;
 		if (!isClicking)
@@ -53,21 +53,21 @@ $(document).ready(function() {
 	loadProjectsStats();
 	// /////////////////////////////////////////
 	// LOAD PROJECTS
-	$.get('templates/projects-light-list-template-' + lang + '.html', function(template) {
+	$.get('templates/projects-light-list-template-' + lang + '.html', function (template) {
 		$('body').append(template);
 		loadProjectsList(0, 10);
 	});
 	// /////////////////////////////////////////
 	// LOAD NOTIFICATIONS
 	$("#events-light-list-container").empty();
-	$.get('templates/events-light-list-template-' + lang + '.html', function(template) {
+	$.get('templates/events-light-list-template-' + lang + '.html', function (template) {
 		$('body').append(template);
 		loadEventsList(0, 10);
 	});
 	// /////////////////////////////////////////
 	// LOAD MESSAGES
 	$("#messages-light-list-container").empty();
-	$.get('templates/messages-light-list-template-' + lang + '.html', function(template) {
+	$.get('templates/messages-light-list-template-' + lang + '.html', function (template) {
 		$('body').append(template);
 		loadMessagesList(0, 10);
 	});
@@ -81,21 +81,21 @@ function loadProjectsStats(filter) {
 	var resource = "projects-stats";
 	var extraFilter = "";
 	if (filter !== undefined) {
-		extraFilter += "&filter="+filter;
+		extraFilter += "&filter=" + filter;
 	}
 	// run
 	$.ajax({
-		type : "get",
-		url : "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
-				+ resource + extraFilter,
-		dataType : "json",
-		async : true,
-		success : function(projectsStats) {
+		type: "get",
+		url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+			+ resource + extraFilter,
+		dataType: "json",
+		async: true,
+		success: function (projectsStats) {
 			if (projectsStats.hasOwnProperty('success')
-					&& projectsStats.success == false) {
+				&& projectsStats.success == false) {
 				// TODO show error message info
 			} else {
-//				console.log(projectsStats);
+				// console.log(projectsStats);
 				if (projectsStats.userRight == "project_manager" || projectsStats.userRight == "admin") {
 					nbProjectsWaiting = projectsStats['allProjectsWaiting'];
 					nbProjectsCompleted = projectsStats['allProjectsCompleted'];
@@ -105,36 +105,49 @@ function loadProjectsStats(filter) {
 					nbProjectsArchived = projectsStats['allProjectsArchived'];
 					nbProjectsBlocked = projectsStats['allProjectsBlocked'];
 					nbProjectsRejected = projectsStats['allProjectsRejected'];
-//					nbProjectsTotal = nbProjectsWaiting + nbProjectsCompleted + nbProjectsAssigned + nbProjectsRunning + nbProjectsArchived + nbProjectsBlocked + nbProjectsRejected;
-					
+					// nbProjectsTotal = nbProjectsWaiting + nbProjectsCompleted + nbProjectsAssigned + nbProjectsRunning + nbProjectsArchived + nbProjectsBlocked + nbProjectsRejected;
+
 					nbProjectsInChargeCompleted = projectsStats['inChargeProjectsCompleted'];
 					nbProjectsInChargeAccepted = projectsStats['inChargeProjectsAccepted'];
 					nbProjectsInChargeAssigned = projectsStats['inChargeProjectsAssigned'];
 					nbProjectsInChargeRunning = projectsStats['inChargeProjectsRunning'];
 					nbProjectsInChargeBlocked = projectsStats['inChargeProjectsBlocked'];
 					nbProjectsInChargeTotal = nbProjectsInChargeCompleted + nbProjectsInChargeAccepted + nbProjectsInChargeAssigned + nbProjectsInChargeRunning + nbProjectsInChargeBlocked;
-					
+
 					var myWaitingProject = projectsStats['userProjectsWaiting'];
 					var myAcceptedProject = projectsStats['userProjectsAccepted'];
 					var myAssignedProject = projectsStats['userProjectsAssigned'];
 					var myCompletedProject = projectsStats['userProjectsCompleted'];
 					var myRunningProject = projectsStats['userProjectsRunning'];
-					
+
 					$(".panel-primary.panel-projects").find(".huge").html(nbProjectsInChargeTotal);
 					$(".panel-waiting.panel-projects").find(".huge").html(nbProjectsWaiting);
 					$(".panel-accepted.panel-projects").find(".huge").html(nbProjectsAccepted);
 					$(".panel-assigned.panel-projects").find(".huge").html(nbProjectsAssigned);
 					$(".panel-completed.panel-projects").find(".huge").html(nbProjectsCompleted);
 					$(".panel-info.panel-projects").find(".huge").html(nbProjectsRunning);
-					
+
 					$("#spanMyWaitingProjects").html(myWaitingProject);
 					$("#spanMyAcceptedProjects").html(myAcceptedProject);
 					$("#spanMyAssignedProjects").html(myAssignedProject);
 					$("#spanMyCompletedProjects").html(myCompletedProject);
 					$("#spanMyRunningProjects").html(myRunningProject);
+
+					// new mama#41 - on my platform
+					var myPfWaitingProject = projectsStats['myPfProjectsWaiting'];
+					var myPfAcceptedProject = projectsStats['myPfProjectsAccepted'];
+					var myPfAssignedProject = projectsStats['myPfProjectsAssigned'];
+					var myPfCompletedProject = projectsStats['myPfProjectsCompleted'];
+					var myPfRunningProject = projectsStats['myPfProjectsRunning'];
+					$("#spanMyPfWaitingProjects").html(myPfWaitingProject);
+					$("#spanMyPfAcceptedProjects").html(myPfAcceptedProject);
+					$("#spanMyPfAssignedProjects").html(myPfAssignedProject);
+					$("#spanMyPfCompletedProjects").html(myPfCompletedProject);
+					$("#spanMyPfRunningProjects").html(myPfRunningProject);
+
 					try {
 						buildProjectsStats();
-					} catch(e) {}
+					} catch (e) { }
 					nbProjectsTotal = nbProjectsWaiting + nbProjectsCompleted + nbProjectsAssigned + nbProjectsArchived + nbProjectsBlocked + nbProjectsRejected;
 				} else {
 					// user is user (lal)
@@ -158,7 +171,7 @@ function loadProjectsStats(filter) {
 				}
 			}
 		},
-		error : function(xhr) {
+		error: function (xhr) {
 			console.log(xhr);
 			// TODO show error message info
 		}
@@ -173,19 +186,19 @@ function loadProjectsList(start, limit, filter) {
 	var resource = "projects";
 	var extraFilter = "&start=" + start + "&limit=" + limit;
 	if (filter !== undefined) {
-		extraFilter += "&filter="+filter;
+		extraFilter += "&filter=" + filter;
 	}
 	extraFilter += "&order=desc"
 	// run
 	$.ajax({
-		type : "get",
-		url : "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
-				+ resource + extraFilter,
-		dataType : "json",
-		async : true,
-		success : function(projects) {
+		type: "get",
+		url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+			+ resource + extraFilter,
+		dataType: "json",
+		async: true,
+		success: function (projects) {
 			if (projects.hasOwnProperty('success')
-					&& projects.success == false) {
+				&& projects.success == false) {
 				// TODO show error message info
 			} else {
 				if (projects.length === 0) {
@@ -193,7 +206,7 @@ function loadProjectsList(start, limit, filter) {
 					$("#tableListProjects").hide();
 				} else {
 					$("#projects-light-list-template").tmpl(projects)
-							.appendTo("#projects-light-list-container");
+						.appendTo("#projects-light-list-container");
 					if (projects.length >= limit) {
 						var totNb = nbProjectsTotal; // TODO if filter, other max
 						buildPagination(start, limit, filter, "projectsPagination", "loadProjectsList", totNb);
@@ -201,7 +214,7 @@ function loadProjectsList(start, limit, filter) {
 				}
 			}
 		},
-		error : function(xhr) {
+		error: function (xhr) {
 			console.log(xhr);
 			// TODO show error message info
 		}
@@ -211,37 +224,37 @@ function loadProjectsList(start, limit, filter) {
 /**
  */
 function loadEventsList(start, limit, filter) {
-//	$("#events-light-list-container").empty();
+	//	$("#events-light-list-container").empty();
 	var verbe = "get";
 	var resource = "events";
 	var extraFilter = "&start=" + start + "&limit=" + limit;
 	if (filter !== undefined) {
-		extraFilter += "&filter="+filter;
+		extraFilter += "&filter=" + filter;
 	}
 	extraFilter += "&order=desc"
 	// run
 	$.ajax({
-		type : "get",
-		url : "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
-				+ resource + extraFilter,
-		dataType : "json",
-		async : true,
-		success : function(events) {
+		type: "get",
+		url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+			+ resource + extraFilter,
+		dataType: "json",
+		async: true,
+		success: function (events) {
 			if (events.hasOwnProperty('success')
-					&& events.success == false) {
+				&& events.success == false) {
 				// TODO show error message info
 			} else {
 				if (events.length === 0) {
 					// hide more button
 					$("#showMoreEventsBtn").hide();
-				} else { 
+				} else {
 					if (events.length < limit) {
 						// hide more button
 						$("#showMoreEventsBtn").hide();
 					}
 					$("#noEventToShow").hide();
 					var now = new Date();
-					$.each(events, function(k, v) {
+					$.each(events, function (k, v) {
 						v = eventStatUpdate(v, now);
 					});
 					$("#events-light-list-template").tmpl(events).appendTo("#events-light-list-container");
@@ -250,7 +263,7 @@ function loadEventsList(start, limit, filter) {
 				}
 			}
 		},
-		error : function(xhr) {
+		error: function (xhr) {
 			console.log(xhr);
 			// TODO show error message info
 		}
@@ -259,11 +272,11 @@ function loadEventsList(start, limit, filter) {
 /////////////////////////////////////////////////////////////////////////////////////////
 var lastEventStart = 0;
 var lastEventLimit = 10;
-showMoreEvents = function() {
+showMoreEvents = function () {
 	lastEventStart += lastEventLimit;
 	loadEventsList(lastEventStart, lastEventLimit);
 }
-showProject = function(id) {
+showProject = function (id) {
 	document.location = "?page=projects&showProject=" + id;
 }
 
@@ -271,12 +284,12 @@ showProject = function(id) {
 /**
  */
 function loadMessagesList(start, limit, filter) {
-//	$("#messages-light-list-container").empty();
+	//	$("#messages-light-list-container").empty();
 	var verbe = "get";
 	var resource = "messages";
 	var extraFilter = "&start=" + start + "&limit=" + limit;
 	if (filter !== undefined) {
-		extraFilter += "&filter="+filter;
+		extraFilter += "&filter=" + filter;
 	}
 	extraFilter += "&order=desc";
 	extraFilter += "&userFilter=receiver";
@@ -284,22 +297,22 @@ function loadMessagesList(start, limit, filter) {
 	extraFilter += "&projectPlaceFilter=all";
 	// run
 	$.ajax({
-		type : "get",
-		url : "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
-				+ resource + extraFilter,
-		dataType : "json",
-		async : true,
-		success : function(messages) {
+		type: "get",
+		url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+			+ resource + extraFilter,
+		dataType: "json",
+		async: true,
+		success: function (messages) {
 			if (messages.hasOwnProperty('success')
-					&& messages.success == false) {
+				&& messages.success == false) {
 				// TODO show error message info
 			} else {
 				if (messages.length === 0) {
 					$("#goToMessagesBtn").hide();
-				} else { 
+				} else {
 					$("#noMessageToShow").hide();
 					var now = new Date();
-					$.each(messages, function(k, v) {
+					$.each(messages, function (k, v) {
 						v['messageClean'] = $("<div>").append(v.message).text().replace('"', "&quot;");
 						v = eventStatUpdate(v, now);
 					});
@@ -308,7 +321,7 @@ function loadMessagesList(start, limit, filter) {
 				}
 			}
 		},
-		error : function(xhr) {
+		error: function (xhr) {
 			console.log(xhr);
 			// TODO show error message info
 		}

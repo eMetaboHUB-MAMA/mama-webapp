@@ -197,19 +197,19 @@ _diag_usersStats_serieUsers_inactive = "Inactifs"
 // create / update project
 createProject_title_create = "Créer"
 createProject_title_newAnalysisRequest = "nouvelle sollicitation"
-createProject_content_basicInformations = "informations basiques"
+createProject_content_basicInformations = "informations générales"
 createProject_content_projectTitle = "titre du projet"
 createProject_content_projectTitle_ph = "entrer le titre de la sollicitation / du projet"
-createProject_content_projectTitle_help = "Sera utilisé plus tard pour suivre la sollicitation / le projet. Choisir Sagement !"
-createProject_content_projectAim = "Que voulez-vous faire avec MetaboHUB ?"
+createProject_content_projectTitle_help = "Choisir un titre de projet court et explicite qui sera utilisé plus tard pour suivre la sollicitation (⚠️ non modifiable par la suite&nbsp;!)"
+createProject_content_projectAim = "En quoi MetaboHUB peut vous aider&nbsp;? <small>(merci de bien renseigner votre demande et non le contexte du projet)</small>"
 createProject_content_projectAim_ph = "Expliquez votre projet en quelques mots"
 createProject_content_projectDemandType = "Type de demande"
 createProject_content_projectDemandType_eqProv = "Mise à disposition d'équipements"
 createProject_content_projectDemandType_catAllow = "Analyses inscrites au Catalogue"
-createProject_content_projectDemandType_feasibility = "Étude de faisabilité - R &amp; D"
+createProject_content_projectDemandType_feasibility = "R &amp; D"
 createProject_content_projectDemandType_training = "Formation"
 createProject_content_projectDemandType_dataProcessing = "Traitement et analyses de données"
-createProject_content_projectDemandType_other = "Autre"
+createProject_content_projectDemandType_other = "Autre <small>(merci de bien renseigner dans la partie \"En quoi MetaboHUB peut vous aider\")</small>"
 createProject_content_sampleNb = "nombre d'échantillons"
 createProject_content_projectType_less50 = "50 ou moins"
 createProject_content_projectType_51to100 = "51 à 100"
@@ -227,7 +227,7 @@ createProject_content_project_mthPF = "plateforme(s) MTH"
 createProject_content_project_copart = "l'analyse peut-elle être transmise à un partenaire privilégié"
 createProject_content_project_copart_yes = "oui"
 createProject_content_project_copart_no = "non"
-createProject_content_project_copart_def = "Partenaire privilégié : MTH ne peut pas subvenir à tous les besoins, votre demande peut éventuellement être basculée vers nos <a href=\"http://www.metabohub.fr/donnees/partenaires/\" target=\"_blank\">partenaires</a>&nbsp;; ce sont des laboratoires français compétents et fiables spécialisés en métabolomique et/ou fluxomique qui ne font pas partie de MTH."
+createProject_content_project_copart_def = "Partenaire privilégié : MTH ne peut pas subvenir à tous les besoins, votre demande peut éventuellement être basculée vers nos <a href=\"http://www.metabohub.fr/donnees/partenaires/\" target=\"_blank\">partenaires</a>&nbsp;; ce sont des laboratoires français avec qui nous collaborons depuis des années en toute confiance spécialisés en métabolomique et/ou fluxomique qui ne font pas partie de MTH."
 createProject_content_project_context = "contexte scientifique"
 createProject_content_project_desc = "Description rapide"
 createProject_content_project_context_size = "caractères restants"
@@ -513,3 +513,17 @@ _title_filter_pj_analysts = "Filtrer sur un motif de l'email d'un analyste du pr
 
 // confirm project reject (mama#32)
 _confirm_popup_reject_project = "⚠️ Êtes-vous sur de vouloir 'rejeter' le projet ?"
+
+// user platform pref. (mama#41)
+_update_account_pref_platform = "Plateforme MTH pref."
+_belongToMyPf = "sur ma plateforme"
+
+// contact form (mama#39)
+_leftMenu_contact = "Contact"
+_contact_txt_messageSend = "Votre message a bien été envoyé ☺"
+_contact_txt_contactBack = "nous vous contactons tantôt !"
+_contact_txt_contactUs = "Nous contacter"
+_contact_btn_writeMessage = "Envoyer le message"
+
+// new rejected reason (mama#53)
+_modal_stopProject_rejectedSelect_opt_canceled_by_client = "Annulé par le client"

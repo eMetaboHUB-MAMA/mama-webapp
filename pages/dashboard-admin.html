@@ -37,7 +37,11 @@
 					</div>
 					<div class="col-xs-9 text-right">
 						<div class="huge">.</div>
-						<div><span id="dashboard_waitingProjects" class="lang"></span> (<span class="lang-class belongToMe1"></span><span id="spanMyWaitingProjects"></span><span class="lang-class belongToMe2"></span>)</div>
+						<div><span id="dashboard_waitingProjects" class="lang"></span> (<span
+								class="lang-class belongToMe1"></span><span id="spanMyWaitingProjects"></span><span
+								class="lang-class belongToMe2"></span>; <span id="spanMyPfWaitingProjects"></span> <span
+								class="lang-class _belongToMyPf"></span>)
+						</div>
 					</div>
 				</div>
 			</div>
@@ -59,7 +63,10 @@
 					</div>
 					<div class="col-xs-9 text-right">
 						<div class="huge">.</div>
-						<div><span id="dashboard_assignedProjects" class="lang"></span> (<span class="lang-class belongToMe1"></span><span id="spanMyAssignedProjects"></span><span class="lang-class belongToMe2"></span>)</div>
+						<div><span id="dashboard_assignedProjects" class="lang"></span> (<span
+								class="lang-class belongToMe1"></span><span id="spanMyAssignedProjects"></span><span
+								class="lang-class belongToMe2"></span>; <span id="spanMyPfAssignedProjects"></span>
+							<span class="lang-class _belongToMyPf"></span>)</div>
 					</div>
 				</div>
 			</div>
@@ -81,7 +88,10 @@
 					</div>
 					<div class="col-xs-9 text-right">
 						<div class="huge">.</div>
-						<div><span id="dashboard_completedProjects" class="lang"></span> (<span class="lang-class belongToMe1"></span><span id="spanMyCompletedProjects"></span><span class="lang-class belongToMe2"></span>)</div>
+						<div><span id="dashboard_completedProjects" class="lang"></span> (<span
+								class="lang-class belongToMe1"></span><span id="spanMyCompletedProjects"></span><span
+								class="lang-class belongToMe2"></span>; <span id="spanMyPfCompletedProjects"></span>
+							<span class="lang-class _belongToMyPf"></span>)</div>
 					</div>
 				</div>
 			</div>
@@ -103,7 +113,10 @@
 					</div>
 					<div class="col-xs-9 text-right">
 						<div class="huge">.</div>
-						<div><span id="dashboard_acceptedProjects" class="lang"></span> (<span class="lang-class belongToMe1"></span><span id="spanMyAcceptedProjects"></span><span class="lang-class belongToMe2"></span>)</div>
+						<div><span id="dashboard_acceptedProjects" class="lang"></span> (<span
+								class="lang-class belongToMe1"></span><span id="spanMyAcceptedProjects"></span><span
+								class="lang-class belongToMe2"></span>; <span id="spanMyPfAcceptedProjects"></span>
+							<span class="lang-class _belongToMyPf"></span>)</div>
 					</div>
 				</div>
 			</div>
@@ -125,7 +138,10 @@
 					</div>
 					<div class="col-xs-9 text-right">
 						<div class="huge">.</div>
-						<div><span id="dashboard_runningProjects" class="lang"></span> (<span class="lang-class belongToMe1"></span><span id="spanMyRunningProjects"></span><span class="lang-class belongToMe2"></span>)</div>
+						<div><span id="dashboard_runningProjects" class="lang"></span> (<span
+								class="lang-class belongToMe1"></span><span id="spanMyRunningProjects"></span><span
+								class="lang-class belongToMe2"></span>; <span id="spanMyPfRunningProjects"></span> <span
+								class="lang-class _belongToMyPf"></span>)</div>
 					</div>
 				</div>
 			</div>
@@ -288,118 +304,118 @@
 				</button>
 			</div>
 			<div class="panel-body">
-				<div id="container-pie"
-					style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+				<div id="container-pie" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 				<script type="text/javascript">
-				var chart = null;
-				var visible = true;
-				showHideClosed = function() {
-					if (visible) {
-						chart.series[0].data[6].dataLabel.hide();
-						chart.series[0].data[6].update({ visible : false }, true);
-						chart.series[0].data[7].dataLabel.hide();
-						chart.series[0].data[7].update({ visible : false }, true);
-						chart.series[0].data[8].dataLabel.hide();
-						chart.series[0].data[8].update({ visible : false }, true);
-					} else {
-						chart.series[0].data[6].dataLabel.hide();
-						chart.series[0].data[6].update({ visible : true }, true);
-						chart.series[0].data[7].dataLabel.hide();
-						chart.series[0].data[7].update({ visible : true }, true);
-						chart.series[0].data[8].dataLabel.hide();
-						chart.series[0].data[8].update({ visible : true }, true);
+					var chart = null;
+					var visible = true;
+					showHideClosed = function () {
+						if (visible) {
+							chart.series[0].data[6].dataLabel.hide();
+							chart.series[0].data[6].update({ visible: false }, true);
+							chart.series[0].data[7].dataLabel.hide();
+							chart.series[0].data[7].update({ visible: false }, true);
+							chart.series[0].data[8].dataLabel.hide();
+							chart.series[0].data[8].update({ visible: false }, true);
+						} else {
+							chart.series[0].data[6].dataLabel.hide();
+							chart.series[0].data[6].update({ visible: true }, true);
+							chart.series[0].data[7].dataLabel.hide();
+							chart.series[0].data[7].update({ visible: true }, true);
+							chart.series[0].data[8].dataLabel.hide();
+							chart.series[0].data[8].update({ visible: true }, true);
+						}
+						visible = !visible;
 					}
-					visible = !visible;
-				}
 
-				function buildProjectsStats() {
-					chart = new Highcharts.Chart(
+					function buildProjectsStats() {
+						chart = new Highcharts.Chart(
 							{
-								chart : {
-									plotBackgroundColor : null,
-									plotBorderWidth : null,
-									plotShadow : false,
-									type : 'pie',
-									renderTo : 'container-pie',
+								chart: {
+									plotBackgroundColor: null,
+									plotBorderWidth: null,
+									plotShadow: false,
+									type: 'pie',
+									renderTo: 'container-pie',
 									useHTML: true
 								},
-								title : {
-									text : _diag_projectStats
+								title: {
+									text: _diag_projectStats
 								},
-								tooltip : {
-									pointFormat : '<b>{point.percentage:.2f}%</b> <small>({point.y})</small>'
+								tooltip: {
+									pointFormat: '<b>{point.percentage:.2f}%</b> <small>({point.y})</small>'
 								},
-								plotOptions : {
-									pie : {
-										allowPointSelect : true,
-										cursor : 'pointer',
-										dataLabels : {
-											enabled : true,
-											format : '<b>{point.name}</b>: {point.percentage:.1f}% <small>({point.y})</small>',
-											style : {
-												color : (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+								plotOptions: {
+									pie: {
+										allowPointSelect: true,
+										cursor: 'pointer',
+										dataLabels: {
+											enabled: true,
+											format: '<b>{point.name}</b>: {point.percentage:.1f}% <small>({point.y})</small>',
+											style: {
+												color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
 											},
 											useHTML: true
 										}
 									}
 								},
-								series : [ {
-									name : _diag_projectStats_serieProjects,
-									colorByPoint : true,
-									data : [ {
-										name : _diag_projectStats_serieProjects_inCharge,
-										y : nbProjectsInChargeTotal,
-										color : '#337ab7'
+								series: [{
+									name: _diag_projectStats_serieProjects,
+									colorByPoint: true,
+									data: [{
+										name: _diag_projectStats_serieProjects_inCharge,
+										y: nbProjectsInChargeTotal,
+										color: '#337ab7'
 									}, {
-										name : _diag_projectStats_serieProjects_waiting,
-										y : nbProjectsWaiting,
-										color : '#000'
+										name: _diag_projectStats_serieProjects_waiting,
+										y: nbProjectsWaiting,
+										color: '#000'
 									}, {
-										name : _diag_projectStats_serieProjects_assigned,
-										y : (nbProjectsAssigned - nbProjectsInChargeAssigned),
-										color : '#f0ad4e'
+										name: _diag_projectStats_serieProjects_assigned,
+										y: (nbProjectsAssigned - nbProjectsInChargeAssigned),
+										color: '#f0ad4e'
 									}, {
-										name : _diag_projectStats_serieProjects_completed,
-										y : (nbProjectsCompleted - nbProjectsInChargeCompleted),
-										color : '#dff0d8'
+										name: _diag_projectStats_serieProjects_completed,
+										y: (nbProjectsCompleted - nbProjectsInChargeCompleted),
+										color: '#dff0d8'
 									}, {
-										name : _diag_projectStats_serieProjects_accepted,
-										y : (nbProjectsAccepted - nbProjectsInChargeAccepted),
-										color : '#5cb85c'
+										name: _diag_projectStats_serieProjects_accepted,
+										y: (nbProjectsAccepted - nbProjectsInChargeAccepted),
+										color: '#5cb85c'
 									}, {
-										name : _diag_projectStats_serieProjects_running,
-										y : (nbProjectsRunning - nbProjectsInChargeRunning),
-										color : '#bce8f1'
+										name: _diag_projectStats_serieProjects_running,
+										y: (nbProjectsRunning - nbProjectsInChargeRunning),
+										color: '#bce8f1'
 									}, {
-										name : _diag_projectStats_serieProjects_blocked,
-										y : (nbProjectsBlocked - nbProjectsInChargeBlocked),
-										color : '#d9534f',
+										name: _diag_projectStats_serieProjects_blocked,
+										y: (nbProjectsBlocked - nbProjectsInChargeBlocked),
+										color: '#d9534f',
 										borderColor: '#fff'
 									}, {
-										name : _diag_projectStats_serieProjects_rejected,
-										y : (nbProjectsRejected),
-										color : '#d9534f',
+										name: _diag_projectStats_serieProjects_rejected,
+										y: (nbProjectsRejected),
+										color: '#d9534f',
 										borderColor: '#000'
 									}, {
-										name : _diag_projectStats_serieProjects_archived,
-										y : nbProjectsArchived,
-										sliced : true,
-										selected : true,
-										color : 'lightgray'
-									} ]
-								} ]
+										name: _diag_projectStats_serieProjects_archived,
+										y: nbProjectsArchived,
+										sliced: true,
+										selected: true,
+										color: 'lightgray'
+									}]
+								}]
 							});
-							if (!visible) {
-								chart.series[0].data[6].dataLabel.hide();
-								chart.series[0].data[6].update({ visible : false }, true);
-								chart.series[0].data[7].dataLabel.hide();
-								chart.series[0].data[7].update({ visible : false }, true);
-								chart.series[0].data[8].dataLabel.hide();
-								chart.series[0].data[8].update({ visible : false }, true);
-							}
-				};
+						if (!visible) {
+							chart.series[0].data[6].dataLabel.hide();
+							chart.series[0].data[6].update({ visible: false }, true);
+							chart.series[0].data[7].dataLabel.hide();
+							chart.series[0].data[7].update({ visible: false }, true);
+							chart.series[0].data[8].dataLabel.hide();
+							chart.series[0].data[8].update({ visible: false }, true);
+						}
+					};
 				</script>
-				<a href="?page=projects" class="btn btn-default btn-block"><span class="lang-class viewDetails"></span></a>
+				<a href="?page=projects" class="btn btn-default btn-block"><span
+						class="lang-class viewDetails"></span></a>
 			</div>
 			<!-- /.panel-body -->
 		</div>
@@ -410,111 +426,111 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<i class="fa fa-users fa-fw"></i> <span id="dashboard_allUsers" class="lang"></span>
-				<button class="btn btn-xs btn-default"
-					onclick="showHideClosedUsers()">
+				<button class="btn btn-xs btn-default" onclick="showHideClosedUsers()">
 					<i class="fa fa-eye"></i>
 				</button>
 			</div>
 			<div class="panel-body">
-				<div id="container-pie-users"
-					style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+				<div id="container-pie-users" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto">
+				</div>
 				<script type="text/javascript">
 					var chartUsers = null;
 					var visibleUsers = true;
-					showHideClosedUsers = function() {
+					showHideClosedUsers = function () {
 						if (visibleUsers) {
 							chartUsers.series[0].data[4].dataLabel.hide();
-							chartUsers.series[0].data[4].update({ visible : false }, true);
+							chartUsers.series[0].data[4].update({ visible: false }, true);
 							chartUsers.series[0].data[5].dataLabel.hide();
-							chartUsers.series[0].data[5].update({ visible : false }, true);
+							chartUsers.series[0].data[5].update({ visible: false }, true);
 						}
 
 						else {
-							chartUsers.series[0].data[4].dataLabel .hide();
-							chartUsers.series[0].data[4].update({ visible : true }, true);
-							chartUsers.series[0].data[5].dataLabel .hide();
-							chartUsers.series[0].data[5].update({ visible : true }, true);
+							chartUsers.series[0].data[4].dataLabel.hide();
+							chartUsers.series[0].data[4].update({ visible: true }, true);
+							chartUsers.series[0].data[5].dataLabel.hide();
+							chartUsers.series[0].data[5].update({ visible: true }, true);
 						}
 						visibleUsers = !visibleUsers;
 					}
 
 					buildUsersChart = function () {
 						chartUsers = new Highcharts.Chart(
-								{
-									chart : {
-										plotBackgroundColor : null,
-										plotBorderWidth : null,
-										plotShadow : false,
-										type : 'pie',
-										renderTo : 'container-pie-users'
-									},
-									title : {
-										text : _diag_usersStats
-									},
-									tooltip : {
-										pointFormat : '<b>{point.percentage:.2f}%</b> <small>({point.y})</small>',
-										useHTML: true
-									},
-									plotOptions : {
-										pie : {
-											allowPointSelect : true,
-											cursor : 'pointer',
-											dataLabels : {
-												enabled : true,
-												format : '<b>{point.name}</b>: {point.percentage:.1f}% <small>({point.y})</small>',
-												style : {
-													color : (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-												},
-												useHTML: true
-											}
+							{
+								chart: {
+									plotBackgroundColor: null,
+									plotBorderWidth: null,
+									plotShadow: false,
+									type: 'pie',
+									renderTo: 'container-pie-users'
+								},
+								title: {
+									text: _diag_usersStats
+								},
+								tooltip: {
+									pointFormat: '<b>{point.percentage:.2f}%</b> <small>({point.y})</small>',
+									useHTML: true
+								},
+								plotOptions: {
+									pie: {
+										allowPointSelect: true,
+										cursor: 'pointer',
+										dataLabels: {
+											enabled: true,
+											format: '<b>{point.name}</b>: {point.percentage:.1f}% <small>({point.y})</small>',
+											style: {
+												color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+											},
+											useHTML: true
 										}
-									},
-									series : [ {
-										name : _diag_usersStats_serieUsers,
-										colorByPoint : true,
-										data : [
-												{
-													name : _diag_usersStats_serieUsers_notActivated,
-													y : nbUsersNotActivated,
-													color : '#f0ad4e'
-												},
-												{
-													name : _diag_usersStats_serieUsers_users,
-													y : nbUsersUsers, 
-													color : '#5cb85c',
-													sliced : true,
-													selected : true,
-												},
-												{
-													name : _diag_usersStats_serieUsers_projectsManager,
-													y : nbUsersProjectManager,
-													color : '#d9edf7'
-												},
-												{
-													name : _diag_usersStats_serieUsers_admin,
-													y : nbUsersAdmin,  
-													color : '#337ab7'
-												},
-												{
-													name : _diag_usersStats_serieUsers_blocked,
-													y : nbUsersBlocked,
-													color : '#d9534f'
-												},{
-													name : _diag_usersStats_serieUsers_inactive,
-													y : nbUsersInactive,  
-													color : 'lightgray'
-												}]
-									} ]
-								});
-								if (!visibleUsers) {
-									chartUsers.series[0].data[4].dataLabel.hide();
-									chartUsers.series[0].data[4].update({ visible : false }, true);
-									chartUsers.series[0].data[5].dataLabel.hide();
-									chartUsers.series[0].data[5].update({ visible : false }, true);
-								}
+									}
+								},
+								series: [{
+									name: _diag_usersStats_serieUsers,
+									colorByPoint: true,
+									data: [
+										{
+											name: _diag_usersStats_serieUsers_notActivated,
+											y: nbUsersNotActivated,
+											color: '#f0ad4e'
+										},
+										{
+											name: _diag_usersStats_serieUsers_users,
+											y: nbUsersUsers,
+											color: '#5cb85c',
+											sliced: true,
+											selected: true,
+										},
+										{
+											name: _diag_usersStats_serieUsers_projectsManager,
+											y: nbUsersProjectManager,
+											color: '#d9edf7'
+										},
+										{
+											name: _diag_usersStats_serieUsers_admin,
+											y: nbUsersAdmin,
+											color: '#337ab7'
+										},
+										{
+											name: _diag_usersStats_serieUsers_blocked,
+											y: nbUsersBlocked,
+											color: '#d9534f'
+										}, {
+											name: _diag_usersStats_serieUsers_inactive,
+											y: nbUsersInactive,
+											color: 'lightgray'
+										}]
+								}]
+							});
+						if (!visibleUsers) {
+							chartUsers.series[0].data[4].dataLabel.hide();
+							chartUsers.series[0].data[4].update({ visible: false }, true);
+							chartUsers.series[0].data[5].dataLabel.hide();
+							chartUsers.series[0].data[5].update({ visible: false }, true);
+						}
 					};
 				</script>
-				<a href="?page=users&status=" class="btn btn-default btn-block"><span class="lang-class viewDetails"></span></a>
+				<a href="?page=users&status=" class="btn btn-default btn-block"><span
+						class="lang-class viewDetails"></span></a>
 			</div>
 			<!-- /.panel-body -->
 		</div>
@@ -532,7 +548,8 @@
 				</div>
 				<!-- /.list-group -->
 				<div id="noEventToShow" style=""><span class="lang-class noEventToShow"></span></div>
-				<a id="showMoreEventsBtn" style="" onclick="showMoreEvents()" class="btn btn-default btn-block"><span class="lang-class showMore"></span></a>
+				<a id="showMoreEventsBtn" style="" onclick="showMoreEvents()" class="btn btn-default btn-block"><span
+						class="lang-class showMore"></span></a>
 			</div>
 			<!-- /.panel-body -->
 		</div>

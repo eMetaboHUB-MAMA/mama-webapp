@@ -534,6 +534,9 @@ function showProject(projectID) {
 							case "saved_twice":
 								$("#trRejected").html(_modal_stopProject_rejectedSelect_opt_saved_twice);
 								break;
+							case "canceled_by_client":
+								$("#trRejected").html(_modal_stopProject_rejectedSelect_opt_canceled_by_client);
+								break;
 						}
 					} catch (e) { }
 					$("#trStopped").html(project.analysisRequestExtraData.stoppedReason);

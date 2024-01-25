@@ -15,6 +15,7 @@ if (isset ( $_SESSION ["user_right"] ) && $_SESSION ["user_right"] != "") {
 			array_push ( $pages, "statistics" );
 			array_push ( $pages, "settings" );
 			array_push ( $pages, "help" );
+			array_push ( $pages, "contact" );
 			// TODO add other admin pages
 			break;
 		case "project_manager" :
@@ -24,6 +25,7 @@ if (isset ( $_SESSION ["user_right"] ) && $_SESSION ["user_right"] != "") {
 			array_push ( $pages, "messages" );
 			array_push ( $pages, "appointments" );
 			array_push ( $pages, "help" );
+			array_push ( $pages, "contact" );
 			// TODO add other PM pages
 			break;
 		case "user" :
@@ -33,6 +35,7 @@ if (isset ( $_SESSION ["user_right"] ) && $_SESSION ["user_right"] != "") {
 			array_push ( $pages, "projects" );
 			array_push ( $pages, "messages" );
 			array_push ( $pages, "appointments" );
+			array_push ( $pages, "contact" );
 			// TODO add other user pages
 			break;
 	}

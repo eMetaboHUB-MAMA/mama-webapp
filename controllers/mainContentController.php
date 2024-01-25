@@ -72,6 +72,9 @@ if (isset ( $_GET ["page"] ) && $_GET ["page"] != "") {
 		case "help" :
 			getHelpPage ();
 			break;
+		case "contact" :
+			getContactPage ();
+			break;
 		default :
 			getDefaultPage ();
 			break;
@@ -138,6 +141,26 @@ function getHelpPage() {
 		include ('../pages/default.html');
 	}
 }
+
+/**
+ */
+function getContactPage() {
+	if (isset ( $_SESSION ["user_right"] ) && $_SESSION ["user_right"] != "") {
+		switch ($_SESSION ["user_right"]) {
+			case "admin" :
+			case "project_manager" :
+			case "user" :
+				include ('../pages/contact.html');
+				break;
+			default :
+				include ('../pages/default.html');
+				break;
+		}
+	} else {
+		include ('../pages/default.html');
+	}
+}
+
 
 /**
  */

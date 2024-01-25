@@ -10,89 +10,83 @@
 	<!-- /.row -->
 	<div class="row">
 		<div class="col-lg-6">
-			<form class="form-horizontal" action="?" method="put"
-				onsubmit="return checkUpdateUserForm();">
+			<form class="form-horizontal" action="?" method="put" onsubmit="return checkUpdateUserForm();">
 				<fieldset>
-					<div id="divError" class="alert alert-danger" role="alert"
-						style="display: none;">
-						<strong><span id="_warning1_" class="lang"></span></strong> <span
-							id="_service_not_available" class="lang"></span>
+					<div id="divError" class="alert alert-danger" role="alert" style="display: none;">
+						<strong><span id="_warning1_" class="lang"></span></strong> <span id="_service_not_available"
+							class="lang"></span>
 					</div>
-					<div id="divWarning" class="alert alert-warning" role="alert"
-						style="display: none;">
-						<strong><span id="_warning2_" class="lang"></span></strong> 
+					<div id="divWarning" class="alert alert-warning" role="alert" style="display: none;">
+						<strong><span id="_warning2_" class="lang"></span></strong>
 						<span id="update_account_error_couldNotUpdate" class="lang"></span>
 					</div>
-					<div id="divSuccess" class="alert alert-success" role="alert"
-						style="display: none;">
-						<strong><span id="update_account_successAlert" class="lang"></span></strong> 
+					<div id="divSuccess" class="alert alert-success" role="alert" style="display: none;">
+						<strong><span id="update_account_successAlert" class="lang"></span></strong>
 						<span id="update_account_successTxt" class="lang"></span>
 					</div>
 					<!-- Prepended text-->
 					<div class="form-group input-group">
-						<span class="input-group-addon"><i class="fa fa-at"></i> 
-							<span id="update_account_field_email" class="lang"></span></span> <input id="email" name="email" type="text"
-							class="form-control" disabled value="...">
+						<span class="input-group-addon"><i class="fa fa-at"></i>
+							<span id="update_account_field_email" class="lang"></span></span> <input id="email"
+							name="email" type="text" class="form-control" disabled value="...">
 					</div>
 
 					<div class="form-group input-group">
 						<span class="input-group-addon"><i class="fa fa-user"></i>
-							<span id="update_account_field_FName" class="lang"></span></span> 
-							<input id="firstName" name="firstName" type="text"
-								class="form-control lang" lang="update_account_field_FName_ph" value="..."
-								placeholder="enter your first name">
+							<span id="update_account_field_FName" class="lang"></span></span>
+						<input id="firstName" name="firstName" type="text" class="form-control lang"
+							lang="update_account_field_FName_ph" value="..." placeholder="enter your first name">
 					</div>
 
 					<div class="form-group input-group">
 						<span class="input-group-addon"><i class="fa fa-user"></i>
-							<span id="update_account_field_LName" class="lang"></span></span> 
-							<input id="lastName" name="lastName" type="text"
-								class="form-control lang" lang="update_account_field_LName_ph" value="..."
-								placeholder="enter your last name">
+							<span id="update_account_field_LName" class="lang"></span></span>
+						<input id="lastName" name="lastName" type="text" class="form-control lang"
+							lang="update_account_field_LName_ph" value="..." placeholder="enter your last name">
 					</div>
 
 					<div id="updatePasswordDiv" class="form-group">
-						<label><span id="update_account_field_updatePwd" class="lang"></span></label> <label class="radio-inline">
-							<input type="radio" name="accountUpdatePassword"
-							class="checkValidFormListener" id="accountUpdatePasswordYES"
-							value="yes"><span id="update_account_field_updatePwd_yes" class="lang"></span>
-						</label> <label class="radio-inline"> <input type="radio"
-							name="accountUpdatePassword" id="accountUpdatePasswordNO" checked
-							class="checkValidFormListener" value="no"><span id="update_account_field_updatePwd_nop" class="lang"></span>
+						<label><span id="update_account_field_updatePwd" class="lang"></span></label> <label
+							class="radio-inline">
+							<input type="radio" name="accountUpdatePassword" class="checkValidFormListener"
+								id="accountUpdatePasswordYES" value="yes"><span id="update_account_field_updatePwd_yes"
+								class="lang"></span>
+						</label> <label class="radio-inline"> <input type="radio" name="accountUpdatePassword"
+								id="accountUpdatePasswordNO" checked class="checkValidFormListener" value="no"><span
+								id="update_account_field_updatePwd_nop" class="lang"></span>
 						</label>
 					</div>
 
 					<hr class="UpdatePassword" style="display: none;" />
 
-					<div class="form-group input-group UpdatePassword is-mandarotry"
-						style="display: none;">
+					<div class="form-group input-group UpdatePassword is-mandarotry" style="display: none;">
 						<span class="input-group-addon"><i class="fa fa-key"></i>
-							<span id="update_account_field_currentPwd" class="lang"></span><sup>*</sup></span> <input id="old-password"
-							type="password" class="form-control lang" lang="update_account_field_currentPwd_ph"
-							placeholder="enter your current password">
+							<span id="update_account_field_currentPwd" class="lang"></span><sup>*</sup></span> <input
+							id="old-password" type="password" class="form-control lang"
+							lang="update_account_field_currentPwd_ph" placeholder="enter your current password">
 					</div>
 
-					<div class="form-group input-group UpdatePassword is-mandarotry"
-						style="display: none;">
+					<div class="form-group input-group UpdatePassword is-mandarotry" style="display: none;">
 						<span class="input-group-addon"><i class="fa fa-key"></i>
-							<span id="update_account_field_newPwd" class="lang"></span><sup>*</sup></span> <input id="password" name="password"
-							type="password" class="form-control password lang" lang="update_account_field_newPwd_ph"
-							placeholder="enter your new password"
-							aria-describedby="inputSuccess2Status"> <span
-							class="fa fa-2x form-control-feedback" aria-hidden="true"></span>
-						<span id="inputSuccess2Status" class="sr-only"><span id="update_account_field_newPwd_success" class="lang"></span></span>
+							<span id="update_account_field_newPwd" class="lang"></span><sup>*</sup></span> <input
+							id="password" name="password" type="password" class="form-control password lang"
+							lang="update_account_field_newPwd_ph" placeholder="enter your new password"
+							aria-describedby="inputSuccess2Status"> <span class="fa fa-2x form-control-feedback"
+							aria-hidden="true"></span>
+						<span id="inputSuccess2Status" class="sr-only"><span id="update_account_field_newPwd_success"
+								class="lang"></span></span>
 					</div>
 					<span id="passwordHelpBlock" class="help-block"></span>
 
-					<div class="form-group input-group UpdatePassword is-mandarotry"
-						style="display: none;">
+					<div class="form-group input-group UpdatePassword is-mandarotry" style="display: none;">
 						<span class="input-group-addon"><i class="fa fa-key"></i>
-							<span id="update_account_field_rePwd" class="lang"></span><sup>*</sup></span> <input id="repassword"
-							type="password" class="form-control password lang" lang = "update_account_field_rePwd_ph"
-							placeholder="re-enter your new password"
-							aria-describedby="inputSuccess3Status"> <span
-							class="fa fa-2x form-control-feedback" aria-hidden="true"></span>
-						<span id="inputSuccess3Status" class="sr-only"><span id="update_account_field_rePwd_success" class="lang"></span></span>
+							<span id="update_account_field_rePwd" class="lang"></span><sup>*</sup></span> <input
+							id="repassword" type="password" class="form-control password lang"
+							lang="update_account_field_rePwd_ph" placeholder="re-enter your new password"
+							aria-describedby="inputSuccess3Status"> <span class="fa fa-2x form-control-feedback"
+							aria-hidden="true"></span>
+						<span id="inputSuccess3Status" class="sr-only"><span id="update_account_field_rePwd_success"
+								class="lang"></span></span>
 					</div>
 					<span id="rePasswordHelpBlock" class="help-block"></span>
 
@@ -102,28 +96,29 @@
 
 		<div class="col-lg-6" style="">
 			<div class="form-group input-group">
-				<span class="input-group-addon" style="max-width: 40%;"><i
-					class="fa fa-phone"></i> <span id="update_account_field_phoneGrp" class="lang"></span></span> <select id="phoneGroup"
-					name="phoneGroup" style="max-width: 40%;"
-					class="form-control phoneGroup">
-					<option value="" disabled="disabled"><span id="update_account_field_phoneGrpList" class="lang"></span></option>
-				</select> <input id="phoneNumber" name="phoneNumber" type="text"
-					class="form-control lang" lang="update_account_field_phoneGrp_ph" style="max-width: 60%;" value="..."
+				<span class="input-group-addon" style="max-width: 40%;"><i class="fa fa-phone"></i> <span
+						id="update_account_field_phoneGrp" class="lang"></span></span> <select id="phoneGroup"
+					name="phoneGroup" style="max-width: 40%;" class="form-control phoneGroup">
+					<option value="" disabled="disabled"><span id="update_account_field_phoneGrpList"
+							class="lang"></span></option>
+				</select> <input id="phoneNumber" name="phoneNumber" type="text" class="form-control lang"
+					lang="update_account_field_phoneGrp_ph" style="max-width: 60%;" value="..."
 					placeholder="enter your phone">
 			</div>
 
 			<div class="form-group input-group">
 				<span class="input-group-addon"><i class="fa fa-building"></i>
-					<span id="update_account_field_laboOrComp" class="lang"></span></span> <input id="laboratoryOrCompagny"
-					name="laboratoryOrCompagny" type="text" class="form-control lang" lang="update_account_field_laboOrComp_ph"
-					value="" placeholder="enter your Laboratory or Company name">
+					<span id="update_account_field_laboOrComp" class="lang"></span></span> <input
+					id="laboratoryOrCompagny" name="laboratoryOrCompagny" type="text" class="form-control lang"
+					lang="update_account_field_laboOrComp_ph" value=""
+					placeholder="enter your Laboratory or Company name">
 			</div>
 
 			<div class="form-group">
 				<span class="input-group-addon"><i class="fa fa-map-marker"></i>
 					<span id="update_account_field_workplaceAddress" class="lang"></span></span>
-				<textarea class="form-control lang" lang="update_account_field_workplaceAddress_ph" rows="4" id="workplaceAddress"
-					name="workplaceAddress"
+				<textarea class="form-control lang" lang="update_account_field_workplaceAddress_ph" rows="4"
+					id="workplaceAddress" name="workplaceAddress"
 					placeholder="enter your full adress, country included"></textarea>
 			</div>
 
@@ -138,8 +133,7 @@
 
 			<div class="form-group input-group">
 				<span class="input-group-addon"><span id="update_account_field_typeOfLab" class="lang"></span></span>
-				<select class="form-control" id="laboratoryType"
-					name="laboratoryType">
+				<select class="form-control" id="laboratoryType" name="laboratoryType">
 					<option value="private" class="lang" id="update_account_field_typeOfLab_private"></option>
 					<option value="public" class="lang" id="update_account_field_typeOfLab_public"></option>
 					<option value="public_private" class="lang" id="update_account_field_typeOfLab_mixt"></option>
@@ -162,47 +156,56 @@
 
 			<!-- Prepended text-->
 			<div class="form-group">
-				<label><span id="update_account_pref_receiveEmail" class="lang"></span></label> <label class="radio-inline"> <input
-					type="radio" name="emailNotification" id="emailNotificationEach"
-					value="each_notification"> <span id="update_account_pref_receiveEmail_eachNotif" class="lang"></span>
-				</label> <label class="radio-inline"> <input type="radio"
-					name="emailNotification" id="emailNotificationDaily"
-					value="daily_digest"> <span id="update_account_pref_receiveEmail_dailyDig" class="lang"></span>
-				</label> <label class="radio-inline"> <input type="radio"
-					name="emailNotification" id="emailNotificationWeekly"
-					value="weekly_digest"> <span id="update_account_pref_receiveEmail_weeklyDig" class="lang"></span>
+				<label><span id="update_account_pref_receiveEmail" class="lang"></span></label> <label
+					class="radio-inline"> <input type="radio" name="emailNotification" id="emailNotificationEach"
+						value="each_notification"> <span id="update_account_pref_receiveEmail_eachNotif"
+						class="lang"></span>
+				</label> <label class="radio-inline"> <input type="radio" name="emailNotification"
+						id="emailNotificationDaily" value="daily_digest"> <span
+						id="update_account_pref_receiveEmail_dailyDig" class="lang"></span>
+				</label> <label class="radio-inline"> <input type="radio" name="emailNotification"
+						id="emailNotificationWeekly" value="weekly_digest"> <span
+						id="update_account_pref_receiveEmail_weeklyDig" class="lang"></span>
 				</label>
 			</div>
-			
+
 			<div class="form-group">
 				<label><span id="update_account_pref_notif" class="lang"></span></label>
 				<div class="checkbox optAdmin">
-					<label> <input id="emailAlertNewUserAccount"
-						type="checkbox" value=""><span id="update_account_pref_notifNewUser" class="lang"></span>
+					<label> <input id="emailAlertNewUserAccount" type="checkbox" value=""><span
+							id="update_account_pref_notifNewUser" class="lang"></span>
 					</label>
 				</div>
 				<div class="checkbox optAdmin optPM">
-					<label> <input id="emailAlertNewProject"
-						type="checkbox" value=""><span id="update_account_pref_notifNewAR" class="lang"></span>
+					<label> <input id="emailAlertNewProject" type="checkbox" value=""><span
+							id="update_account_pref_notifNewAR" class="lang"></span>
 					</label>
 				</div>
 				<div class="checkbox optAll">
-					<label> <input id="emailAlertNewEventFollowedProject"
-						type="checkbox" value=""><span id="update_account_pref_notifNewEvent" class="lang"></span>
+					<label> <input id="emailAlertNewEventFollowedProject" type="checkbox" value=""><span
+							id="update_account_pref_notifNewEvent" class="lang"></span>
 					</label>
 				</div>
 				<div class="checkbox optAll">
-					<label> <input id="emailAlertNewMessage" type="checkbox"
-						value=""><span id="update_account_pref_notifNewMessage" class="lang"></span>
+					<label> <input id="emailAlertNewMessage" type="checkbox" value=""><span
+							id="update_account_pref_notifNewMessage" class="lang"></span>
 					</label>
 				</div>
 			</div>
-			
+
 			<div class="form-group input-group">
-				<span class="input-group-addon"><span id="update_account_pref_emailLang" class="lang"></span></span> <select
-					class="form-control" id="emailLanguage" name="emailLanguage">
+				<span class="input-group-addon"><span id="update_account_pref_emailLang" class="lang"></span></span>
+				<select class="form-control" id="emailLanguage" name="emailLanguage">
 					<option id="update_account_pref_emailLang_en" value="en" class="lang"></option>
 					<option id="update_account_pref_emailLang_fr" value="fr" class="lang"></option>
+				</select>
+			</div>
+
+			<!-- mama#41 - new pref. -->
+			<div class="form-group input-group optAdmin optPM">
+				<span class="input-group-addon"><span id="_update_account_pref_platform" class="lang"></span></span>
+				<select class="form-control" id="mthPlatform" name="mthPlatform">
+					<option value="null"></option>
 				</select>
 			</div>
 
@@ -218,8 +221,7 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<h1 class="page-header">
-				<button type="button" id="btn-update-user" class="btn btn-primary"
-					onclick="checkUpdateUserForm();">
+				<button type="button" id="btn-update-user" class="btn btn-primary" onclick="checkUpdateUserForm();">
 					<i class="fa fa-rocket"></i> <span id="update_account_updateBtn" class="lang"></span>
 				</button>
 			</h1>
@@ -231,27 +233,27 @@
 </div>
 
 <script type="text/javascript">
-	$("#accountUpdatePasswordYES").click(function() {
+	$("#accountUpdatePasswordYES").click(function () {
 		$(".UpdatePassword").show();
 		checkValidForm();
 	});
-	$("#accountUpdatePasswordNO").click(function() {
+	$("#accountUpdatePasswordNO").click(function () {
 		$(".UpdatePassword").hide();
 		checkValidForm();
 	});
 
 	$("#password").focusout(
-			function() {
-				$(this).parent().removeClass(
-						"has-error has-success has-warning has-feedback");
-				$(this).parent().find(".fa").removeClass("fa-check fa-times");
-				var passStrength = 0;
-				var password = $(this).val();
-				if (password.length > 10)
-					passStrength = 2;
-				else if (password.length > 5)
-					passStrength = 1;
-				switch (passStrength) {
+		function () {
+			$(this).parent().removeClass(
+				"has-error has-success has-warning has-feedback");
+			$(this).parent().find(".fa").removeClass("fa-check fa-times");
+			var passStrength = 0;
+			var password = $(this).val();
+			if (password.length > 10)
+				passStrength = 2;
+			else if (password.length > 5)
+				passStrength = 1;
+			switch (passStrength) {
 				case 0:
 					$(this).parent().addClass("has-error has-feedback");
 					$(this).parent().find(".fa").addClass("fa-times");
@@ -267,29 +269,29 @@
 					$(this).parent().find(".fa").addClass("fa-check");
 					$("#passwordHelpBlock").html("");
 					break;
-				}
-			});
+			}
+		});
 
 	$(".password").focusout(
-			function() {
-				$("#repassword").parent().removeClass(
-						"has-error has-success has-feedback");
-				$("#repassword").parent().find(".fa").removeClass(
-						"fa-check fa-times");
-				if ($("#password").val() == $("#repassword").val()
-						&& $("#repassword").val() != "") {
-					$("#repassword").parent().addClass(
-							"has-success has-feedback");
-					$("#repassword").parent().find(".fa").addClass("fa-check");
-					$("#rePasswordHelpBlock").html("");
-				} else if ($("#repassword").val() != "") {
-					$("#repassword").parent()
-							.addClass("has-error has-feedback");
-					$("#repassword").parent().find(".fa").addClass("fa-times");
-					$("#rePasswordHelpBlock").html(
-							update_account_error_passwords_no_match);
-				}
-			});
+		function () {
+			$("#repassword").parent().removeClass(
+				"has-error has-success has-feedback");
+			$("#repassword").parent().find(".fa").removeClass(
+				"fa-check fa-times");
+			if ($("#password").val() == $("#repassword").val()
+				&& $("#repassword").val() != "") {
+				$("#repassword").parent().addClass(
+					"has-success has-feedback");
+				$("#repassword").parent().find(".fa").addClass("fa-check");
+				$("#rePasswordHelpBlock").html("");
+			} else if ($("#repassword").val() != "") {
+				$("#repassword").parent()
+					.addClass("has-error has-feedback");
+				$("#repassword").parent().find(".fa").addClass("fa-times");
+				$("#rePasswordHelpBlock").html(
+					update_account_error_passwords_no_match);
+			}
+		});
 
 	/**
 	 * check users emails
@@ -298,76 +300,76 @@
 		var email = $(elem).val();
 		if (!email.match(re)) {
 			$(elem).parent().removeClass("has-success has-feedback").addClass(
-					"has-error has-feedback");
+				"has-error has-feedback");
 			$(elem).parent().find(".fa").removeClass("fa-check").addClass(
-					"fa-times");
+				"fa-times");
 		} else {
 			$(elem).parent().addClass("has-success has-feedback").removeClass(
-					"has-error has-feedback");
+				"has-error has-feedback");
 			$(elem).parent().find(".fa").removeClass("fa-times").addClass(
-					"fa-check");
+				"fa-check");
 		}
 	}
 
 	$("#firstname").val($("#firstname").val()).focus();
 
-	$.getJSON("json/codes_countries.json", function(data) {
+	$.getJSON("json/codes_countries.json", function (data) {
 		// load data from json
-		$.each(data, function() {
+		$.each(data, function () {
 			if (this.country == "France")
 				$(".phoneGroup").append(
-						'<option value="'+this.code+'" selected="selected">'
-								+ this.country + ' (+' + this.code
-								+ ')</option>');
+					'<option value="' + this.code + '" selected="selected">'
+					+ this.country + ' (+' + this.code
+					+ ')</option>');
 			else
 				$(".phoneGroup").append(
-						'<option value="'+this.code+'">' + this.country + ' (+'
-								+ this.code + ')</option>');
+					'<option value="' + this.code + '">' + this.country + ' (+'
+					+ this.code + ')</option>');
 		});
 	});
 
 	$(".form-control").change(
-			function() {
-				setTimeout(function() {
-					var success = true;
-					$.each($("input.form-control:visible"),
-							function() {
-								if ($(this).parent().hasClass(
-										"has-error has-feedback")) {
-									success = false;
-								}
-								if ($(this).parent().hasClass("is-mandarotry")
-										&& $(this).val() == "") {
-									success = false;
-								}
-							});
-					if ($("#accountUpdatePasswordYES").is(":checked")
-							&& $("#old-password").val() == "")
-						success = false;
-					$("#btn-update-user").removeClass("btn-disabled");
-					$("#btn-update-user").prop("disabled", false);
-					if (success) {
+		function () {
+			setTimeout(function () {
+				var success = true;
+				$.each($("input.form-control:visible"),
+					function () {
+						if ($(this).parent().hasClass(
+							"has-error has-feedback")) {
+							success = false;
+						}
+						if ($(this).parent().hasClass("is-mandarotry")
+							&& $(this).val() == "") {
+							success = false;
+						}
+					});
+				if ($("#accountUpdatePasswordYES").is(":checked")
+					&& $("#old-password").val() == "")
+					success = false;
+				$("#btn-update-user").removeClass("btn-disabled");
+				$("#btn-update-user").prop("disabled", false);
+				if (success) {
 
-					} else {
-						$("#btn-update-user").addClass("btn-disabled");
-						$("#btn-update-user").prop("disabled", true);
-					}
-				}, 50);
-			});
+				} else {
+					$("#btn-update-user").addClass("btn-disabled");
+					$("#btn-update-user").prop("disabled", true);
+				}
+			}, 50);
+		});
 	function checkValidForm() {
-		setTimeout(function() {
+		setTimeout(function () {
 			var success = true;
-			$.each($("input.form-control:visible"), function() {
+			$.each($("input.form-control:visible"), function () {
 				if ($(this).parent().hasClass("has-error has-feedback")) {
 					success = false;
 				}
 				if ($(this).parent().hasClass("is-mandarotry")
-						&& $(this).val() == "") {
+					&& $(this).val() == "") {
 					success = false;
 				}
 			});
 			if ($("#accountUpdatePasswordYES").is(":checked")
-					&& $("#old-password").val() == "")
+				&& $("#old-password").val() == "")
 				success = false;
 			$("#btn-update-user").removeClass("btn-disabled");
 			$("#btn-update-user").prop("disabled", false);
@@ -380,24 +382,47 @@
 		}, 50);
 	}
 
+	function loadPlatforms() {
+		$.ajax({
+			type: "get",
+			url: "ajax/ajax_proxypass.php?verbe=get&resource=mth-platforms",
+			dataType: "json",
+			async: true,
+			success: function (platforms) {
+				console.log("platforms ⇒ ", platforms);
+				$.each(platforms, function (k, v) {
+					$("#mthPlatform").append(
+						'<option value="' + v.id + '">' + v.name + '</option>');
+				});
+			},
+			error: function (xhr) {
+				console.log(xhr);
+				// show error message info
+				$("#divError").show();
+			}
+		});
+	}
+	// load platorm in gui
+	loadPlatforms();
+
 	/**
 	 * 
 	 */
 	function loadUserData(userID) {
 		var verbe = "get";
 		var resource = "user";
-		var extraGet= "";
-		if (userID !== undefined ){
+		var extraGet = "";
+		if (userID !== undefined) {
 			extraGet += "&userID=" + userID;
 		}
 		// run
 		$.ajax({
-			type : "get",
-			url : "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
-					+ resource + extraGet,
-			dataType : "json",
-			async : true,
-			success : function(user) {
+			type: "get",
+			url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+				+ resource + extraGet,
+			dataType: "json",
+			async: true,
+			success: function (user) {
 				if (user.hasOwnProperty('message')) {
 					$("#divError").show();
 					return false;
@@ -410,127 +435,133 @@
 					$(".UpdatePassword").hide();
 				}
 				// 				$("#email").val(user.email);
-				$.each(user, function(k, v) {
+				$.each(user, function (k, v) {
 					$("#" + k).val(v);
 				});
 				$("#workplaceAddress").html(user.workplaceAddress);
 				// email pref. (1)
 				switch (user.emailReception) {
-				case "weekly_digest":
-					$("#emailNotificationWeekly").prop("checked", true);
-					break;
-				case "each_notification":
-					$("#emailNotificationEach").prop("checked", true);
-					break;
-				case "daily_digest":
-				default:
-					$("#emailNotificationDaily").prop("checked", true);
-					break;
+					case "weekly_digest":
+						$("#emailNotificationWeekly").prop("checked", true);
+						break;
+					case "each_notification":
+						$("#emailNotificationEach").prop("checked", true);
+						break;
+					case "daily_digest":
+					default:
+						$("#emailNotificationDaily").prop("checked", true);
+						break;
 				}
 				// email pref. (2)
 				$(".optAdmin").hide();
 				$(".optPM").hide();
 				switch (user.right) {
-				case "admin":
-					$(".optAdmin").show();
-					break;
-				case "project_manager":
-					$(".optPM").show();
-					break;
-				case "user":
-				default:
-					break;
+					case "admin":
+						$(".optAdmin").show();
+						break;
+					case "project_manager":
+						$(".optPM").show();
+						break;
+					case "user":
+					default:
+						break;
 				}
 				// email pref. (3)
 				$("#emailAlertNewProject").prop("checked",
-						user.emailAlertNewProject);
+					user.emailAlertNewProject);
 				$("#emailAlertNewEventFollowedProject").prop("checked",
-						user.emailAlertNewEventFollowedProject);
+					user.emailAlertNewEventFollowedProject);
 				$("#emailAlertNewMessage").prop("checked",
-						user.emailAlertNewMessage);
+					user.emailAlertNewMessage);
 				$("#emailAlertNewUserAccount").prop("checked",
-						user.emailAlertNewUserAccount);
+					user.emailAlertNewUserAccount);
 				// email pref. (4)
 				$("#emailLanguage").val(user.emailLanguage);
 				// img
 				var hash = md5(user.email.toLowerCase());
-				$("#user-profile-img").attr("src", "https://secure.gravatar.com/avatar/" + hash + "?s=200&d=identicon" )
+				$("#user-profile-img").attr("src", "https://secure.gravatar.com/avatar/" + hash + "?s=200&d=identicon")
+				// mama#41 - link user to MTH platform
+				if (user.mthPlatform !== null) {
+					setTimeout(()=>($("#mthPlatform").val(user.mthPlatform.id)), 200);
+				}
 			},
-			error : function(xhr) {
+			error: function (xhr) {
 				console.log(xhr);
 				// show error message info
 				$("#divError").show();
 			}
 		});
 	}
-	
-	
-	if (getUrlParameter("userID")!== undefined) {
+
+	// load user data
+	if (getUrlParameter("userID") !== undefined) {
 		loadUserData(Number(getUrlParameter("userID")));
 		$("#updatePasswordDiv").hide();
 		$(".UpdatePassword").hide();
 	} else {
 		loadUserData();
 	}
-	
+
 	/**
 	 * 
 	 */
-	checkUpdateUserForm = function() {
+	checkUpdateUserForm = function () {
 		$(".alert").hide();
 		var verbe = "put";
 		var resource = "user";
 		var params = "";
-		var extraGet= "";
-		if (getUrlParameter("userID")!== undefined) {
-			extraGet += "&userID=" + Number(getUrlParameter("userID")) ;
+		var extraGet = "";
+		if (getUrlParameter("userID") !== undefined) {
+			extraGet += "&userID=" + Number(getUrlParameter("userID"));
 		}
 		// 		$.each($("input"), function(k, v) {
 		// 			params += "&" + $(this).prop('id') + "="
 		// 					+ $("#" + $(this).prop('id')).val();
 		// 		});
-		$.each($("input[type=text]"), function(k, v) {
+		$.each($("input[type=text]"), function (k, v) {
 			params += "&" + $(this).prop('id') + "="
-					+ encodeURIComponent($("#" + $(this).prop('id')).val());
+				+ encodeURIComponent($("#" + $(this).prop('id')).val());
 		});
 		if ($("input[name=accountUpdatePassword]:checked").val() === "yes")
-			$.each($("input[type=password]"), function(k, v) {
+			$.each($("input[type=password]"), function (k, v) {
 				params += "&" + $(this).prop('id') + "="
-						+ encodeURIComponent($("#" + $(this).prop('id')).val());
-			});
-		$.each($("textarea"), function(k, v) {
-			params += "&" + $(this).prop('id') + "="
 					+ encodeURIComponent($("#" + $(this).prop('id')).val());
+			});
+		$.each($("textarea"), function (k, v) {
+			params += "&" + $(this).prop('id') + "="
+				+ encodeURIComponent($("#" + $(this).prop('id')).val());
 		});
 		params += "&emailNotification="
-				+ $("input[name=emailNotification]:checked").val();
+			+ $("input[name=emailNotification]:checked").val();
 		params += "&emailAlertNewUserAccount="
-				+ $("#emailAlertNewUserAccount").is(":checked");
+			+ $("#emailAlertNewUserAccount").is(":checked");
 		params += "&emailAlertNewProject="
-				+ $("#emailAlertNewProject").is(":checked");
+			+ $("#emailAlertNewProject").is(":checked");
 		params += "&emailAlertNewEventFollowedProject="
-				+ $("#emailAlertNewEventFollowedProject").is(":checked");
+			+ $("#emailAlertNewEventFollowedProject").is(":checked");
 		params += "&emailAlertNewMessage="
-				+ $("#emailAlertNewMessage").is(":checked");
+			+ $("#emailAlertNewMessage").is(":checked");
 		params += "&emailLanguage=" + $("#emailLanguage").val()
 		// phone group
 		params += "&phoneGroup=" + $("#phoneGroup").val();
 		// labo
 		params += "&laboratoryType=" + $("#laboratoryType").val();
+		// mama#41 - mth platform
+		params += "&mthPlatform=" + $("#mthPlatform").val();
 		// run
 		$.ajax({
-			type : "post",
-			url : "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
-					+ resource + extraGet,
-			dataType : "json",
-			async : true,
-			data : params,
-			success : function(data) {
+			type: "post",
+			url: "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+				+ resource + extraGet,
+			dataType: "json",
+			async: true,
+			data: params,
+			success: function (data) {
 				// console.log(data);
 				if (data.success) {
 					var extraURL = "";
 					if (getUrlParameter("userID") !== undefined) {
-						extraURL += "&userID="+getUrlParameter("userID"); 
+						extraURL += "&userID=" + getUrlParameter("userID");
 					}
 					location.search = "?page=user-profile&success=true" + extraURL;
 				} else {
@@ -538,7 +569,7 @@
 					$("#divWarning").show();
 				}
 			},
-			error : function(xhr) {
+			error: function (xhr) {
 				console.log(xhr);
 				// show error message info
 				$("#divError").show();

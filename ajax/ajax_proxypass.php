@@ -300,6 +300,13 @@ if (isset ( $_GET ["resource"] ) && $_GET ["resource"] != "") {
 				get_rest_api ( $mama_config_json ['mamaRestApi'] );
 			}
 			break;
+		// new mama#39
+		case "contact-message" :
+			if ($verbe == "POST") {
+				// create new message
+				post_contact_message ( $mama_config_json ['mamaRestApi'] );
+			}
+			break;
 		default :
 			returnSuccess ( false );
 	}
@@ -1231,4 +1238,22 @@ function delete_project_file($mama_rest_url, $pid) {
 function get_rest_api($mama_rest_url) {
 	$curl_response = getStandardizedGet ( $mama_rest_url, "" );
 	echo $curl_response;
+}
+
+function post_contact_message($mama_rest_url) {
+	$curl_response = getStandardizedPost ( $mama_rest_url, "contact-message" );
+	if ($curl_response == "null") {
+		returnSuccess ( false );
+	}
+	// return
+	$entity = json_decode ( $curl_response, true );
+	if ($entity != null) {
+		if (is_array ( $entity ) && array_key_exists ( "error", $entity )) {
+			returnSuccess ( false, $entity ['error'] );
+		}
+		// status: SUCCESS
+		returnSuccess ( true );
+	} else {
+		returnSuccess ( false );
+	}
 }
