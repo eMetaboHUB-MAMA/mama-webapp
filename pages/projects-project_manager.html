@@ -1,5 +1,5 @@
 <!-- js -->
-<script src="js/projects.min.js" type="text/javascript"></script>
+<script src="js/projects.js" type="text/javascript"></script>
 <!-- page -->
 <div id="noProjectsContent" class="row" style="display: none">
 	<br />
@@ -7,7 +7,8 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<h3>
-					<span id="listProjects_noProject_title" class="lang"></span> <small><span id="listProjects_noProject_text" class="lang"></span></small>
+					<span id="listProjects_noProject_title" class="lang"></span> <small><span
+						id="listProjects_noProject_text" class="lang"></span></small>
 				</h3>
 			</div>
 		</div>
@@ -15,80 +16,122 @@
 </div>
 <div class="row listProjectsContent">
 	<div class="col-lg-12">
-		<div class="col-lg-12"><br /></div>
+		<div class="col-lg-12">
+			<br />
+		</div>
 		<div class="col-lg-6">
 			<div class="form-group input-group">
-				<input type="text" id="projectsSearchFilter" class="form-control lang" lang="listProjects_search_ph" placeholder="e.g. plasma">
+				<input type="text" id="projectsSearchFilter"
+					class="form-control lang" lang="listProjects_search_ph"
+					placeholder="e.g. plasma">
 				<div class="input-group-btn">
 					<button type="button" class="btn btn-primary dropdown-toggle"
 						data-toggle="dropdown">
-						<span id="search-analyses-filter-status"> <span id="listProjects_search_filter_all" class="lang"></span></span> 
-						<span class="caret"></span>
+						<span id="search-analyses-filter-status"> <span
+							id="listProjects_search_filter_all" class="lang"></span></span> <span
+							class="caret"></span>
 					</button>
 					<ul class="dropdown-menu pull-right">
-						<li><a id="aPj_blocked" href="#" onclick="reloadPage('blocked')"> <span id="listProjects_search_filter_blocked" class="lang"></span></a></li>
-						<li><a id="aPj_rejected" href="#" onclick="reloadPage('rejected')"> <span id="listProjects_search_filter_rejected" class="lang"></span></a></li>
-						<li><a id="aPj_waiting" href="#" onclick="reloadPage('waiting')"> <span id="listProjects_search_filter_waiting" class="lang"></span></a></li>
-						<li><a id="aPj_assigned" href="#" onclick="reloadPage('assigned')"> <span id="listProjects_search_filter_assigned" class="lang"></span></a></li>
-						<li><a id="aPj_completed" href="#" onclick="reloadPage('completed')"> <span id="listProjects_search_filter_completed" class="lang"></span></a></li>
-						<li><a id="aPj_accepted" href="#" onclick="reloadPage('accepted')"> <span id="listProjects_search_filter_accepted" class="lang"></span></a></li>
-						<li><a id="aPj_running" href="#" onclick="reloadPage('running')"> <span id="listProjects_search_filter_running" class="lang"></span></a></li>
-						<li><a id="aPj_archived" href="#" onclick="reloadPage('archived')"> <span id="listProjects_search_filter_archived" class="lang"></span></a></li>
-						<li><a href="#" onclick="reloadPage('')"> <span id="listProjects_search_filter_allStatus" class="lang"></span></a></li>
+						<li><a id="aPj_blocked" href="#"
+							onclick="reloadPage('blocked')"> <span
+								id="listProjects_search_filter_blocked" class="lang"></span></a></li>
+						<li><a id="aPj_rejected" href="#"
+							onclick="reloadPage('rejected')"> <span
+								id="listProjects_search_filter_rejected" class="lang"></span></a></li>
+						<li><a id="aPj_waiting" href="#"
+							onclick="reloadPage('waiting')"> <span
+								id="listProjects_search_filter_waiting" class="lang"></span></a></li>
+						<li><a id="aPj_assigned" href="#"
+							onclick="reloadPage('assigned')"> <span
+								id="listProjects_search_filter_assigned" class="lang"></span></a></li>
+						<li><a id="aPj_completed" href="#"
+							onclick="reloadPage('completed')"> <span
+								id="listProjects_search_filter_completed" class="lang"></span></a></li>
+						<li><a id="aPj_accepted" href="#"
+							onclick="reloadPage('accepted')"> <span
+								id="listProjects_search_filter_accepted" class="lang"></span></a></li>
+						<li><a id="aPj_running" href="#"
+							onclick="reloadPage('running')"> <span
+								id="listProjects_search_filter_running" class="lang"></span></a></li>
+						<li><a id="aPj_archived" href="#"
+							onclick="reloadPage('archived')"> <span
+								id="listProjects_search_filter_archived" class="lang"></span></a></li>
+						<li><a href="#" onclick="reloadPage('')"> <span
+								id="listProjects_search_filter_allStatus" class="lang"></span></a></li>
 					</ul>
 				</div>
 				<div class="input-group-btn">
-					<button type="button" class="btn btn-primary dropdown-toggle" onclick="searchProjects();"
-						data-toggle="dropdown">
-						<span id="search-analyses-filter"> <span id="listProjects_search_btn" class="lang"></span> <i class="fa fa-search"></i></span>
+					<button type="button" class="btn btn-primary dropdown-toggle"
+						onclick="searchProjects();" data-toggle="dropdown">
+						<span id="search-analyses-filter"> <span
+							id="listProjects_search_btn" class="lang"></span> <i
+							class="fa fa-search"></i></span>
 					</button>
 				</div>
 			</div>
 		</div>
 		<div class="col-lg-6">
 			<div class="pull-right pull-top">
-				<button id="btn-userFilter-owner" class="btn btn-default" onclick="addRemoveUserFilter('owner');">
-					<i class="fa fa-tags" aria-hidden="true"></i> <span id="listProjects_filter_owner" class="lang"></span>
+				<button id="btn-userFilter-owner" class="btn btn-default"
+					onclick="addRemoveUserFilter('owner');">
+					<i class="fa fa-tags" aria-hidden="true"></i> <span
+						id="listProjects_filter_owner" class="lang"></span>
 				</button>
 				&nbsp;
-				<button id="btn-userFilter-inCharge" class="btn btn-default" onclick="addRemoveUserFilter('inCharge');">
-					<i class="fa fa-user-md" aria-hidden="true"></i> <span id="listProjects_filter_inCharge" class="lang"></span>
+				<button id="btn-userFilter-inCharge" class="btn btn-default"
+					onclick="addRemoveUserFilter('inCharge');">
+					<i class="fa fa-user-md" aria-hidden="true"></i> <span
+						id="listProjects_filter_inCharge" class="lang"></span>
 				</button>
 				&nbsp;
-				<button id="btn-userFilter-involved" class="btn btn-default" onclick="addRemoveUserFilter('involved');">
-					<i class="fa fa-smile-o" aria-hidden="true"></i> <span id="listProjects_filter_involved" class="lang"></span>
+				<button id="btn-userFilter-involved" class="btn btn-default"
+					onclick="addRemoveUserFilter('involved');">
+					<i class="fa fa-smile-o" aria-hidden="true"></i> <span
+						id="listProjects_filter_involved" class="lang"></span>
 				</button>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<a id="link-donwload-xls-file" class="btn btn-default" href="ajax/ajax_proxypass.php?verbe=get&resource=projects-file" target="_blank">
-					<i class="fa fa-file-excel-o" aria-hidden="true"></i> <span id="listProjects_download_btn" class="lang"></span>
+				<a id="link-donwload-xls-file" class="btn btn-default"
+					href="ajax/ajax_proxypass.php?verbe=get&resource=projects-file"
+					target="_blank"> <i class="fa fa-file-excel-o"
+					aria-hidden="true"></i> <span id="listProjects_download_btn"
+					class="lang"></span>
 				</a>
 			</div>
 
 		</div>
 	</div>
 	<!-- /.col-lg-6 -->
-	<div class="col-lg-6">&nbsp;</div><!-- /.col-lg-6 -->
+	<div class="col-lg-6">&nbsp;</div>
+	<!-- /.col-lg-6 -->
 	<div class="col-lg-6">
-		<span class="">
-			<select id="mthPlatforms" style="width: 150px;" onchange="addRemoveUserFilter('mth_pf', this.value);" class="btn btn-mini"></select>
-			&nbsp;
-		</span>
-		<span class="form-inline">
+		<span class=""> <select id="mthPlatforms" style="width: 150px;"
+			onchange="addRemoveUserFilter('mth_pf', this.value);"
+			class="btn btn-mini"></select> &nbsp;
+		</span> <span class="form-inline">
 			<div class="form-group input-group ">
-				<span class="input-group-addon"><span id="listProjects_filter_from" class="lang"></span></span> 
-				<input id="range-date-start" data-date-format="yyyy-mm-dd" type="text" class="form-control datepicker" value="" placeholder="2014-01-01" style="max-width: 85px;">
+				<span class="input-group-addon"><span
+					id="listProjects_filter_from" class="lang"></span></span> <input
+					id="range-date-start" data-date-format="yyyy-mm-dd" type="text"
+					class="form-control datepicker" value="" placeholder="2014-01-01"
+					style="max-width: 85px;">
 			</div>
 			<div class="form-group input-group ">
-				<span class="input-group-addon"><span id="listProjects_filter_to" class="lang"></span></span> 
-				<input id="range-date-end" data-date-format="yyyy-mm-dd" type="text" class="form-control datepicker " value="" placeholder="2015-12-31" style="max-width: 85px;">
+				<span class="input-group-addon"><span
+					id="listProjects_filter_to" class="lang"></span></span> <input
+					id="range-date-end" data-date-format="yyyy-mm-dd" type="text"
+					class="form-control datepicker " value="" placeholder="2015-12-31"
+					style="max-width: 85px;">
 			</div>
-			<button id="range-date-update" type="submit" class="btn btn-primary"><i class="fa fa-refresh"></i> </button>
-<!-- 			<button class="btn btn-default"><i class="fa fa-file-excel-o"></i> Download</button> -->
+			<button id="range-date-update" type="submit" class="btn btn-primary">
+				<i class="fa fa-refresh"></i>
+			</button> <!-- 			<button class="btn btn-default"><i class="fa fa-file-excel-o"></i> Download</button> -->
 		</span>
-	</div><!-- /.col-lg-6 -->
+	</div>
+	<!-- /.col-lg-6 -->
 	<div class="col-lg-12">
 		<br />
-	</div><!-- /.col-lg-12 -->
+	</div>
+	<!-- /.col-lg-12 -->
 </div>
 <div class="row listProjectsContent">
 	<div class="col-lg-12">
@@ -137,7 +180,8 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title">
-					<span id="_modal_showProject_title" class="lang"></span><span id="project-idLong"></span>
+					<span id="_modal_showProject_title" class="lang"></span><span
+						id="project-idLong"></span>
 				</h4>
 			</div>
 			<div class="modal-body">
@@ -147,7 +191,9 @@
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a data-toggle="collapse" data-parent="#accordion"
-									href="#collapseMainInfos"><i class="fa fa-info-circle" aria-hidden="true"></i> <span id="_modal_showProject_main_title" class="lang"></span></a>
+									href="#collapseMainInfos"><i class="fa fa-info-circle"
+									aria-hidden="true"></i> <span
+									id="_modal_showProject_main_title" class="lang"></span></a>
 							</h4>
 						</div>
 						<div id="collapseMainInfos" class="panel-collapse collapse in">
@@ -156,8 +202,10 @@
 									<table class="table">
 										<thead>
 											<tr>
-												<th><span id="_modal_showProject_main_tabKey" class="lang"></span></th>
-												<th><span id="_modal_showProject_main_tabVal" class="lang"></span></th>
+												<th><span id="_modal_showProject_main_tabKey"
+													class="lang"></span></th>
+												<th><span id="_modal_showProject_main_tabVal"
+													class="lang"></span></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -166,7 +214,8 @@
 												<td id="project-title"></td>
 											</tr>
 											<tr>
-												<td rowspan="2"><span id="_modal_showProject_pjUser" class="lang"></span></td>
+												<td rowspan="2"><span id="_modal_showProject_pjUser"
+													class="lang"></span></td>
 												<td id="project-owner"></td>
 											</tr>
 											<tr>
@@ -174,69 +223,87 @@
 											</tr>
 											<tr>
 												<td><span id="_modal_showProject_pjDemand" class="lang"></span></td>
-												<td id="project-demand">
-													<span class="demandTypeCatalogAllowance label label-default label-space">
-														<span id="_modal_showProject_pjDemand_catAllo" class="lang"></span>
-													</span> 
-													<span  class="demandTypeEqProvisioning label label-default label-space">
+												<td id="project-demand"><span
+													class="demandTypeCatalogAllowance label label-default label-space">
+														<span id="_modal_showProject_pjDemand_catAllo"
+														class="lang"></span>
+												</span> <span
+													class="demandTypeEqProvisioning label label-default label-space">
 														<span id="_modal_showProject_pjDemand_eqProv" class="lang"></span>
-													</span> 
-													<span class="demandTypeFeasibilityStudy label label-default label-space">
-														<span id="_modal_showProject_pjDemand_feasStud" class="lang"></span>
-													</span> 
-													<span class="demandTypeDataProcessing label label-default label-space">
-														<span id="_modal_showProject_pjDemand_dataProcessing" class="lang"></span>
-													</span>
-													<span class="demandTypeTraining label label-default label-space">
-														<span id="_modal_showProject_pjDemand_training" class="lang"></span>
-													</span>
-													<span class="demandTypeOther label label-default label-space">
+												</span> <span
+													class="demandTypeFeasibilityStudy label label-default label-space">
+														<span id="_modal_showProject_pjDemand_feasStud"
+														class="lang"></span>
+												</span> <span
+													class="demandTypeDataProcessing label label-default label-space">
+														<span id="_modal_showProject_pjDemand_dataProcessing"
+														class="lang"></span>
+												</span> <span
+													class="demandTypeTraining label label-default label-space">
+														<span id="_modal_showProject_pjDemand_training"
+														class="lang"></span>
+												</span> <span
+													class="demandTypeOther label label-default label-space">
 														<span id="_modal_showProject_pjDemand_other" class="lang"></span>
-													</span>
-												</td>
+												</span></td>
 											</tr>
 											<tr id="trSampleNb">
-												<td><span id="_modal_showProject_pjSampleNb" class="lang"></span></td>
+												<td><span id="_modal_showProject_pjSampleNb"
+													class="lang"></span></td>
 												<td><span
-													class="project-sampleNumber-50_or_fewer label label-default"><span id="_modal_showProject_pjSampleNb_less50" class="lang"></span></span> <span
-													class="project-sampleNumber-51_to_100 label label-default"><span id="_modal_showProject_pjSampleNb_51to100" class="lang"></span></span> <span
-													class="project-sampleNumber-101_to_500 label label-default"><span id="_modal_showProject_pjSampleNb_101to500" class="lang"></span></span> <span
-													class="project-sampleNumber-more_than_500 label label-default"><span id="_modal_showProject_pjSampleNb_more500" class="lang"></span></span></td>
+													class="project-sampleNumber-50_or_fewer label label-default"><span
+														id="_modal_showProject_pjSampleNb_less50" class="lang"></span></span>
+													<span
+													class="project-sampleNumber-51_to_100 label label-default"><span
+														id="_modal_showProject_pjSampleNb_51to100" class="lang"></span></span>
+													<span
+													class="project-sampleNumber-101_to_500 label label-default"><span
+														id="_modal_showProject_pjSampleNb_101to500" class="lang"></span></span>
+													<span
+													class="project-sampleNumber-more_than_500 label label-default"><span
+														id="_modal_showProject_pjSampleNb_more500" class="lang"></span></span></td>
 											</tr>
 											<tr>
-												<td><span id="_modal_showProject_pjScientificCtx" class="lang"></span></td>
+												<td><span id="_modal_showProject_pjScientificCtx"
+													class="lang"></span></td>
 												<td id="project-scientificContext"></td>
 											</tr>
 											<tr style="display: none;">
-												<td><span id="_modal_showProject_pjScientificCtxFile" class="lang"></span></td>
+												<td><span id="_modal_showProject_pjScientificCtxFile"
+													class="lang"></span></td>
 												<td id="project-scientificContextFile"></td>
 											</tr>
 											<tr>
-												<td><span id="_modal_showProject_pjThemWords" class="lang"></span></td>
+												<td><span id="_modal_showProject_pjThemWords"
+													class="lang"></span></td>
 												<td id="trKeyWords"></td>
 											</tr>
 											<tr>
-												<td><span id="_modal_showProject_pjSubThemWords" class="lang"></span></td>
+												<td><span id="_modal_showProject_pjSubThemWords"
+													class="lang"></span></td>
 												<td id="trSubKeyWords"></td>
 											</tr>
 											<tr>
 												<td><span id="_modal_showProject_pjMTHPF" class="lang"></span></td>
 												<td id="trPlatforms"></td>
 											</tr>
-											
+
 											<tr class="trBlockedOrRejected trBlocked danger">
-												<td><span id="_modal_showProject_pjBlocked" class="lang"></span></td>
+												<td><span id="_modal_showProject_pjBlocked"
+													class="lang"></span></td>
 												<td id="trBlocked"></td>
 											</tr>
 											<tr class="trBlockedOrRejected trRejected danger">
-												<td><span id="_modal_showProject_pjRejected" class="lang"></span></td>
+												<td><span id="_modal_showProject_pjRejected"
+													class="lang"></span></td>
 												<td id="trRejected"></td>
 											</tr>
 											<tr class="trBlockedOrRejected trBlocked trRejected danger">
-												<td><span id="_modal_showProject_pjStopped" class="lang"></span></td>
+												<td><span id="_modal_showProject_pjStopped"
+													class="lang"></span></td>
 												<td id="trStopped"></td>
 											</tr>
-											
+
 										</tbody>
 										<tfoot></tfoot>
 									</table>
@@ -248,17 +315,22 @@
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a data-toggle="collapse" data-parent="#accordion"
-									href="#collapseProjectEvents"><i class="fa fa-bell" aria-hidden="true"></i> <span id="_modal_showProject_events_title" class="lang"></span></a>
+									href="#collapseProjectEvents"><i class="fa fa-bell"
+									aria-hidden="true"></i> <span
+									id="_modal_showProject_events_title" class="lang"></span></a>
 							</h4>
 						</div>
 						<div id="collapseProjectEvents" class="panel-collapse collapse">
 							<div class="panel-body">
 								<div class="list-group" id="events-light-list-container"></div>
 								<!-- /.list-group -->
-								<div id="noEventToShow" style=""><span class="lang-class noEventToShow"></span></div>
+								<div id="noEventToShow" style="">
+									<span class="lang-class noEventToShow"></span>
+								</div>
 								<a id="showMoreEventsBtn" style=""
 									onclick="showMoreProjectEvents()"
-									class="btn btn-default btn-block"><span class="lang-class showMore"></span></a>
+									class="btn btn-default btn-block"><span
+									class="lang-class showMore"></span></a>
 							</div>
 						</div>
 					</div>
@@ -266,22 +338,31 @@
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a data-toggle="collapse" data-parent="#accordion"
-									href="#collapseProjectMessages"><i class="fa fa-envelope-o" aria-hidden="true"></i> <span id="_modal_showProject_messages_title" class="lang"></span></a>
+									href="#collapseProjectMessages"><i class="fa fa-envelope-o"
+									aria-hidden="true"></i> <span
+									id="_modal_showProject_messages_title" class="lang"></span></a>
 							</h4>
 						</div>
 						<div id="collapseProjectMessages" class="panel-collapse collapse">
 							<div class="panel-body">
 								<div class="list-group" id="messages-light-list-container"></div>
 								<!-- /.list-group -->
-								<div id="noMessageToShow" style=""><span class="lang-class noMessageToShow"></span></div>
+								<div id="noMessageToShow" style="">
+									<span class="lang-class noMessageToShow"></span>
+								</div>
 								<a id="showMoreMessageBtn" style=""
 									onclick="showMoreProjectMessages()"
-									class="btn btn-default btn-block"><span class="lang-class showMore"></span></a>
+									class="btn btn-default btn-block"><span
+									class="lang-class showMore"></span></a>
 							</div>
 							<div class="panel-body">
 								<p id="divWriteProjectMessage"></p>
 								<br />
-								<button id="writeProjectMessageBtn" type="button" class="btn btn-primary" onclick=""><i class="fa fa-envelope-square" aria-hidden="true"></i> <span id="_modal_showProject_btn_writeMessage" class="lang"></span></button>
+								<button id="writeProjectMessageBtn" type="button"
+									class="btn btn-primary" onclick="">
+									<i class="fa fa-envelope-square" aria-hidden="true"></i> <span
+										id="_modal_showProject_btn_writeMessage" class="lang"></span>
+								</button>
 							</div>
 						</div>
 					</div>
@@ -289,89 +370,165 @@
 				</p>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default btn-xs" onclick="printProject(false)"><i class="fa fa-print"></i> <span id="_modal_showProject_btn_print_all" class="lang"></span></button>
-				<button type="button" class="btn btn-default btn-xs" onclick="printProject(true)"><i class="fa fa-print"></i> <span id="_modal_showProject_btn_print_main" class="lang"></span></button>
+				<button type="button" class="btn btn-default btn-xs"
+					onclick="printProject(false)">
+					<i class="fa fa-print"></i> <span
+						id="_modal_showProject_btn_print_all" class="lang"></span>
+				</button>
+				<button type="button" class="btn btn-default btn-xs"
+					onclick="printProject(true)">
+					<i class="fa fa-print"></i> <span
+						id="_modal_showProject_btn_print_main" class="lang"></span>
+				</button>
 				<button type="button" class="btn btn-primary"
 					onclick="editProject(currentProjectInModalId)">
-					<i class="fa fa-pencil"></i> <span id="_modal_showProject_btn_edit" class="lang"></span>
+					<i class="fa fa-pencil"></i> <span id="_modal_showProject_btn_edit"
+						class="lang"></span>
 				</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal"><span id="_modal_showProject_btn_close" class="lang"></span></button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					<span id="_modal_showProject_btn_close" class="lang"></span>
+				</button>
 			</div>
 		</div>
 	</div>
 </div>
 <div id="contextMenu" class="dropdown clearfix">
-	<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">
-		<li><a tabindex="-1" href="#" onclick="setProjectStatus(currentProjectId,'assigned');"><i class="fa fa-tasks" aria-hidden="true"></i> <span id="editProjectMenu_setToAssigned" class="lang"></span></a></li>
-		<li><a tabindex="-1" href="#" onclick="setProjectStatus(currentProjectId,'rejected');"><i class="fa fa-ban" aria-hidden="true"></i> <span id="editProjectMenu_setToRejected" class="lang"></span></a></li>
-		<li><a tabindex="-1" href="#" onclick="setProjectStatus(currentProjectId,'completed');"><i class="fa fa-check" aria-hidden="true"></i> <span id="editProjectMenu_setToCompleted" class="lang"></span></a></li>
-		<li><a tabindex="-1" href="#" onclick="setProjectStatus(currentProjectId,'accepted');"><i class="fa fa-check-circle-o" aria-hidden="true"></i> <span id="editProjectMenu_setToAccepted" class="lang"></span></a></li>
-		<li><a tabindex="-1" href="#" onclick="setProjectStatus(currentProjectId,'running');"><i class="fa fa-flag-checkered" aria-hidden="true"></i> <span id="editProjectMenu_setToRunning" class="lang"></span></a></li>
-		<li><a tabindex="-1" href="#" onclick="setProjectStatus(currentProjectId,'blocked');"><i class="fa fa-pause-circle-o" aria-hidden="true"></i> <span id="editProjectMenu_setToBlocked" class="lang"></span></a></li>
-		<li><a tabindex="-1" href="#" onclick="setProjectStatus(currentProjectId,'archived');"><i class="fa fa-archive" aria-hidden="true"></i> <span id="editProjectMenu_setToArchived" class="lang"></span></a></li>
+	<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"
+		style="display: block; position: static; margin-bottom: 5px;">
+		<li><a tabindex="-1" href="#"
+			onclick="setProjectStatus(currentProjectId,'assigned');"><i
+				class="fa fa-tasks" aria-hidden="true"></i> <span
+				id="editProjectMenu_setToAssigned" class="lang"></span></a></li>
+		<li><a tabindex="-1" href="#"
+			onclick="setProjectStatus(currentProjectId,'rejected');"><i
+				class="fa fa-ban" aria-hidden="true"></i> <span
+				id="editProjectMenu_setToRejected" class="lang"></span></a></li>
+		<li><a tabindex="-1" href="#"
+			onclick="setProjectStatus(currentProjectId,'completed');"><i
+				class="fa fa-check" aria-hidden="true"></i> <span
+				id="editProjectMenu_setToCompleted" class="lang"></span></a></li>
+		<li><a tabindex="-1" href="#"
+			onclick="setProjectStatus(currentProjectId,'accepted');"><i
+				class="fa fa-check-circle-o" aria-hidden="true"></i> <span
+				id="editProjectMenu_setToAccepted" class="lang"></span></a></li>
+		<li><a tabindex="-1" href="#"
+			onclick="setProjectStatus(currentProjectId,'running');"><i
+				class="fa fa-flag-checkered" aria-hidden="true"></i> <span
+				id="editProjectMenu_setToRunning" class="lang"></span></a></li>
+		<li><a tabindex="-1" href="#"
+			onclick="setProjectStatus(currentProjectId,'blocked');"><i
+				class="fa fa-pause-circle-o" aria-hidden="true"></i> <span
+				id="editProjectMenu_setToBlocked" class="lang"></span></a></li>
+		<li><a tabindex="-1" href="#"
+			onclick="setProjectStatus(currentProjectId,'archived');"><i
+				class="fa fa-archive" aria-hidden="true"></i> <span
+				id="editProjectMenu_setToArchived" class="lang"></span></a></li>
 		<li class="divider"></li>
-		<li><a tabindex="-1" href="#" onclick="currentProjectId = null;"><span id="editProjectMenu_cancel" class="lang"></span></a></li>
+		<li><a tabindex="-1" href="#" onclick="currentProjectId = null;"><span
+				id="editProjectMenu_cancel" class="lang"></span></a></li>
 	</ul>
 </div>
 <script type="text/javascript">
 <!--
-	if (getUrlParameter("showProject") !== undefined) {
-		showProject(getUrlParameter("showProject"));
-	}
+    if (getUrlParameter("showProject") !== undefined) {
+        showProject(getUrlParameter("showProject"));
+    }
 //-->
 </script>
 <div id="blockedModal" class="modal fade" tabindex="-1" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 				<h4 class="modal-title">
-					<span id="_modal_pauseProject_title" class="lang blockedOrRejectedCase blockedCase"></span>
-					<span id="_modal_rejectProject_title" class="lang blockedOrRejectedCase rejectedCase"></span>
+					<span id="_modal_pauseProject_title"
+						class="lang blockedOrRejectedCase blockedCase"></span> <span
+						id="_modal_rejectProject_title"
+						class="lang blockedOrRejectedCase rejectedCase"></span>
 				</h4>
 			</div>
 			<div class="modal-body">
-				<div id="blockedCase" class="blockedOrRejectedCase" class="form-group">
-					<label id="_modal_stopProject_blockedSelect" class="lang" for="sel1"></label>
-					<select class="form-control" id="blockedCase_list">
+				<div id="blockedCase" class="blockedOrRejectedCase"
+					class="form-group">
+					<label id="_modal_stopProject_blockedSelect" class="lang"
+						for="sel1"></label> <select class="form-control"
+						id="blockedCase_list">
 						<option selected="selected" disabled="disabled" value="">...</option>
 						<!-- <option id="_modal_stopProject_blockedSelect_opt_transfered_to_privilegied" class="lang" value="_transfered_to_privilegied_partner"></option> -->
-						<option id="_modal_stopProject_pausedSelect_opt_waiting_for_samples" class="lang" value="_waiting_for_samples"></option>
-						<option id="_modal_stopProject_pausedSelect_opt_waiting_for_service_user_answer" class="lang" value="_waiting_for_service_user_answer"></option>
-						<option id="_modal_stopProject_pausedSelect_opt_waiting_for_provisioning" class="lang" value="_waiting_for_provisioning"></option>
+						<option
+							id="_modal_stopProject_pausedSelect_opt_waiting_for_samples"
+							class="lang" value="_waiting_for_samples"></option>
+						<option
+							id="_modal_stopProject_pausedSelect_opt_waiting_for_service_user_answer"
+							class="lang" value="_waiting_for_service_user_answer"></option>
+						<option
+							id="_modal_stopProject_pausedSelect_opt_waiting_for_provisioning"
+							class="lang" value="_waiting_for_provisioning"></option>
 					</select>
 				</div>
-				<div id="rejectedCase" class="blockedOrRejectedCase" class="form-group">
-					<label id="_modal_stopProject_rejectedSelect" class="lang" for="sel2"></label>
-					<select class="form-control" id="rejectedCase_list">
+				<div id="rejectedCase" class="blockedOrRejectedCase"
+					class="form-group">
+					<label id="_modal_stopProject_rejectedSelect" class="lang"
+						for="sel2"></label> <select class="form-control"
+						id="rejectedCase_list">
 						<option selected="selected" disabled="disabled" value="">...</option>
-						<option id="_modal_stopProject_rejectedSelect_opt_transfered_to_privilegied" class="lang" value="_transfered_to_privilegied_partner"></option>
-						<option id="_modal_stopProject_rejectedSelect_opt_expensive" class="lang" value="_too_expensive"></option>
-						<option id="_modal_stopProject_rejectedSelect_opt_delays" class="lang" value="_too_long_delays"></option>
-						<option id="_modal_stopProject_rejectedSelect_opt_too_many_samples" class="lang" value="_too_many_samples"></option>
-						<option id="_modal_stopProject_rejectedSelect_opt_outside_our_skill" class="lang" value="_outside_our_skill_shere"></option>
-						<option id="_modal_stopProject_rejectedSelect_opt_non_prioritary" class="lang" value="_non_prioritary_rad"></option>
-						<option id="_modal_stopProject_rejectedSelect_opt_incompatible_deadline" class="lang" value="_incompatible_deadline"></option>
-						<option id="_modal_stopProject_rejectedSelect_opt_not_funded" class="lang" value="_not_funded"></option>
+						<option
+							id="_modal_stopProject_rejectedSelect_opt_transfered_to_privilegied"
+							class="lang" value="_transfered_to_privilegied_partner"></option>
+						<option id="_modal_stopProject_rejectedSelect_opt_expensive"
+							class="lang" value="_too_expensive"></option>
+						<option id="_modal_stopProject_rejectedSelect_opt_delays"
+							class="lang" value="_too_long_delays"></option>
+						<option
+							id="_modal_stopProject_rejectedSelect_opt_too_many_samples"
+							class="lang" value="_too_many_samples"></option>
+						<option
+							id="_modal_stopProject_rejectedSelect_opt_outside_our_skill"
+							class="lang" value="_outside_our_skill_sphere"></option>
+						<option id="_modal_stopProject_rejectedSelect_opt_non_prioritary"
+							class="lang" value="_non_prioritary_rad"></option>
+						<option
+							id="_modal_stopProject_rejectedSelect_opt_incompatible_deadline"
+							class="lang" value="_incompatible_deadline"></option>
+						<option id="_modal_stopProject_rejectedSelect_opt_not_funded"
+							class="lang" value="_not_funded"></option>
 					</select>
 				</div>
 				<br />
 				<div class="form-group">
-					<span class="input-group-addon">
-						<i class="fa fa-question-circle"></i> 
-						<span id="_modal_stopProject_freeTxt" class="lang"></span>
+					<span class="input-group-addon"> <i
+						class="fa fa-question-circle"></i> <span
+						id="_modal_stopProject_freeTxt" class="lang"></span><sup
+						style="color: red;">*</sup>
 					</span>
-					<textarea id="blockedOrRejectedCase_txt" class="form-control lang" lang="_modal_stopProject_freeTxt_ph" rows="3" maxlength="150" placeholder=""></textarea>
+					<textarea id="blockedOrRejectedCase_txt" class="form-control lang"
+						lang="_modal_stopProject_freeTxt_ph" rows="3" maxlength="150"
+						placeholder=""></textarea>
+				</div>
+				<div id="blockedOrRejectedCase_warning">
+					<div class="alert alert-danger" role="alert">
+						<strong><span id="_warning1_" class="lang"></span></strong> <span
+							id="_modal_stopProject_warningList" class="lang"></span>
+					</div>
+				</div>
+				<div id="blockedOrRejectedCase_txtWarning">
+					<div class="alert alert-danger" role="alert">
+						<strong><span id="_warning2_" class="lang"></span></strong> <span
+							id="_modal_stopProject_warningTxt" class="lang"></span>
+					</div>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button id="closeBlockedModalBtn" type="button" class="btn btn-primary" onclick="">
-					<i class="fa fa-save" aria-hidden="true"></i> 
-					<span id="_modal_stopProject_btn_save" class="lang"></span>
+				<button id="closeBlockedModalBtn" type="button"
+					class="btn btn-primary" onclick="">
+					<i class="fa fa-save" aria-hidden="true"></i> <span
+						id="_modal_stopProject_btn_save" class="lang"></span>
 				</button>
-				<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
+				<button type="button" class="btn btn-default btn-sm"
+					data-dismiss="modal">
 					<span id="_modal_stopProject_btn_close" class="lang"></span>
 				</button>
 			</div>
@@ -379,4 +536,5 @@
 		<!-- /.modal-content -->
 	</div>
 	<!-- /.modal-dialog -->
-</div><!-- /.modal -->
+</div>
+<!-- /.modal -->

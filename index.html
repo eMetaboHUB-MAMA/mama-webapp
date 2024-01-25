@@ -328,22 +328,22 @@
 </div>
 <!-- /.modal -->
 	<!-- modales:END -->
-<!-- Piwik -->
+<!-- Matomo -->
 <script type="text/javascript">
-  var _paq = _paq || [];
-  _paq.push(["setDomains", ["*.pfemw3.clermont.inra.fr/mama-webapp"]]);
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
   _paq.push(['trackPageView']);
   _paq.push(['enableLinkTracking']);
   (function() {
-    var u="//pfemw3.clermont.inra.fr/piwik/";
-    _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', 3]);
+    var u="//pfem.clermont.inra.fr/piwik/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '4']);
     var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
   })();
 </script>
-<noscript><p><img src="//pfemw3.clermont.inra.fr/piwik/piwik.php?idsite=3" style="border:0;" alt="" /></p></noscript>
-<!-- End Piwik Code -->
+<noscript><p><img src="//pfem.clermont.inra.fr/piwik/matomo.php?idsite=4&amp;rec=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Matomo Code -->
 <iframe id="contentToPrint" name="contentToPrint" style="display: none;"></iframe>
 </body>
 </html>

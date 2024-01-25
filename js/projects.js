@@ -579,11 +579,23 @@ function showMoreProjectEvents() {
 }
 // ///////////////////////////////////////////////////////////////////////////////////////
 /**
- * 
+ * Update the personne responsable of a project
  */
 function updateInCharge(projectID) {
 	var verbe = "put";
 	var resource = "project";
+	// test current project status
+	var isWaiting = $("#projectTr"+projectID).hasClass("waiting");
+	if (isWaiting) {
+		var text = window['listProjects_action_setManager_confirmDialog'];
+		var continuePost = confirm(text);
+		if (!continuePost) {
+			// reset selected value
+			$($("tr#projectTr" + projectID + " td")[6]).find("select").val("");
+			// exit
+			return false;
+		}
+	}
 	// run
 	$.ajax({
 		type : "post",
@@ -850,12 +862,14 @@ function blockProject(pid, newStatus) {
 	if (newStatus == "blocked") {
 		$("#blockedCase").show();
 		$(".blockedCase").show();
-		$("#blockedCase_list").val("");
 	} else if (newStatus == "rejected" ) {
 		$("#rejectedCase").show();
 		$(".rejectedCase").show();
-		$("#rejectedCase_list").val("");
 	}
+	$("#blockedCase_list").val("");
+	$("#rejectedCase_list").val("");
+	$("#blockedOrRejectedCase_warning").hide();
+    $("#blockedOrRejectedCase_txtWarning").hide();
 	$("#blockedOrRejectedCase_txt").html("");
 	$("#blockedOrRejectedCase_txt").val("");
 	$("#closeBlockedModalBtn").attr('onclick', 'closeBlockedModal('+pid+');')
@@ -867,8 +881,29 @@ function blockProject(pid, newStatus) {
  * @returns
  */
 function closeBlockedModal(projectID) {
-	var verbe = "put";
-	var resource = "stop-project";
+	const verbe = "put";
+	const resource = "stop-project";
+	// new 1.0.3: field `reasons` if mandatory
+	const rejectList = $("#blockedCase_list").val();
+	const blockList = $("#rejectedCase_list").val();
+	let reasonsTxt = $("#blockedOrRejectedCase_txt").val();
+	reasonsTxt = $.trim(reasonsTxt);
+	let goClose = true;
+	if (rejectList === null && blockList === null) {
+		$("#blockedOrRejectedCase_warning").show();
+		goClose = false
+	} else {
+		$("#blockedOrRejectedCase_warning").hide();
+	}
+	if (reasonsTxt === "") {
+		$("#blockedOrRejectedCase_txtWarning").show();
+		goClose = false;
+	} else {
+		$("#blockedOrRejectedCase_txtWarning").hide();
+	}
+	if (!goClose) {
+		return false;
+	}
 	// run
 	$.ajax({
 		type : "post",

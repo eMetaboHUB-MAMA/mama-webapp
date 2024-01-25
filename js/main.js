@@ -229,3 +229,19 @@ var waitForFinalEvent = (function() {
 	};
 })();
 /////////////////////////////////////////////////////////////////////////////////////////
+// log date
+function formatDate() {
+    var dateNow = new Date();
+    var year = dateNow.getFullYear()
+    var month = (dateNow.getMonth() + 1);
+    if (month < 10) { month = "0" + month; }
+    var day = dateNow.getDate();
+    if (day < 10) { day = "0" + day; }
+    var hours = dateNow.getHours();
+    if (hours < 10) { hours = "0" + hours; }
+    var min = dateNow.getMinutes();
+    if (min < 10) { min = "0" + min; }
+    var dateNowFormatted = year + "-" + month + "-" + day + " " + hours + ":" + min;
+    return dateNowFormatted;
+}
+/////////////////////////////////////////////////////////////////////////////////////////

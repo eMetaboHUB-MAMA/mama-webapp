@@ -1,25 +1,22 @@
-MAMA - WebApp
-=======
+[![pipeline status](https://services.pfem.clermont.inra.fr/gitlab/mama/mama-webapp/badges/dev/pipeline.svg)](https://services.pfem.clermont.inra.fr/gitlab/mama/mama-webapp/commits/dev)
 
-Metadata
------------
+# MAMA - WebApp
 
- * **@name**: MAMA - WebApp
- * **@version**: 1.0
- * **@authors**: <nils.paulhe@inra.fr>, <franck.giacomoni@inra.fr>
- * **@date creation**: 2016/01/29
- * **@main usage**: WebApp of the **M**etaboHUB's **A**nalyses **MA**nager
- * **@see**: dev-team/mama-rest
+## Metadata
+
+* **@authors**: <nils.paulhe@inra.fr>, <franck.giacomoni@inra.fr>
+* **@date creation**: `2016-01-29`
+* **@main usage**: WebApp of the **M**etaboHUB's **A**nalyses **MA**nager
+* **@see**: [MAMA - REST](../mama-rest)
  
-Configuration
------------
+## Configuration
 
 ### Requirement:
 PHP web-server (Apache / ...)
 
 ### Deploy:
- * get project data `git clone ssh://git@pfemw3.clermont.inra.fr:dev-team/mama-webapp.git`
- * edit `config/mama-webapp.json` configuration file (or create it from `config/mama-webapp.json.sample` template file ) 
+* get project data `git clone ssh://git@services.pfem.clermont.inra.fr:mama/mama-webapp.git`
+* edit `config/mama-webapp.json` configuration file (or create it from `config/mama-webapp.json.sample` template file ) 
  
 #### Apache
 
@@ -37,25 +34,25 @@ TODO
 ### Warning:
 TODO
 
-Services provided
------------
+## Services provided
+
 TODO
 
-Technical description
------------
+## Technical description
+
 TODO
 
 
-Notes
------------
+## Notes
+
 TODO
 
-License
------------
+## License
+
 TODO
 
-Tird part code
------------
+## Tird part code
+
 ### [Start Bootstrap](http://startbootstrap.com/) - [SB Admin 2](http://startbootstrap.com/template-overviews/sb-admin-2/)
 
 [SB Admin 2](http://startbootstrap.com/template-overviews/sb-admin-2/) is an open source, admin dashboard template for [Bootstrap](http://getbootstrap.com/) created by [Start Bootstrap](http://startbootstrap.com/).

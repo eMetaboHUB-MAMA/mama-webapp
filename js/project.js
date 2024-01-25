@@ -59,12 +59,39 @@ $( document ).ready(function() {
 		$(".classiqAnalyze").show();
 	else
 		$(".classiqAnalyze").hide();
+	
+	// 2.0.1 - mama#9 - dialog box
+	var dialogBoxEdit = 0;
+	$("#extra_dialogBoxVal").on("change", function() {
+	    if (dialogBoxEdit >= 1 ){
+            var dialogTxt = $("#extra_dialogBoxTxt").val();
+            if (dialogTxt !== "") { dialogTxt += "\n"; }
+            dialogTxt += "- " + formatDate() + " " + window.userData.email + " ⇒ \"" + $("#extra_dialogBoxVal option:selected").html() + "\": ..." ;
+            $("#extra_dialogBoxTxt").val(dialogTxt);
+	    }
+	    dialogBoxEdit++;
+	});
+	
+	// 2.0.1 - mama#18 - scientific context size
+	var scientificContextMaxLength = 3000;
+	$("#scientificContext").keyup( function() {
+	    var txtSize = (escape($("#scientificContext").val())).length;
+	    var remainingSize = scientificContextMaxLength - txtSize;
+        $("#scientificContext-size").html(remainingSize);
+        $("#scientificContext-size").parent().css("color", "");
+        if (remainingSize < 0) {
+            $("#scientificContext-size").parent().css("color", "red");
+        }
+    });
+	$("#scientificContext").keyup();
+	
 });
+
 /**
  * 
  */
 function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+	return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 /**
@@ -341,11 +368,13 @@ function loadProject (projectID) {
 				}
 				// if (project.financialContextIsProjectOtherValue !== null) {}
 				// file
+				$("#project-scientificContextFileDeleteBtn").hide();
 				if (project.scientificContextFile !== null && project.scientificContextFile !== "") {
 					$("#link-to-upload-file").click();
 					$("#project-scientificContextFile").parent().show();
 					var linkFile = 'download current file: <a href="'+project.scientificContextFileURL+'" target="_blank">'+project.scientificContextFile+'</a>'
 					$("#project-scientificContextFile").html(linkFile);
+					$("#project-scientificContextFileDeleteBtn").show();
 				} 
 				// extra data
 				if (project.hasOwnProperty("analysisRequestExtraData") && project.analysisRequestExtraData != null) {
@@ -375,6 +404,9 @@ function loadProject (projectID) {
 						$("#extra_laboType_privatepublic").attr("checked",  true);
 						break;
 					}
+					// new 1.0.3 - mama#9 dialogbox
+					$("#extra_dialogBoxVal").val(extraData.dialogBoxVal);
+					$("#extra_dialogBoxTxt").val(extraData.dialogBoxTxt);
 				}
 				
 				// mop
@@ -383,6 +415,8 @@ function loadProject (projectID) {
 				$("select").change();
 				// focus
 				$("#interestInMthCollaboration").focus();
+				// mama#18
+				$("#scientificContext").keyup();
 			}
 		},
 		error : function(xhr) {
@@ -582,4 +616,41 @@ function checkIfFormNewProjectValid() {
 		$("#submitNewDAbtn").attr("disabled", true);
 	} 
 	return isFormValid;
+}
+
+/**
+ * Delete an attached file
+ */
+function removeAttachedFile() {
+	var projectID = $("#projectId").val();
+	var verbe = "delete";
+	var resource = "project-file&projectID=" + projectID;
+	var params = "";
+	// run
+	$.ajax({
+		type : "post",
+		url : "ajax/ajax_proxypass.php?verbe=" + verbe + "&resource="
+				+ resource,
+		dataType : "json",
+		async : true,
+		data : params,
+		success : function(json) {
+			if (json.success) {
+				$("#project-scientificContextFile").hide();
+				$("#project-scientificContextFileDeleteBtn").hide();
+			} else {
+				// show wrong deletion info
+				$("#divError").show();
+				if (json.message !== null) {
+					$("#divErrorCause").html("<br>cause: " + json.message);
+				}
+			}
+		},
+		error : function(xhr) {
+			console.log(xhr);
+			// show error message info
+			$("#divError").show();
+		}
+	});
+	return false;
 }

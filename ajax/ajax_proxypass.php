@@ -9,7 +9,6 @@ header ( "Content-Type: application/json" );
 
 // ////////////////////////////////////////////////////////////////////////////
 // LOAD MAMA SERVER OPTIONS
-// LOAD MAMA SERVER OPTIONS
 // if not in RAM load it from ini file
 $configFile =__DIR__ . "/../config/mama-webapp.json";
 if (! file_exists ( $configFile )) {
@@ -161,6 +160,10 @@ if (isset ( $_GET ["resource"] ) && $_GET ["resource"] != "") {
 				// read project data
 				$pid = intval ( $_GET ['projectID'] );
 				get_project_file ( $mama_config_json ['mamaRestApi'], $pid );
+			} else if ($verbe == "DELETE") {
+				// delete a project file
+				$pid = intval ( $_GET ['projectID'] );
+				delete_project_file ( $mama_config_json ['mamaRestApi'], $pid );
 			}
 			break;
 		case "projects-file" :
@@ -1095,6 +1098,7 @@ function get_admin_generic_query($mama_rest_url, $mama_rest_query) {
 	$curl_response = getStandardizedGet ( $mama_rest_url, $mama_rest_query );
 	echo $curl_response;
 }
+
 /**
  *
  * @param unknown $mama_rest_url        	
@@ -1203,5 +1207,14 @@ function get_statistics_file($mama_rest_url) {
  */
 function get_project_file($mama_rest_url, $pid) {
 	$curl_response = getFile ( $mama_rest_url, "project-file", $pid );
+	echo $curl_response;
+}
+
+/**
+ *
+ * @param unknown $mama_rest_url        	
+ */
+function delete_project_file($mama_rest_url, $pid) {
+	$curl_response = getStandardizedDelete ( $mama_rest_url, "project-file/$pid" );
 	echo $curl_response;
 }

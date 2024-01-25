@@ -1,0 +1,65 @@
+
+# maven env.
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  # docker env.
+  DOCKER_IMAGE: "metabohub/mama-webapp"
+  DOCKER_CONTAINER: "mama-webapp"
+  DOCKER_SOCKET: "6381"
+  # SSH / SCP
+  SSH_OPTS: " -q -t "
+  SSH_USER: "gitlab-bot"
+  SSH_HOST: "147.99.132.187"
+  # cache
+  IMAGE_FILE: "mama-webapp.image"
+  CACHE_BASH: "/tmp/gitlab-ci-cache"
+  CACHE_DOCKER: "/root/.cache-ci"
+
+# stages
+stages:
+  - docker_env
+  - copy_to_dev
+
+build docker image:
+  stage: docker_env
+  tags:
+    - bash
+  before_script:
+    - echo "==================================";
+    - echo "[info] set config. files ";
+    - test -f config/mama-webapp.json && rm mama-webapp.json
+    - cp config/mama-webapp.json.sample config/mama-webapp.json
+    - sed -i -e "s/https:\/\/mama-rest.metabohub.fr\//$CONFIG_URL_REST/g" config/mama-webapp.json
+  script:
+    - echo "==================================";
+    - echo "[info] run 'docker build image' ";
+    - docker build -t $DOCKER_IMAGE .
+  after_script:
+    - echo "[gitlab-ci] reset/init cache";
+    - test -d $CACHE_BASH || mkdir -p $CACHE_BASH
+    - test -f $CACHE_BASH/$IMAGE_FILE && rm -rf $CACHE_BASH/$IMAGE_FILE
+    - echo "[gitlab-ci] create new docker image";
+    - docker save -o $CACHE_BASH/$IMAGE_FILE $DOCKER_IMAGE
+
+copy to dev:
+  stage: copy_to_dev
+  tags:
+    - docker
+  image: $DOCKER_IMAGE
+  before_script:
+    - mkdir -p ~/.ssh
+    - eval $(ssh-agent -s)
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - ssh-add <(echo "$SSH_PRIVATE_KEY" | base64 -d)
+  script:
+    - echo "[gitlab-ci] remove old docker image";
+    - ssh $SSH_OPTS $SSH_USER@$SSH_HOST "rm -rf /tmp/$IMAGE_FILE "
+    - echo "[gitlab-ci] stop and remove docker container";
+    - ssh $SSH_OPTS $SSH_USER@$SSH_HOST "docker stop $DOCKER_CONTAINER || echo \"container not started\" ";
+    - ssh $SSH_OPTS $SSH_USER@$SSH_HOST "docker rm $DOCKER_CONTAINER || echo \"container not init\" ";
+    - echo "[gitlab-ci] copy new docker image to test server ";
+    - scp -r $CACHE_DOCKER/$IMAGE_FILE $SSH_USER@$SSH_HOST:/tmp/
+    - echo "[gitlab-ci] load new docker image ";
+    - ssh $SSH_OPTS $SSH_USER@$SSH_HOST "cat /tmp/$IMAGE_FILE | docker load";
+    - echo "[gitlab-ci] start new docker container as deamon";
+    - ssh $SSH_OPTS $SSH_USER@$SSH_HOST "docker run --restart unless-stopped --name $DOCKER_CONTAINER -it -p $DOCKER_SOCKET:80 -d $DOCKER_IMAGE ";
